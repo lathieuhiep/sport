@@ -6,7 +6,7 @@ $sport_information_mail      =   $sport_options['sport_information_mail'];
 $sport_information_phone     =   $sport_options['sport_information_phone'];
 ?>
 
-<div class="information">
+<div class="top-bar">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-7">
