@@ -1,21 +1,26 @@
-.information {
-  line-height: 32px;
-  border-bottom: 1px solid #eee;
+.header {
+  .top-bar {
+    padding: 5px 0;
+    background-color: $background-primary;
 
-  span {
-    display: inline-block;
-    padding-left: 7px;
-    padding-right: 12px;
+    .sign-up-bar {
+      a {
+        display: inline-block;
+        color: #ffffff;
+        font-size: 12px;
+        margin-right: 25px;
 
-    i.fa {
-      margin-right: 5px;
+        &:last-child {
+          margin-right: 0;
+        }
+        i {
+          font-size: 12px;
+          margin-right: 5px;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
-  }
-}
-.information__social-network {
-  .social-network-item {
-    margin: 0;
-    width: 30px;
-    text-align: center;
   }
 }

@@ -8,45 +8,16 @@ $sport_information_phone     =   $sport_options['sport_information_phone'];
 
 <div class="top-bar">
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-7">
-                <?php if ( $sport_information_address != '' ) : ?>
+        <div class="sign-up-bar text-right">
+            <a class="login" href="#">
+                <i class="fas fa-lock"></i>
+                <?php esc_html_e( 'Đăng nhập', 'sport' ); ?>
+            </a>
 
-                    <span>
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <?php echo esc_html( $sport_information_address ); ?>
-                    </span>
-
-                <?php
-                endif;
-
-                if ( $sport_information_mail != '' ) :
-                ?>
-
-                    <span>
-                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        <?php echo esc_html( $sport_information_mail ); ?>
-                    </span>
-
-                <?php
-                endif;
-
-                if ( $sport_information_phone != '' ) :
-                ?>
-
-                    <span>
-                        <i class="fas fa-mobile-alt"></i>
-                        <?php echo esc_html( $sport_information_phone ); ?>
-                    </span>
-
-                <?php endif; ?>
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-5 d-none d-lg-block">
-                <div class="information__social-network social-network-toTopFromBottom d-lg-flex justify-content-lg-end">
-                    <?php sport_get_social_url(); ?>
-                </div>
-            </div>
+            <a class="register" href="#">
+                <i class="fas fa-user"></i>
+                <?php esc_html_e( 'Đăng kí', 'sport' ); ?>
+            </a>
         </div>
     </div>
 </div>

@@ -197,7 +197,7 @@ pre {
 }
 
 #back-top:hover {
-  background-color: #333333;
+  background-color: #00b0f0;
 }
 
 /* Social network */
@@ -660,40 +660,45 @@ form.post-password-form p input[type='submit'] {
 /**
 # Header
 -----------------------------------------------------------------------------*/
-/* Information */
-.information {
-  line-height: 32px;
-  border-bottom: 1px solid #eee;
+/* Top Bar */
+.header .top-bar {
+  padding: 5px 0;
+  background-color: #00b0f0;
 }
 
-.information span {
+.header .top-bar .sign-up-bar a {
   display: inline-block;
-  padding-left: 7px;
-  padding-right: 12px;
+  color: #ffffff;
+  font-size: 12px;
+  margin-right: 25px;
 }
 
-.information span i.fa {
+.header .top-bar .sign-up-bar a:last-child {
+  margin-right: 0;
+}
+
+.header .top-bar .sign-up-bar a i {
+  font-size: 12px;
   margin-right: 5px;
 }
 
-.information__social-network .social-network-item {
-  margin: 0;
-  width: 30px;
-  text-align: center;
+.header .top-bar .sign-up-bar a:hover {
+  text-decoration: underline;
 }
 
-/* Menu */
+/* Nav */
 .header .navbar {
   margin: 0;
 }
 
-.header-bottom {
+.header-nav {
+  padding: 15px 0;
   -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
 }
 
-.header-bottom button.navbar-toggler {
+.header-nav button.navbar-toggler {
   padding: 0;
   border: 0;
 }
@@ -1958,7 +1963,7 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   color: #ffffff;
   font-size: 12px;
   font-weight: 400;
-  background-color: #333333;
+  background-color: #00b0f0;
 }
 
 .woocommerce ul.products li.product .button.add_to_cart_button {
@@ -2415,7 +2420,7 @@ form.wpcf7-form .wpcf7-submit {
   border: none;
   cursor: pointer;
   text-transform: uppercase;
-  background: #333333;
+  background: #00b0f0;
 }
 
 /**
@@ -2528,16 +2533,16 @@ form.wpcf7-form .wpcf7-submit {
 }
 
 @media (max-width: 991px) {
-  .header-bottom_warp {
+  .header-nav_warp {
     display: block;
   }
   .information .container {
     max-width: none;
   }
-  .header-bottom {
+  .header-nav {
     position: relative;
   }
-  .header-bottom .container {
+  .header-nav .container {
     max-width: none;
   }
   .site-logo {

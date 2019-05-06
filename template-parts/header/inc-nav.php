@@ -4,9 +4,9 @@ global $sport_options;
 $sport_logo_image_id    =   $sport_options['sport_logo_image']['id'];
 
 ?>
-<div class="header-bottom">
+<div class="header-nav">
     <div class="container">
-        <div class="header-bottom_warp d-lg-flex align-items-center justify-content-lg-end">
+        <div class="header-nav_warp d-lg-flex align-items-center justify-content-lg-end">
             <div class="site-logo">
                 <a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
                     <?php

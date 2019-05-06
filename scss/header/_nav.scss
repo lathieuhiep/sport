@@ -3,7 +3,8 @@
     margin: 0;
   }
 }
-.header-bottom {
+.header-nav {
+  padding: 15px 0;
   @include box-shadow(0 3px 3px -3px rgba(0, 0, 0, 0.3));
 
   button {
