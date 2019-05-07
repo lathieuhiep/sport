@@ -50,15 +50,27 @@ if ( ! function_exists( 'sport_get_cart' ) ):
 
     function sport_get_cart(){
 
-    ?>
-        <a class="cart-customlocation" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html_e('View your shopping cart', 'sport'); ?>">
-            <img src="<?php echo esc_url( get_theme_file_uri( '/images/cart.png' ) ); ?>" alt="cart">
+?>
 
-            <span class="number-cart-product">
-                <?php echo sprintf ( _n( '%d', '%d', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?>
+        <div class="cart-box d-flex align-items-center">
+            <a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html_e('Xem giỏ hàng', 'sport'); ?>"></a>
+
+            <div class="cart-customlocation">
+                <img src="<?php echo esc_url( get_theme_file_uri( '/images/cart.png' ) ); ?>" alt="cart">
+
+                <span class="number-cart-product">
+                    <?php echo sprintf ( _n( '%d', '%d', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?>
+                </span>
+            </div>
+
+            <span class="text-cart-product">
+                <?php esc_html_e( 'Giỏ hàng', 'sport' ); ?>
+                <br />
+                <?php esc_html_e( 'sản phẩm', 'sport' ); ?>
             </span>
-        </a>
-    <?php
+        </div>
+
+<?php
     }
 
 endif;
@@ -74,7 +86,7 @@ if ( ! function_exists( 'sport_add_to_cart_fragment' ) ) :
 
         do_action( 'sport_get_cart_item' );
 
-        $sport_fragments['a.cart-customlocation'] = ob_get_clean();
+        $sport_fragments['.cart-box'] = ob_get_clean();
 
         return $sport_fragments;
 
