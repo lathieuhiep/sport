@@ -93,6 +93,9 @@ pre {
     @include box-shadow(none);
   }
 }
+.global-transition {
+  @include transition(all 0.4s ease-in-out);
+}
 #site-loadding {
   position: fixed;
   top: 0;

@@ -1,11 +1,3 @@
-<?php
-global $sport_options;
-
-$sport_information_address   =   $sport_options['sport_information_address'];
-$sport_information_mail      =   $sport_options['sport_information_mail'];
-$sport_information_phone     =   $sport_options['sport_information_phone'];
-?>
-
 <div class="top-bar">
     <div class="container">
         <div class="sign-up-bar text-right">

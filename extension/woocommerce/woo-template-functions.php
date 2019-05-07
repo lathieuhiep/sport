@@ -45,6 +45,44 @@ function sport_loop_columns_product() {
 }
 /* End Change number or products per row */
 
+/* Start get cart */
+if ( ! function_exists( 'sport_get_cart' ) ):
+
+    function sport_get_cart(){
+
+    ?>
+        <a class="cart-customlocation" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html_e('View your shopping cart', 'sport'); ?>">
+            <img src="<?php echo esc_url( get_theme_file_uri( '/images/cart.png' ) ); ?>" alt="cart">
+
+            <span class="number-cart-product">
+                <?php echo sprintf ( _n( '%d', '%d', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?>
+            </span>
+        </a>
+    <?php
+    }
+
+endif;
+
+/* To ajaxify your cart viewer */
+add_filter( 'woocommerce_add_to_cart_fragments', 'sport_add_to_cart_fragment' );
+
+if ( ! function_exists( 'sport_add_to_cart_fragment' ) ) :
+
+    function sport_add_to_cart_fragment( $sport_fragments ) {
+
+        ob_start();
+
+        do_action( 'sport_get_cart_item' );
+
+        $sport_fragments['a.cart-customlocation'] = ob_get_clean();
+
+        return $sport_fragments;
+
+    }
+
+endif;
+/* End get cart */
+
 /* Start Sidebar Shop */
 if ( ! function_exists( 'sport_woo_get_sidebar' ) ) :
 

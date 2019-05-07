@@ -303,42 +303,31 @@ Redux::setSection( $sport_opt_name, array(
 
 // information
 Redux::setSection( $sport_opt_name, array(
-    'title'         =>  esc_html__( 'Information', 'sport' ),
-    'id'            =>  'sport_information_config',
+    'title'         =>  esc_html__( 'Contact Us', 'sport' ),
+    'id'            =>  'sport_contact_us',
     'desc'          =>  esc_html__( '', 'sport' ),
     'subsection'    =>  true,
     'fields'        =>  array(
 
         array(
-            'id'        =>  'sport_information_show_hide',
-            'type'      =>  'select',
-            'title'     =>  esc_html__( 'Show Or Hide Information', 'sport' ),
-            'default'   =>  1,
-            'options'   =>  array(
-                1   =>  esc_html__( 'Show', 'sport' ),
-                0   =>  esc_html__( 'Hide', 'sport' )
-            )
+            'id'        =>  'sport_contact_us_phone',
+            'type'      =>  'multi_text',
+            'title'     =>  esc_html__( 'Phone', 'sport' ),
+            'validate'  =>  'not_empty',
         ),
 
         array(
-            'id'        =>  'sport_information_address',
-            'type'      =>  'text',
-            'title'     =>  esc_html__( 'Address', 'sport' ),
-            'default'   =>  '988782, Our Street, S State.',
-        ),
-
-        array(
-            'id'        =>  'sport_information_mail',
+            'id'        =>  'sport_contact_us_mail',
             'type'      =>  'text',
             'title'     =>  esc_html__( 'Mail', 'sport' ),
-            'default'   =>  'info@domain.com',
+            'default'   =>  'thethao360.sale@gmail.com',
         ),
 
         array(
-            'id'        =>  'sport_information_phone',
+            'id'        =>  'sport_contact_us_zalo',
             'type'      =>  'text',
-            'title'     =>  esc_html__( 'Phone', 'sport' ),
-            'default'   =>  '+1 234 567 186',
+            'title'     =>  esc_html__( 'Zalo Chat', 'sport' ),
+            'default'   =>  '0984.187.697',
         ),
 
     )

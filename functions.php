@@ -373,7 +373,7 @@ if ( ! function_exists( 'sport_fonts_url' ) ) :
             $sport_font_families = array();
 
             if ( 'off' !== $sport_font_google ) {
-                $sport_font_families[] = 'Roboto:400,700';
+                $sport_font_families[] = 'Roboto:400,500,700';
             }
 
             $sport_query_args = array(
