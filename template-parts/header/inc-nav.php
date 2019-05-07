@@ -1,7 +1,7 @@
 <div class="header-nav">
     <div class="container">
-        <div class="header-nav_warp d-lg-flex align-items-center justify-content-lg-end">
-            <div class="site-menu collapse navbar-collapse d-lg-flex justify-content-lg-end">
+        <div class="header-nav_warp">
+            <div class="site-menu collapse navbar-collapse">
 
                 <?php
 

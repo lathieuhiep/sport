@@ -925,7 +925,6 @@ form.post-password-form p input[type='submit'] {
 }
 
 .header-nav {
-  padding: 15px 0;
   -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
@@ -968,6 +967,7 @@ form.post-password-form p input[type='submit'] {
   padding: 0 15px;
   text-shadow: none;
   display: block;
+  text-transform: capitalize;
 }
 
 .site-menu ul li a:hover {
