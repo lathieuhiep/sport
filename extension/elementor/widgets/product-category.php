@@ -28,75 +28,21 @@ class sport_widget_products_filter extends Widget_Base {
 
     protected function _register_controls() {
 
-        /* Start Section Filter */
-        $this->start_controls_section(
-            'section_filter',
-            [
-                'label' =>  esc_html__( 'Filter', 'sport' )
-            ]
-        );
-
-        $repeater = new Repeater();
-
-        $repeater->add_control(
-            'filter_list_name', [
-                'label'         =>  esc_html__( 'Title', 'sport' ),
-                'type'          =>  Controls_Manager::TEXT,
-                'default'       =>  esc_html__( 'New' , 'sport' ),
-                'label_block'   =>  true,
-            ]
-        );
-
-        $repeater->add_control(
-            'filter_list_cat',
-            [
-                'label'         =>  esc_html__( 'Select Category', 'sport' ),
-                'type'          =>  Controls_Manager::SELECT2,
-                'options'       =>  sport_check_get_cat( 'product_cat' ),
-                'multiple'      =>  true,
-                'label_block'   =>  true,
-            ]
-        );
-
-        $repeater->add_control(
-            'filter_list_order_by',
-            [
-                'label'     =>  esc_html__( 'Order By', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  'id',
-                'options'   =>  [
-                    'id'            =>  esc_html__( 'ID', 'sport' ),
-                    'date'          =>  esc_html__( 'Date', 'sport' ),
-                    'total_sales'   =>  esc_html__( 'Bestsellers', 'sport' ),
-                    'rating_count'  =>  esc_html__( 'Rating', 'sport' ),
-                    '_featured'     =>  esc_html__( 'Featured', 'sport' ),
-                    '_sale_price'   =>  esc_html__( 'Sale Price', 'sport' )
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'filter_list',
-            [
-                'label'     =>  esc_html__( 'Filter List', 'sport' ),
-                'type'      =>  Controls_Manager::REPEATER,
-                'fields'    =>  $repeater->get_controls(),
-                'default'   =>  [
-                    [
-                        'filter_list_name'    =>  esc_html__( 'New', 'sport' ),
-                    ],
-                ],
-                'title_field' => '{{{ filter_list_name }}}',
-            ]
-        );
-
-        $this->end_controls_section();
-
         /* Start Section Query */
         $this->start_controls_section(
             'section_query',
             [
                 'label' =>  esc_html__( 'Query', 'sport' )
+            ]
+        );
+
+        $this->add_control(
+            'product_cat',
+            [
+                'label'         =>  esc_html__( 'Select Category', 'sport' ),
+                'type'          =>  Controls_Manager::SELECT,
+                'options'       =>  sport_check_get_cat( 'product_cat' ),
+                'label_block'   =>  true,
             ]
         );
 
@@ -109,6 +55,21 @@ class sport_widget_products_filter extends Widget_Base {
                 'min'       =>  1,
                 'max'       =>  100,
                 'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'order_by',
+            [
+                'label'     =>  esc_html__( 'Order By', 'sport' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'id',
+                'options'   =>  [
+                    'id'    =>  esc_html__( 'Post ID', 'sport' ),
+                    'date'  =>  esc_html__( 'Date', 'sport' ),
+                    'title' =>  esc_html__( 'Title', 'sport' ),
+                    'rand'  =>  esc_html__( 'Random', 'sport' ),
+                ],
             ]
         );
 
@@ -169,15 +130,15 @@ class sport_widget_products_filter extends Widget_Base {
         $this->start_controls_section(
             'section_slides',
             [
-                'label' => esc_html__( 'Slides Options', 'sport' ),
-                'tab' => \Elementor\Controls_Manager::SECTION
+                'label' =>  esc_html__( 'Slides Options', 'sport' ),
+                'tab'   =>  Controls_Manager::SECTION
             ]
         );
 
         $this->add_control(
             'loop',
             [
-                'type'          =>  \Elementor\Controls_Manager::SWITCHER,
+                'type'          =>  Controls_Manager::SWITCHER,
                 'label'         =>  esc_html__( 'Loop Slides ?', 'sport' ),
                 'label_on'      =>  esc_html__( 'Yes', 'sport' ),
                 'label_off'     =>  esc_html__( 'No', 'sport' ),
@@ -189,24 +150,24 @@ class sport_widget_products_filter extends Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label'         => esc_html__( 'Autoplay?', 'sport' ),
-                'type'          => \Elementor\Controls_Manager::SWITCHER,
-                'label_on'      => esc_html__( 'Yes', 'sport' ),
-                'label_off'     => esc_html__( 'No', 'sport' ),
-                'return_value'  => 'yes',
-                'default'       => 'no',
+                'label'         =>  esc_html__( 'Autoplay?', 'sport' ),
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label_on'      =>  esc_html__( 'Yes', 'sport' ),
+                'label_off'     =>  esc_html__( 'No', 'sport' ),
+                'return_value'  =>  'yes',
+                'default'       =>  'no',
             ]
         );
 
         $this->add_control(
             'nav',
             [
-                'label'         => esc_html__( 'Nav?', 'sport' ),
-                'type'          => \Elementor\Controls_Manager::SWITCHER,
-                'label_on'      => esc_html__( 'Yes', 'sport' ),
-                'label_off'     => esc_html__( 'No', 'sport' ),
-                'return_value'  => 'yes',
-                'default'       => 'yes',
+                'label'         =>  esc_html__( 'Nav?', 'sport' ),
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label_on'      =>  esc_html__( 'Yes', 'sport' ),
+                'label_off'     =>  esc_html__( 'No', 'sport' ),
+                'return_value'  =>  'yes',
+                'default'       =>  'yes',
             ]
         );
 
@@ -218,12 +179,14 @@ class sport_widget_products_filter extends Widget_Base {
     protected function render() {
 
         $settings       =   $this->get_settings_for_display();
+        $product_cat    =   $settings['product_cat'];
         $rows_number    =   $settings['rows_number'];
         $column_number  =   $settings['column_number'];
         $number_item    =   $rows_number * $column_number;
-        $filter_list    =   $settings['filter_list'];
         $limit          =   $settings['limit'];
+        $order_by       =   $settings['order_by'];
         $order          =   $settings['order'];
+        $tax_query      =   $product_term  = '';
 
         if ( $column_number == 4 ) :
             $class_column_number = 'column-4 col-lg-3';
@@ -235,8 +198,9 @@ class sport_widget_products_filter extends Widget_Base {
             $class_column_number = 'column-1 col-lg-12';
         endif;
 
-        $product_filter_settings =   [
+        $product_settings =   [
             'limit'     =>  $limit,
+            'order_by'  =>  $order_by,
             'order'     =>  $order
         ];
 
@@ -246,138 +210,112 @@ class sport_widget_products_filter extends Widget_Base {
             'nav'           =>  ( 'yes' === $settings['nav'] ),
         ];
 
-        ?>
+        $product_cat_children = get_term_children( $product_cat, 'product_cat' );
 
+        if ( !empty( $product_cat ) ) :
 
-        <div class="element-product-filter" data-settings='<?php echo esc_attr( wp_json_encode( $product_filter_settings ) ); ?>'>
-            <?php if ( !empty( $filter_list ) ) : ?>
+            $product_term = get_term( $product_cat, 'product_cat' );
 
-                <div class="filter-block">
+            $tax_query = array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'id',
+                    'terms'    => $product_cat,
+                )
+            );
+
+        endif;
+
+        $args = array(
+            'post_type'         =>  'product',
+            'posts_per_page'    =>  $limit,
+            'orderby'           =>  $order_by,
+            'order'             =>  $order,
+            'tax_query'         =>  $tax_query,
+        );
+
+        $query = new \ WP_Query( $args );
+
+        if ( $query->have_posts() ) :
+
+    ?>
+
+        <div class="element-product-cat" data-settings='<?php echo esc_attr( wp_json_encode( $product_settings ) ); ?>'>
+            <?php if ( !empty( $product_cat ) ) : ?>
+
+            <h2 class="title-parent-cat text-center">
+                <a href="<?php echo esc_url( get_term_link( $product_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
+                    <?php echo esc_html( $product_term->name ); ?>
+                </a>
+            </h2>
+
+            <?php endif; ?>
+
+            <div class="element-product-cat__warp">
+                <?php if ( !empty( $product_cat_children ) ) : ?>
+
+                <div class="btn-product-cat-filter d-flex align-items-end">
+                    <div class="btn-list-cat">
+                        <?php
+                        foreach ( $product_cat_children as $item ) :
+
+                            $term_children = get_term_by( 'id', $item, 'product_cat' );
+                        ?>
+
+                        <span class="btn-item-filter" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
+                            <?php echo esc_html( $term_children->name ); ?>
+                        </span>
+
+                        <?php endforeach; ?>
+                    </div>
+
+                    <a class="link-cat-parent" href="<?php echo esc_url( get_term_link( $product_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
+                        <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </div>
+
+                <?php endif; ?>
+
+                <div class="element-product-filter__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
                     <?php
-                    $i = 0;
-                    foreach ( $filter_list as $item ) :
+                    $i = 1;
+                    $total_posts    =   $query->post_count;
+                    while ( $query->have_posts() ): $query->the_post();
+                        if ( $i % $number_item == 1 ) :
 
-                        if ( !empty( $item['filter_list_cat'] ) ) :
+                    ?>
 
-                            $ids = implode( ",",$item['filter_list_cat'] );
+                            <div class="menu-filter__row">
+                                <div class="row">
 
-                        else:
-
-                            $ids = 0;
+                    <?php
 
                         endif;
 
-                        $btn_filter_settings =   [
-                            'ids'       =>  $ids,
-                            'order_by'  =>  $item['filter_list_order_by'],
-                        ];
+                        sport_content_product_filter( $class_column_number );
 
-                        ?>
+                        if ( $i % $number_item == 0 || $i == $total_posts ) :
+                    ?>
 
-                        <button class="btn-filter-product<?php echo esc_attr( $i == 0 ? ' active' : '' ); ?>" data-settings='<?php echo esc_attr( wp_json_encode( $btn_filter_settings ) ); ?>'>
-                            <?php echo esc_html( $item['filter_list_name'] ); ?>
-                        </button>
-
-                        <?php $i++; endforeach; ?>
-                </div>
-
-                <div class="element-product-filter__container">
-                    <?php
-                    $meta_query                 =   '';
-                    $filter_list_fist           =   $filter_list[0];
-                    $filter_list_fist_cat       =   $filter_list_fist['filter_list_cat'];
-                    $filter_list_fist_order_by  =   $filter_list_fist['filter_list_order_by'];
-
-                    if ( !empty( $filter_list_fist_cat ) ):
-
-                        $tax_query = array(
-                            'taxonomy'  =>  'product_cat',
-                            'field'     =>  'id',
-                            'terms'     =>  $filter_list_fist_cat,
-                        );
-
-                    else:
-
-                        $tax_query = '';
-
-                    endif;
-
-                    if ( $filter_list_fist_order_by == 'total_sales' ) :
-
-                        $order_by   =   'meta_value_num';
-
-                        $meta_query =   array(
-                            array(
-                                'key'       =>  'total_sales',
-                                'value'     =>  0,
-                                'compare'   =>  '>'
-                            )
-                        );
-
-                    else:
-
-                        $order_by = $filter_list_fist_order_by;
-
-                    endif;
-
-
-                    $args = array(
-                        'post_type'         =>  'product',
-                        'posts_per_page'    =>  $limit,
-                        'orderby'           =>  $order_by,
-                        'order'             =>  $order,
-                        'tax_query'         =>  $tax_query,
-                        'meta_query'        =>  $meta_query
-                    );
-
-                    $query = new \ WP_Query( $args );
-
-                    if ( $query->have_posts() ) :
-
-                ?>
-
-                        <div class="element-product-filter__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-                            <?php
-                            $i = 1;
-                            $total_posts    =   $query->post_count;
-                            while ( $query->have_posts() ): $query->the_post();
-                                if ( $i % $number_item == 1 ) :
-
-                                    ?>
-
-                                    <div class="menu-filter__row">
-                                    <div class="row">
-
-                                <?php
-
-                                endif;
-
-                                sport_content_product_filter( $class_column_number );
-
-                                if ( $i % $number_item == 0 || $i == $total_posts ) :
-                                ?>
-
-                                    </div>
                                 </div>
+                            </div>
 
-                                <?php
+                    <?php
 
-                                endif;
+                        endif;
 
-                                $i++;
-                            endwhile;
-                            wp_reset_postdata();
-                            ?>
-                        </div>
-
-                    <?php endif; ?>
+                        $i++;
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
                 </div>
-
-            <?php endif; ?>
+            </div>
         </div>
 
-        <?php
+    <?php
 
+        endif;
 
     }
 

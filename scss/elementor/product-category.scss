@@ -1,0 +1,45 @@
+.element-product-cat {
+  .title-parent-cat {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 17px 8px 12px 24px;
+    background-color: #ff5c00;
+
+    a {
+      display: block;
+      color: #ffffff;
+    }
+  }
+  .btn-product-cat-filter {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ff5c00;
+
+    .btn-list-cat {
+      @include flex(1 0 auto);
+    }
+    span {
+      cursor: pointer;
+      display: inline-block;
+      color: #323c3f;
+      line-height: 42px;
+      text-align: center;
+      margin-right: 5px;
+      padding: 0 20px;
+      background-color: #f2f2f2;
+      @include transition(all 0.4s ease-in-out);
+
+      &:hover {
+        color: #ffffff;
+        background-color: #ff5c00;
+      }
+    }
+    .link-cat-parent {
+      color: #ff5c00;
+
+      &:hover {
+        color: $color-hover;
+      }
+    }
+  }
+}

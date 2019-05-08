@@ -28,6 +28,7 @@ Text Domain: sport
   ## Posts Carousel
   ## Text Editor Scroll
   ## Text Box
+  ## Product Category
 # Woocommerce
 # Contact Form 7
 # Footer
@@ -2093,6 +2094,59 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 .elementor-text-box .description {
   font-size: 12px;
   color: #707070;
+}
+
+/* Product Category */
+.element-product-cat .title-parent-cat {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 17px 8px 12px 24px;
+  background-color: #ff5c00;
+}
+
+.element-product-cat .title-parent-cat a {
+  display: block;
+  color: #ffffff;
+}
+
+.element-product-cat .btn-product-cat-filter {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ff5c00;
+}
+
+.element-product-cat .btn-product-cat-filter .btn-list-cat {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.element-product-cat .btn-product-cat-filter span {
+  cursor: pointer;
+  display: inline-block;
+  color: #323c3f;
+  line-height: 42px;
+  text-align: center;
+  margin-right: 5px;
+  padding: 0 20px;
+  background-color: #f2f2f2;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.element-product-cat .btn-product-cat-filter span:hover {
+  color: #ffffff;
+  background-color: #ff5c00;
+}
+
+.element-product-cat .btn-product-cat-filter .link-cat-parent {
+  color: #ff5c00;
+}
+
+.element-product-cat .btn-product-cat-filter .link-cat-parent:hover {
+  color: #00b0f0;
 }
 
 /**
