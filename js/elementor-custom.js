@@ -20,6 +20,20 @@
     };
     /* End element post carousel */
 
+    /* Start element text editor scroll */
+    let ElementTextEditorScroll =   function( $scope, $ ) {
+
+        let element_text_editor_scroll = $scope.find( '.element-text-editor-scroll .boxscroll' );
+
+        element_text_editor_scroll.each( function () {
+
+            $(this).niceScroll();
+
+        } )
+
+    };
+    /* End element text editor scroll */
+
     $( window ).on( 'elementor/frontend/init', function() {
 
         /* Element slider */
@@ -27,6 +41,9 @@
 
         /* Element post carousel */
         elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-post-carousel.default', ElementPostCarousel );
+
+        /* Element text editor scroll */
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-text-editor-scroll.default', ElementTextEditorScroll );
 
     } );
 

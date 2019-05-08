@@ -6,7 +6,7 @@ html {
 }
 body {
   min-height: 100vh;
-  line-height: 1.8em;
+  line-height: 1.6em;
   overflow-x: hidden;
   font-size: 14px;
   color: $color-primary;
@@ -269,17 +269,6 @@ pre {
       &:hover {
         span {
           background-color: #ff5555;
-        }
-      }
-    }
-  }
-}
-.elementor-column-gap-default {
-  > .elementor-row {
-    > .elementor-column {
-      > .elementor-element-populated {
-        &.elementor-column-wrap  {
-          padding: 15px;
         }
       }
     }

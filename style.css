@@ -26,6 +26,8 @@ Text Domain: sport
   ## Slider
   ## Posts Grid
   ## Posts Carousel
+  ## Text Editor Scroll
+  ## Text Box
 # Woocommerce
 # Contact Form 7
 # Footer
@@ -45,7 +47,7 @@ html {
 
 body {
   min-height: 100vh;
-  line-height: 1.8em;
+  line-height: 1.6em;
   overflow-x: hidden;
   font-size: 14px;
   color: #777777;
@@ -371,10 +373,6 @@ pre {
 
 .owl-carousel .owl-dots .owl-dot.active span, .owl-carousel .owl-dots .owl-dot:hover span {
   background-color: #ff5555;
-}
-
-.elementor-column-gap-default > .elementor-row > .elementor-column > .elementor-element-populated.elementor-column-wrap {
-  padding: 15px;
 }
 
 /* WordPress Core
@@ -973,6 +971,10 @@ form.post-password-form p input[type='submit'] {
 .site-menu ul li a:hover {
   background-color: transparent;
   color: #00b0f0;
+}
+
+.site-menu ul li:first-child a {
+  padding-left: 0;
 }
 
 .site-menu ul li:last-child a {
@@ -2063,6 +2065,34 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .element-post-carousel.owl-carousel .owl-nav .owl-next {
   right: -70px;
+}
+
+/* Text Editor Scroll */
+.element-text-editor-scroll .boxscroll {
+  height: 80px;
+  overflow: hidden;
+}
+
+/* Text Box */
+.elementor-text-box .icon-image {
+  width: 40px;
+  margin-right: 15px;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.elementor-text-box .title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #707070;
+  margin-bottom: 10px;
+}
+
+.elementor-text-box .description {
+  font-size: 12px;
+  color: #707070;
 }
 
 /**
