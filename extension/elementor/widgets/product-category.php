@@ -277,7 +277,7 @@ class sport_widget_products_filter extends Widget_Base {
 
                 <?php endif; ?>
 
-                <div class="element-product-filter__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                <div class="element-product-cat__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
                     <?php
                     $i = 1;
                     $total_posts    =   $query->post_count;

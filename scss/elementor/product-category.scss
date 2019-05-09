@@ -42,4 +42,31 @@
       }
     }
   }
+  .element-product-cat__slider {
+    .item-col {
+      margin-bottom: 30px;
+    }
+    .item-title {
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0 0 8px;
+    }
+    .price-box {
+      .price {
+        font-size: 16px;
+        color: $color-hover-second;
+        font-weight: 700;
+
+        del {
+          font-size: 14px;
+          font-weight: 400;
+          color: $color-primary;
+          margin-right: 5px;
+        }
+        ins {
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }

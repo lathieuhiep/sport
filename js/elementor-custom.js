@@ -35,11 +35,11 @@
     /* End element text editor scroll */
 
     /* Start element product category */
-    let ElementProductFilter   =   function( $scope, $ ) {
+    let ElementProductCatSlider   =   function( $scope, $ ) {
 
-        let element_product_filter = $scope.find( '.element-product-filter__slider' );
+        let element_product_cat_slider = $scope.find( '.element-product-cat__slider' );
 
-        $( document ).general_owlCarousel_item( element_product_filter );
+        $( document ).general_owlCarousel_item( element_product_cat_slider );
 
     };
     /* End element product category */
@@ -56,7 +56,7 @@
         elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-text-editor-scroll.default', ElementTextEditorScroll );
 
         /* Element product category */
-        elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-products-cat.default', ElementProductFilter );
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-products-cat.default', ElementProductCatSlider );
 
     } );
 

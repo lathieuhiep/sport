@@ -12,7 +12,7 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
                 if ( has_post_thumbnail() ) :
                     the_post_thumbnail( 'large' );
                 else:
-                    ?>
+                ?>
                     <img src="<?php echo esc_url( get_theme_file_uri( '/images/no-image.png' ) ); ?>" alt="<?php the_title(); ?>">
                 <?php endif; ?>
 
