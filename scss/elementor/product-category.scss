@@ -49,6 +49,10 @@
     }
     .item-thumbnail {
       margin-bottom: 15px;
+
+      a {
+        display: block;
+      }
     }
     .item-title {
       font-size: 16px;

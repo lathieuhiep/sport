@@ -2157,6 +2157,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   margin-bottom: 15px;
 }
 
+.element-product-cat .element-product-cat__slider .item-thumbnail a {
+  display: block;
+}
+
 .element-product-cat .element-product-cat__slider .item-title {
   font-size: 16px;
   font-weight: 400;

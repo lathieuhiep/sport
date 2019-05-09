@@ -177,6 +177,184 @@ class sport_widget_products_filter extends Widget_Base {
         $this->end_controls_section();
         /* End Section Layout */
 
+        /* Style Title Cat */
+        $this->start_controls_section('style_title_cat', array(
+            'label' =>  esc_html__( 'Title', '' ),
+            'tab'   =>  Controls_Manager::TAB_STYLE,
+        ));
+
+        $this->add_control(
+            'bk_title',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .title-parent-cat' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'title_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .title-parent-cat a' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .element-product-cat .title-parent-cat',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Style Filter Cat */
+        $this->start_controls_section('style_filter', array(
+            'label' =>  esc_html__( 'Filter', '' ),
+            'tab'   =>  Controls_Manager::TAB_STYLE,
+        ));
+
+        $this->add_control(
+            'button_filter_options',
+            [
+                'label'     =>  esc_html__( 'Button Filter', 'sport' ),
+                'type'      =>  Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'filter_line_color',
+            [
+                'label'     =>  esc_html__( 'Color Line', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter' => 'border-bottom-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'filter_typography',
+                'selector' => '{{WRAPPER}} .element-product-cat .btn-product-cat-filter span',
+            ]
+        );
+
+        $this->start_controls_tabs( 'style_tabs_filter' );
+
+        $this->start_controls_tab(
+            'style_normal_tab_filter',
+            [
+                'label' => esc_html__( 'Normal', 'sport' ),
+            ]
+        );
+
+        $this->add_control(
+            'filter_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter span' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'filter_bk',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter span' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'style_hover_tab_filter',
+            [
+                'label' => esc_html__( 'Hover', 'sport' ),
+            ]
+        );
+
+        $this->add_control(
+            'filter_color_hover',
+            [
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter span.active, {{WRAPPER}} .element-product-cat .btn-product-cat-filter span:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'bk_filter_hover',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter span.active, {{WRAPPER}} .element-product-cat .btn-product-cat-filter span:hover' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_control(
+            'text_filter_all',
+            [
+                'label'     =>  esc_html__( 'Text All', 'sport' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'text_filter_typography',
+                'selector' => '{{WRAPPER}} .element-product-cat .btn-product-cat-filter .link-cat-parent',
+            ]
+        );
+
+        $this->add_control(
+            'text_filter_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter .link-cat-parent' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'text_filter_color_hover',
+            [
+                'label'     =>  esc_html__( 'Color Hover', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .btn-product-cat-filter .link-cat-parent:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
     protected function render() {

@@ -6,15 +6,17 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
     <div class="item-col <?php echo esc_attr( $class_animate . $class_column_number ); ?> col-md-3 col-sm-6 col-6">
         <div class="item-product">
             <div class="item-thumbnail">
-                <?php
-                do_action( 'woo_elementor_product_sale_flash' );
+                <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
+                    <?php
+                    do_action( 'woo_elementor_product_sale_flash' );
 
-                if ( has_post_thumbnail() ) :
-                    the_post_thumbnail( 'large' );
-                else:
-                ?>
-                    <img src="<?php echo esc_url( get_theme_file_uri( '/images/no-image.png' ) ); ?>" alt="<?php the_title(); ?>">
-                <?php endif; ?>
+                    if ( has_post_thumbnail() ) :
+                        the_post_thumbnail( 'large' );
+                    else:
+                    ?>
+                        <img src="<?php echo esc_url( get_theme_file_uri( '/images/no-image.png' ) ); ?>" alt="<?php the_title(); ?>">
+                    <?php endif; ?>
+                </a>
             </div>
 
             <div class="item-detail text-center">
@@ -54,9 +56,11 @@ function sport_product_filter() {
         'orderby'           =>  $order_by,
         'order'             =>  $order,
         'tax_query'         =>  array(
-            'taxonomy' => 'product_cat',
-            'field'    => 'term_id',
-            'terms'    => $product_cat_id,
+           array(
+               'taxonomy' => 'product_cat',
+               'field'    => 'term_id',
+               'terms'    => $product_cat_id,
+           )
         ),
     );
 
@@ -78,7 +82,7 @@ function sport_product_filter() {
 
         endif;
 
-//        sport_content_product_filter( $column );
+        sport_content_product_filter( $column );
 
         if ( $i % $number_item == 0 || $i == $total_posts ) :
 

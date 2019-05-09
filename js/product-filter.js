@@ -63,8 +63,7 @@
 
                         if ( data ) {
 
-                            $('.element-product-cat__warp').append( data );
-                            // product_cat_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+                            product_cat_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
 
                         }
 
