@@ -1,10 +1,10 @@
 <?php
 function sport_content_product_filter( $class_column_number, $class_animate = null ) {
 
-    ?>
+?>
 
     <div class="item-col <?php echo esc_attr( $class_animate . $class_column_number ); ?> col-md-3 col-sm-6 col-6">
-        <div class="woocommerce item-product">
+        <div class="item-product">
             <div class="item-thumbnail">
                 <?php
                 do_action( 'woo_elementor_product_sale_flash' );
@@ -15,24 +15,6 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
                 ?>
                     <img src="<?php echo esc_url( get_theme_file_uri( '/images/no-image.png' ) ); ?>" alt="<?php the_title(); ?>">
                 <?php endif; ?>
-
-                <div class="actions">
-                    <ul class="add-to-links text-center">
-                        <li>
-                            <p class="item-actions" data-toggle="tooltip" title="Quick View">
-                                <a href="#">
-                                    <i class="far fa-eye"></i>
-                                </a>
-                            </p>
-                        </li>
-
-                        <li>
-                            <p class="item-actions" data-toggle="tooltip" title="Add to cart">
-                                <?php do_action( 'woo_elementor_add_to_cart' ); ?>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
             <div class="item-detail text-center">
@@ -42,10 +24,6 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
                     </a>
                 </h2>
 
-                <div class="ratings">
-                    <?php woocommerce_template_loop_rating(); ?>
-                </div>
-
                 <div class="price-box">
                     <?php woocommerce_template_loop_price(); ?>
                 </div>
@@ -53,7 +31,7 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
         </div>
     </div>
 
-    <?php
+<?php
 
 }
 
@@ -62,11 +40,13 @@ add_action( 'wp_ajax_sport_product_filter', 'sport_product_filter' );
 add_action( 'wp_ajax_nopriv_sport_product_filter', 'sport_product_filter' );
 
 function sport_product_filter() {
-    $product_tag_id =   $_POST['tag_id_product'];
-    $column         =   $_POST['column'];
+
+    $product_cat_id =   $_POST['product_cat_id'];
     $limit          =   $_POST['limit'];
-    $order_by       =   $_POST['orderby'];
+    $order_by       =   $_POST['order_by'];
     $order          =   $_POST['order'];
+    $rows           =   $_POST['rows'];
+    $column         =   $_POST['column'];
 
     $args = array(
         'post_type'         =>  'product',
@@ -74,21 +54,44 @@ function sport_product_filter() {
         'orderby'           =>  $order_by,
         'order'             =>  $order,
         'tax_query'         =>  array(
-            array(
-                'taxonomy'  =>  'product_tag',
-                'field'     =>  'id',
-                'terms'     =>  $product_tag_id,
-            ),
+            'taxonomy' => 'product_cat',
+            'field'    => 'term_id',
+            'terms'    => $product_cat_id,
         ),
     );
 
-    $query = new \ WP_Query( $args );
+    $query = new WP_Query( $args );
+    $i = 1;
+    $total_posts    =   $query->post_count;
+    $number_item    =   $rows * $column;
 
     while ( $query->have_posts() ): $query->the_post();
 
-        sport_content_product_filter( $column, 'animated  fadeInUp ' );
+        if ( $i % $number_item == 1 ) :
 
-    endwhile; wp_reset_postdata();
+?>
+
+            <div class="menu-filter__row">
+                <div class="row">
+
+        <?php
+
+        endif;
+
+//        sport_content_product_filter( $column );
+
+        if ( $i % $number_item == 0 || $i == $total_posts ) :
+
+        ?>
+                </div>
+            </div>
+
+<?php
+        endif;
+
+        $i++;
+    endwhile;
+    wp_reset_postdata();
 
     exit();
 }

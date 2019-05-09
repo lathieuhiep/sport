@@ -23,7 +23,7 @@ class sport_widget_products_filter extends Widget_Base {
     }
 
     public function get_script_depends() {
-        return ['sport-elementor-custom'];
+        return ['sport-elementor-custom', 'products_filter'];
     }
 
     protected function _register_controls() {
@@ -116,6 +116,9 @@ class sport_widget_products_filter extends Widget_Base {
                 'type'      =>  Controls_Manager::SELECT,
                 'default'   =>  4,
                 'options'   =>  [
+                    7   =>  esc_html__( '7 Column', 'sport' ),
+                    6   =>  esc_html__( '6 Column', 'sport' ),
+                    5   =>  esc_html__( '5 Column', 'sport' ),
                     4   =>  esc_html__( '4 Column', 'sport' ),
                     3   =>  esc_html__( '3 Column', 'sport' ),
                     2   =>  esc_html__( '2 Column', 'sport' ),
@@ -188,7 +191,13 @@ class sport_widget_products_filter extends Widget_Base {
         $order          =   $settings['order'];
         $tax_query      =   $product_term  = '';
 
-        if ( $column_number == 4 ) :
+        if ( $column_number == 7 ) :
+            $class_column_number = 'column-7';
+        elseif ( $column_number == 6 ) :
+            $class_column_number = 'column-6 col-lg-2';
+        elseif ( $column_number == 5 ) :
+            $class_column_number = 'column-5';
+        elseif ( $column_number == 4 ) :
             $class_column_number = 'column-4 col-lg-3';
         elseif ( $column_number == 3 ) :
             $class_column_number = 'column-3 col-lg-4';
@@ -201,7 +210,9 @@ class sport_widget_products_filter extends Widget_Base {
         $product_settings =   [
             'limit'     =>  $limit,
             'order_by'  =>  $order_by,
-            'order'     =>  $order
+            'order'     =>  $order,
+            'rows'      =>  $rows_number,
+            'column'    =>  $column_number,
         ];
 
         $data_settings  =   [
@@ -216,11 +227,17 @@ class sport_widget_products_filter extends Widget_Base {
 
             $product_term = get_term( $product_cat, 'product_cat' );
 
+            if ( !empty( $product_cat_children ) ) :
+                $product_cat_id = $product_cat_children[0];
+            else:
+                $product_cat_id = $product_cat;
+            endif;
+
             $tax_query = array(
                 array(
                     'taxonomy' => 'product_cat',
-                    'field'    => 'id',
-                    'terms'    => $product_cat,
+                    'field'    => 'term_id',
+                    'terms'    => $product_cat_id,
                 )
             );
 
@@ -262,7 +279,7 @@ class sport_widget_products_filter extends Widget_Base {
                             $term_children = get_term_by( 'id', $item, 'product_cat' );
                         ?>
 
-                        <span class="btn-item-filter" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
+                        <span class="btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
                             <?php echo esc_html( $term_children->name ); ?>
                         </span>
 

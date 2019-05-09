@@ -3,6 +3,12 @@
   .container {
     max-width: 1200px;
   }
+  .column-5 {
+    @include flex( 0 0 20% );
+  }
+  .column-7 {
+    @include flex( 0 0 14.285714285714285714285714285714% );
+  }
 
 }
 
