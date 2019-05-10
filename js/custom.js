@@ -117,7 +117,7 @@
                     nav: $active_nav,
                     navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
                     dots: $active_dots,
-                    autoHeight:false
+                    autoHeight:true
 
                 });
 

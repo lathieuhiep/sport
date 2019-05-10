@@ -30,7 +30,8 @@
                 var parent_class            =   $(this).parents( '.element-product-cat' ),
                     parent_data_settings    =   parent_class.data( 'settings' ),
                     product_cat_slider      =   parent_class.find( '.element-product-cat__slider' ),
-                    content_product         =   parent_class.find( '.menu-filter__row' ),
+                    filter_loader           =   parent_class.find( '.filter-loader' ),
+                    product_cat_data        =   parent_class.find( '.element-product-cat__data' ),
                     product_cat_id          =   parseInt( $(this).data( 'id' ) ),
                     limit                   =   parseInt( parent_data_settings['limit'] ),
                     order_by                =   parent_data_settings['order_by'],
@@ -56,14 +57,19 @@
 
                     beforeSend: function () {
 
+                        filter_loader.show();
+                        product_cat_data.addClass('hide-loading');
 
                     },
 
                     success: function( data ) {
 
+                        filter_loader.hide();
+                        product_cat_data.removeClass('hide-loading');
+
                         if ( data ) {
 
-                            product_cat_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+                            product_cat_slider.trigger('replace.owl.carousel', data).trigger('refreshed.owl.carousel');
 
                         }
 

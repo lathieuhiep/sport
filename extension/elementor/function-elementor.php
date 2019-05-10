@@ -82,7 +82,7 @@ function sport_product_filter() {
 
         endif;
 
-        sport_content_product_filter( $column );
+        sport_content_product_filter( $column, 'animated zoomIn ' );
 
         if ( $i % $number_item == 0 || $i == $total_posts ) :
 

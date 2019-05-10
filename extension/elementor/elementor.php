@@ -54,12 +54,13 @@ class sport_plugin_elementor_widgets {
 
     function sport_elementor_script() {
 
+        wp_register_script( 'sport-elementor-custom', get_theme_file_uri( '/js/elementor-custom.js' ), array(), '1.0.0', true );
+
         $products_filter_admin_url  =   admin_url('admin-ajax.php');
         $products_filter_get        =   array( 'url' => $products_filter_admin_url );
         wp_localize_script( 'products_filter', 'sport_products_filter_load', $products_filter_get );
         wp_register_script( 'products_filter', get_theme_file_uri( '/js/product-filter.js' ), array(), '', true );
 
-        wp_register_script( 'sport-elementor-custom', get_theme_file_uri( '/js/elementor-custom.js' ), array(), '1.0.0', true );
     }
 
 }

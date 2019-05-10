@@ -472,38 +472,46 @@ class sport_widget_products_filter extends Widget_Base {
 
                 <?php endif; ?>
 
-                <div class="element-product-cat__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-                    <?php
-                    $i = 1;
-                    $total_posts    =   $query->post_count;
-                    while ( $query->have_posts() ): $query->the_post();
-                        if ( $i % $number_item == 1 ) :
+                <div class="element-product-cat__container">
+                    <div class="filter-loader">
+                        <span class="loader-icon"></span>
+                    </div>
 
-                    ?>
+                    <div class="element-product-cat__data">
+                        <div class="element-product-cat__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                            <?php
+                            $i = 1;
+                            $total_posts    =   $query->post_count;
+                            while ( $query->have_posts() ): $query->the_post();
+                                if ( $i % $number_item == 1 ) :
 
-                            <div class="menu-filter__row">
-                                <div class="row">
+                            ?>
 
-                    <?php
+                                    <div class="menu-filter__row">
+                                        <div class="row">
 
-                        endif;
+                            <?php
 
-                        sport_content_product_filter( $class_column_number );
+                                endif;
 
-                        if ( $i % $number_item == 0 || $i == $total_posts ) :
-                    ?>
+                                sport_content_product_filter( $class_column_number );
 
-                                </div>
-                            </div>
+                                if ( $i % $number_item == 0 || $i == $total_posts ) :
+                            ?>
 
-                    <?php
+                                        </div>
+                                    </div>
 
-                        endif;
+                            <?php
 
-                        $i++;
-                    endwhile;
-                    wp_reset_postdata();
-                    ?>
+                                endif;
+
+                                $i++;
+                            endwhile;
+                            wp_reset_postdata();
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
