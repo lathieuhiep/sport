@@ -94,7 +94,8 @@
                     $autoplay           =   false,
                     $rtl_slider         =   false,
                     $active_dots        =   false,
-                    $active_nav         =   false;
+                    $active_nav         =   false,
+                    $auto_height        =   false;
 
                 if ( $settings_slider !== undefined ) {
 
@@ -102,6 +103,7 @@
                     $autoplay       =   typeof ( $settings_slider['autoplay'] ) !== "undefined" ? $settings_slider['autoplay']: false;
                     $active_dots    =   typeof ( $settings_slider['dots'] ) !== "undefined" ? $settings_slider['dots'] : false;
                     $active_nav     =   typeof ( $settings_slider['nav'] ) !== "undefined" ?  $settings_slider['nav'] : false;
+                    $auto_height    =   typeof ( $settings_slider['autoHeight'] ) !== "undefined" ?  $settings_slider['autoHeight'] : false;
 
                 }
 
@@ -117,7 +119,7 @@
                     nav: $active_nav,
                     navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
                     dots: $active_dots,
-                    autoHeight:true
+                    autoHeight:$auto_height
 
                 });
 

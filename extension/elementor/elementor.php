@@ -75,7 +75,7 @@ function sport_check_get_cat( $type_taxonomy ) {
     $category     =   get_terms(
         array(
             'taxonomy'      =>  $type_taxonomy,
-            'hide_empty'    =>  false
+            'hide_empty'    =>  true,
         )
     );
 
