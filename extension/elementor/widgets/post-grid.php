@@ -24,68 +24,6 @@ class sport_post_grid extends Widget_Base {
 
     protected function _register_controls() {
 
-        /* Section Query */
-        $this->start_controls_section(
-            'section_query',
-            [
-                'label' =>  esc_html__( 'Query', 'sport' )
-            ]
-        );
-
-        $this->add_control(
-            'select_cat',
-            [
-                'label'         =>  esc_html__( 'Select Category', 'sport' ),
-                'type'          =>  Controls_Manager::SELECT2,
-                'options'       =>  sport_check_get_cat( 'category' ),
-                'multiple'      =>  true,
-                'label_block'   =>  true
-            ]
-        );
-
-        $this->add_control(
-            'limit',
-            [
-                'label'     =>  esc_html__( 'Number of Posts', 'sport' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  6,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-            ]
-        );
-
-        $this->add_control(
-            'order_by',
-            [
-                'label'     =>  esc_html__( 'Order By', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  'id',
-                'options'   =>  [
-                    'id'            =>  esc_html__( 'Post ID', 'sport' ),
-                    'author'        =>  esc_html__( 'Post Author', 'sport' ),
-                    'title'         =>  esc_html__( 'Title', 'sport' ),
-                    'date'          =>  esc_html__( 'Date', 'sport' ),
-                    'rand'          =>  esc_html__( 'Random', 'sport' ),
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'order',
-            [
-                'label'     =>  esc_html__( 'Order', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  'ASC',
-                'options'   =>  [
-                    'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
-                    'DESC'  =>  esc_html__( 'Descending', 'sport' ),
-                ],
-            ]
-        );
-
-        $this->end_controls_section();
-
         /* Section Layout */
         $this->start_controls_section(
             'section_layout',
@@ -95,16 +33,14 @@ class sport_post_grid extends Widget_Base {
         );
 
         $this->add_control(
-            'column_number',
+            'style_layout',
             [
-                'label'     =>  esc_html__( 'Column', 'sport' ),
+                'label'     =>  esc_html__( 'Style', 'sport' ),
                 'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  3,
+                'default'   =>  'style-1',
                 'options'   =>  [
-                    4   =>  esc_html__( '4 Column', 'sport' ),
-                    3   =>  esc_html__( '3 Column', 'sport' ),
-                    2   =>  esc_html__( '2 Column', 'sport' ),
-                    1   =>  esc_html__( '1 Column', 'sport' ),
+                    'style-1'   =>  esc_html__( 'Style 1', 'sport' ),
+                    'style-2'   =>  esc_html__( 'Style 2', 'sport' ),
                 ],
             ]
         );
@@ -145,6 +81,91 @@ class sport_post_grid extends Widget_Base {
                 'default'   =>  '10',
                 'condition' =>  [
                     'show_excerpt' => '1',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Section Query */
+        $this->start_controls_section(
+            'section_query',
+            [
+                'label' =>  esc_html__( 'Query', 'sport' )
+            ]
+        );
+
+        $this->add_control(
+            'input_id_post',
+            [
+                'label'         =>  esc_html__( 'Input Id Post', 'sport' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  '',
+                'label_block'   =>  true,
+                'description'   =>  esc_html__( 'Ex input id post: 1,2', 'sport' ),
+                'condition' => [
+                    'style_layout' => 'style-1',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'select_cat',
+            [
+                'label'         =>  esc_html__( 'Select Category', 'sport' ),
+                'type'          =>  Controls_Manager::SELECT2,
+                'options'       =>  sport_check_get_cat( 'category' ),
+                'multiple'      =>  true,
+                'label_block'   =>  true,
+                'condition' => [
+                    'style_layout!' => 'style-1',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'limit',
+            [
+                'label'     =>  esc_html__( 'Number of Posts', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  4,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+                'condition' => [
+                    'style_layout!' => 'style-1',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'order_by',
+            [
+                'label'     =>  esc_html__( 'Order By', 'sport' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'id',
+                'options'   =>  [
+                    'id'            =>  esc_html__( 'Post ID', 'sport' ),
+                    'author'        =>  esc_html__( 'Post Author', 'sport' ),
+                    'title'         =>  esc_html__( 'Title', 'sport' ),
+                    'date'          =>  esc_html__( 'Date', 'sport' ),
+                    'rand'          =>  esc_html__( 'Random', 'sport' ),
+                ],
+                'condition' => [
+                    'style_layout!' => 'style-1',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'order',
+            [
+                'label'     =>  esc_html__( 'Order', 'sport' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'ASC',
+                'options'   =>  [
+                    'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
+                    'DESC'  =>  esc_html__( 'Descending', 'sport' ),
                 ],
             ]
         );
@@ -304,26 +325,47 @@ class sport_post_grid extends Widget_Base {
         $order_by_post  =   $settings['order_by'];
         $order_post     =   $settings['order'];
 
-        if ( !empty( $cat_post ) ) :
+        if ( $settings['style_layout'] == 'style-1' ) :
 
-            $args = array(
-                'post_type'             =>  'post',
-                'posts_per_page'        =>  $limit_post,
-                'orderby'               =>  $order_by_post,
-                'order'                 =>  $order_post,
-                'cat'                   =>  $cat_post,
-                'ignore_sticky_posts'   =>  1,
-            );
+            $input_id_post  =   $settings['input_id_post'];
+
+            if ( !empty( $input_id_post ) ) :
+
+                $ids_post = explode( ",", $input_id_post  );
+
+                $args = array(
+                    'post_type'             =>  'post',
+                    'post__in'              =>  $ids_post,
+                    'orderby'               =>  $order_by_post,
+                    'ignore_sticky_posts'   =>  1,
+                );
+            endif;
 
         else:
 
-            $args = array(
-                'post_type'             =>  'post',
-                'posts_per_page'        =>  $limit_post,
-                'orderby'               =>  $order_by_post,
-                'order'                 =>  $order_post,
-                'ignore_sticky_posts'   =>  1,
-            );
+
+            if ( !empty( $cat_post ) ) :
+
+                $args = array(
+                    'post_type'             =>  'post',
+                    'posts_per_page'        =>  $limit_post,
+                    'orderby'               =>  $order_by_post,
+                    'order'                 =>  $order_post,
+                    'cat'                   =>  $cat_post,
+                    'ignore_sticky_posts'   =>  1,
+                );
+
+            else:
+
+                $args = array(
+                    'post_type'             =>  'post',
+                    'posts_per_page'        =>  $limit_post,
+                    'orderby'               =>  $order_by_post,
+                    'order'                 =>  $order_post,
+                    'ignore_sticky_posts'   =>  1,
+                );
+
+            endif;
 
         endif;
 
@@ -333,11 +375,28 @@ class sport_post_grid extends Widget_Base {
 
         ?>
 
-            <div class="element-post-grid">
+            <div class="element-post-grid <?php echo esc_attr( $settings['style_layout'] ); ?>">
                 <div class="row">
-                    <?php while ( $query->have_posts() ): $query->the_post(); ?>
+                    <?php
+                    $i = $j = 0 ;
+                    while ( $query->have_posts() ): $query->the_post();
 
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( 12 / $settings['column_number'] ); ?>">
+                        $total_posts    =   $query->post_count;
+
+                        if ( $i % 4 == 0 ) :
+                            $class_column = 6;
+                        else:
+                            $class_column = 3;
+                        endif;
+
+                        if ( $i % 4 != 3 ) :
+
+                    ?>
+
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( $class_column ); ?> item-col">
+
+                    <?php endif; ?>
+
                             <div class="item-post">
                                 <div class="item-post__thumbnail">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
@@ -375,9 +434,18 @@ class sport_post_grid extends Widget_Base {
 
                                 <?php endif; ?>
                             </div>
+
+                    <?php if ( $i % 4 != 2 || $j == $total_posts ) : ?>
+
                         </div>
 
-                    <?php endwhile; wp_reset_postdata(); ?>
+                    <?php endif; ?>
+
+                    <?php
+                        $i++;
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
                 </div>
             </div>
 
