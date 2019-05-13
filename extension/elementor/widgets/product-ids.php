@@ -37,27 +37,6 @@ class sport_widget_products_ids extends Widget_Base {
         );
 
         $this->add_control(
-            'title',
-            [
-                'label'         =>  esc_html__( 'Title', 'sport' ),
-                'type'          =>  Controls_Manager::TEXT,
-                'default'       =>  esc_html__( 'Top sản phẩm mới', 'sport' ),
-                'label_block'   =>  true
-            ]
-        );
-
-        $this->add_control(
-            'input_id_product',
-            [
-                'label'         =>  esc_html__( 'Input Id Product', 'sport' ),
-                'type'          =>  Controls_Manager::TEXT,
-                'default'       =>  '',
-                'label_block'   =>  true,
-                'description'   =>  esc_html__( 'Ex input id post: 1,2', 'sport' ),
-            ]
-        );
-
-        $this->add_control(
             'order',
             [
                 'label'     =>  esc_html__( 'Order', 'sport' ),
@@ -67,6 +46,43 @@ class sport_widget_products_ids extends Widget_Base {
                     'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
                     'DESC'  =>  esc_html__( 'Descending', 'sport' ),
                 ],
+            ]
+        );
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'title_tab', [
+                'label'         =>  esc_html__( 'Title', 'sport' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  esc_html__( 'Sản phẩm mới' , 'sport' ),
+                'label_block'   =>  true,
+            ]
+        );
+
+        $repeater->add_control(
+            'product_id',
+            [
+                'label'         =>  esc_html__( 'Input Product Id', 'sport' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  '',
+                'label_block'   =>  true,
+                'description'   =>  esc_html__( 'Ex input id post: 1,2', 'sport' ),
+            ]
+        );
+
+        $this->add_control(
+            'tab_list',
+            [
+                'label'     =>  esc_html__( 'Tab List', 'sport' ),
+                'type'      =>  Controls_Manager::REPEATER,
+                'fields'    =>  $repeater->get_controls(),
+                'default'   =>  [
+                    [
+                        'title_tab'    =>  esc_html__( 'Sản phẩm bán chạy', 'sport' ),
+                    ],
+                ],
+                'title_field' => '{{{ title_tab }}}',
             ]
         );
 
@@ -373,7 +389,7 @@ class sport_widget_products_ids extends Widget_Base {
 
         $settings           =   $this->get_settings_for_display();
         $order              =   $settings['order'];
-        $input_id_product   =   $settings['input_id_product'];
+        $product_id   =   $settings['product_id'];
 
         $data_settings  =   [
             'number_item'           =>  $settings['item'],
@@ -386,11 +402,11 @@ class sport_widget_products_ids extends Widget_Base {
             'nav'                   =>  ( 'yes' === $settings['nav'] ),
         ];
 
-        $ids_product = explode( ",", $input_id_product  );
+        $product_id_arr = explode( ",", $product_id  );
 
         $args = array(
             'post_type'             =>  'product',
-            'post__in'              =>  $ids_product,
+            'post__in'              =>  $product_id_arr,
             'order'                 =>  $order,
         );
 
