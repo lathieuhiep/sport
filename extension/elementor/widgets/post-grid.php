@@ -32,25 +32,24 @@ class sport_post_grid extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'style_layout',
-            [
-                'label'     =>  esc_html__( 'Style', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  'style-1',
-                'options'   =>  [
-                    'style-1'   =>  esc_html__( 'Style 1', 'sport' ),
-                    'style-2'   =>  esc_html__( 'Style 2', 'sport' ),
-                ],
-            ]
-        );
-
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
                 'name'      =>  'thumbnail',
                 'exclude'   =>  [ 'custom' ],
-                'default'   =>  'medium_large',
+                'default'   =>  'full',
+            ]
+        );
+
+        $this->add_control(
+            'title_post_length',
+            [
+                'label'     =>  esc_html__( 'Title Post Words', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  '10',
+                'condition' =>  [
+                    'show_excerpt' => '1',
+                ],
             ]
         );
 
@@ -103,57 +102,6 @@ class sport_post_grid extends Widget_Base {
                 'default'       =>  '',
                 'label_block'   =>  true,
                 'description'   =>  esc_html__( 'Ex input id post: 1,2', 'sport' ),
-                'condition' => [
-                    'style_layout' => 'style-1',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'select_cat',
-            [
-                'label'         =>  esc_html__( 'Select Category', 'sport' ),
-                'type'          =>  Controls_Manager::SELECT2,
-                'options'       =>  sport_check_get_cat( 'category' ),
-                'multiple'      =>  true,
-                'label_block'   =>  true,
-                'condition' => [
-                    'style_layout!' => 'style-1',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'limit',
-            [
-                'label'     =>  esc_html__( 'Number of Posts', 'sport' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'default'   =>  4,
-                'min'       =>  1,
-                'max'       =>  100,
-                'step'      =>  1,
-                'condition' => [
-                    'style_layout!' => 'style-1',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'order_by',
-            [
-                'label'     =>  esc_html__( 'Order By', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  'id',
-                'options'   =>  [
-                    'id'            =>  esc_html__( 'Post ID', 'sport' ),
-                    'author'        =>  esc_html__( 'Post Author', 'sport' ),
-                    'title'         =>  esc_html__( 'Title', 'sport' ),
-                    'date'          =>  esc_html__( 'Date', 'sport' ),
-                    'rand'          =>  esc_html__( 'Random', 'sport' ),
-                ],
-                'condition' => [
-                    'style_layout!' => 'style-1',
-                ],
             ]
         );
 
@@ -223,36 +171,6 @@ class sport_post_grid extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'title_post_alignment',
-            [
-                'label'     =>  esc_html__( 'Title Alignment', 'sport' ),
-                'type'      =>  Controls_Manager::CHOOSE,
-                'options'   =>  [
-                    'left'  =>  [
-                        'title' =>  esc_html__( 'Left', 'sport' ),
-                        'icon'  =>  'fa fa-align-left',
-                    ],
-                    'center' => [
-                        'title' =>  esc_html__( 'Center', 'sport' ),
-                        'icon'  =>  'fa fa-align-center',
-                    ],
-                    'right' => [
-                        'title' =>  esc_html__( 'Right', 'sport' ),
-                        'icon'  =>  'fa fa-align-right',
-                    ],
-                    'justify'=> [
-                        'title' =>  esc_html__( 'Justified', 'sport' ),
-                        'icon'  =>  'fa fa-align-justify',
-                    ],
-                ],
-                'toggle'    =>  true,
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-post-grid .item-post .item-post__title'   =>  'text-align: {{VALUE}};',
-                ]
-            ]
-        );
-
         // Style excerpt post
         $this->add_control(
             'excerpt_post_options',
@@ -270,7 +188,7 @@ class sport_post_grid extends Widget_Base {
                 'type'      =>  Controls_Manager::COLOR,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-post-grid .item-post .item-post__content p'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-post-grid .item-post .item-excerpt'   =>  'color: {{VALUE}};',
                 ],
             ]
         );
@@ -279,37 +197,37 @@ class sport_post_grid extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'excerpt_typography',
-                'selector' => '{{WRAPPER}} .element-post-grid .item-post .item-post__content p',
+                'selector' => '{{WRAPPER}} .element-post-grid .item-post .item-excerpt',
+            ]
+        );
+
+        // Style comment post
+        $this->add_control(
+            'comment_post_options',
+            [
+                'label'     =>  esc_html__( 'Comment Post', 'sport' ),
+                'type'      =>  \Elementor\Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
         $this->add_control(
-            'excerpt_alignment',
+            'comment_color',
             [
-                'label'     =>  esc_html__( 'Excerpt Alignment', 'sport' ),
-                'type'      =>  Controls_Manager::CHOOSE,
-                'options'   =>  [
-                    'left'  =>  [
-                        'title' =>  esc_html__( 'Left', 'sport' ),
-                        'icon'  =>  'fa fa-align-left',
-                    ],
-                    'center' => [
-                        'title' =>  esc_html__( 'Center', 'sport' ),
-                        'icon'  =>  'fa fa-align-center',
-                    ],
-                    'right' => [
-                        'title' =>  esc_html__( 'Right', 'sport' ),
-                        'icon'  =>  'fa fa-align-right',
-                    ],
-                    'justify'=> [
-                        'title' =>  esc_html__( 'Justified', 'sport' ),
-                        'icon'  =>  'fa fa-align-justify',
-                    ],
-                ],
-                'toggle'    =>  true,
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-post-grid .item-post .item-post__content p'   =>  'text-align: {{VALUE}};',
-                ]
+                    '{{WRAPPER}} .element-post-grid .item-post .item-post__comment a'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'comment_typography',
+                'selector' => '{{WRAPPER}} .element-post-grid .item-post .item-post__comment a',
             ]
         );
 
@@ -320,62 +238,27 @@ class sport_post_grid extends Widget_Base {
     protected function render() {
 
         $settings       =   $this->get_settings_for_display();
-        $cat_post       =   $settings['select_cat'];
-        $limit_post     =   $settings['limit'];
-        $order_by_post  =   $settings['order_by'];
         $order_post     =   $settings['order'];
+        $input_id_post  =   $settings['input_id_post'];
 
-        if ( $settings['style_layout'] == 'style-1' ) :
+        if ( !empty( $input_id_post ) ) :
 
-            $input_id_post  =   $settings['input_id_post'];
+            $ids_post = explode( ",", $input_id_post  );
 
-            if ( !empty( $input_id_post ) ) :
+            $args = array(
+                'post_type'             =>  'post',
+                'post__in'              =>  $ids_post,
+                'order'                 =>  $order_post,
+                'ignore_sticky_posts'   =>  1,
+            );
 
-                $ids_post = explode( ",", $input_id_post  );
+            $query = new \ WP_Query( $args );
 
-                $args = array(
-                    'post_type'             =>  'post',
-                    'post__in'              =>  $ids_post,
-                    'orderby'               =>  $order_by_post,
-                    'ignore_sticky_posts'   =>  1,
-                );
-            endif;
-
-        else:
-
-
-            if ( !empty( $cat_post ) ) :
-
-                $args = array(
-                    'post_type'             =>  'post',
-                    'posts_per_page'        =>  $limit_post,
-                    'orderby'               =>  $order_by_post,
-                    'order'                 =>  $order_post,
-                    'cat'                   =>  $cat_post,
-                    'ignore_sticky_posts'   =>  1,
-                );
-
-            else:
-
-                $args = array(
-                    'post_type'             =>  'post',
-                    'posts_per_page'        =>  $limit_post,
-                    'orderby'               =>  $order_by_post,
-                    'order'                 =>  $order_post,
-                    'ignore_sticky_posts'   =>  1,
-                );
-
-            endif;
-
-        endif;
-
-        $query = new \ WP_Query( $args );
-
-        if ( $query->have_posts() ) :
+            if ( $query->have_posts() ) :
 
         ?>
 
-            <div class="element-post-grid <?php echo esc_attr( $settings['style_layout'] ); ?>">
+            <div class="element-post-grid post-grid-masory">
                 <div class="row">
                     <?php
                     $i = $j = 0 ;
@@ -412,27 +295,53 @@ class sport_post_grid extends Widget_Base {
                                     </a>
                                 </div>
 
-                                <h2 class="item-post__title">
-                                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                        <?php the_title(); ?>
-                                    </a>
-                                </h2>
+                                <p class="item-post__date d-flex align-items-center justify-content-center flex-column">
+                                    <span class="day">
+                                        <?php echo esc_html( get_the_date( 'd' ) ); ?>
+                                    </span>
 
-                                <?php if ( $settings['show_excerpt'] == 1 ) : ?>
+                                    <span class="month">
+                                        <?php echo esc_html( get_the_date( 'Sm' ) ); ?>
+                                    </span>
+                                </p>
 
-                                    <div class="item-post__content">
-                                        <p>
+                                <div class="item-content text-center">
+                                    <h3 class="item-post__title">
+                                        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                            <?php echo esc_html( wp_trim_words( get_the_title(), $settings['title_post_length'] ) ); ?>
+                                        </a>
+                                    </h3>
+
+                                    <?php if ( $settings['show_excerpt'] == 1 && $i % 4 != 2 && $i % 4 != 3 ) : ?>
+
+                                        <p class="item-excerpt">
                                             <?php
                                             if ( has_excerpt() ) :
-                                                echo esc_html( wp_trim_words( get_the_excerpt(), $settings['excerpt_length'], '...' ) );
+                                                echo esc_html( wp_trim_words( get_the_excerpt(), $settings['excerpt_length'], '[...]' ) );
                                             else:
-                                                echo esc_html( wp_trim_words( get_the_content(), $settings['excerpt_length'], '...' ) );
+                                                echo esc_html( wp_trim_words( get_the_content(), $settings['excerpt_length'], '[...]' ) );
                                             endif;
                                             ?>
                                         </p>
-                                    </div>
 
-                                <?php endif; ?>
+                                    <?php
+                                    endif;
+
+                                    if ( $i % 4 == 0 ) :
+                                    ?>
+
+                                        <p class="item-post__comment">
+                                            <?php
+                                            comments_popup_link(
+                                                esc_html__( '0 Comment', 'cogito' ),
+                                                esc_html__( '1 Comment', 'cogito' ),
+                                                esc_html__( '% Comment(s)', 'cogito' )
+                                            );
+                                            ?>
+                                        </p>
+
+                                    <?php endif; ?>
+                                </div>
                             </div>
 
                     <?php if ( $i % 4 != 2 || $j == $total_posts ) : ?>
@@ -450,6 +359,8 @@ class sport_post_grid extends Widget_Base {
             </div>
 
         <?php
+
+            endif;
 
         endif;
     }

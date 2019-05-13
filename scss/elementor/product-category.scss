@@ -1,3 +1,61 @@
+.element-products {
+  .item-product {
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    @include border-radius(5px);
+
+    .item-thumbnail {
+      margin-bottom: 15px;
+
+      a {
+        display: block;
+      }
+    }
+    .item-title {
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0 0 8px;
+    }
+    .item-detail {
+      padding-bottom: 10px;
+    }
+    .price-box {
+      .price {
+        font-size: 16px;
+        color: $color-hover-second;
+        font-weight: 700;
+
+        del {
+          font-size: 14px;
+          font-weight: 400;
+          color: $color-primary;
+          margin-right: 5px;
+        }
+        ins {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .owl-carousel {
+    .owl-nav {
+      button {
+        position: absolute;
+        top: 50%;
+        margin: 0;
+        background-color: rgba(204,204,204,0.5);
+        @include transform(translateY(-50%));
+
+        &.owl-prev {
+          left: 0;
+        }
+        &.owl-next {
+          right: 0;
+        }
+      }
+    }
+  }
+}
 .element-product-cat {
   .title-parent-cat {
     font-size: 16px;
@@ -56,43 +114,6 @@
 
     .item-col {
       margin-bottom: 30px;
-    }
-    .item-thumbnail {
-      margin-bottom: 15px;
-
-      a {
-        display: block;
-      }
-    }
-    .item-title {
-      font-size: 16px;
-      font-weight: 400;
-      margin: 0 0 8px;
-    }
-    .item-detail {
-      padding-bottom: 10px;
-    }
-    .item-product {
-      border: 1px solid #ebebeb;
-      overflow: hidden;
-      @include border-radius(5px)
-    }
-    .price-box {
-      .price {
-        font-size: 16px;
-        color: $color-hover-second;
-        font-weight: 700;
-
-        del {
-          font-size: 14px;
-          font-weight: 400;
-          color: $color-primary;
-          margin-right: 5px;
-        }
-        ins {
-          text-decoration: none;
-        }
-      }
     }
   }
 }

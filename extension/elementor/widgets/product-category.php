@@ -435,7 +435,7 @@ class sport_widget_products_filter extends Widget_Base {
 
     ?>
 
-        <div class="element-product-cat" data-settings='<?php echo esc_attr( wp_json_encode( $product_settings ) ); ?>'>
+        <div class="element-product-cat element-products" data-settings='<?php echo esc_attr( wp_json_encode( $product_settings ) ); ?>'>
             <?php if ( !empty( $product_cat ) ) : ?>
 
             <h2 class="title-parent-cat text-center">

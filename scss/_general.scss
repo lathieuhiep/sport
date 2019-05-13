@@ -230,13 +230,17 @@ pre {
       &.owl-prev {
         display: inline-block;
         margin: 0 5px;
-        padding: 5px 15px !important;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        padding: 0 !important;
         background-color: #ff5555;
-        @include border-radius(5px);
+        @include border-radius(0);
         @include transition(all 0.4s ease-in-out);
 
         &:hover {
-          background-color: #333333;
+          background-color: $background-primary;
         }
       }
       i.fa {

@@ -406,7 +406,7 @@ class sport_post_carousel extends Widget_Base {
             'margin_item_mobile'    =>  $settings['margin_item_mobile'],
             'loop'                  =>  ( 'yes' === $settings['loop'] ),
             'autoplay'              =>  ( 'yes' === $settings['autoplay'] ),
-            'nav'                  =>  ( 'yes' === $settings['nav'] ),
+            'nav'                   =>  ( 'yes' === $settings['nav'] ),
             'dots'                  =>  ( 'yes' === $settings['dots'] ),
         ];
 
