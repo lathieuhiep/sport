@@ -8,11 +8,14 @@
 
     "use strict";
 
-    var product_cat_btn_filter  =   $( '.btn-product-cat-filter .btn-item-filter' );
+    let product_cat_btn_filter  =   $( '.btn-product-cat-filter .btn-item-filter' ),
+        product_id_btn_filter   =   $( '.btn-list-product-ids .btn-item-filter-product-id' );
 
     $( document ).ready( function () {
 
         filter_product();
+
+        filter_product_ids();
 
     });
 
@@ -20,14 +23,14 @@
 
         product_cat_btn_filter.on( 'click', function () {
 
-            var has_active      =   $(this).hasClass( 'active' );
+            let has_active      =   $(this).hasClass( 'active' );
 
             if ( has_active === false ) {
 
                 $(this).parent().find('.btn-item-filter').removeClass( 'active' );
                 $(this).addClass( 'active' );
 
-                var parent_class            =   $(this).parents( '.element-product-cat' ),
+                let parent_class            =   $(this).parents( '.element-product-cat' ),
                     parent_data_settings    =   parent_class.data( 'settings' ),
                     product_cat_slider      =   parent_class.find( '.element-product-cat__slider' ),
                     filter_loader           =   parent_class.find( '.filter-loader' ),
@@ -69,13 +72,67 @@
 
                         if ( data ) {
 
-                            product_cat_slider.trigger('replace.owl.carousel', data).trigger('refreshed.owl.carousel');
+                            product_cat_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
 
                         }
 
                     }
 
                 });
+
+            }
+
+        } )
+
+    }
+
+    function filter_product_ids() {
+
+        product_id_btn_filter.on( 'click', function () {
+
+            let has_active      =   $(this).hasClass( 'active' );
+
+            if ( has_active === false ) {
+
+                $(this).parent().find('.btn-item-filter-product-id').removeClass( 'active' );
+                $(this).addClass( 'active' );
+
+                let parent_class        =   $(this).parents( '.element-product-ids' ),
+                    product_ids_slider  =   parent_class.find( '.element-product-ids__slider' ),
+                    order               =   parent_class.data( 'order' ),
+                    product_ids         =   $(this).data( 'ids' );
+
+                $.ajax({
+
+                    url: sport_products_filter_load.url,
+                    type: 'POST',
+                    data: ({
+
+                        action: 'sport_product_filter_id',
+                        product_ids: product_ids,
+                        order: order
+
+                    }),
+
+                    beforeSend: function () {
+
+
+
+                    },
+
+                    success: function( data ) {
+
+                        if ( data ) {
+
+                            product_ids_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+                            product_ids_slider.find( '.item-product' ).addClass( 'animated zoomIn' );
+
+                        }
+
+                    }
+
+                });
+
 
             }
 

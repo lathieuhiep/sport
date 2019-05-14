@@ -146,6 +146,7 @@
                     $autoplay           =   false,
                     $active_dots        =   false,
                     $active_nav         =   false,
+                    $auto_height        =   false,
                     $item_mobile        =   1,
                     $margin_item_mobile =   0,
                     $item_tablet        =   3;
@@ -158,6 +159,7 @@
                     $autoplay           =   typeof ( $settings_slider['autoplay'] ) !== "undefined" ? $settings_slider['autoplay']: false;
                     $active_dots        =   typeof ( $settings_slider['dots'] ) !== "undefined" ? $settings_slider['dots'] : false;
                     $active_nav         =   typeof ( $settings_slider['nav'] ) !== "undefined" ?  $settings_slider['nav'] : false;
+                    $auto_height        =   typeof ( $settings_slider['autoHeight'] ) !== "undefined" ?  $settings_slider['autoHeight'] : false;
                     $item_mobile        =   typeof ( $settings_slider['item_mobile'] ) !== "undefined" ? parseInt( $settings_slider['item_mobile'] ) : 1;
                     $margin_item_mobile =   typeof ( $settings_slider['margin_item_mobile'] ) !== "undefined" ? parseInt( $settings_slider['margin_item_mobile'] ) : 0;
                     $item_tablet        =   typeof ( $settings_slider['item_tablet'] ) !== "undefined" ? parseInt( $settings_slider['item_tablet'] ) : 3;
@@ -176,7 +178,7 @@
                     autoplaySpeed: 800,
                     navSpeed: 800,
                     dotsSpeed: 800,
-                    autoHeight:true,
+                    autoHeight:$auto_height,
                     responsive:{
                         0:{
                             items: $item_mobile,

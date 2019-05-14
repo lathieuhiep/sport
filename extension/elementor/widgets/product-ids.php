@@ -23,7 +23,7 @@ class sport_widget_products_ids extends Widget_Base {
     }
 
     public function get_script_depends() {
-        return ['sport-elementor-custom'];
+        return ['sport-elementor-custom','products_filter'];
     }
 
     protected function _register_controls() {
@@ -412,73 +412,51 @@ class sport_widget_products_ids extends Widget_Base {
 
        endif;
 
-           $query = new \ WP_Query( $args );
+       $query = new \ WP_Query( $args );
 
-           if ( $query->have_posts() ) :
+       if ( $query->have_posts() ) :
 
     ?>
 
-            <div class="element-product-ids element-products">
-                <div class="product-tabs btn-filter-product-ids d-flex align-items-end">
-                    <div class="product-tabs-list btn-list-product-ids">
-                        <?php
-                        $i = 1;
-                        foreach ( $tab_list as $item ) :
+        <div class="element-product-ids element-products" data-order="<?php echo esc_attr( $order ); ?>">
+            <div class="product-tabs btn-filter-product-ids d-flex align-items-end">
+                <div class="product-tabs-list btn-list-product-ids">
+                    <?php
+                    $i = 1;
+                    foreach ( $tab_list as $item ) :
 
-                            if ( !empty( $item['list_product_id'] ) ) :
-                                $ids = $item['list_product_id'];
-                            else:
-                                $ids = 0;
-                            endif;
-                        ?>
+                        if ( !empty( $item['list_product_id'] ) ) :
+                            $ids = $item['list_product_id'];
+                        else:
+                            $ids = 0;
+                        endif;
+                    ?>
 
-                        <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
-                            <?php echo esc_html_e( $item['title_tab'] ); ?>
-                        </span>
-
-                        <?php $i++; endforeach; ?>
-                    </div>
-
-                    <span class="btn-product-grid btn-product-grid-all-ids">
-                        <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
-                        <i class="fas fa-angle-double-right"></i>
+                    <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
+                        <?php echo esc_html_e( $item['title_tab'] ); ?>
                     </span>
+
+                    <?php $i++; endforeach; ?>
                 </div>
 
-                <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-                    <?php while ( $query->have_posts() ): $query->the_post(); ?>
-
-                        <div class="item-product">
-                            <div class="item-thumbnail">
-                                <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
-                                    <?php
-                                    do_action( 'woo_elementor_product_sale_flash' );
-
-                                    if ( has_post_thumbnail() ) :
-                                        the_post_thumbnail( 'large' );
-                                    else:
-                                    ?>
-                                        <img src="<?php echo esc_url( get_theme_file_uri( '/images/no-image.png' ) ); ?>" alt="<?php the_title(); ?>">
-                                    <?php endif; ?>
-                                </a>
-                            </div>
-
-                            <div class="item-detail text-center">
-                                <h2 class="item-title">
-                                    <a class="item-link-product" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                        <?php the_title(); ?>
-                                    </a>
-                                </h2>
-
-                                <div class="price-box">
-                                    <?php woocommerce_template_loop_price(); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php endwhile; wp_reset_postdata(); ?>
-                </div>
+                <span class="btn-product-grid btn-product-grid-all-ids">
+                    <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
             </div>
+
+            <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                <?php
+                while ( $query->have_posts() ):
+                    $query->the_post();
+
+                    sport_content_item_product();
+
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </div>
 
     <?php
            endif;
