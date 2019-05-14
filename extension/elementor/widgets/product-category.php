@@ -449,25 +449,25 @@ class sport_widget_products_filter extends Widget_Base {
             <div class="element-product-cat__warp">
                 <?php if ( !empty( $product_cat_children ) ) : ?>
 
-                <div class="btn-product-cat-filter d-flex align-items-end">
-                    <div class="btn-list-cat">
+                <div class="product-tabs btn-product-cat-filter d-flex align-items-end">
+                    <div class="product-tabs-list btn-list-cat">
                         <?php
                         foreach ( $product_cat_children as $item ) :
 
                             $term_children = get_term_by( 'id', $item, 'product_cat' );
                         ?>
 
-                        <span class="btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
+                        <span class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
                             <?php echo esc_html( $term_children->name ); ?>
                         </span>
 
                         <?php endforeach; ?>
                     </div>
 
-                    <a class="link-cat-parent" href="<?php echo esc_url( get_term_link( $product_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
+                    <span class="btn-product-grid btn-product-grid-all-cat">
                         <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                         <i class="fas fa-angle-double-right"></i>
-                    </a>
+                    </span>
                 </div>
 
                 <?php endif; ?>

@@ -61,7 +61,7 @@ class sport_widget_products_ids extends Widget_Base {
         );
 
         $repeater->add_control(
-            'product_id',
+            'list_product_id',
             [
                 'label'         =>  esc_html__( 'Input Product Id', 'sport' ),
                 'type'          =>  Controls_Manager::TEXT,
@@ -88,16 +88,6 @@ class sport_widget_products_ids extends Widget_Base {
 
         $this->end_controls_section();
         /* End Section Query */
-
-        /* Start Section Layout */
-        $this->start_controls_section(
-            'section_layout',
-            [
-                'label' =>  esc_html__( 'Layout', 'sport' )
-            ]
-        );
-
-        $this->end_controls_section();
 
         /* Section Layout */
         $this->start_controls_section(
@@ -387,9 +377,10 @@ class sport_widget_products_ids extends Widget_Base {
 
     protected function render() {
 
-        $settings           =   $this->get_settings_for_display();
-        $order              =   $settings['order'];
-        $product_id   =   $settings['product_id'];
+        $settings   =   $this->get_settings_for_display();
+        $order      =   $settings['order'];
+        $tab_list   =   $settings['tab_list'];
+        $list_id    =   $tab_list[0]['list_product_id'];
 
         $data_settings  =   [
             'number_item'           =>  $settings['item'],
@@ -402,25 +393,56 @@ class sport_widget_products_ids extends Widget_Base {
             'nav'                   =>  ( 'yes' === $settings['nav'] ),
         ];
 
-        $product_id_arr = explode( ",", $product_id  );
+        if ( !empty( $list_id ) ) :
 
-        $args = array(
-            'post_type'             =>  'product',
-            'post__in'              =>  $product_id_arr,
-            'order'                 =>  $order,
-        );
+           $product_ids = explode( ",", $list_id  );
 
-        $query = new \ WP_Query( $args );
+           $args = array(
+               'post_type'  =>  'product',
+               'post__in'   =>  $product_ids,
+               'order'      =>  $order,
+           );
 
-        if ( $query->have_posts() ) :
+       else:
 
-        ?>
+           $args = array(
+               'post_type'  =>  'product',
+               'order'      =>  $order,
+           );
+
+       endif;
+
+           $query = new \ WP_Query( $args );
+
+           if ( $query->have_posts() ) :
+
+    ?>
 
             <div class="element-product-ids element-products">
-                <div class="top-header">
-                    <h4 class="title">
-                        <?php echo esc_html( $settings['title'] ); ?>
-                    </h4>
+                <div class="product-tabs btn-filter-product-ids d-flex align-items-end">
+                    <div class="product-tabs-list btn-list-product-ids">
+                        <?php
+                        $i = 1;
+                        foreach ( $tab_list as $item ) :
+
+                            if ( !empty( $item['list_product_id'] ) ) :
+                                $ids = $item['list_product_id'];
+                            else:
+                                $ids = 0;
+                            endif;
+                        ?>
+
+                        <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
+                            <?php echo esc_html_e( $item['title_tab'] ); ?>
+                        </span>
+
+                        <?php $i++; endforeach; ?>
+                    </div>
+
+                    <span class="btn-product-grid btn-product-grid-all-ids">
+                        <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
+                        <i class="fas fa-angle-double-right"></i>
+                    </span>
                 </div>
 
                 <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
@@ -458,10 +480,8 @@ class sport_widget_products_ids extends Widget_Base {
                 </div>
             </div>
 
-        <?php
-
-        endif;
-
+    <?php
+           endif;
     }
 
 }
