@@ -439,7 +439,7 @@ class sport_widget_products_ids extends Widget_Base {
                     <?php $i++; endforeach; ?>
                 </div>
 
-                <span class="btn-product-grid btn-product-grid-all-ids">
+                <span class="btn-product-grid btn-product-grid-all-ids" data-grid-ids="<?php echo esc_attr( $list_id ); ?>">
                     <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                     <i class="fas fa-angle-double-right"></i>
                 </span>

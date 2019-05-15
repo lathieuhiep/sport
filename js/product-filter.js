@@ -17,6 +17,8 @@
 
         filter_product_ids();
 
+        // filter_product_grid();
+
     });
 
     function filter_product() {
@@ -102,6 +104,8 @@
                     order               =   parent_class.data( 'order' ),
                     product_ids         =   $(this).data( 'ids' );
 
+                parent_class.find( '.btn-product-grid-all-ids' ).data( 'grid-ids', product_ids );
+
                 $.ajax({
 
                     url: sport_products_filter_load.url,
@@ -133,8 +137,53 @@
 
                 });
 
-
             }
+
+        } )
+
+    }
+    
+    function filter_product_grid() {
+
+        $( '.btn-product-grid-all-ids' ).on( 'click', function () {
+
+            let parent_class        =   $(this).parents( '.element-product-ids' ),
+                product_ids_slider  =   parent_class.find( '.element-product-ids__slider' ),
+                product_grid_ids    =   $(this).data( 'grid-ids' ),
+                order               =   parent_class.data( 'order' );
+
+            $.ajax({
+
+                url: sport_products_filter_load.url,
+                type: 'POST',
+                data: ({
+
+                    action: 'sport_product_filter_id',
+                    product_ids: product_grid_ids,
+                    order: order
+
+                }),
+
+                beforeSend: function () {
+
+
+
+                },
+
+                success: function( data ) {
+
+                    if ( data ) {
+
+                        product_ids_slider.empty();
+
+                        // product_ids_slider.trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+                        // product_ids_slider.find( '.item-product' ).addClass( 'animated zoomIn' );
+
+                    }
+
+                }
+
+            });
 
         } )
 
