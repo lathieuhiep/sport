@@ -177,6 +177,68 @@ class sport_widget_products_filter extends Widget_Base {
         $this->end_controls_section();
         /* End Section Layout */
 
+        /* Start Section Gallery */
+        $this->start_controls_section(
+            'section_gallery',
+            [
+                'label' =>  esc_html__( 'Gallery', 'sport' )
+            ]
+        );
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'list_title', [
+                'label'         =>  esc_html__( 'Title', 'sport' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  esc_html__( 'List Title' , 'sport' ),
+                'label_block'   =>  true,
+            ]
+        );
+
+        $repeater->add_control(
+            'list_image',
+            [
+                'label'     =>  esc_html__( 'Choose Image', 'sport' ),
+                'type'      =>  Controls_Manager::MEDIA,
+                'default'   =>  [
+                    'url'   =>  Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'list_link',
+            [
+                'label'         =>  esc_html__( 'Link', 'sport' ),
+                'type'          =>  Controls_Manager::URL,
+                'placeholder'   =>  esc_html__( 'https://your-link.com', 'sport' ),
+                'show_external' =>  true,
+                'default'   => [
+                    'url'   => '#',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'list',
+            [
+                'label'     =>  esc_html__( 'Repeater List', 'sport' ),
+                'type'      =>  Controls_Manager::REPEATER,
+                'fields'    =>  $repeater->get_controls(),
+                'default'   =>  [
+                    [
+                        'list_title' => esc_html__( 'Title #1', 'sport' ),
+
+                    ],
+                ],
+                'title_field' => '{{{ list_title }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+        /* End Section Gallery */
+
         /* Style Title Cat */
         $this->start_controls_section('style_title_cat', array(
             'label' =>  esc_html__( 'Title', '' ),
@@ -368,6 +430,7 @@ class sport_widget_products_filter extends Widget_Base {
         $order_by       =   $settings['order_by'];
         $order          =   $settings['order'];
         $tax_query      =   $product_term  = '';
+        $list_gallery   =   $settings['list'];
 
         if ( $column_number == 7 ) :
             $class_column_number = 'column-7';
@@ -472,46 +535,58 @@ class sport_widget_products_filter extends Widget_Base {
 
                 <?php endif; ?>
 
-                <div class="element-product-cat__container">
-                    <div class="filter-loader">
-                        <span class="loader-icon"></span>
-                    </div>
+                <div class="row">
+                    <div class="col-12 <?php echo esc_attr( !empty( $list_gallery ) ? 'col-md-9' : 'col-md-12' ); ?>">
+                        <div class="element-product-cat__container">
+                            <div class="filter-loader">
+                                <span class="loader-icon"></span>
+                            </div>
 
-                    <div class="element-product-cat__data">
-                        <div class="element-product-cat__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-                            <?php
-                            $i = 1;
-                            $total_posts    =   $query->post_count;
-                            while ( $query->have_posts() ): $query->the_post();
-                                if ( $i % $number_item == 1 ) :
+                            <div class="element-product-cat__data">
+                                <div class="element-product-cat__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                                    <?php
+                                    $i = 1;
+                                    $total_posts    =   $query->post_count;
+                                    while ( $query->have_posts() ): $query->the_post();
+                                        if ( $i % $number_item == 1 ) :
 
-                            ?>
+                                    ?>
 
-                                    <div class="menu-filter__row">
-                                        <div class="row">
+                                            <div class="menu-filter__row">
+                                                <div class="row">
 
-                            <?php
+                                    <?php
 
-                                endif;
+                                        endif;
 
-                                sport_content_product_filter( $class_column_number );
+                                        sport_content_product_filter( $class_column_number );
 
-                                if ( $i % $number_item == 0 || $i == $total_posts ) :
-                            ?>
+                                        if ( $i % $number_item == 0 || $i == $total_posts ) :
+                                    ?>
 
-                                        </div>
-                                    </div>
+                                                </div>
+                                            </div>
 
-                            <?php
+                                    <?php
 
-                                endif;
+                                        endif;
 
-                                $i++;
-                            endwhile;
-                            wp_reset_postdata();
-                            ?>
+                                        $i++;
+                                    endwhile;
+                                    wp_reset_postdata();
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                     <?php if ( !empty( $list_gallery ) ) : ?>
+
+                    <div class="col-12 col-md-3">
+                        <div class="product-gallery-cat"></div>
+                    </div>
+
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
