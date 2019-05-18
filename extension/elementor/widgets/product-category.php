@@ -133,7 +133,7 @@ class sport_widget_products_filter extends Widget_Base {
         $this->start_controls_section(
             'section_slides',
             [
-                'label' =>  esc_html__( 'Slides Options', 'sport' ),
+                'label' =>  esc_html__( 'Slides Options Query', 'sport' ),
                 'tab'   =>  Controls_Manager::SECTION
             ]
         );
@@ -233,6 +233,54 @@ class sport_widget_products_filter extends Widget_Base {
                     ],
                 ],
                 'title_field' => '{{{ list_title }}}',
+            ]
+        );
+
+        $this->add_control(
+            'slider_gallery_options',
+            [
+                'label'     =>  esc_html__( 'Options', 'sport' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'gallery_height',
+            [
+                'label'     =>  esc_html__( 'Height', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .product-gallery-cat .item-gallery .item-gallery__img' => 'height: {{VALUE}}px;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'gallery_loop',
+            [
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label'         =>  esc_html__( 'Loop Slides ?', 'sport' ),
+                'label_on'      =>  esc_html__( 'Yes', 'sport' ),
+                'label_off'     =>  esc_html__( 'No', 'sport' ),
+                'return_value'  =>  'yes',
+                'default'       =>  'yes',
+            ]
+        );
+
+        $this->add_control(
+            'gallery_autoplay',
+            [
+                'label'         =>  esc_html__( 'Autoplay?', 'sport' ),
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label_on'      =>  esc_html__( 'Yes', 'sport' ),
+                'label_off'     =>  esc_html__( 'No', 'sport' ),
+                'return_value'  =>  'yes',
+                'default'       =>  'yes',
             ]
         );
 
@@ -417,6 +465,42 @@ class sport_widget_products_filter extends Widget_Base {
 
         $this->end_controls_section();
 
+        /* Style Gallery */
+        $this->start_controls_section('style_gallery', array(
+            'label' =>  esc_html__( 'Gallery', '' ),
+            'tab'   =>  Controls_Manager::TAB_STYLE,
+        ));
+
+        $this->add_control(
+            'title_gallery_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'sport' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat .product-gallery-cat .item-gallery .item-gallery__title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_gallery_typography',
+                'selector' => '{{WRAPPER}} .element-product-cat .product-gallery-cat .item-gallery .item-gallery__title',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'      =>  'title_gallery_border',
+                'label'     =>  esc_html__( 'Border', 'sport' ),
+                'selector'  =>  '{{WRAPPER}} .element-product-cat .product-gallery-cat .item-gallery .item-gallery__title',
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
     protected function render() {
@@ -460,6 +544,11 @@ class sport_widget_products_filter extends Widget_Base {
             'loop'          =>  ( 'yes' === $settings['loop'] ),
             'autoplay'      =>  ( 'yes' === $settings['autoplay'] ),
             'nav'           =>  ( 'yes' === $settings['nav'] ),
+        ];
+
+        $gallery_settings  =   [
+            'loop'          =>  ( 'yes' === $settings['gallery_loop'] ),
+            'autoplay'      =>  ( 'yes' === $settings['gallery_autoplay'] ),
         ];
 
         $product_cat_children = get_term_children( $product_cat, 'product_cat' );
@@ -580,11 +669,36 @@ class sport_widget_products_filter extends Widget_Base {
                         </div>
                     </div>
 
-                     <?php if ( !empty( $list_gallery ) ) : ?>
+                    <?php if ( !empty( $list_gallery ) ) : ?>
 
-                    <div class="col-12 col-md-3">
-                        <div class="product-gallery-cat"></div>
-                    </div>
+                        <div class="col-12 col-md-3">
+                            <div class="product-gallery-cat owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
+                                <?php
+                                foreach ( $list_gallery as $item ) :
+
+                                    $target     =   $item['list_link']['is_external'] ? ' target=_blank' : '';
+                                    $nofollow   =   $item['list_link']['nofollow'] ? ' rel=nofollow' : '';
+                                ?>
+
+                                    <div class="item-gallery">
+                                        <h4 class="item-gallery__title text-center">
+                                            <?php echo esc_html( $item['list_title'] ); ?>
+                                        </h4>
+
+                                        <div class="item-gallery__img">
+                                            <?php if ( !empty( $item['list_link']['url'] ) ) : ?>
+
+                                            <a class="item-gallery__link" href="<?php echo esc_url( $item['list_link']['url'] ) ?>"<?php echo esc_attr( $target . $nofollow ); ?>></a>
+
+                                            <?php endif; ?>
+
+                                            <?php echo wp_kses_post( wp_get_attachment_image( $item['list_image']['id'], 'full' ) ); ?>
+                                        </div>
+                                    </div>
+
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
 
                     <?php endif; ?>
                 </div>
