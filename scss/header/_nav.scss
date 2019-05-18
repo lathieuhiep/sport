@@ -45,16 +45,6 @@
           color: $color-hover;
         }
       }
-      &:first-child {
-        a {
-          padding-left: 0;
-        }
-      }
-      &:last-child {
-        a {
-          padding-right: 0;
-        }
-      }
       .sub-menu {
         min-width: 160px;
         border-top: 1px solid $color-hover;
@@ -91,6 +81,20 @@
           z-index: 999;
           opacity: 1;
           visibility: visible;
+        }
+      }
+    }
+    > li {
+      > a {
+        &:first-child {
+          a {
+            padding-left: 0;
+          }
+        }
+        &:last-child {
+          a {
+            padding-right: 0;
+          }
         }
       }
     }
