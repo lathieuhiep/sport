@@ -33,6 +33,28 @@ function sport_register_meta_boxes() {
     );
     /* End meta box post */
 
+    /* Start meta box gallery */
+    $sport_meta_boxes[] = array(
+        'id'         => 'gallery_format_option',
+        'title'      => esc_html__( 'Gallery Format', 'sport' ),
+        'post_types' => array( 'gallery' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
+
+            array(
+                'id'               => 'sport_images_gallery',
+                'name'             => 'Gallery',
+                'type'             => 'image_advanced',
+                'force_delete'     => false,
+                'max_status'       => false,
+                'image_size'       => 'thumbnail',
+            ),
+
+        )
+    );
+    /* End meta box post */
+
     return $sport_meta_boxes;
 
 }

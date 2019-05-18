@@ -185,6 +185,16 @@ class sport_widget_products_filter extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'list_post_type_gallery',
+            [
+                'label'         =>  esc_html__( 'Select Gallery', 'sport' ),
+                'type'          =>  Controls_Manager::SELECT,
+                'options'       =>  sport_get_title_post_type( 'gallery' ),
+                'label_block'   =>  true,
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(

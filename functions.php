@@ -119,6 +119,11 @@ foreach(glob( get_parent_theme_file_path( '/extension/widgets/*.php' ) ) as $spo
     require $sport_file_widgets;
 }
 
+/* Start Require Post type */
+require get_parent_theme_file_path( '/extension/post-type/gallery.php' );
+/* End Require Post type */
+
+
 if ( class_exists('Woocommerce') ) :
     /*
      * Required: Woocommerce

@@ -81,11 +81,11 @@ function sport_check_get_cat( $type_taxonomy ) {
 
     if ( isset( $category ) && !empty( $category ) ):
 
-        foreach( $category as $item ) {
+        foreach( $category as $item ) :
 
             $cat_check[$item->term_id]  =   $item->name;
 
-        }
+        endforeach;
 
     endif;
 
@@ -93,3 +93,24 @@ function sport_check_get_cat( $type_taxonomy ) {
 
 }
 /* End get Category check box */
+
+/* Start get title check box */
+function sport_get_title_post_type( $type_post ) {
+
+    $args   =   array(
+        'post_type' => $type_post
+    );
+
+    $posts      =   array();
+    $post_types =   get_posts( $args );
+
+    foreach ( $post_types as $item ) :
+
+        $posts[$item->ID]  =   $item->post_title;
+
+    endforeach;
+
+    return $posts;
+
+}
+/* Start get title check box */
