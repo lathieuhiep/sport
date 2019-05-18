@@ -685,7 +685,7 @@ class sport_widget_products_filter extends Widget_Base {
                                             <?php echo esc_html( $item['list_title'] ); ?>
                                         </h4>
 
-                                        <div class="item-gallery__img">
+                                        <div class="item-gallery__img ">
                                             <?php if ( !empty( $item['list_link']['url'] ) ) : ?>
 
                                             <a class="item-gallery__link" href="<?php echo esc_url( $item['list_link']['url'] ) ?>"<?php echo esc_attr( $target . $nofollow ); ?>></a>
