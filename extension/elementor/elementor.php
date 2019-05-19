@@ -101,7 +101,7 @@ function sport_get_title_post_type( $type_post ) {
         'post_type' => $type_post
     );
 
-    $posts      =   array();
+    $posts      =   array( 0 => esc_html__( 'None', 'sport' ) );
     $post_types =   get_posts( $args );
 
     foreach ( $post_types as $item ) :

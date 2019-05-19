@@ -195,57 +195,6 @@ class sport_widget_products_filter extends Widget_Base {
             ]
         );
 
-        $repeater = new Repeater();
-
-        $repeater->add_control(
-            'list_title', [
-                'label'         =>  esc_html__( 'Title', 'sport' ),
-                'type'          =>  Controls_Manager::TEXT,
-                'default'       =>  esc_html__( 'List Title' , 'sport' ),
-                'label_block'   =>  true,
-            ]
-        );
-
-        $repeater->add_control(
-            'list_image',
-            [
-                'label'     =>  esc_html__( 'Choose Image', 'sport' ),
-                'type'      =>  Controls_Manager::MEDIA,
-                'default'   =>  [
-                    'url'   =>  Utils::get_placeholder_image_src(),
-                ],
-            ]
-        );
-
-        $repeater->add_control(
-            'list_link',
-            [
-                'label'         =>  esc_html__( 'Link', 'sport' ),
-                'type'          =>  Controls_Manager::URL,
-                'placeholder'   =>  esc_html__( 'https://your-link.com', 'sport' ),
-                'show_external' =>  true,
-                'default'   => [
-                    'url'   => '#',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'list',
-            [
-                'label'     =>  esc_html__( 'Repeater List', 'sport' ),
-                'type'      =>  Controls_Manager::REPEATER,
-                'fields'    =>  $repeater->get_controls(),
-                'default'   =>  [
-                    [
-                        'list_title' => esc_html__( 'Title #1', 'sport' ),
-
-                    ],
-                ],
-                'title_field' => '{{{ list_title }}}',
-            ]
-        );
-
         $this->add_control(
             'slider_gallery_options',
             [
@@ -524,7 +473,7 @@ class sport_widget_products_filter extends Widget_Base {
         $order_by       =   $settings['order_by'];
         $order          =   $settings['order'];
         $tax_query      =   $product_term  = '';
-        $list_gallery   =   $settings['list'];
+        $list_gallery   =   $settings['list_post_type_gallery'];
 
         if ( $column_number == 7 ) :
             $class_column_number = 'column-7';
@@ -679,34 +628,60 @@ class sport_widget_products_filter extends Widget_Base {
                         </div>
                     </div>
 
-                    <?php if ( !empty( $list_gallery ) ) : ?>
+                    <?php
+                    if ( !empty( $list_gallery ) ) :
+
+                        $gallery_args = array(
+                            'post_type'  =>  'gallery',
+                            'post__in'   =>  array( $list_gallery ),
+                        );
+
+                        $gallery_query = new \ WP_Query( $gallery_args );
+
+                        ?>
 
                         <div class="col-12 col-md-3">
                             <div class="product-gallery-cat owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
-                                <?php
-                                foreach ( $list_gallery as $item ) :
 
-                                    $target     =   $item['list_link']['is_external'] ? ' target=_blank' : '';
-                                    $nofollow   =   $item['list_link']['nofollow'] ? ' rel=nofollow' : '';
+                                <?php
+                                while ( $gallery_query->have_posts() ):
+                                    $gallery_query->the_post();
+
+                                    $sport_gallery_image = get_post_meta( get_the_ID(),'sport_images_gallery', false );
+
+                                    foreach ( $sport_gallery_image as $item) :
+
+                                        $attachment     =   get_post( $item );
+                                        $title_gallery  =   $attachment->post_excerpt;
+                                        $link           =   $attachment->post_content
+
                                 ?>
 
                                     <div class="item-gallery">
                                         <h4 class="item-gallery__title text-center">
-                                            <?php echo esc_html( $item['list_title'] ); ?>
+                                            <?php echo esc_html( $title_gallery ); ?>
                                         </h4>
 
                                         <div class="item-gallery__img">
-                                            <?php if ( !empty( $item['list_link']['url'] ) ) : ?>
+                                            <?php if ( !empty( $link ) ) : ?>
 
-                                            <a class="item-gallery__link" href="<?php echo esc_url( $item['list_link']['url'] ) ?>"<?php echo esc_attr( $target . $nofollow ); ?>></a>
+                                            <a class="item-gallery__link" href="<?php echo esc_url( $attachment->post_content ); ?>" title="<?php echo esc_attr( $title_gallery ); ?>"></a>
 
-                                            <?php endif; ?>
+                                            <?php
+                                            endif;
 
-                                            <?php echo wp_kses_post( wp_get_attachment_image( $item['list_image']['id'], 'full' ) ); ?>
+                                            echo wp_kses_post( wp_get_attachment_image( $item, 'full' ) );
+                                            ?>
+
                                         </div>
                                     </div>
 
-                                <?php endforeach; ?>
+                                <?php
+                                    endforeach;
+
+                                endwhile;
+                                wp_reset_postdata(); ?>
+
                             </div>
                         </div>
 
