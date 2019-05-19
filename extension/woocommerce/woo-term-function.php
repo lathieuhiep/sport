@@ -1,15 +1,27 @@
 <?php
 
-// Add term page
-add_action( 'product_cat_add_form_fields', 'shoptheme_product_cat_add_new_meta_field', 10, 2 );
-
-function shoptheme_product_cat_add_new_meta_field() {
+function sport_select_post_gallery() {
 
     $args   =   array(
         'post_type' => 'gallery'
     );
 
+    $posts      =   array();
     $post_types =   get_posts( $args );
+
+    foreach ( $post_types as $key => $item ):
+
+        $posts[$item->ID]  =   $item->post_title;
+
+    endforeach;
+
+    return $posts;
+
+}
+
+// Add term page
+function shoptheme_product_cat_add_new_meta_field() {
+    
 ?>
 
     <div class="form-field">
@@ -17,11 +29,15 @@ function shoptheme_product_cat_add_new_meta_field() {
             <?php esc_html_e( 'Gallery', 'shoptheme' ); ?>
         </label>
 
-        <select id="type-gallery" name="type-gallery" class="postform">
-            <?php foreach ( $post_types as $item ): ?>
+        <select id="type-gallery" name="type-gallery">
+            <option value="0">
+                <?php esc_html_e( 'None', 'sport' ); ?>
+            </option>
 
-                <option value="<?php echo esc_attr( $item->ID ); ?>" >
-                    <?php echo esc_html( $item->post_title ); ?>
+            <?php foreach ( sport_select_post_gallery() as $key => $item ): ?>
+
+                <option value="<?php echo esc_attr( $key ); ?>">
+                    <?php echo esc_html( $item ); ?>
                 </option>
 
             <?php endforeach; ?>
@@ -31,22 +47,40 @@ function shoptheme_product_cat_add_new_meta_field() {
 <?php
 
 }
+add_action( 'product_cat_add_form_fields', 'shoptheme_product_cat_add_new_meta_field', 10, 2 );
+
+function sport_save_select_gallery( $term_id ){
+    if( isset( $_POST['type-gallery'] ) && $_POST['type-gallery'] !== '' ){
+        $select_gallery = sanitize_title( $_POST['type-gallery'] );
+        add_term_meta( $term_id, 'type-gallery', $select_gallery, true );
+    }
+}
+add_action( 'create_product_cat', 'sport_save_select_gallery', 10, 2 );
 
 // Edit term page
-add_action( 'product_cat_edit_form_fields', 'shoptheme_product_cat_edit_meta_field', 10, 2 );
-function shoptheme_product_cat_edit_meta_field() {
+function shoptheme_product_cat_edit_meta_field( $term ) {
 
     $args   =   array(
         'post_type' => 'gallery'
     );
 
+    $posts      =   array();
     $post_types =   get_posts( $args );
+
+    foreach ( $post_types as $key => $item ):
+
+        $posts[$item->ID]  =   $item->post_title;
+
+    endforeach;
+
+    // get current group
+    $feature_group = get_term_meta( $term->term_id, 'type-gallery', true );
 
 ?>
 
     <tr>
         <th>
-            <label for="term-collections">
+            <label for="type-gallery">
                 <?php esc_html_e( 'Gallery', 'shoptheme' ); ?>
             </label>
         </th>
@@ -54,15 +88,15 @@ function shoptheme_product_cat_edit_meta_field() {
         <td>
             <div class="form-field form-field__edit-cat">
                 <div class="form-field__item">
-                    <label for="type-gallery">
-                        <?php esc_html_e( 'Gallery', 'shoptheme' ); ?>
-                    </label>
+                    <select id="type-gallery" name="type-gallery">
+                        <option value="0">
+                            <?php esc_html_e( 'None', 'sport' ); ?>
+                        </option>
 
-                    <select id="type-gallery" name="type-gallery" class="postform">
-                        <?php foreach ( $post_types as $item ): ?>
+                        <?php foreach ( sport_select_post_gallery() as $key => $item ): ?>
 
-                            <option value="<?php echo esc_attr( $item->ID ); ?>" >
-                                <?php echo esc_html( $item->post_title ); ?>
+                            <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $feature_group, $key ); ?>>
+                                <?php echo esc_html( $item ); ?>
                             </option>
 
                         <?php endforeach; ?>
@@ -75,15 +109,16 @@ function shoptheme_product_cat_edit_meta_field() {
 <?php
 
 }
+add_action( 'product_cat_edit_form_fields', 'shoptheme_product_cat_edit_meta_field', 10, 2 );
 
 // Save extra taxonomy fields callback function.
-function shoptheme_taxonomy_custom_meta( $shoptheme_product_term_id ) {
+function sport_update_select_gallery( $term_id ) {
 
-    if ( isset( $_POST[ 'type-gallery' ] ) ) {
-        update_term_meta( $shoptheme_product_term_id, 'type-gallery', $_POST[ 'type-gallery' ] );
+    if( isset( $_POST['type-gallery'] ) &&  $_POST['type-gallery'] !=='' ){
+        $select_gallery = sanitize_title( $_POST['type-gallery'] );
+        update_term_meta( $term_id, 'type-gallery', $select_gallery );
     }
 
 }
-add_action( 'edited_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
-add_action( 'create_product_cat', 'shoptheme_taxonomy_custom_meta', 10, 2 );
+add_action( 'edited_product_cat', 'sport_update_select_gallery', 10, 2 );
 
