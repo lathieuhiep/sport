@@ -52,6 +52,10 @@
         $( document ).general_owlCarousel_item( '.site-post-slides' );
         /* End Gallery Single */
 
+        /* Start Product gallery Cat Single */
+        $( document ).general_owlCarousel_item( '.product-gallery-cat-single' );
+        /* End Product gallery Cat Single */
+
     });
 
     $( window ).on( "load", function() {

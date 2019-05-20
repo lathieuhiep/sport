@@ -408,6 +408,7 @@ if ( !function_exists( 'sport_woo_before_single_product_summary_open_warp' ) ) :
     ?>
 
         <div class="site-shop-single__warp">
+            <div class="row">
 
     <?php
 
@@ -427,7 +428,7 @@ if ( !function_exists( 'sport_woo_after_single_product_summary_close_warp' ) ) :
     function sport_woo_after_single_product_summary_close_warp() {
 
     ?>
-
+            </div><!-- .row -->
         </div><!-- .site-shop-single__warp -->
 
     <?php
@@ -447,8 +448,8 @@ if ( ! function_exists( 'sport_woo_before_single_product_summary_open' ) ) :
     function sport_woo_before_single_product_summary_open() {
 
     ?>
-
-        <div class="site-shop-single__gallery-box">
+        <div class="col-12 col-md-3">
+            <div class="site-shop-single__gallery-box">
 
     <?php
 
@@ -468,9 +469,136 @@ if ( ! function_exists( 'sport_woo_before_single_product_summary_close' ) ) :
 
     ?>
 
-        </div><!-- .site-shop-single__gallery-box -->
+            </div><!-- .site-shop-single__gallery-box -->
+        </div><!-- .col -->
 
     <?php
+
+    }
+
+endif;
+
+if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_open' ) ) :
+
+    /**
+     * woocommerce_before_single_product_summary hook.
+     *
+     * @hooked sport_woo_before_single_product_entry_summary_open - 35
+     */
+
+    function sport_woo_before_single_product_entry_summary_open() {
+
+?>
+        <div class="col-12 col-md-6">
+
+<?php
+
+    }
+
+endif;
+
+if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_close' ) ) :
+
+    /**
+     * woocommerce_after_single_product_summary hook.
+     *
+     * @hooked sport_woo_before_single_product_entry_summary_close - 2
+     */
+
+    function sport_woo_before_single_product_entry_summary_close() {
+
+?>
+
+        </div><!-- .col -->
+
+<?php
+
+    }
+
+endif;
+
+if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
+
+    /**
+     * woocommerce_before_single_product_summary hook.
+     *
+     * @hooked sport_post_type_gallery_product_cate - 3
+     */
+
+    function sport_post_type_gallery_product_cate() {
+
+        $product_cate = get_the_terms( get_the_ID(), 'product_cat' );
+
+        $term_values   =   array();
+
+        foreach ( $product_cate as $item ) {
+
+            $term_values[] = get_term_meta( $item->term_id, 'type-gallery', true );
+
+        }
+
+        if ( !empty( $term_values ) ) :
+
+            $gallery_settings  =   [
+                'loop'          =>  true,
+                'autoplay'      =>  true,
+            ];
+
+            $gallery_args = array(
+                'post_type'  =>  'gallery',
+                'post__in'   =>  $term_values,
+            );
+
+            $gallery_query = new \ WP_Query( $gallery_args );
+
+?>
+            <div class="col-12 col-md-3">
+                <div class="product-gallery-cat-single owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
+
+                    <?php
+                    while ( $gallery_query->have_posts() ):
+                        $gallery_query->the_post();
+
+                        $sport_gallery_image = get_post_meta( get_the_ID(),'sport_images_gallery', false );
+
+                        foreach ( $sport_gallery_image as $item) :
+
+                            $attachment     =   get_post( $item );
+                            $title_gallery  =   $attachment->post_excerpt;
+                            $link           =   $attachment->post_content
+
+                            ?>
+
+                            <div class="item-gallery">
+                                <h4 class="item-gallery__title text-center">
+                                    <?php echo esc_html( $title_gallery ); ?>
+                                </h4>
+
+                                <div class="item-gallery__img">
+                                    <?php if ( !empty( $link ) ) : ?>
+
+                                        <a class="item-gallery__link" href="<?php echo esc_url( $attachment->post_content ); ?>" title="<?php echo esc_attr( $title_gallery ); ?>"></a>
+
+                                    <?php
+                                    endif;
+
+                                    echo wp_kses_post( wp_get_attachment_image( $item, 'full' ) );
+                                    ?>
+
+                                </div>
+                            </div>
+
+                        <?php
+                        endforeach;
+
+                    endwhile;
+                    wp_reset_postdata(); ?>
+
+                </div>
+            </div>
+
+<?php
+        endif;
 
     }
 
