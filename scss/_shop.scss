@@ -241,8 +241,45 @@
             margin: 0 0 10px;
 
             .variations {
+              margin: 0 0 20px;
+
+              tbody {
+                tr {
+                  margin-bottom: 15px;
+                  @include flexbox();
+                  @include align-items(center);
+
+                  &:last-child {
+                    margin-bottom: 0;
+                  }
+                  td {
+                    &.label {
+                      @include flex(0 0 auto);
+                      min-width: 60px;
+                      margin: 0;
+                      @include flexbox();
+                      @include align-items(center);
+
+                      label {
+                        margin: 0;
+                      }
+                    }
+                    &.value {
+                      @include flex(1);
+                    }
+                  }
+                }
+              }
               select {
-                
+                border: 1px solid #ebebeb;
+                padding: 8px 5px;
+              }
+            }
+            .woocommerce-variation-price {
+              margin-bottom: 15px;
+
+              span {
+                margin: 0;
               }
             }
             .quantity {
