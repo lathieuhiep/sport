@@ -15,6 +15,10 @@ function sport_shop_setup() {
 
 }
 
+/* Remove description heading */
+add_filter( 'woocommerce_product_description_heading', '__return_null' );
+add_filter( 'woocommerce_product_additional_information_heading', '__return_null' );
+
 /* Start limit product */
 add_filter('loop_shop_per_page', 'sport_show_products_per_page');
 
@@ -553,7 +557,7 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
 
 ?>
             <div class="col-12 col-md-3">
-                <div class="product-gallery-cat-single owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
+                <div class="product-gallery-cat-single product-gallery-cate owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
 
                     <?php
                     while ( $gallery_query->have_posts() ):

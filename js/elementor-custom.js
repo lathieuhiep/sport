@@ -45,7 +45,7 @@
 
     let ElementProductCatSliderGallery  =   function( $scope, $ ) {
 
-        let product_gallery_cat_slider = $scope.find( '.product-gallery-cat' );
+        let product_gallery_cat_slider = $scope.find( '.element-product-gallery-cate' );
 
         $( document ).general_owlCarousel_item( product_gallery_cat_slider );
 

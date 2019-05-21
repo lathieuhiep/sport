@@ -641,7 +641,7 @@ class sport_widget_products_filter extends Widget_Base {
                         ?>
 
                         <div class="col-12 col-md-3">
-                            <div class="product-gallery-cat owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
+                            <div class="element-product-gallery-cate product-gallery-cate owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
 
                                 <?php
                                 while ( $gallery_query->have_posts() ):
