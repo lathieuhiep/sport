@@ -2254,6 +2254,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   color: #00b0f0;
 }
 
+.element-products .item-col {
+  margin-bottom: 30px;
+}
+
 .element-products .item-product {
   border: 1px solid #ebebeb;
   overflow: hidden;
@@ -2339,10 +2343,6 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-}
-
-.element-product-cat .element-product-cat__slider .item-col {
-  margin-bottom: 30px;
 }
 
 .filter-loader {
@@ -2672,13 +2672,6 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   margin: 0 10px 0 0;
 }
 
-.woocommerce .site-shop-single div.product .price {
-  margin: 0 0 15px;
-  color: #e12f2f;
-  font-size: 24px;
-  font-weight: 500;
-}
-
 .woocommerce .site-shop-single div.product .woocommerce-product-details__short-description {
   margin-bottom: 15px;
 }
@@ -2778,18 +2771,15 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   font-weight: 400;
 }
 
-.woocommerce .site-shop-single .related.products {
-  padding-top: 30px;
+.woocommerce .site-shop-single .site-shop-single__warp .price {
+  margin: 0 0 15px;
+  color: #e12f2f;
+  font-size: 24px;
+  font-weight: 500;
 }
 
-.woocommerce .site-shop-single .related.products > h2 {
+.woocommerce .site-shop-single .site-shop-single__warp .price del {
   font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  color: #ffffff;
-  padding: 10px;
-  text-transform: uppercase;
-  background-color: #00b0f0;
 }
 
 .woocommerce div.product .woocommerce-tabs {
@@ -2890,6 +2880,16 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .woocommerce a.button.alt:hover {
   background-color: #ff5555;
+}
+
+.site-single-product-related .title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 10px;
+  margin: 30px 0;
+  text-transform: uppercase;
+  background-color: #00b0f0;
 }
 
 .site-shop__product--item {

@@ -71,8 +71,11 @@ add_action( 'woocommerce_after_main_content', 'sport_woo_after_main_content', 10
  * @see sport_post_type_gallery_product_cate()
  * @see sport_woo_after_single_product_summary_close_warp()
  * @see sport_woo_after_single_product()
+ * @see sport_related_products()
  *
  */
+
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
 add_action( 'woocommerce_before_single_product', 'sport_woo_before_single_product', 5 );
 
@@ -91,4 +94,6 @@ add_action( 'woocommerce_after_single_product_summary', 'sport_post_type_gallery
 add_action( 'woocommerce_after_single_product_summary', 'sport_woo_after_single_product_summary_close_warp', 5 );
 
 add_action( 'woocommerce_after_single_product', 'sport_woo_after_single_product', 30 );
+
+add_action( 'woocommerce_after_single_product_summary', 'sport_related_products', 20 );
 

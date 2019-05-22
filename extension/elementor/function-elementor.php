@@ -17,6 +17,8 @@ function sport_content_item_product() {
 
     <div class="item-product">
         <div class="item-thumbnail">
+<!--            --><?php //woocommerce_show_product_loop_sale_flash(); ?>
+
             <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
                 <?php
                 do_action( 'woo_elementor_product_sale_flash' );

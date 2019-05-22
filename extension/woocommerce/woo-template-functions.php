@@ -607,3 +607,118 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
     }
 
 endif;
+
+if ( ! function_exists( 'sport_related_products' ) ) :
+
+    /**
+     * woocommerce_after_single_product_summary hook.
+     *
+     * @hooked sport_related_products - 20
+     */
+
+    function sport_related_products() {
+
+        $product_cat = get_the_terms( get_the_ID(), 'product_cat' );
+
+        if ( !empty( $product_cat ) ) :
+
+            $data_settings  =   [
+                'loop'          =>  false,
+                'autoplay'      =>  false,
+                'nav'           =>  true,
+            ];
+
+            $rows_number    =   2;
+            $column_number  =   5;
+            $number_item    =   $rows_number * $column_number;
+
+            $product_cat_ids = array();
+
+            foreach( $product_cat as $item ) $product_cat_ids[] = $item->term_id;
+
+            $args = array(
+                'post_type'         =>  'product',
+                'posts_per_page'    =>  12,
+                'orderby'           =>  'id',
+                'order'             =>  'DESC',
+                'tax_query'         =>  array(
+                    array(
+                        'taxonomy'  =>  'product_cat',
+                        'field'     =>  'term_id',
+                        'terms'     =>  $product_cat_ids,
+                    )
+                ),
+            );
+
+            $query = new WP_Query( $args );
+
+            if ( $query->have_posts() ) :
+
+    ?>
+
+            <div class="site-single-product-related element-products">
+                <h3 class="title text-center">
+                    <?php esc_html_e( 'Sản phẩm cùng danh mục', 'sport' ); ?>
+                </h3>
+
+                <div class="related-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                    <?php
+                    $i = 1;
+                    $total_posts    =   $query->post_count;
+
+                    while ( $query->have_posts() ):
+                        $query->the_post();
+                        if ( $i % $number_item == 1 ) :
+                    ?>
+
+                        <div class="row">
+
+                    <?php endif; ?>
+
+                            <div class="col-12 col-sm-6 col-md-3 column-5 item-col">
+                                <?php sport_content_item_product(); ?>
+                            </div>
+
+                    <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
+
+                        </div>
+
+                    <?php
+                        endif;
+
+                        $i++;
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
+                </div>
+            </div>
+
+    <?php
+
+            endif;
+
+        endif;
+
+    }
+
+endif;
+
+add_filter( 'woocommerce_sale_flash', 'sport_change_displayed_sale_price' );
+
+function sport_change_displayed_sale_price() {
+
+    global $product, $price;
+
+    if( $product->is_on_sale() && ! is_admin() && ! $product->is_type('variable')) {
+
+        $regular_price      =   (float) $product->get_regular_price();
+        $sale_price         =   (float) $product->get_price();
+        $precision          =   0;
+        $saving_percentage  =   round( 100 - ( $sale_price / $regular_price * 100 ), $precision ) . '%';
+
+
+        $price .= sprintf( __('<span class="onsale">-%s</span>', 'sport' ), $saving_percentage );
+    }
+
+    return $price;
+}

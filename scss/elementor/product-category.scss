@@ -36,6 +36,9 @@
       }
     }
   }
+  .item-col {
+    margin-bottom: 30px;
+  }
   .item-product {
     border: 1px solid #ebebeb;
     overflow: hidden;
@@ -112,12 +115,6 @@
     &.hide-loading {
       opacity: 0;
       @include transition(all 0.4s ease-in-out);
-    }
-  }
-  .element-product-cat__slider {
-
-    .item-col {
-      margin-bottom: 30px;
     }
   }
 }
