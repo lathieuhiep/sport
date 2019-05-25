@@ -707,18 +707,33 @@ add_filter( 'woocommerce_sale_flash', 'sport_change_displayed_sale_price' );
 
 function sport_change_displayed_sale_price() {
 
-    global $product, $price;
+    global $product;
 
-    if( $product->is_on_sale() && ! is_admin() && ! $product->is_type('variable')) {
+    if ( ! $product->is_on_sale() ) return;
 
-        $regular_price      =   (float) $product->get_regular_price();
-        $sale_price         =   (float) $product->get_price();
-        $precision          =   0;
-        $saving_percentage  =   round( 100 - ( $sale_price / $regular_price * 100 ), $precision ) . '%';
+    if ( $product->is_type( 'simple' ) ) {
 
+        $max_percentage = ( ( $product->get_regular_price() - $product->get_sale_price() ) / $product->get_regular_price() ) * 100;
 
-        $price .= sprintf( __('<span class="onsale">-%s</span>', 'sport' ), $saving_percentage );
+    } elseif ( $product->is_type( 'variable' ) ) {
+
+        $max_percentage = 0;
+
+        foreach ( $product->get_children() as $child_id ) {
+            $variation = wc_get_product( $child_id );
+
+            $price = $variation->get_regular_price();
+            $sale = $variation->get_sale_price();
+
+            if ( $price != 0 && ! empty( $sale ) ) $percentage = ( $price - $sale ) / $price * 100;
+
+            if ( $percentage > $max_percentage ) {
+
+                $max_percentage = $percentage;
+
+            }
+        }
+
     }
-
-    return $price;
+    if ( $max_percentage > 0 ) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
 }

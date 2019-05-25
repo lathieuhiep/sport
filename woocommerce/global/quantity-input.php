@@ -29,6 +29,13 @@ if ( $max_value && $min_value === $max_value ) {
 	?>
 	<div class="quantity">
 		<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_attr( $label ); ?></label>
+
+        <p class="title-qty">
+            <?php esc_html_e( 'Số Lượng', 'sport' ); ?>
+        </p>
+
+        <input type="button" value="-" class="qty_button minus" />
+
 		<input
 			type="number"
 			id="<?php echo esc_attr( $input_id ); ?>"
@@ -41,6 +48,8 @@ if ( $max_value && $min_value === $max_value ) {
 			title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'woocommerce' ); ?>"
 			size="4"
 			inputmode="<?php echo esc_attr( $inputmode ); ?>" />
+
+        <input type="button" value="+" class="qty_button plus" />
 	</div>
 	<?php
 }

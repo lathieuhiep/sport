@@ -45,6 +45,7 @@
     @include border-radius(5px);
 
     .item-thumbnail {
+      position: relative;
       margin-bottom: 15px;
 
       a {

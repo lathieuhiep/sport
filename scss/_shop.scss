@@ -1,3 +1,12 @@
+.on-sale-percent {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  color: #ffffff;
+  padding: 0 10px;
+  @include border-radius(3px);
+  background-color: $background-hover;
+}
 .site-shop {
   padding: 50px 0;
 }
@@ -235,6 +244,9 @@
         form {
           &.cart {
             margin: 0 0 10px;
+            @include flexbox();
+            @include align-items(flex-end);
+            @include justify-content(flex-start);
 
             .variations {
               margin: 0 0 20px;
@@ -278,15 +290,6 @@
                 margin: 0;
               }
             }
-            .quantity {
-              input {
-                padding: 0;
-                line-height: 33px;
-                margin-right: 15px;
-                width: 60px;
-                border: 1px solid #eeeeee;
-              }
-            }
             .single_add_to_cart_button {
               background-color: $background-primary;
               width: auto;
@@ -323,6 +326,7 @@
 
         del {
           font-size: 18px;
+          color: $color-primary;
         }
       }
     }
@@ -435,6 +439,48 @@
       }
     }
   }
+  .on-sale-percent {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    z-index: 2;
+  }
+  .quantity {
+    input {
+      padding: 0;
+      line-height: 33px;
+      border: 1px solid #eeeeee;
+
+      &.qty {
+        &.text {
+          width: 60px;
+          margin-left: -3px;
+          appearance: textfield;
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            display: none;
+            margin: 0;
+          }
+        }
+      }
+      &.qty_button {
+        cursor: pointer;
+        width: 45px;
+        background-color: transparent;
+
+        &.minus {
+          border-right: 0;
+        }
+        &.plus {
+          margin-left: -3px;
+          border-left: 0;
+        }
+      }
+    }
+  }
 }
 .site-single-product-related {
   .title {
@@ -455,6 +501,9 @@
   @include flexbox();
   @include flex-direction(column);
 
+  .site-shop__product--item-image {
+    position: relative;
+  }
   a {
     &.woocommerce-loop-product__link {
       display: block;
