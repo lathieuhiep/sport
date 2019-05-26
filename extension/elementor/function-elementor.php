@@ -1,4 +1,26 @@
 <?php
+function sport_class_col( $column_number = 5 ) {
+
+    if ( $column_number == 7 ) :
+        $class_column_number = 'column-7';
+    elseif ( $column_number == 6 ) :
+        $class_column_number = 'column-6 col-lg-2';
+    elseif ( $column_number == 5 ) :
+        $class_column_number = 'column-5';
+    elseif ( $column_number == 4 ) :
+        $class_column_number = 'column-4 col-lg-3';
+    elseif ( $column_number == 3 ) :
+        $class_column_number = 'column-3 col-lg-4';
+    elseif ( $column_number == 2 ) :
+        $class_column_number = 'column-2 col-lg-6';
+    else:
+        $class_column_number = 'column-1 col-lg-12';
+    endif;
+
+    return $class_column_number;
+
+}
+
 function sport_content_product_filter( $class_column_number, $class_animate = null ) {
 
 ?>
@@ -94,7 +116,7 @@ function sport_product_filter() {
 
         endif;
 
-        sport_content_product_filter( $column, 'animated zoomIn ' );
+        sport_content_product_filter( sport_class_col( $column ), 'animated fadeIn ' );
 
         if ( $i % $number_item == 0 || $i == $total_posts ) :
 
@@ -121,6 +143,7 @@ function sport_product_filter_id() {
 
     $product_ids    =   $_POST['product_ids'];
     $order          =   $_POST['order'];
+    $column         =   $_POST['column'];
 
     if ( !empty( $product_ids ) ) :
 
@@ -134,11 +157,32 @@ function sport_product_filter_id() {
 
         $query = new \ WP_Query( $args );
 
+        $i = 1;
+        $total_posts    =   $query->post_count;
+
         while ( $query->have_posts() ):
             $query->the_post();
 
-            sport_content_item_product();
+            if ( $i % $column == 1 ) :
 
+        ?>
+
+            <div class="row">
+
+        <?php
+            endif;
+
+            sport_content_product_filter( sport_class_col( $column ), 'animated fadeIn ' );
+
+            if ( $i % $column == 0 || $i == $total_posts ) :
+        ?>
+
+            </div>
+
+        <?php
+            endif;
+
+            $i++;
         endwhile;
         wp_reset_postdata();
 
@@ -148,3 +192,127 @@ function sport_product_filter_id() {
 
 }
 /* End ajax product filter ids */
+
+/* Start ajax product grid */
+add_action( 'wp_ajax_sport_product_style_grid_ids', 'sport_product_style_grid_ids' );
+add_action( 'wp_ajax_nopriv_sport_product_style_grid_ids', 'sport_product_style_grid_ids' );
+
+function sport_product_style_grid_ids() {
+
+    $product_ids    =   $_POST['product_ids'];
+    $order          =   $_POST['order'];
+    $column         =   $_POST['column'];
+
+    if ( !empty( $product_ids ) ) :
+
+        $ids = explode( ",", $product_ids  );
+
+        $args = array(
+            'post_type'  =>  'product',
+            'post__in'   =>  $ids,
+            'order'      =>  $order,
+        );
+
+        $query = new \ WP_Query( $args );
+
+        $i = 1;
+        $total_posts    =   $query->post_count;
+
+        while ( $query->have_posts() ):
+            $query->the_post();
+
+            if ( $i == 1 ):
+        ?>
+
+            <div class="row">
+
+        <?php
+            endif;
+
+            sport_content_product_filter( sport_class_col( $column ), 'animated fadeIn ' );
+
+            if ( $i == $total_posts ) :
+        ?>
+
+            </div>
+
+        <?php
+
+            endif;
+
+            $i++;
+        endwhile;
+        wp_reset_postdata();
+
+    endif;
+
+    exit();
+
+}
+/* End ajax product grid */
+
+/* Start ajax product grid cat */
+add_action( 'wp_ajax_sport_product_style_grid_cat', 'sport_product_style_grid_cat' );
+add_action( 'wp_ajax_nopriv_sport_product_style_grid_cat', 'sport_product_style_grid_cat' );
+
+function sport_product_style_grid_cat() {
+
+    $product_cat_id =   $_POST['product_cat_id'];
+    $limit          =   $_POST['limit'];
+    $order_by       =   $_POST['order_by'];
+    $order          =   $_POST['order'];
+    $column         =   $_POST['column'];
+
+    if ( !empty( $product_cat_id ) ) :
+
+        $args = array(
+            'post_type'         =>  'product',
+            'posts_per_page'    =>  $limit,
+            'orderby'           =>  $order_by,
+            'order'             =>  $order,
+            'tax_query'         =>  array(
+                array(
+                    'taxonomy'  =>   'product_cat',
+                    'field'     =>   'term_id',
+                    'terms'     =>   $product_cat_id,
+                )
+            ),
+        );
+
+        $query = new \ WP_Query( $args );
+
+        $i = 1;
+        $total_posts    =   $query->post_count;
+
+        while ( $query->have_posts() ):
+            $query->the_post();
+
+            if ( $i == 1 ):
+        ?>
+
+                <div class="row">
+
+            <?php
+            endif;
+
+            sport_content_product_filter( sport_class_col( $column ), 'animated fadeIn ' );
+
+            if ( $i == $total_posts ) :
+            ?>
+
+                </div>
+
+            <?php
+
+            endif;
+
+            $i++;
+        endwhile;
+        wp_reset_postdata();
+
+    endif;
+
+    exit();
+
+}
+/* End ajax product grid */

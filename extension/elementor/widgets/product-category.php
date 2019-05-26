@@ -473,23 +473,8 @@ class sport_widget_products_filter extends Widget_Base {
         $order_by       =   $settings['order_by'];
         $order          =   $settings['order'];
         $tax_query      =   $product_term  = '';
+        $product_cat_id =   0;
         $list_gallery   =   $settings['list_post_type_gallery'];
-
-        if ( $column_number == 7 ) :
-            $class_column_number = 'column-7';
-        elseif ( $column_number == 6 ) :
-            $class_column_number = 'column-6 col-lg-2';
-        elseif ( $column_number == 5 ) :
-            $class_column_number = 'column-5';
-        elseif ( $column_number == 4 ) :
-            $class_column_number = 'column-4 col-lg-3';
-        elseif ( $column_number == 3 ) :
-            $class_column_number = 'column-3 col-lg-4';
-        elseif ( $column_number == 2 ) :
-            $class_column_number = 'column-2 col-lg-6';
-        else:
-            $class_column_number = 'column-1 col-lg-12';
-        endif;
 
         $product_settings =   [
             'limit'     =>  $limit,
@@ -575,7 +560,7 @@ class sport_widget_products_filter extends Widget_Base {
                         <?php endforeach; ?>
                     </div>
 
-                    <span class="btn-product-grid btn-product-grid-all-cat">
+                    <span class="btn-product-grid btn-product-grid-all-cat" data-grid-cat-id="<?php echo esc_attr( $product_cat_id ); ?>">
                         <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                         <i class="fas fa-angle-double-right"></i>
                     </span>
@@ -607,7 +592,7 @@ class sport_widget_products_filter extends Widget_Base {
 
                                         endif;
 
-                                        sport_content_product_filter( $class_column_number );
+                                        sport_content_product_filter( sport_class_col( $column_number ) );
 
                                         if ( $i % $number_item == 0 || $i == $total_posts ) :
                                     ?>
