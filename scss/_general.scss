@@ -14,6 +14,12 @@ body {
   font-weight: $font-weight-regular;
   @include flexbox();
   @include flex-direction(column);
+
+  &.logged-in {
+    .mm-menu_offcanvas {
+      top: 32px;
+    }
+  }
 }
 .sticky-footer {
   flex: 1 0 auto;

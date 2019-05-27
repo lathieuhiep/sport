@@ -14,22 +14,23 @@
 </head>
 <body <?php body_class(); ?>>
 
-<!--Include Loading Template-->
-<?php
+<div id="page">
+    <!--Include Loading Template-->
+    <?php
 
-get_template_part('template-parts/inc','loading');
-get_template_part('template-parts/header/inc','header');
+    get_template_part('template-parts/inc','loading');
+    get_template_part('template-parts/header/inc','header');
 
-?>
-<!--End Loading Template-->
+    ?>
+    <!--End Loading Template-->
 
-<div id="back-top">
-    <a href="#">
-        <i class="fa fa-chevron-up"></i>
-    </a>
-</div>
+    <div id="back-top">
+        <a href="#">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
 
-<!--Start Sticky Footer-->
-<div class="sticky-footer">
+    <!--Start Sticky Footer-->
+    <div class="sticky-footer">
 
 

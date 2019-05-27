@@ -1,17 +1,18 @@
-</div><!--End Sticky Footer-->
+    </div><!--End Sticky Footer-->
 
+    <footer class="site-footer">
 
-<footer class="site-footer">
+        <?php
 
-    <?php
+        get_template_part( 'template-parts/footer/inc','multi-column' );
 
-    get_template_part( 'template-parts/footer/inc','multi-column' );
+        get_template_part( 'template-parts/footer/inc','copyright' );
 
-    get_template_part( 'template-parts/footer/inc','copyright' );
+        ?>
 
-    ?>
+    </footer>
 
-</footer>
+</div>
 
 <?php wp_footer(); ?>
 

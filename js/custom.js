@@ -256,3 +256,18 @@
     /* End function multi owlCarouse */
 
 } )( jQuery );
+
+new Mmenu( document.querySelector( '#menu-canvas' ),
+    {
+        navbar: {
+            title: ''
+        },
+    }
+);
+
+document.addEventListener( 'click', ( evnt ) => {
+    let anchor = evnt.target.closest( 'a[href^="#/"]' );
+    if ( anchor ) {
+        evnt.preventDefault();
+    }
+});

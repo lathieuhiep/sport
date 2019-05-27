@@ -257,6 +257,8 @@ function sport_register_front_end() {
         wp_enqueue_script( 'comment-reply' );
     }
 
+    wp_enqueue_script( 'mmenu', get_theme_file_uri( '/js/library/mmenu.js' ), array('jquery'), '', true );
+
     wp_enqueue_script( 'sport-custom', get_theme_file_uri( '/js/custom.js' ), array(), '1.0.0', true );
 
     /*

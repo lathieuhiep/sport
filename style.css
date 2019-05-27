@@ -65,6 +65,10 @@ body {
   flex-direction: column;
 }
 
+body.logged-in .mm-menu_offcanvas {
+  top: 32px;
+}
+
 .sticky-footer {
   flex: 1 0 auto;
 }
@@ -948,6 +952,10 @@ form.post-password-form p input[type='submit'] {
 .site-logo a {
   display: inline-block;
   line-height: 64px;
+}
+
+.site-menu-canvas .icon-canvas {
+  cursor: pointer;
 }
 
 .site-menu {
