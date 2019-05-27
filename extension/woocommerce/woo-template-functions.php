@@ -703,6 +703,33 @@ if ( ! function_exists( 'sport_related_products' ) ) :
 
 endif;
 
+if ( !function_exists( 'sport_product_new' ) ) :
+
+    /**
+     * woocommerce_before_shop_loop_item_title hook.
+     *
+     * @hooked sport_product_new - 9
+     */
+
+    function sport_product_new() {
+
+        $product_new = get_post_meta( get_the_ID(), 'sport_option_product_new', true );
+
+        if ( $product_new == 1 ) :
+    ?>
+
+        <span class="product-new">
+            <?php esc_html_e( 'New', 'sport' ); ?>
+        </span>
+
+    <?php
+        endif;
+
+    }
+
+endif;
+
+/* Sale flash percent */
 add_filter( 'woocommerce_sale_flash', 'sport_change_displayed_sale_price' );
 
 function sport_change_displayed_sale_price() {

@@ -123,8 +123,8 @@ function sport_update_select_gallery( $term_id ) {
 add_action( 'edited_product_cat', 'sport_update_select_gallery', 10, 2 );
 
 /* Product New Columns */
-add_filter( 'manage_posts_columns', 'product_column_new' );
-add_action( 'manage_posts_custom_column', 'product_custom_column_new', 10, 2 );
+add_filter( 'manage_product_posts_columns', 'product_column_new' );
+add_action( 'manage_product_posts_custom_column', 'product_custom_column_new', 10, 2 );
 
 function product_column_new( $defaults ) {
 

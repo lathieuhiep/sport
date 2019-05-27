@@ -7,6 +7,24 @@
   @include border-radius(3px);
   background-color: $background-hover;
 }
+.product-new {
+  position: absolute;
+  top: 12px;
+  left: -70px;
+  height: 30px;
+  width: 195px;
+  line-height: 30px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background-color: $background-hover;
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  text-align: center;
+  z-index: 2;
+}
 .site-shop {
   padding: 50px 0;
 }
@@ -203,6 +221,7 @@
       &.product {
         .site-shop-single__gallery-box {
           position: relative;
+          overflow: hidden;
 
           .on-sale-percent {
             top: 0;
@@ -591,6 +610,7 @@
 
   .site-shop__product--item-image {
     position: relative;
+    overflow: hidden;
   }
   a {
     &.woocommerce-loop-product__link {
