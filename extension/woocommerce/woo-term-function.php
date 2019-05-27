@@ -122,3 +122,31 @@ function sport_update_select_gallery( $term_id ) {
 }
 add_action( 'edited_product_cat', 'sport_update_select_gallery', 10, 2 );
 
+/* Product New Columns */
+add_filter( 'manage_posts_columns', 'product_column_new' );
+add_action( 'manage_posts_custom_column', 'product_custom_column_new', 10, 2 );
+
+function product_column_new( $defaults ) {
+
+    $defaults['product_new'] = esc_html__( 'New', 'sport' );
+
+    return $defaults;
+
+}
+
+function product_custom_column_new( $column_name, $id ) {
+
+    if( $column_name === 'product_new' ) {
+
+        $value = get_post_meta( $id, 'sport_option_product_new', true );
+
+        if ( $value == 1 ) :
+            echo esc_html__( 'Yes', 'sport' );
+        else:
+            echo esc_html__( 'No', 'sport' );
+        endif;
+
+    }
+
+}
+

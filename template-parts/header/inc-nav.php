@@ -1,6 +1,8 @@
 <div class="header-nav">
     <div class="container">
-        <div class="header-nav_warp">
+        <div class="header-nav_warp d-flex">
+            <?php get_template_part('template-parts/header/inc','canvas'); ?>
+
             <div class="site-menu collapse navbar-collapse">
 
                 <?php

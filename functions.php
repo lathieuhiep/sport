@@ -42,6 +42,7 @@ if( !function_exists('sport_setup') ):
 
         // This theme uses wp_nav_menu() in two locations.
         register_nav_menu('primary','Primary Menu');
+        register_nav_menu('canvas','Canvas Menu');
         register_nav_menu('footer-menu','Footer Menu');
 
         // add theme support title-tag
