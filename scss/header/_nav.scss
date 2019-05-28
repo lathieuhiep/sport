@@ -26,6 +26,9 @@
     cursor: pointer;
   }
 }
+#menu-canvas:not(.mm-menu_opened) {
+  display: none;
+}
 .site-menu {
   @include flex(1);
 

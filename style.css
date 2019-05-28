@@ -958,6 +958,10 @@ form.post-password-form p input[type='submit'] {
   cursor: pointer;
 }
 
+#menu-canvas:not(.mm-menu_opened) {
+  display: none;
+}
+
 .site-menu {
   -webkit-flex: 1;
   -ms-flex: 1;
