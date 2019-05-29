@@ -129,6 +129,7 @@ if ( class_exists('Woocommerce') ) :
     /*
      * Required: Woocommerce
      */
+    require get_parent_theme_file_path( '/extension/woocommerce/woo-register-tax.php' );
     require get_parent_theme_file_path( '/extension/woocommerce/woo-template-hooks.php' );
     require get_parent_theme_file_path( '/extension/woocommerce/woo-template-functions.php' );
     require get_parent_theme_file_path( '/extension/woocommerce/woo-term-function.php' );
