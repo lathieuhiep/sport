@@ -3058,8 +3058,8 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .woocommerce .on-sale-percent {
   position: absolute;
-  left: 0;
-  bottom: -5px;
+  left: 5px;
+  bottom: 5px;
   z-index: 2;
 }
 
@@ -3290,6 +3290,32 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .woocommerce #review_form #respond p {
   display: inline-block;
+}
+
+.btn-product-pagination {
+  margin-top: 30px;
+}
+
+.btn-product-pagination button {
+  padding: 10px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  text-transform: capitalize;
+  background-color: #00b0f0;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-product-pagination button:hover {
+  background-color: #e12f2f;
 }
 
 /**

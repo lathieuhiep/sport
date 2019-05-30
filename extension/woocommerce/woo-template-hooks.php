@@ -22,6 +22,7 @@
  * @see sport_woo_loop_add_to_cart_close()
  * @see sport_woo_get_sidebar()
  * @see sport_woo_after_main_content()
+ * @see sport_woo_pagination_ajax()
  */
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
@@ -35,12 +36,17 @@ remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_pr
 
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
+remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+
 add_action( 'sport_get_cart_item', 'sport_get_cart', 5 );
 
 add_action( 'woocommerce_before_main_content', 'sport_woo_before_main_content', 10 );
 
 add_action( 'woocommerce_before_shop_loop', 'sport_woo_before_shop_loop_open',  5 );
 add_action( 'woocommerce_before_shop_loop', 'sport_woo_before_shop_loop_close',  35 );
+
+add_action( 'woocommerce_before_shop_loop', 'sport_woo_before_shop_loop_product', 35 );
+add_action( 'woocommerce_after_shop_loop', 'sport_woo_after_shop_loop_product',  15 );
 
 add_action( 'woocommerce_before_shop_loop_item_title', 'sport_woo_product_thumbnail_open', 5 );
 add_action( 'woocommerce_before_shop_loop_item_title', 'sport_product_new', 9 );
@@ -59,6 +65,8 @@ add_action ( 'woocommerce_after_shop_loop_item', 'sport_woo_after_shop_loop_item
 add_action( 'sport_woo_sidebar', 'sport_woo_get_sidebar', 10 );
 
 add_action( 'woocommerce_after_main_content', 'sport_woo_after_main_content', 10 );
+
+add_action( 'woocommerce_after_shop_loop', 'sport_woo_pagination_ajax', 10 );
 
 
 /**

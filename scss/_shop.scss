@@ -545,8 +545,8 @@
   }
   .on-sale-percent {
     position: absolute;
-    left: 0;
-    bottom: -5px;
+    left: 5px;
+    bottom: 5px;
     z-index: 2;
   }
   .quantity {
@@ -749,6 +749,26 @@
       p {
         display: inline-block;
       }
+    }
+  }
+}
+.btn-product-pagination {
+  margin-top: 30px;
+
+  button {
+    padding: 10px 15px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: capitalize;
+    background-color: $background-primary;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    @include border-radius(5px);
+    @include transition(all 0.4s ease-in-out);
+
+    &:hover {
+      background-color: $background-hover;
     }
   }
 }

@@ -129,11 +129,13 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
      */
     function sport_woo_before_main_content() {
         global $sport_options;
-        $sport_sidebar_woo_position = $sport_options['sport_sidebar_woo'];
+        $sport_sidebar_woo_position =   $sport_options['sport_sidebar_woo'];
+        $sport_order_by_product     =   $_GET['orderby'];
+        $sport_get_product_cat_id   =   get_queried_object_id();
 
     ?>
 
-        <div class="site-shop">
+        <div class="site-shop" data-orderby="<?php echo esc_attr( $sport_order_by_product ); ?>" data-product-cat="<?php echo esc_attr( $sport_get_product_cat_id ); ?>">
             <div class="container">
                 <div class="row">
 
@@ -346,6 +348,77 @@ if ( ! function_exists( 'sport_woo_before_shop_loop_close' ) ) :
         </div><!-- .site-shop__result-count-ordering -->
 
     <?php
+    }
+
+endif;
+
+if ( ! function_exists( 'sport_woo_before_shop_loop_product' ) ) :
+    /**
+     * Hook: woocommerce_before_shop_loop.
+     *
+     * @hooked sport_woo_before_shop_loop_product - 35
+     */
+
+    function sport_woo_before_shop_loop_product() {
+        ?>
+
+        <div class="site-shop__product">
+
+        <?php
+    }
+endif;
+
+if ( ! function_exists( 'sport_woo_after_shop_loop_product' ) ) :
+    /**
+     * Hook: woocommerce_after_shop_loop.
+     *
+     * @hooked sport_woo_after_shop_loop_product - 15
+     */
+
+    function sport_woo_after_shop_loop_product() {
+        ?>
+
+        </div><!-- .site-shop__product -->
+
+        <?php
+    }
+endif;
+
+if ( ! function_exists( 'sport_woo_pagination_ajax' ) ) :
+
+    /**
+     * Hook: woocommerce_after_shop_loop.
+     *
+     * @hooked sport_woo_pagination_ajax - 10
+     */
+
+    function sport_woo_pagination_ajax() {
+
+        $limit          =   sport_show_products_per_page();
+        $total_pages    =   wc_get_loop_prop( 'total_pages' );
+        $total_product  =   wc_get_loop_prop( 'total' );
+
+        if ( $total_pages > 1 ) :
+
+            $total_product_remaining  =   $total_product - $limit;
+    ?>
+
+        <div class="btn-product-pagination text-center">
+            <div class="loader-ajax loader-hide"></div>
+
+            <button class="btn-global btn-load-product" data-pagination="2" data-limit="<?php echo esc_attr( $limit ); ?>">
+                <?php esc_html_e( 'Xem thêm', 'sport' ); ?>
+                &#40;
+                <span class="total-product-remaining">
+                    <?php echo esc_html( $total_product_remaining ); ?>
+                </span>
+                &#41;
+            </button>
+        </div>
+
+    <?php
+
+        endif;
     }
 
 endif;
@@ -763,4 +836,21 @@ function sport_change_displayed_sale_price() {
 
     }
     if ( $max_percentage > 0 ) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
+}
+
+/*
+* Start pagination ajax
+*/
+add_action( 'wp_ajax_nopriv_sport_pagination_product', 'sport_pagination_product' );
+add_action( 'wp_ajax_sport_pagination_product', 'sport_pagination_product' );
+
+function sport_pagination_product() {
+
+    $pagination     =   $_POST['pagination'];
+    $order_by       =   $_POST['order_by'];
+    $limit          =   $_POST['limit'];
+    $product_cat_id =   $_POST['product_cat_id'];
+
+    wp_die();
+
 }

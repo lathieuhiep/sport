@@ -262,6 +262,20 @@ function sport_register_front_end() {
 
     wp_enqueue_script( 'sport-custom', get_theme_file_uri( '/js/custom.js' ), array(), '1.0.0', true );
 
+    if ( class_exists('Woocommerce') ) :
+
+        if ( is_shop() || is_product_category() ) :
+
+            wp_enqueue_script( 'shop-cat', get_theme_file_uri( '/js/shop-cat.js' ), array(), '1.0.0', true );
+
+            $sport_woo_cat_admin_url    =   admin_url( 'admin-ajax.php' );
+            $sport_woo_cat_ajax         =   array( 'url' => $sport_woo_cat_admin_url );
+            wp_localize_script( 'shop-cat', 'load_product_cat', $sport_woo_cat_ajax );
+
+        endif;
+
+    endif;
+
     /*
    * End Get Js Front End
    * */
