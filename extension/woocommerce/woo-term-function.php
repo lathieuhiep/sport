@@ -151,4 +151,12 @@ function product_custom_column_new( $column_name, $id ) {
     }
 
 }
+function sport_get_product_brand() {
 
+    return $sport_get_product_brand = get_terms( 'product_brand',
+        array(
+            'hide_empty' => 0
+        )
+    );
+
+};

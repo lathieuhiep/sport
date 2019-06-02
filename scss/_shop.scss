@@ -227,6 +227,12 @@
             top: 0;
             bottom: auto;
           }
+          .product-new {
+            ~ .on-sale-percent {
+              top: auto;
+              bottom: 5px;
+            }
+          }
         }
         div {
           &.images {
@@ -753,6 +759,7 @@
   }
 }
 .btn-product-pagination {
+  position: relative;
   margin-top: 30px;
 
   button {
@@ -770,5 +777,105 @@
     &:hover {
       background-color: $background-hover;
     }
+  }
+  .filter-loader {
+    top: -20px;
+
+    .loader-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .loader-show {
+    display: block;
+  }
+}
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+.sidebar-filter-shop {
+  .widget-filter-product-term__item {
+    margin-top: 3px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:nth-child(n+7) {
+      display: none;
+    }
+    label {
+      cursor: pointer;
+      margin: 0;
+      display: inline-block;
+
+      &:hover {
+        color: $color-hover-second;
+      }
+      span {
+        display: inline-block;
+      }
+      .widget-filter-product-term__check {
+        width: 15px;
+
+        &::before {
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 400;
+          content:"\f0c8";
+        }
+      }
+      input[type=checkbox] {
+        display: none;
+
+        &:checked {
+          + .widget-filter-product-term__check {
+            &::before {
+              content:"\f14a";
+              color: $color-hover-second;
+            }
+
+            ~ .widget-filter-product-term__name {
+              color: $color-hover-second;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.load-more-filter-product {
+  display: block;
+  cursor: pointer;
+  margin-top: 3px;
+  @include transition(all 0.4s ease-in-out);
+
+  &:hover {
+    color: #ff5555;
   }
 }

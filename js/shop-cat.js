@@ -11,15 +11,15 @@
     let site_shop           =   $( '.site-shop' ),
         product_cat_id      =   site_shop.data( 'product-cat' ),
         order_by             =   site_shop.data( 'orderby' ),
-        site_shop_product   =   $( '.site-shop__product' );
+        site_shop_product   =   $( '.site-shop__product' ),
+        btn_product_pagination  =   $( '.btn-product-pagination' );
 
     $( 'body' ).on( 'click', '.btn-load-product', function () {
 
-        let pagination      =   parseInt( $(this).data( 'pagination' ) ),
+        let $this           =   $(this),
+            pagination      =   parseInt( $(this).data( 'pagination' ) ),
             limit           =   parseInt( $(this).data( 'limit' ) ),
             total_remaining =   parseInt( $(this).find( '.total-product-remaining' ).text() );
-
-        console.log( pagination + '-' + limit + '-' + total_remaining + '-' + order_by + '-' + product_cat_id );
 
         $.ajax({
 
@@ -36,33 +36,31 @@
             }),
 
             beforeSend: function () {
-                // site_shop_pagination.find( '.loader-ajax').removeClass( 'loader-hide' );
+                btn_product_pagination.find( '.filter-loader').addClass( 'loader-show' );
             },
 
             success: function( data ) {
 
                 if ( data ) {
 
+                    let btn_load_product        =   $( '.btn-load-product' ),
+                        total_remaining_product =   total_remaining - limit;
+
+                    btn_product_pagination.find( '.filter-loader').removeClass( 'loader-show' );
+
                     $( '.site-shop__product ul.products' ).append( data );
 
-                    // let btn_load_product        =   $( '.btn-load-product' ),
-                    //     total_remaining_product =   remaining_product - limit_product;
-                    //
-                    // site_shop_pagination.find( '.loader-ajax').addClass( 'loader-hide' );
-                    //
-                    // $( '.site-shop__product ul.products' ).append(data);
-                    //
-                    // if ( total_remaining_product > 0 ) {
-                    //
-                    //     let pagination_product_plus =   pagination_product + 1;
-                    //
-                    //     btn_load_product.data( {'pagination': pagination_product_plus, 'remaining-product' :total_remaining_product} ).find( '.total-product-remaining' ).empty().append( '(' + total_remaining_product + ')' );
-                    //
-                    // }else {
-                    //
-                    //     site_shop_pagination.remove();
-                    //
-                    // }
+                    if ( total_remaining_product > 0 ) {
+
+                        let pagination_product_plus =   pagination + 1;
+
+                        btn_load_product.data( {'pagination': pagination_product_plus} ).find( '.total-product-remaining' ).text(total_remaining_product);
+
+                    }else {
+
+                        btn_product_pagination.remove();
+
+                    }
 
                 }
 

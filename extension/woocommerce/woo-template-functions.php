@@ -49,6 +49,11 @@ function sport_loop_columns_product() {
 }
 /* End Change number or products per row */
 
+add_filter( 'woocommerce_show_page_title', 'sport_woo_show_page_title' );
+function sport_woo_show_page_title() {
+    return false;
+}
+
 /* Start get cart */
 if ( ! function_exists( 'sport_get_cart' ) ):
 
@@ -145,13 +150,13 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
                  *
                  * @hooked sport_woo_sidebar - 10
                  */
-        
-                if ( $sport_sidebar_woo_position == 'left' ) :
+
+                if ( $sport_sidebar_woo_position == 'left' && !is_product() ) :
                     do_action( 'sport_woo_sidebar' );
                 endif;
                 ?>
 
-                    <div class="<?php echo is_active_sidebar( 'sport-sidebar-wc' ) && $sport_sidebar_woo_position != 'hide' ? 'col-md-9' : 'col-md-12'; ?>">
+                    <div class="<?php echo is_active_sidebar( 'sport-sidebar-wc' ) && $sport_sidebar_woo_position != 'hide' && !is_product() ? 'col-md-9' : 'col-md-12'; ?>">
 
     <?php
 
@@ -178,7 +183,7 @@ if ( ! function_exists( 'sport_woo_after_main_content' ) ) :
                      * @hooked sport_woo_sidebar - 10
                      */
 
-                    if ( $sport_sidebar_woo_position == 'right' ) :
+                    if ( $sport_sidebar_woo_position == 'right' && !is_product() ) :
                         do_action( 'sport_woo_sidebar' );
                     endif;
                     ?>
@@ -404,7 +409,9 @@ if ( ! function_exists( 'sport_woo_pagination_ajax' ) ) :
     ?>
 
         <div class="btn-product-pagination text-center">
-            <div class="loader-ajax loader-hide"></div>
+            <div class="filter-loader">
+                <span class="loader-icon"></span>
+            </div>
 
             <button class="btn-global btn-load-product" data-pagination="2" data-limit="<?php echo esc_attr( $limit ); ?>">
                 <?php esc_html_e( 'Xem thêm', 'sport' ); ?>
@@ -838,6 +845,37 @@ function sport_change_displayed_sale_price() {
     if ( $max_percentage > 0 ) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
 }
 
+/* Get value orderby product  */
+function sport_get_orderby_product( $sport_orderby_product_value = '' ) {
+
+    if ( !empty( $sport_orderby_product_value ) ) :
+
+        $sport_orderby_value =  explode( '-', $sport_orderby_product_value );
+        $sport_orderby       =  esc_attr( $sport_orderby_value[0] );
+        $sport_order         =  ! empty( $sport_orderby_value[1] ) ? $sport_orderby_value[1] : '';
+
+        $sport_product_ordering =   wc()->query->get_catalog_ordering_args( $sport_orderby, $sport_order );
+
+    else:
+        $sport_product_ordering =   wc()->query->get_catalog_ordering_args();
+    endif;
+
+    $sport_product_orderby         =   $sport_product_ordering['orderby'];
+    $sport_product_order           =   $sport_product_ordering['order'] ;
+    $sport_product_order_meta_key  =   '';
+
+    if ( isset( $sport_product_ordering['meta_key'] ) ) {
+        $sport_product_order_meta_key  =   $sport_product_ordering['meta_key'];
+    }
+
+    return array(
+        'sport_product_orderby'         =>  $sport_product_orderby,
+        'sport_product_order'           =>  $sport_product_order,
+        'sport_product_order_meta_key'  =>  $sport_product_order_meta_key
+    );
+
+}
+
 /*
 * Start pagination ajax
 */
@@ -850,6 +888,77 @@ function sport_pagination_product() {
     $order_by       =   $_POST['order_by'];
     $limit          =   $_POST['limit'];
     $product_cat_id =   $_POST['product_cat_id'];
+
+    $sport_product_ordering         =   sport_get_orderby_product( $order_by );
+    $sport_product_orderby          =   $sport_product_ordering['sport_product_orderby'];
+    $sport_product_order            =   $sport_product_ordering['sport_product_order'];
+    $sport_product_order_meta_key   =   $sport_product_ordering['sport_product_order_meta_key'];
+
+    $args  =   array(
+        'post_type'         =>  'product',
+        'paged'             =>  $pagination,
+        'posts_per_page'    =>  $limit,
+        'orderby'           =>  $sport_product_orderby,
+        'order'             =>  $sport_product_order,
+    );
+
+    $query =   new WP_Query( $args );
+
+    if ( $query->have_posts() ) :
+
+        while ( $query->have_posts() ):
+            $query->the_post();
+
+    ?>
+
+        <li <?php wc_product_class( 'animated fadeIn' ); ?>>
+            <?php
+            /**
+             * Hook: woocommerce_before_shop_loop_item.
+             *
+             * @hooked woocommerce_template_loop_product_link_open - 10
+             */
+            do_action( 'woocommerce_before_shop_loop_item' );
+
+            /**
+             * Hook: woocommerce_before_shop_loop_item_title.
+             *
+             * @hooked woocommerce_show_product_loop_sale_flash - 10
+             * @hooked woocommerce_template_loop_product_thumbnail - 10
+             */
+            do_action( 'woocommerce_before_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_shop_loop_item_title.
+             *
+             * @hooked woocommerce_template_loop_product_title - 10
+             */
+            do_action( 'woocommerce_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_after_shop_loop_item_title.
+             *
+             * @hooked woocommerce_template_loop_rating - 5
+             * @hooked woocommerce_template_loop_price - 10
+             */
+            do_action( 'woocommerce_after_shop_loop_item_title' );
+
+            /**
+             * Hook: woocommerce_after_shop_loop_item.
+             *
+             * @hooked woocommerce_template_loop_product_link_close - 5
+             * @hooked woocommerce_template_loop_add_to_cart - 10
+             */
+            do_action( 'woocommerce_after_shop_loop_item' );
+            ?>
+        </li>
+
+    <?php
+
+        endwhile;
+        wp_reset_postdata();
+
+    endif;
 
     wp_die();
 
