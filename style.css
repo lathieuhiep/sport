@@ -3397,25 +3397,6 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   width: 15px;
 }
 
-.sidebar-filter-shop .widget-filter-product-term__item label .widget-filter-product-term__check::before {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 400;
-  content: "\f0c8";
-}
-
-.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox] {
-  display: none;
-}
-
-.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox]:checked + .widget-filter-product-term__check::before {
-  content: "\f14a";
-  color: #e12f2f;
-}
-
-.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox]:checked + .widget-filter-product-term__check ~ .widget-filter-product-term__name {
-  color: #e12f2f;
-}
-
 .load-more-filter-product {
   display: block;
   cursor: pointer;

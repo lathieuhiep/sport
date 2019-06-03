@@ -8,11 +8,59 @@
 
     "use strict";
 
-    let site_shop           =   $( '.site-shop' ),
-        product_cat_id      =   site_shop.data( 'product-cat' ),
-        order_by             =   site_shop.data( 'orderby' ),
-        site_shop_product   =   $( '.site-shop__product' ),
+    let site_shop               =   $( '.site-shop' ),
+        product_cat_id          =   site_shop.data( 'product-cat' ),
+        order_by                =   site_shop.data( 'orderby' ),
+        site_shop_product       =   $( '.site-shop__product' ),
         btn_product_pagination  =   $( '.btn-product-pagination' );
+
+    $( '.product_brand_check' ).on( 'click', function () {
+
+        let brands     =   [];
+
+        $.each( $('input[data-filter="product_brand"]:checked'), function () {
+
+            brands.push($(this).val());
+
+        });
+
+        $.ajax({
+
+            url: load_product_cat.url,
+            type: 'POST',
+            data: ({
+
+                action: 'sport_check_box_product_cat',
+                product_cat_id: product_cat_id,
+                order_by: order_by,
+                brand_ids: brands,
+
+            }),
+
+            beforeSend: function () {
+                // site_shop_product.find( 'ul.products' ).addClass( 'product-opacity' );
+            },
+
+            success: function( data ){
+
+                if ( data ){
+
+                    $( '.site-shop__product ul.products' ).append( data );
+
+                }
+
+                setTimeout( function() {
+
+                    // site_shop_product.find( 'ul.products li.product' ).removeClass( 'popIn' );
+
+                }, 800 );
+
+            }
+
+        });
+
+
+    } );
 
     $( 'body' ).on( 'click', '.btn-load-product', function () {
 

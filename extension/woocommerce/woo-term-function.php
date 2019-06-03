@@ -160,3 +160,215 @@ function sport_get_product_brand() {
     );
 
 };
+
+/* Get value orderby product  */
+function sport_get_orderby_product( $sport_orderby_product_value = '' ) {
+
+    if ( !empty( $sport_orderby_product_value ) ) :
+
+        $sport_orderby_value =  explode( '-', $sport_orderby_product_value );
+        $sport_orderby       =  esc_attr( $sport_orderby_value[0] );
+        $sport_order         =  ! empty( $sport_orderby_value[1] ) ? $sport_orderby_value[1] : '';
+
+        $sport_product_ordering =   wc()->query->get_catalog_ordering_args( $sport_orderby, $sport_order );
+
+    else:
+        $sport_product_ordering =   wc()->query->get_catalog_ordering_args();
+    endif;
+
+    $sport_product_orderby         =   $sport_product_ordering['orderby'];
+    $sport_product_order           =   $sport_product_ordering['order'] ;
+    $sport_product_order_meta_key  =   '';
+
+    if ( isset( $sport_product_ordering['meta_key'] ) ) {
+        $sport_product_order_meta_key  =   $sport_product_ordering['meta_key'];
+    }
+
+    return array(
+        'sport_product_orderby'         =>  $sport_product_orderby,
+        'sport_product_order'           =>  $sport_product_order,
+        'sport_product_order_meta_key'  =>  $sport_product_order_meta_key
+    );
+
+}
+
+/* Product filter tax */
+function shoptheme_product_filter_tax( $shoptheme_vendor_ids = '', $shoptheme_product_cat_id = '' ) {
+
+    if ( !empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ) :
+
+        $shoptheme_filter_tax_query =   array(
+            'relation' => 'AND',
+
+            array(
+                'taxonomy'  =>  'product_vendor',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_vendor_ids
+            ),
+
+            array(
+                'taxonomy'  =>  'product_collections',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_collection_ids
+            ),
+
+        );
+
+    elseif ( !empty( $shoptheme_vendor_ids ) && empty( $shoptheme_collection_ids ) ):
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_vendor',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_vendor_ids
+            ),
+
+        );
+
+    elseif( empty( $shoptheme_vendor_ids ) && !empty( $shoptheme_collection_ids ) ):
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_collections',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_collection_ids
+            ),
+
+        );
+
+    elseif( !empty( $shoptheme_product_cat_id ) ) :
+
+        $shoptheme_filter_tax_query =   array(
+
+            array(
+                'taxonomy'  =>  'product_cat',
+                'field'     =>  'id',
+                'terms'     =>  $shoptheme_product_cat_id
+            ),
+
+        );
+
+    else:
+
+        $shoptheme_filter_tax_query =   '';
+
+    endif;
+
+    return $shoptheme_filter_tax_query;
+
+}
+
+/*
+* Start pagination ajax
+*/
+add_action( 'wp_ajax_nopriv_sport_pagination_product', 'sport_pagination_product' );
+add_action( 'wp_ajax_sport_pagination_product', 'sport_pagination_product' );
+
+function sport_pagination_product() {
+
+    $pagination     =   $_POST['pagination'];
+    $order_by       =   $_POST['order_by'];
+    $limit          =   $_POST['limit'];
+    $product_cat_id =   $_POST['product_cat_id'];
+
+    $sport_product_ordering         =   sport_get_orderby_product( $order_by );
+    $sport_product_orderby          =   $sport_product_ordering['sport_product_orderby'];
+    $sport_product_order            =   $sport_product_ordering['sport_product_order'];
+    $sport_product_order_meta_key   =   $sport_product_ordering['sport_product_order_meta_key'];
+
+    $args  =   array(
+        'post_type'         =>  'product',
+        'paged'             =>  $pagination,
+        'posts_per_page'    =>  $limit,
+        'orderby'           =>  $sport_product_orderby,
+        'order'             =>  $sport_product_order,
+    );
+
+    $query =   new WP_Query( $args );
+
+    if ( $query->have_posts() ) :
+
+        while ( $query->have_posts() ):
+            $query->the_post();
+
+            ?>
+
+            <li <?php wc_product_class( 'animated fadeIn' ); ?>>
+                <?php
+                /**
+                 * Hook: woocommerce_before_shop_loop_item.
+                 *
+                 * @hooked woocommerce_template_loop_product_link_open - 10
+                 */
+                do_action( 'woocommerce_before_shop_loop_item' );
+
+                /**
+                 * Hook: woocommerce_before_shop_loop_item_title.
+                 *
+                 * @hooked woocommerce_show_product_loop_sale_flash - 10
+                 * @hooked woocommerce_template_loop_product_thumbnail - 10
+                 */
+                do_action( 'woocommerce_before_shop_loop_item_title' );
+
+                /**
+                 * Hook: woocommerce_shop_loop_item_title.
+                 *
+                 * @hooked woocommerce_template_loop_product_title - 10
+                 */
+                do_action( 'woocommerce_shop_loop_item_title' );
+
+                /**
+                 * Hook: woocommerce_after_shop_loop_item_title.
+                 *
+                 * @hooked woocommerce_template_loop_rating - 5
+                 * @hooked woocommerce_template_loop_price - 10
+                 */
+                do_action( 'woocommerce_after_shop_loop_item_title' );
+
+                /**
+                 * Hook: woocommerce_after_shop_loop_item.
+                 *
+                 * @hooked woocommerce_template_loop_product_link_close - 5
+                 * @hooked woocommerce_template_loop_add_to_cart - 10
+                 */
+                do_action( 'woocommerce_after_shop_loop_item' );
+                ?>
+            </li>
+
+        <?php
+
+        endwhile;
+        wp_reset_postdata();
+
+    endif;
+
+    wp_die();
+
+}
+
+/*
+* Start ajax filter product cat
+*/
+add_action( 'wp_ajax_nopriv_sport_check_box_product_cat', 'sport_check_box_product_cat' );
+add_action( 'wp_ajax_sport_check_box_product_cat', 'sport_check_box_product_cat' );
+
+function sport_check_box_product_cat() {
+
+    $limit    =   sport_show_products_per_page();
+
+    $product_cat_id =   $_POST['product_cat_id'];
+    $order_by       =   $_POST['order_by'];
+    $brand_ids      =   $_POST['brand_ids'];
+
+    $sport_product_ordering         =   sport_get_orderby_product( $order_by );
+    $sport_product_orderby          =   $sport_product_ordering['sport_product_orderby'];
+    $sport_product_order            =   $sport_product_ordering['sport_product_order'];
+    $sport_product_order_meta_key   =   $sport_product_ordering['sport_product_order_meta_key'];
+
+    var_dump( $product_cat_id . '-' . $order_by . '-' . $brand_ids . '-' . $sport_product_orderby . '-' . $sport_product_order . '-' . $sport_product_order_meta_key );
+
+    wp_die();
+
+}

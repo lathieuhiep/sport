@@ -844,28 +844,28 @@
       .widget-filter-product-term__check {
         width: 15px;
 
-        &::before {
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 400;
-          content:"\f0c8";
-        }
+        //&::before {
+        //  font-family: 'Font Awesome 5 Free';
+        //  font-weight: 400;
+        //  content:"\f0c8";
+        //}
       }
-      input[type=checkbox] {
-        display: none;
-
-        &:checked {
-          + .widget-filter-product-term__check {
-            &::before {
-              content:"\f14a";
-              color: $color-hover-second;
-            }
-
-            ~ .widget-filter-product-term__name {
-              color: $color-hover-second;
-            }
-          }
-        }
-      }
+      //input[type=checkbox] {
+      //  display: none;
+      //
+      //  &:checked {
+      //    + .widget-filter-product-term__check {
+      //      &::before {
+      //        content:"\f14a";
+      //        color: $color-hover-second;
+      //      }
+      //
+      //      ~ .widget-filter-product-term__name {
+      //        color: $color-hover-second;
+      //      }
+      //    }
+      //  }
+      //}
     }
   }
 }
