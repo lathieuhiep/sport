@@ -49,6 +49,18 @@ class sport_widget_products_ids extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'number_item_filter',
+            [
+                'label'     =>  esc_html__( 'Number of Tabs', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  5,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
@@ -341,6 +353,11 @@ class sport_widget_products_ids extends Widget_Base {
         $list_id        =   $tab_list[0]['list_product_id'];
         $column_number  =   $settings['column_number'];
 
+        $data_settings_tab  = [
+            'number_item'   =>  $settings['number_item_filter'],
+            'margin_item'   =>  5
+        ];
+
         $product_settings =   [
             'order'     =>  $order,
             'column'    =>  $column_number,
@@ -378,30 +395,36 @@ class sport_widget_products_ids extends Widget_Base {
     ?>
 
         <div class="element-product-ids element-products"  data-settings='<?php echo esc_attr( wp_json_encode( $product_settings ) ); ?>'>
-            <div class="product-tabs btn-filter-product-ids d-flex align-items-end">
-                <div class="product-tabs-list btn-list-product-ids">
-                    <?php
-                    $i = 1;
-                    foreach ( $tab_list as $item ) :
+            <div class="product-tabs btn-filter-product-ids">
+                <div class="row align-items-end">
+                    <div class="col-12 col-md-10">
+                        <div class="product-tabs-list btn-list-product-ids owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings_tab ) ); ?>'>
+                            <?php
+                            $i = 1;
+                            foreach ( $tab_list as $item ) :
 
-                        if ( !empty( $item['list_product_id'] ) ) :
-                            $ids = $item['list_product_id'];
-                        else:
-                            $ids = 0;
-                        endif;
-                    ?>
+                                if ( !empty( $item['list_product_id'] ) ) :
+                                    $ids = $item['list_product_id'];
+                                else:
+                                    $ids = 0;
+                                endif;
+                            ?>
 
-                    <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
-                        <?php echo esc_html_e( $item['title_tab'] ); ?>
-                    </span>
+                            <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
+                                <?php echo esc_html_e( $item['title_tab'] ); ?>
+                            </span>
 
-                    <?php $i++; endforeach; ?>
+                            <?php $i++; endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-2 text-right">
+                        <span class="btn-product-grid btn-product-grid-all-ids" data-grid-ids="<?php echo esc_attr( $list_id ); ?>">
+                            <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
+                            <i class="fas fa-angle-double-right"></i>
+                        </span>
+                    </div>
                 </div>
-
-                <span class="btn-product-grid btn-product-grid-all-ids" data-grid-ids="<?php echo esc_attr( $list_id ); ?>">
-                    <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
-                    <i class="fas fa-angle-double-right"></i>
-                </span>
             </div>
 
             <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>

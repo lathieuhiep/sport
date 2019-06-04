@@ -2231,18 +2231,17 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 .element-products .product-tabs .product-tabs-list {
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .element-products .product-tabs .product-tabs-list .btn-tab-product-item {
   cursor: pointer;
-  display: inline-block;
+  display: block;
   color: #323c3f;
   line-height: 42px;
   text-align: center;
-  margin-right: 5px;
   padding: 0 20px;
   background-color: #f2f2f2;
   -webkit-transition: all 0.4s ease-in-out;
@@ -3395,6 +3394,25 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .sidebar-filter-shop .widget-filter-product-term__item label .widget-filter-product-term__check {
   width: 15px;
+}
+
+.sidebar-filter-shop .widget-filter-product-term__item label .widget-filter-product-term__check::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+  content: "\f0c8";
+}
+
+.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox] {
+  display: none;
+}
+
+.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox]:checked + .widget-filter-product-term__check::before {
+  content: "\f14a";
+  color: #e12f2f;
+}
+
+.sidebar-filter-shop .widget-filter-product-term__item label input[type=checkbox]:checked + .widget-filter-product-term__check ~ .widget-filter-product-term__name {
+  color: #e12f2f;
 }
 
 .load-more-filter-product {

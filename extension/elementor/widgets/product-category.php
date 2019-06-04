@@ -53,7 +53,7 @@ class sport_widget_products_filter extends Widget_Base {
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  16,
                 'min'       =>  1,
-                'max'       =>  100,
+                'max'       =>  '',
                 'step'      =>  1,
             ]
         );
@@ -83,6 +83,18 @@ class sport_widget_products_filter extends Widget_Base {
                     'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
                     'DESC'  =>  esc_html__( 'Descending', 'sport' ),
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'number_item_filter',
+            [
+                'label'     =>  esc_html__( 'Number of Tabs', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  8,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
             ]
         );
 
@@ -484,6 +496,11 @@ class sport_widget_products_filter extends Widget_Base {
             'column'    =>  $column_number,
         ];
 
+        $data_settings_tab  = [
+            'number_item'   =>  $settings['number_item_filter'],
+            'margin_item'   =>  5
+        ];
+
         $data_settings  =   [
             'loop'          =>  ( 'yes' === $settings['loop'] ),
             'autoplay'      =>  ( 'yes' === $settings['autoplay'] ),
@@ -545,25 +562,31 @@ class sport_widget_products_filter extends Widget_Base {
             <div class="element-product-cat__warp">
                 <?php if ( !empty( $product_cat_children ) ) : ?>
 
-                <div class="product-tabs btn-product-cat-filter d-flex align-items-end">
-                    <div class="product-tabs-list btn-list-cat">
-                        <?php
-                        foreach ( $product_cat_children as $item ) :
+                <div class="product-tabs btn-product-cat-filter">
+                    <div class="row align-items-end">
+                        <div class="col-12 col-md-10">
+                            <div class="product-tabs-list btn-list-cat owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings_tab ) ); ?>'>
+                                <?php
+                                foreach ( $product_cat_children as $item ) :
 
-                            $term_children = get_term_by( 'id', $item, 'product_cat' );
-                        ?>
+                                    $term_children = get_term_by( 'id', $item, 'product_cat' );
+                                ?>
 
-                        <span class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
-                            <?php echo esc_html( $term_children->name ); ?>
-                        </span>
+                                <span class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
+                                    <?php echo esc_html( $term_children->name ); ?>
+                                </span>
 
-                        <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2 text-right">
+                            <span class="btn-product-grid btn-product-grid-all-cat" data-grid-cat-id="<?php echo esc_attr( $product_cat_id ); ?>">
+                                <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
+                                <i class="fas fa-angle-double-right"></i>
+                            </span>
+                        </div>
                     </div>
-
-                    <span class="btn-product-grid btn-product-grid-all-cat" data-grid-cat-id="<?php echo esc_attr( $product_cat_id ); ?>">
-                        <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
-                        <i class="fas fa-angle-double-right"></i>
-                    </span>
                 </div>
 
                 <?php endif; ?>

@@ -31,7 +31,7 @@
 
             if ( has_active === false ) {
 
-                $(this).parent().find('.btn-item-filter').removeClass( 'active' );
+                $(this).parents('.product-tabs-list').find('.btn-item-filter').removeClass( 'active' );
                 $(this).addClass( 'active' );
 
                 let parent_class            =   $(this).parents( '.element-product-cat' ),
@@ -95,7 +95,7 @@
 
             if ( has_active === false ) {
 
-                $(this).parent().find('.btn-item-filter-product-id').removeClass( 'active' );
+                $(this).parents( '.product-tabs-list' ).find('.btn-item-filter-product-id').removeClass( 'active' );
                 $(this).addClass( 'active' );
 
                 let parent_class            =   $(this).parents( '.element-product-ids' ),

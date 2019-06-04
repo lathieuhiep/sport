@@ -135,8 +135,18 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
     function sport_woo_before_main_content() {
         global $sport_options;
         $sport_sidebar_woo_position =   $sport_options['sport_sidebar_woo'];
-        $sport_order_by_product     =   $_GET['orderby'];
+
         $sport_get_product_cat_id   =   get_queried_object_id();
+
+        if ( empty( $_GET ) ) :
+
+            $sport_order_by_product =  '';
+
+        else:
+
+            $sport_order_by_product     =   $_GET['orderby'];
+
+        endif;
 
     ?>
 
@@ -815,6 +825,7 @@ add_filter( 'woocommerce_sale_flash', 'sport_change_displayed_sale_price' );
 function sport_change_displayed_sale_price() {
 
     global $product;
+    $max_percentage =   '';
 
     if ( ! $product->is_on_sale() ) return;
 

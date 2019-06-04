@@ -83,7 +83,7 @@ class sport_brand_filter_widget extends WP_Widget {
 
                 <div class="widget-filter-product-term__item">
                     <label>
-                        <input class="product_brand_check" type="checkbox" name="<?php echo esc_attr( $sport_term_brand->slug ); ?>" value="<?php echo esc_attr( $sport_term_brand->term_id ); ?>" data-filter="product_brand" />
+                        <input class="product_brand_check" type="checkbox" name="<?php echo esc_attr( $sport_term_brand->slug ); ?>" value="<?php echo esc_attr( $sport_term_brand->term_id ); ?>" data-filter="product_brand" autocomplete="off" />
 
                         <span class="widget-filter-product-term__check"></span>
 

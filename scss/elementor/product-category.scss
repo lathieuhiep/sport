@@ -5,15 +5,14 @@
     border-bottom: 1px solid #ff5c00;
 
     .product-tabs-list {
-      @include flex(1 0 auto);
+      @include flex(1);
 
       .btn-tab-product-item {
         cursor: pointer;
-        display: inline-block;
+        display: block;
         color: #323c3f;
         line-height: 42px;
         text-align: center;
-        margin-right: 5px;
         padding: 0 20px;
         background-color: #f2f2f2;
         @include transition(all 0.4s ease-in-out);

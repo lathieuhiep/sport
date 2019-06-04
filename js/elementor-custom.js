@@ -34,6 +34,16 @@
     };
     /* End element text editor scroll */
 
+    /* Start Product Tabs List */
+    let ElementProductTabsList   =   function( $scope, $ ) {
+
+        let product_tabs_list = $scope.find( '.product-tabs-list' );
+
+        $( document ).general_multi_owlCarouse( product_tabs_list );
+
+    };
+    /* End Product Tabs List */
+
     /* Start element product category */
     let ElementProductCatSlider   =   function( $scope, $ ) {
 
@@ -72,6 +82,10 @@
 
         /* Element text editor scroll */
         elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-text-editor-scroll.default', ElementTextEditorScroll );
+
+        /* Element product tabs list */
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-products-ids.default', ElementProductTabsList );
+        elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-products-cat.default', ElementProductTabsList );
 
         /* Element product category */
         elementorFrontend.hooks.addAction( 'frontend/element_ready/sport-products-cat.default', ElementProductCatSlider );
