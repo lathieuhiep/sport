@@ -139,6 +139,21 @@ class sport_widget_products_filter extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'image_height_product',
+            [
+                'label'     =>  esc_html__( 'Height Image Product', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
+                'default'   =>  190,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-product-cat__slider .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /* Options Slides */
@@ -498,7 +513,8 @@ class sport_widget_products_filter extends Widget_Base {
 
         $data_settings_tab  = [
             'number_item'   =>  $settings['number_item_filter'],
-            'margin_item'   =>  5
+            'margin_item'   =>  5,
+            'nav'           =>  true
         ];
 
         $data_settings  =   [

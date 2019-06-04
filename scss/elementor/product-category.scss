@@ -1,3 +1,11 @@
+.menu-filter__row {
+  .row {
+    margin: 0 -5px;
+  }
+  .item-col {
+    padding: 0 5px;
+  }
+}
 .element-products {
   .product-tabs {
     margin-bottom: 25px;
@@ -9,12 +17,15 @@
 
       .btn-tab-product-item {
         cursor: pointer;
-        display: block;
         color: #323c3f;
-        line-height: 42px;
         text-align: center;
-        padding: 0 20px;
+        padding: 8px 12px;
         background-color: #f2f2f2;
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex( 1 0 auto );
+        @include align-items(center);
+        @include justify-content(center);
         @include transition(all 0.4s ease-in-out);
 
         &.active,
@@ -23,6 +34,15 @@
           background-color: #ff5c00;
         }
 
+      }
+      .owl-stage {
+        @include flexbox();
+        @include flex( 1 0 auto );
+      }
+      .owl-item {
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex( 1 0 auto );
       }
     }
     .btn-product-grid {
@@ -36,19 +56,29 @@
     }
   }
   .item-col {
-    margin-bottom: 30px;
+    margin-bottom: 5px;
+    @include flexbox();
+    @include flex-direction(column);
   }
   .item-product {
     border: 1px solid #ebebeb;
     overflow: hidden;
     @include border-radius(5px);
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex( 1 0 auto );
 
     .item-thumbnail {
       position: relative;
-      margin-bottom: 15px;
 
       a {
         display: block;
+        overflow: hidden;
+
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
       }
       .on-sale-percent {
         position: absolute;
@@ -57,24 +87,27 @@
       }
     }
     .item-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400;
       margin: 0 0 8px;
     }
     .item-detail {
-      padding-bottom: 10px;
+      padding: 20px 10px 10px;
+      @include flexbox();
+      @include flex-direction(column);
+      @include flex( 1 0 auto );
+      @include justify-content(space-between);
     }
     .price-box {
       .price {
-        font-size: 16px;
+        font-size: 14px;
         color: $color-hover-second;
         font-weight: 700;
 
         del {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
           color: $color-primary;
-          margin-right: 5px;
         }
         ins {
           text-decoration: none;
