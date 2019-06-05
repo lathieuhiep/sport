@@ -149,7 +149,7 @@ class sport_widget_products_filter extends Widget_Base {
                 'step'      =>  1,
                 'default'   =>  190,
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-product-cat__slider .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
                 ],
             ]
         );
@@ -625,7 +625,7 @@ class sport_widget_products_filter extends Widget_Base {
                                     ?>
 
                                             <div class="menu-filter__row">
-                                                <div class="row">
+                                                <div class="row custom_row">
 
                                     <?php
 

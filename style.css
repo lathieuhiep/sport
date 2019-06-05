@@ -2225,11 +2225,11 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 /* Product Category */
-.menu-filter__row .row {
+.custom_row {
   margin: 0 -5px;
 }
 
-.menu-filter__row .item-col {
+.custom-col {
   padding: 0 5px;
 }
 

@@ -128,6 +128,21 @@ class sport_widget_products_ids extends Widget_Base {
         );
 
         $this->add_control(
+            'image_height_product',
+            [
+                'label'     =>  esc_html__( 'Height Image Product', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
+                'default'   =>  190,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'loop',
             [
                 'type'          =>  Controls_Manager::SWITCHER,
@@ -437,7 +452,7 @@ class sport_widget_products_ids extends Widget_Base {
 
                     if ( $i % $column_number == 1 ) :
                 ?>
-                    <div class="row">
+                    <div class="row custom_row">
 
                 <?php
                     endif;

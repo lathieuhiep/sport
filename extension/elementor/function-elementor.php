@@ -25,7 +25,7 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
 
 ?>
 
-    <div class="item-col <?php echo esc_attr( $class_animate . $class_column_number ); ?> col-md-3 col-sm-6 col-6">
+    <div class="item-col custom-col <?php echo esc_attr( $class_animate . $class_column_number ); ?> col-md-3 col-sm-6 col-6">
         <?php sport_content_item_product(); ?>
     </div>
 
@@ -114,7 +114,7 @@ function sport_product_filter() {
 ?>
 
             <div class="menu-filter__row">
-                <div class="row">
+                <div class="row custom_row">
 
         <?php
 
@@ -171,7 +171,7 @@ function sport_product_filter_id() {
 
         ?>
 
-            <div class="row">
+            <div class="row custom_row">
 
         <?php
             endif;
@@ -228,7 +228,7 @@ function sport_product_style_grid_ids() {
             if ( $i == 1 ):
         ?>
 
-            <div class="row">
+            <div class="row custom_row">
 
         <?php
             endif;
@@ -294,7 +294,7 @@ function sport_product_style_grid_cat() {
             if ( $i == 1 ):
         ?>
 
-                <div class="row">
+                <div class="row custom_row">
 
             <?php
             endif;
