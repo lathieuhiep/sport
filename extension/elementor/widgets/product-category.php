@@ -147,7 +147,7 @@ class sport_widget_products_filter extends Widget_Base {
                 'min'       =>  1,
                 'max'       =>  '',
                 'step'      =>  1,
-                'default'   =>  190,
+                'default'   =>  150,
                 'selectors' =>  [
                     '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
                 ],
@@ -597,18 +597,18 @@ class sport_widget_products_filter extends Widget_Base {
                         </div>
 
                         <div class="col-12 col-md-2 text-right">
-                            <span class="btn-product-grid btn-product-grid-all-cat" data-grid-cat-id="<?php echo esc_attr( $product_cat_id ); ?>">
+                            <a class="btn-product-grid btn-product-grid-all-cat" href="<?php echo esc_url( get_term_link( $product_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
                                 <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                                 <i class="fas fa-angle-double-right"></i>
-                            </span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <?php endif; ?>
 
-                <div class="row">
-                    <div class="col-12 <?php echo esc_attr( !empty( $list_gallery ) ? 'col-md-9' : 'col-md-12' ); ?>">
+                <div class="row custom_row">
+                    <div class="custom-col col-12 <?php echo esc_attr( !empty( $list_gallery ) ? 'col-md-9' : 'col-md-12' ); ?>">
                         <div class="element-product-cat__container">
                             <div class="filter-loader">
                                 <span class="loader-icon"></span>
@@ -664,7 +664,7 @@ class sport_widget_products_filter extends Widget_Base {
 
                         ?>
 
-                        <div class="col-12 col-md-3">
+                        <div class="custom-col col-12 col-md-3">
                             <div class="element-product-gallery-cate product-gallery-cate owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
 
                                 <?php

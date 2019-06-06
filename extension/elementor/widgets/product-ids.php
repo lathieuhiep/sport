@@ -98,6 +98,19 @@ class sport_widget_products_ids extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'link',
+            [
+                'label'         =>  esc_html__( 'Link', 'sport' ),
+                'type'          =>  Controls_Manager::URL,
+                'placeholder'   =>  'https://your-link.com',
+                'show_external' =>  false,
+                'default' => [
+                    'url'   =>  '#',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
         /* End Section Query */
 
@@ -135,7 +148,7 @@ class sport_widget_products_ids extends Widget_Base {
                 'min'       =>  1,
                 'max'       =>  '',
                 'step'      =>  1,
-                'default'   =>  190,
+                'default'   =>  150,
                 'selectors' =>  [
                     '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
                 ],
@@ -367,6 +380,8 @@ class sport_widget_products_ids extends Widget_Base {
         $tab_list       =   $settings['tab_list'];
         $list_id        =   $tab_list[0]['list_product_id'];
         $column_number  =   $settings['column_number'];
+        $target         =   $settings['link']['is_external'] ? ' target="_blank"' : '';
+        $nofollow       =   $settings['link']['nofollow'] ? ' rel="nofollow"' : '';
 
         $data_settings_tab  = [
             'number_item'   =>  $settings['number_item_filter'],
@@ -434,10 +449,10 @@ class sport_widget_products_ids extends Widget_Base {
                     </div>
 
                     <div class="col-12 col-md-2 text-right">
-                        <span class="btn-product-grid btn-product-grid-all-ids" data-grid-ids="<?php echo esc_attr( $list_id ); ?>">
+                        <a class="btn-product-grid btn-product-grid-all-ids" href="<?php echo esc_url( $settings['link']['url'] ); ?>"<?php echo $target . $nofollow ?>>
                             <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                             <i class="fas fa-angle-double-right"></i>
-                        </span>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -75,7 +75,6 @@
 
         img {
           height: 100%;
-          object-fit: cover;
         }
       }
       .on-sale-percent {
@@ -91,6 +90,7 @@
     }
     .item-detail {
       padding: 20px 10px 10px;
+      min-height: 102px;
       @include flexbox();
       @include flex-direction(column);
       @include flex( 1 0 auto );
@@ -194,7 +194,7 @@
     }
     .item-gallery__img {
       position: relative;
-      height: 532px;
+      height: 472px;
       overflow: hidden;
 
       a {

@@ -17,9 +17,9 @@
 
         filter_product_ids();
 
-        filter_product_grid_ids();
+        // filter_product_grid_ids();
 
-        filter_product_grid_cat_id();
+        // filter_product_grid_cat_id();
 
     });
 
