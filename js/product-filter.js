@@ -25,7 +25,9 @@
 
     function filter_product() {
 
-        product_cat_btn_filter.on( 'click', function () {
+        product_cat_btn_filter.on( 'click', function ( event ) {
+
+            event.preventDefault();
 
             let has_active      =   $(this).hasClass( 'active' );
 
@@ -35,6 +37,7 @@
                 $(this).addClass( 'active' );
 
                 let parent_class            =   $(this).parents( '.element-product-cat' ),
+                    href                    =   $(this).attr('href'),
                     parent_data_settings    =   parent_class.data( 'settings' ),
                     product_cat_slider      =   parent_class.find( '.element-product-cat__slider' ),
                     item_col                =   parent_class.find( '.item-col' ),
@@ -45,7 +48,9 @@
                     rows                    =   parent_data_settings['rows'],
                     column                  =   parent_data_settings['column'];
 
-                parent_class.find( '.btn-product-grid-all-cat' ).data( 'grid-cat-id', product_cat_id );
+                // alert( href );
+
+                parent_class.find( '.btn-product-grid-all-cat' ).attr( 'href', href );
 
                 $.ajax({
 

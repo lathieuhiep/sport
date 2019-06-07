@@ -588,16 +588,16 @@ class sport_widget_products_filter extends Widget_Base {
                                     $term_children = get_term_by( 'id', $item, 'product_cat' );
                                 ?>
 
-                                <span class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
+                                <a href="<?php echo esc_url( get_term_link( $term_children->term_id, 'product_cat' ) ); ?>" class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
                                     <?php echo esc_html( $term_children->name ); ?>
-                                </span>
+                                </a>
 
                                 <?php endforeach; ?>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-2 text-right">
-                            <a class="btn-product-grid btn-product-grid-all-cat" href="<?php echo esc_url( get_term_link( $product_term->term_id, 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
+                            <a class="btn-product-grid btn-product-grid-all-cat" href="<?php echo esc_url( get_term_link( $product_cat_children[0], 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
                                 <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                                 <i class="fas fa-angle-double-right"></i>
                             </a>

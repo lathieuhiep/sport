@@ -278,12 +278,31 @@ function sport_pagination_product() {
     $sport_product_order            =   $sport_product_ordering['sport_product_order'];
     $sport_product_order_meta_key   =   $sport_product_ordering['sport_product_order_meta_key'];
 
+    if ( !empty( $product_cat_id ) ) :
+
+        $tax_query  =  array(
+
+            array(
+                'taxonomy'  =>  'product_cat',
+                'field'     =>  'term_id',
+                'terms'     =>  $product_cat_id
+            ),
+
+        );
+
+    else:
+
+        $tax_query  =   '';
+
+    endif;
+
     $args  =   array(
         'post_type'         =>  'product',
         'paged'             =>  $pagination,
         'posts_per_page'    =>  $limit,
         'orderby'           =>  $sport_product_orderby,
         'order'             =>  $sport_product_order,
+        'tax_query'         =>  $tax_query
     );
 
     $query =   new WP_Query( $args );
