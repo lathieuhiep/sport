@@ -239,6 +239,10 @@ function sport_register_front_end() {
     /*  Start Style Css   */
     wp_enqueue_style( 'sport-style', get_stylesheet_uri() );
     /*  Start Style Css   */
+    wp_enqueue_style( 'hungkv-style', get_theme_file_uri( '/css/hungkv.css' ), array(), '' );
+    /* Start hungkv.css */
+
+    /* End hungkv.css */
 
     /*
     * End Get Css Front End
