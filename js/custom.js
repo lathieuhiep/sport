@@ -48,6 +48,28 @@
         }
         /* btn mobile End */
 
+        /* Start product select search */
+        let product_cat_list = $( '.product-cat-list .item-product-cat' );
+
+        if ( product_cat_list.length ) {
+
+            product_cat_list.each( function () {
+
+                $(this).on( 'click', function () {
+
+                    let id_product      =   $(this).data( 'cat-id' ),
+                        name_product    =   $(this).text();
+
+                    $(this).parents( '.product-cat-selector-search' ).find( '.text-product' ).text( name_product );
+                    $(this).parents( '.search-form-product' ).find( '.product-cat-id' ).attr( 'value', id_product );
+
+                } )
+
+            } )
+
+        }
+        /* End product select search */
+
         /* Start Gallery Single */
         $( document ).general_owlCarousel_item( '.site-post-slides' );
         /* End Gallery Single */

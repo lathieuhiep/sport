@@ -391,3 +391,23 @@ function sport_check_box_product_cat() {
     wp_die();
 
 }
+
+// advanced search functionality
+function advanced_search_query($query) {
+
+    if($query->is_search()) {
+
+        // category terms search.
+        if (isset($_GET['product_cat_id']) && !empty($_GET['product_cat_id'])) {
+            $query->set('tax_query', array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms' => array($_GET['product_cat_id']),
+                )
+            ));
+        }
+    }
+    return $query;
+}
+add_action('pre_get_posts', 'advanced_search_query');

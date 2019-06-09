@@ -708,14 +708,66 @@ form.post-password-form p input[type='submit'] {
 }
 
 .header .center-bar .center-bar__search .search-form-product {
+  width: 100%;
   line-height: 40px;
   border: 2px solid #00b0f0;
+}
+
+.header .center-bar .center-bar__search .search-form-product .product-cat-selector-search {
+  position: relative;
+  font-size: 12px;
+  width: 160px;
+  background-image: url("images/select_icon.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.header .center-bar .center-bar__search .search-form-product .product-cat-selector-search .text-product {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header .center-bar .center-bar__search .search-form-product .product-cat-list {
+  padding: 0;
+  min-width: 320px;
+  border: solid 1px #dedede;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  z-index: 1;
+}
+
+.header .center-bar .center-bar__search .search-form-product .product-cat-list span {
+  cursor: pointer;
+  padding: 8px 10px;
+  line-height: 1.5em;
+  font-size: 14px;
+  display: block;
+  white-space: nowrap;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.header .center-bar .center-bar__search .search-form-product .product-cat-list span:hover {
+  color: #ffffff;
+  background-color: #00b0f0;
 }
 
 .header .center-bar .center-bar__search .search-form-product .search-field {
   padding: 0 10px;
   font-size: 12px;
   border: none;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .header .center-bar .center-bar__search .search-form-product .btn-submit {
