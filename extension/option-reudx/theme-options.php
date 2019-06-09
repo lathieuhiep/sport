@@ -708,6 +708,109 @@ Redux::setSection( $sport_opt_name, array(
     'icon'              =>  'el el-arrow-down'
 ));
 
+// Footer Top
+Redux::setSection( $sport_opt_name, array(
+    'title'         =>  esc_html__( 'Footer Top', 'sport' ),
+    'id'            =>  'sport_footer_top',
+    'desc'          =>  esc_html__( 'Option for footer top', 'sport' ),
+    'subsection'    =>  true,
+    'fields'        =>  array(
+        array(
+            'id'            =>  'sport_footer_top_desc',
+            'type'          =>  'editor',
+            'title'         =>  esc_html__( 'Enter content footer top desc', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Quy trình mua hàng trên  Gym360  hoặc để nhanh nhất và tiết kiệm nhất hãy gọi cho chúng tôi qua : Hotline: 0984.187.697 - 0246.292.1887',
+        ),
+
+        // step 1
+        array(
+            'id'            =>  'sport_footer_top_step1_icon',
+            'type'          =>  'media',
+            'title'         =>  esc_html__( 'Step 1 icon', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  '',
+        ),
+
+        array(
+            'id'            =>  'sport_footer_top_step1_text',
+            'type'          =>  'text',
+            'title'         =>  esc_html__( 'Step 1 text', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Khách hàng đặt trên Gym 360',
+        ),
+
+        // step 2
+        array(
+            'id'            =>  'sport_footer_top_step2_icon',
+            'type'          =>  'media',
+            'title'         =>  esc_html__( 'Step 2 icon', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  '',
+        ),
+
+        array(
+            'id'            =>  'sport_footer_top_step2_text',
+            'type'          =>  'text',
+            'title'         =>  esc_html__( 'Step 2 text', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Khách hàng nhập thông tin',
+        ),
+
+        // step 3
+        array(
+            'id'            =>  'sport_footer_top_step3_icon',
+            'type'          =>  'media',
+            'title'         =>  esc_html__( 'Step 3 icon', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  '',
+        ),
+
+        array(
+            'id'            =>  'sport_footer_top_step3_text',
+            'type'          =>  'text',
+            'title'         =>  esc_html__( 'Step 3 text', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Thanh toán',
+        ),
+
+        // step 4
+        array(
+            'id'            =>  'sport_footer_top_step4_icon',
+            'type'          =>  'media',
+            'title'         =>  esc_html__( 'Step 4 icon', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  '',
+        ),
+
+        array(
+            'id'            =>  'sport_footer_top_step4_text',
+            'type'          =>  'text',
+            'title'         =>  esc_html__( 'Step 4 text', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Gym360 xác nhận và vận chuyển',
+        ),
+
+        // step 5
+        array(
+            'id'            =>  'sport_footer_top_step5_icon',
+            'type'          =>  'media',
+            'title'         =>  esc_html__( 'Step 5 icon', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  '',
+        ),
+
+        array(
+            'id'            =>  'sport_footer_top_step5_text',
+            'type'          =>  'text',
+            'title'         =>  esc_html__( 'Step 5 text', 'sport' ),
+            'full_width'    =>  true,
+            'default'       =>  'Khách hàng xác nhận',
+        ),
+    )
+));
+
+
 // Footer Sidebar Multi Column
 Redux::setSection( $sport_opt_name, array(
     'title'         =>  esc_html__( 'Sidebar Footer Multi Column', 'sport' ),
