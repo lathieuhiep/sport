@@ -49,7 +49,22 @@
         /* btn mobile End */
 
         /* Start product select search */
-        let product_cat_list = $( '.product-cat-list .item-product-cat' );
+        let text_product_drop_down  =   $( '.product-cat-selector-search' ),
+            product_cat_list        =   $( '.product-cat-list .item-product-cat' );
+
+        if ( text_product_drop_down.length ) {
+
+            text_product_drop_down.each( function () {
+
+                $(this).on('show.bs.dropdown', function () {
+
+                    $(this).find( '.product-cat-list' ).niceScroll();
+
+                })
+
+            } )
+
+        }
 
         if ( product_cat_list.length ) {
 
@@ -63,7 +78,7 @@
                     $(this).parents( '.product-cat-selector-search' ).find( '.text-product' ).text( name_product );
                     $(this).parents( '.search-form-product' ).find( '.product-cat-id' ).attr( 'value', id_product );
 
-                } )
+                } );
 
             } )
 

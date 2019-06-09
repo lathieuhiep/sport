@@ -513,6 +513,20 @@ Redux::setSection( $sport_opt_name, array(
                 'hide'  =>  'Hide',
             )
         ),
+
+        array(
+            'id'        =>  'sport_products_single_tab_guide',
+            'type'      =>  'editor',
+            'title'     =>  esc_html__( 'Shopping Guide Tab', 'sport' ),
+            'default'   =>  '',
+            'args'          =>  array(
+                'wpautop'       => false,
+                'media_buttons' => false,
+                'textarea_rows' => 10,
+                'teeny'         => false,
+                'quicktags'     => true,
+            )
+        ),
     )
 ));
 /* End Shop */

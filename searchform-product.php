@@ -44,12 +44,12 @@ $sport_cat_id_product   = $_GET['product_cat_id'];
 
     ?>
 
-        <div class="product-cat-selector-search d-flex align-items-center">
-            <span class="text-product" data-toggle="dropdown">
+        <div class="product-cat-selector-search dropdown d-flex align-items-center">
+            <span class="text-product" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php echo esc_html( $sport_text_name_product ) ?>
             </span>
 
-            <div class="dropdown-menu product-cat-list">
+            <div class="dropdown-menu product-cat-list" aria-labelledby="dLabel">
                 <?php foreach ( $sport_product_cat as $item ) : ?>
 
                     <span class="item-product-cat" data-cat-id="<?php echo esc_attr( $item->term_id ); ?>">

@@ -136,7 +136,19 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
         global $sport_options;
         $sport_sidebar_woo_position =   $sport_options['sport_sidebar_woo'];
 
-        $sport_get_product_cat_id   =   get_queried_object_id();
+        if ( is_search() ) :
+
+            if ( !empty( $_GET['product_cat_id'] ) ) :
+                $sport_get_product_cat_id   =   $_GET['product_cat_id'];
+            else:
+                $sport_get_product_cat_id   =   0;
+            endif;
+
+        else:
+
+            $sport_get_product_cat_id   =   get_queried_object_id();
+
+        endif;
 
         if ( empty( $_GET ) ) :
 
@@ -854,4 +866,39 @@ function sport_change_displayed_sale_price() {
 
     }
     if ( $max_percentage > 0 ) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
+}
+
+/**
+ * Add a custom product data tab
+ */
+add_filter( 'woocommerce_product_tabs', 'sport_new_product_tab' );
+function sport_new_product_tab( $tabs ) {
+
+    // Adds the new tab
+    global $sport_options;
+
+    $sport_products_single_tab_guide = $sport_options['sport_products_single_tab_guide'];
+
+    if ( !empty( $sport_products_single_tab_guide ) ) :
+
+        $tabs['shopping_guide'] = array(
+            'title' 	=>  esc_html__( 'Hướng dẫn mua hàng', 'sport' ),
+            'priority' 	=>  25,
+            'callback'  =>  'sport_new_product_tab_content'
+        );
+
+    endif;
+
+    return $tabs;
+
+}
+function sport_new_product_tab_content() {
+
+    // The new tab content
+    global $sport_options;
+
+    $sport_products_single_tab_guide = $sport_options['sport_products_single_tab_guide'];
+
+    echo wp_kses_post( $sport_products_single_tab_guide );
+
 }
