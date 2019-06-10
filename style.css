@@ -3578,6 +3578,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 /**
 # Contact Form 7
 -----------------------------------------------------------------------------*/
+form.wpcf7-form br {
+  display: none;
+}
+
 form.wpcf7-form p {
   position: relative;
   margin: 0;
@@ -3608,27 +3612,39 @@ form.wpcf7-form span.wpcf7-form-control-wrap textarea {
   height: auto;
   width: 100%;
   display: block;
-  border: 1px solid #e9ebed;
-  background-color: #f8f8f8;
-  padding: 4px 12px;
-  color: #202020;
+  border: 1px solid #dedede;
+  background-color: transparent;
+  padding: 10px 15px;
+  color: #55595c;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 form.wpcf7-form span.wpcf7-form-control-wrap input:focus,
 form.wpcf7-form span.wpcf7-form-control-wrap textarea:focus {
-  border-color: #ff335f;
+  border-color: #bdbdbd;
 }
 
 form.wpcf7-form span.wpcf7-form-control-wrap textarea {
-  height: 100px;
+  height: 143px;
 }
 
 form.wpcf7-form .wpcf7-submit {
   color: #fff;
-  padding: 5px 25px;
+  padding: 12px 40px;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
+  background: #e12f2f;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+form.wpcf7-form .wpcf7-submit:hover {
   background: #00b0f0;
 }
 
