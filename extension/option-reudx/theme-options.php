@@ -527,6 +527,23 @@ Redux::setSection( $sport_opt_name, array(
                 'quicktags'     => true,
             )
         ),
+
+        array(
+            'id'        =>  'sport_products_title_blog',
+            'type'      =>  'text',
+            'title'     =>  esc_html__( 'Title Blog', 'sport' ),
+            'default'   =>  'Bài viết hướng dẫn tập'
+
+        ),
+
+        array(
+            'id'        =>  'sport_products_check_blog',
+            'type'      =>  'checkbox',
+            'title'     =>  esc_html__( 'Check Category Blog', 'sport' ),
+            'data'      =>  'category'
+
+        ),
+
     )
 ));
 /* End Shop */
