@@ -603,7 +603,8 @@
     }
   }
 }
-.site-single-product-related {
+.site-single-product-related,
+.blog-post-product {
   .title {
     font-size: 18px;
     font-weight: 500;
@@ -886,4 +887,7 @@
   &:hover {
     color: #ff5555;
   }
+}
+.blog-post-product {
+  margin-top: 30px;
 }

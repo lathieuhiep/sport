@@ -528,6 +528,17 @@ Redux::setSection( $sport_opt_name, array(
             )
         ),
 
+    )
+));
+
+// Blog Shop
+Redux::setSection( $sport_opt_name, array(
+    'title'         =>  esc_html__( 'Blog Shop', 'sport' ),
+    'id'            =>  'sport_product_blog',
+    'desc'          =>  esc_html__( '', 'sport' ),
+    'subsection'    =>  true,
+    'fields'        =>  array(
+
         array(
             'id'        =>  'sport_products_title_blog',
             'type'      =>  'text',
@@ -540,8 +551,43 @@ Redux::setSection( $sport_opt_name, array(
             'id'        =>  'sport_products_check_blog',
             'type'      =>  'checkbox',
             'title'     =>  esc_html__( 'Check Category Blog', 'sport' ),
-            'data'      =>  'category'
+            'data'      =>  'categories'
 
+        ),
+
+        array(
+            'id'            =>  'sport_product_blog_limit',
+            'type'          =>  'slider',
+            'title'         =>  esc_html__( 'Post Limit', 'sport' ),
+            'min'           =>  1,
+            'step'          =>  1,
+            'max'           =>  250,
+            'default'       =>  12,
+            'display_value' => 'text'
+        ),
+
+        array(
+            'id'        =>  'sport_product_blog_order_by',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Order_by', 'sport' ),
+            'default'   =>  'id',
+            'options'   =>  array(
+                'id'    =>  esc_html__( 'Post ID', 'sport' ),
+                'date'  =>  esc_html__( 'Date', 'sport' ),
+                'title' =>  esc_html__( 'Title', 'sport' ),
+                'rand'  =>  esc_html__( 'Random', 'sport' ),
+            )
+        ),
+
+        array(
+            'id'        =>  'sport_product_blog_order',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Order', 'sport' ),
+            'default'   =>  'ASC',
+            'options'   =>  array(
+                'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
+                'DESC'  =>  esc_html__( 'Descending', 'sport' ),
+            )
         ),
 
     )

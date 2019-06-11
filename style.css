@@ -3251,7 +3251,8 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   border-left: 0;
 }
 
-.site-single-product-related .title {
+.site-single-product-related .title,
+.blog-post-product .title {
   font-size: 18px;
   font-weight: 500;
   color: #ffffff;
@@ -3573,6 +3574,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .load-more-filter-product:hover {
   color: #ff5555;
+}
+
+.blog-post-product {
+  margin-top: 30px;
 }
 
 /**

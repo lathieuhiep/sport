@@ -85,6 +85,7 @@ add_action( 'woocommerce_after_shop_loop', 'sport_woo_pagination_ajax', 10 );
  * @see sport_woo_after_single_product_summary_close_warp()
  * @see sport_woo_after_single_product()
  * @see sport_related_products()
+ * @see sport_product_blog()
  *
  */
 
@@ -111,4 +112,6 @@ add_action( 'woocommerce_after_single_product_summary', 'sport_woo_after_single_
 add_action( 'woocommerce_after_single_product', 'sport_woo_after_single_product', 30 );
 
 add_action( 'woocommerce_after_single_product_summary', 'sport_related_products', 20 );
+
+add_action( 'woocommerce_after_single_product_summary', 'sport_product_blog', 25 );
 

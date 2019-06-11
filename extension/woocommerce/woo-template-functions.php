@@ -902,3 +902,112 @@ function sport_new_product_tab_content() {
     echo wp_kses_post( $sport_products_single_tab_guide );
 
 }
+
+if ( !function_exists( 'sport_product_blog' ) ) :
+
+    /**
+     * woocommerce_after_single_product_summary hook.
+     *
+     * @hooked sport_product_blog - 25
+     */
+
+    function sport_product_blog() {
+        global $sport_options;
+
+        $sport_products_title_blog      =   $sport_options['sport_products_title_blog'];
+        $sport_products_check_blog      =   $sport_options['sport_products_check_blog'];
+        $sport_product_blog_limit       =   $sport_options['sport_product_blog_limit'];
+        $sport_product_blog_order_by    =   $sport_options['sport_product_blog_order_by'];
+        $sport_product_blog_order       =   $sport_options['sport_product_blog_order'];
+
+        $cat_post_ids    =   array();
+
+        if ( !empty( $sport_products_check_blog ) ) :
+
+            foreach ( $sport_products_check_blog as $key => $item ):
+
+                if ( $item == 1 ) :
+
+                    $cat_post_ids[] .= $key;
+
+                endif;
+
+            endforeach;
+
+        endif;
+
+        if ( !empty( $cat_post_ids ) ) :
+
+
+            $args = array(
+                'post_type'         =>  'post',
+                'cat'               =>  $cat_post_ids,
+                'posts_per_page'    =>  $sport_product_blog_limit,
+                'orderby'           =>  $sport_product_blog_order_by,
+                'order'             =>  $sport_product_blog_order,
+            );
+
+        else:
+
+            $args = array(
+                'post_type'         =>  'post',
+                'posts_per_page'    =>  $sport_product_blog_limit,
+                'orderby'           =>  $sport_product_blog_order_by,
+                'order'             =>  $sport_product_blog_order,
+            );
+
+        endif;
+
+        $query = new WP_Query( $args );
+
+        if ( $query->have_posts() ) :
+
+?>
+
+        <div class="blog-post-product">
+            <h3 class="title text-center">
+                <?php echo esc_html( $sport_products_title_blog ); ?>
+            </h3>
+
+            <div class="blog-wrap">
+                <div class="row">
+                    <?php while ( $query->have_posts() ): $query->the_post(); ?>
+
+                    <div class="col-md-3">
+                        <div class="item">
+                            <div class="item-thumbnail">
+                                <?php the_post_thumbnail( 'large' ); ?>
+                            </div>
+
+                            <h3 class="item-title">
+                                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                    <?php the_title(); ?>
+                                </a>
+                            </h3>
+
+                            <p class="item-excerpt">
+                                <?php
+                                if( has_excerpt() ) :
+                                    echo wp_trim_words( get_the_excerpt(), 15, '...' );
+                                else:
+                                    echo wp_trim_words( get_the_content(), 15, '...' );
+                                endif;
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+
+                    <?php
+                    endwhile;
+                    wp_reset_postdata(); ?>
+                </div>
+            </div>
+        </div>
+
+<?php
+
+        endif;
+
+    }
+
+endif;
