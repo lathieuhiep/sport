@@ -33,11 +33,11 @@ function sport_content_product_filter( $class_column_number, $class_animate = nu
 
 }
 
-function sport_content_item_product() {
+function sport_content_item_product( $class_animate = null ) {
 
 ?>
 
-    <div class="item-product">
+    <div class="item-product<?php echo esc_attr( $class_animate ); ?>">
         <div class="item-thumbnail">
             <?php
             sport_product_new();
@@ -147,7 +147,6 @@ function sport_product_filter_id() {
 
     $product_ids    =   $_POST['product_ids'];
     $order          =   $_POST['order'];
-    $column         =   $_POST['column'];
 
     if ( !empty( $product_ids ) ) :
 
@@ -161,32 +160,11 @@ function sport_product_filter_id() {
 
         $query = new \ WP_Query( $args );
 
-        $i = 1;
-        $total_posts    =   $query->post_count;
-
         while ( $query->have_posts() ):
             $query->the_post();
 
-            if ( $i % $column == 1 ) :
+            sport_content_item_product( ' animated fadeIn' );
 
-        ?>
-
-            <div class="row custom_row">
-
-        <?php
-            endif;
-
-            sport_content_product_filter( sport_class_col( $column ), 'animated fadeIn ' );
-
-            if ( $i % $column == 0 || $i == $total_posts ) :
-        ?>
-
-            </div>
-
-        <?php
-            endif;
-
-            $i++;
         endwhile;
         wp_reset_postdata();
 

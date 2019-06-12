@@ -67,7 +67,7 @@
 
         let element_product_ids_slider = $scope.find( '.element-product-ids__slider' );
 
-        $( document ).general_owlCarousel_item( element_product_ids_slider );
+        $( document ).general_multi_owlCarouse( element_product_ids_slider );
 
     };
     /* End element product ids */

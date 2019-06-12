@@ -48,8 +48,6 @@
                     rows                    =   parent_data_settings['rows'],
                     column                  =   parent_data_settings['column'];
 
-                // alert( href );
-
                 parent_class.find( '.btn-product-grid-all-cat' ).attr( 'href', href );
 
                 $.ajax({
@@ -94,7 +92,9 @@
 
     function filter_product_ids() {
 
-        product_id_btn_filter.on( 'click', function () {
+        product_id_btn_filter.on( 'click', function ( event ) {
+
+            event.preventDefault();
 
             let has_active      =   $(this).hasClass( 'active' );
 
@@ -104,14 +104,14 @@
                 $(this).addClass( 'active' );
 
                 let parent_class            =   $(this).parents( '.element-product-ids' ),
+                    href                    =   $(this).attr('href'),
                     parent_data_settings    =   parent_class.data( 'settings' ),
                     product_ids_slider      =   parent_class.find( '.element-product-ids__slider' ),
-                    item_col                =   parent_class.find( '.item-col' ),
+                    item_product            =   parent_class.find( '.item-product' ),
                     order                   =   parent_data_settings['order'],
-                    column                  =   parent_data_settings['column'],
                     product_ids             =   $(this).data( 'ids' );
 
-                parent_class.find( '.btn-product-grid-all-ids' ).data( 'grid-ids', product_ids );
+                parent_class.find( '.btn-product-grid-all-ids' ).attr( 'href', href );
 
                 $.ajax({
 
@@ -122,13 +122,12 @@
                         action: 'sport_product_filter_id',
                         product_ids: product_ids,
                         order: order,
-                        column: column
 
                     }),
 
                     beforeSend: function () {
 
-                        item_col.addClass('animated fadeOut');
+                        item_product.addClass('animated fadeOut');
 
                     },
 

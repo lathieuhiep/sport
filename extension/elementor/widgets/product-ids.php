@@ -83,6 +83,18 @@ class sport_widget_products_ids extends Widget_Base {
             ]
         );
 
+        $repeater->add_control(
+            'link',
+            [
+                'label'         =>  esc_html__( 'Link Page', 'sport' ),
+                'type'          =>  Controls_Manager::URL,
+                'placeholder'   =>  'https://your-link.com',
+                'default' => [
+                    'url'   =>  '#',
+                ],
+            ]
+        );
+
         $this->add_control(
             'tab_list',
             [
@@ -98,19 +110,6 @@ class sport_widget_products_ids extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'link',
-            [
-                'label'         =>  esc_html__( 'Link', 'sport' ),
-                'type'          =>  Controls_Manager::URL,
-                'placeholder'   =>  'https://your-link.com',
-                'show_external' =>  false,
-                'default' => [
-                    'url'   =>  '#',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
         /* End Section Query */
 
@@ -119,24 +118,6 @@ class sport_widget_products_ids extends Widget_Base {
             'section_layout',
             [
                 'label' =>  esc_html__( 'Layout Settings', 'sport' )
-            ]
-        );
-
-        $this->add_control(
-            'column_number',
-            [
-                'label'     =>  esc_html__( 'Column', 'sport' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  4,
-                'options'   =>  [
-                    7   =>  esc_html__( '7 Column', 'sport' ),
-                    6   =>  esc_html__( '6 Column', 'sport' ),
-                    5   =>  esc_html__( '5 Column', 'sport' ),
-                    4   =>  esc_html__( '4 Column', 'sport' ),
-                    3   =>  esc_html__( '3 Column', 'sport' ),
-                    2   =>  esc_html__( '2 Column', 'sport' ),
-                    1   =>  esc_html__( '1 Column', 'sport' ),
-                ],
             ]
         );
 
@@ -152,6 +133,66 @@ class sport_widget_products_ids extends Widget_Base {
                 'selectors' =>  [
                     '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'item',
+            [
+                'label'     =>  esc_html__( 'Number of Item Desktop', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  6,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'item_tablet',
+            [
+                'label'     =>  esc_html__( 'Number of Item Tablet', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  3,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'item_mobile',
+            [
+                'label'     =>  esc_html__( 'Number of Item Mobile', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  1,
+                'min'       =>  1,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item',
+            [
+                'label'     =>  esc_html__( 'Margin Item Desktop', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  10,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'margin_item_mobile',
+            [
+                'label'     =>  esc_html__( 'Margin Item Mobile', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  0,
+                'min'       =>  0,
+                'max'       =>  100,
+                'step'      =>  1,
             ]
         );
 
@@ -379,9 +420,7 @@ class sport_widget_products_ids extends Widget_Base {
         $order          =   $settings['order'];
         $tab_list       =   $settings['tab_list'];
         $list_id        =   $tab_list[0]['list_product_id'];
-        $column_number  =   $settings['column_number'];
-        $target         =   $settings['link']['is_external'] ? ' target="_blank"' : '';
-        $nofollow       =   $settings['link']['nofollow'] ? ' rel="nofollow"' : '';
+        $link_fist      =   $tab_list[0]['link']['url'];
 
         $data_settings_tab  = [
             'number_item'   =>  $settings['number_item_filter'],
@@ -390,10 +429,14 @@ class sport_widget_products_ids extends Widget_Base {
 
         $product_settings =   [
             'order'     =>  $order,
-            'column'    =>  $column_number,
         ];
 
         $data_settings  =   [
+            'number_item'           =>  $settings['item'],
+            'item_tablet'           =>  $settings['item_tablet'],
+            'item_mobile'           =>  $settings['item_mobile'],
+            'margin_item'           =>  $settings['margin_item'],
+            'margin_item_mobile'    =>  $settings['margin_item_mobile'],
             'loop'                  =>  ( 'yes' === $settings['loop'] ),
             'autoplay'              =>  ( 'yes' === $settings['autoplay'] ),
             'nav'                   =>  ( 'yes' === $settings['nav'] ),
@@ -440,16 +483,16 @@ class sport_widget_products_ids extends Widget_Base {
                                 endif;
                             ?>
 
-                            <span class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
+                            <a class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" href="<?php echo esc_url( $item['link']['url'] ) ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
                                 <?php echo esc_html_e( $item['title_tab'] ); ?>
-                            </span>
+                            </a>
 
                             <?php $i++; endforeach; ?>
                         </div>
                     </div>
 
                     <div class="col-12 col-md-2 text-right">
-                        <a class="btn-product-grid btn-product-grid-all-ids" href="<?php echo esc_url( $settings['link']['url'] ); ?>"<?php echo $target . $nofollow ?>>
+                        <a class="btn-product-grid btn-product-grid-all-ids" href="<?php echo esc_url( $link_fist ); ?>">
                             <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                             <i class="fas fa-angle-double-right"></i>
                         </a>
@@ -459,29 +502,11 @@ class sport_widget_products_ids extends Widget_Base {
 
             <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
                 <?php
-                $i = 1;
-                $total_posts    =   $query->post_count;
-
                 while ( $query->have_posts() ):
                     $query->the_post();
 
-                    if ( $i % $column_number == 1 ) :
-                ?>
-                    <div class="row custom_row">
+                    sport_content_item_product();
 
-                <?php
-                    endif;
-
-                    sport_content_product_filter( sport_class_col( $column_number ) );
-
-                    if ( $i % $column_number == 0 || $i == $total_posts ) :
-                ?>
-
-                    </div>
-                <?php
-                    endif;
-
-                    $i++;
                 endwhile;
                 wp_reset_postdata();
                 ?>

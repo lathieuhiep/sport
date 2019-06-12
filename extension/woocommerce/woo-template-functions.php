@@ -920,6 +920,16 @@ if ( !function_exists( 'sport_product_blog' ) ) :
         $sport_product_blog_order_by    =   $sport_options['sport_product_blog_order_by'];
         $sport_product_blog_order       =   $sport_options['sport_product_blog_order'];
 
+        $data_settings  =   [
+            'loop'          =>  false,
+            'autoplay'      =>  false,
+            'nav'           =>  true,
+        ];
+
+        $rows_number    =   2;
+        $column_number  =   2;
+        $number_item    =   $rows_number * $column_number;
+
         $cat_post_ids    =   array();
 
         if ( !empty( $sport_products_check_blog ) ) :
@@ -969,38 +979,59 @@ if ( !function_exists( 'sport_product_blog' ) ) :
                 <?php echo esc_html( $sport_products_title_blog ); ?>
             </h3>
 
-            <div class="blog-wrap">
-                <div class="row">
-                    <?php while ( $query->have_posts() ): $query->the_post(); ?>
-
-                    <div class="col-md-3">
-                        <div class="item">
-                            <div class="item-thumbnail">
-                                <?php the_post_thumbnail( 'large' ); ?>
-                            </div>
-
-                            <h3 class="item-title">
-                                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                    <?php the_title(); ?>
-                                </a>
-                            </h3>
-
-                            <p class="item-excerpt">
-                                <?php
-                                if( has_excerpt() ) :
-                                    echo wp_trim_words( get_the_excerpt(), 15, '...' );
-                                else:
-                                    echo wp_trim_words( get_the_content(), 15, '...' );
-                                endif;
-                                ?>
-                            </p>
-                        </div>
-                    </div>
+            <div class="blog-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
 
                     <?php
+                    $i = 1;
+                    $total_posts    =   $query->post_count;
+
+                    while ( $query->have_posts() ):
+                        $query->the_post();
+
+                        if ( $i % $number_item == 1 ) :
+                    ?>
+
+                        <div class="row">
+
+                    <?php endif; ?>
+
+                            <div class="col-md-6 item-col">
+                                <div class="item d-sm-flex">
+                                    <div class="item-thumbnail">
+                                        <?php the_post_thumbnail( 'large' ); ?>
+                                    </div>
+
+                                    <div class="item-content">
+                                        <h3 class="item-title">
+                                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                                <?php the_title(); ?>
+                                            </a>
+                                        </h3>
+
+                                        <p class="item-excerpt">
+                                            <?php
+                                            if( has_excerpt() ) :
+                                                echo wp_trim_words( get_the_excerpt(), 30, '...' );
+                                            else:
+                                                echo wp_trim_words( get_the_content(), 30, '...' );
+                                            endif;
+                                            ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
+
+                        </div>
+
+                    <?php
+                        endif;
+
+                        $i++;
                     endwhile;
                     wp_reset_postdata(); ?>
-                </div>
+
             </div>
         </div>
 

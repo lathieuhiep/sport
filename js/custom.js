@@ -97,6 +97,10 @@
         $( document ).general_owlCarousel_item( '.related-product-slider' );
         /* End Product Related */
 
+        /* Start Blog Product */
+        $( document ).general_owlCarousel_item( '.blog-product-slider' );
+        /* End Blog Product */
+
         if ( ! String.prototype.getDecimals ) {
             String.prototype.getDecimals = function() {
                 let num = this,

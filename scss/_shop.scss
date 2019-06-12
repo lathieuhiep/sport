@@ -889,5 +889,63 @@
   }
 }
 .blog-post-product {
+  position: relative;
   margin-top: 30px;
+
+  .item-col {
+    margin-bottom: 30px;
+  }
+  .item-thumbnail {
+    width: 250px;
+    height: 150px;
+    overflow: hidden;
+    @include flex(0 0 auto);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .item-content {
+    padding-left: 15px;
+
+    .item-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+  }
+  .owl-carousel {
+    .owl-nav {
+      margin: 0;
+
+      button {
+        position: absolute;
+        top: 50%;
+        margin: 0;
+        opacity: 0;
+        visibility: hidden;
+        background-color: rgba(204, 204, 204, 0.5);
+        @include transform(translateY(-50%));
+        @include transition(all 0.4s ease-in-out);
+
+        &.owl-prev {
+          left: -20px;
+        }
+        &.owl-next {
+          right: -20px;
+        }
+      }
+    }
+  }
+  &:hover {
+    .owl-carousel {
+      .owl-nav {
+        button {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
 }
