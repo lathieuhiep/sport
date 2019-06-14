@@ -270,6 +270,13 @@ function sport_register_front_end() {
 
     wp_enqueue_script( 'sport-custom', get_theme_file_uri( '/js/custom.js' ), array(), '1.0.0', true );
 
+    /* Notification */
+    wp_enqueue_script( 'notification', get_theme_file_uri( '/js/notification.js' ), array(), '1.0.0', true );
+
+    $sport_notification_admin_url    =   admin_url( 'admin-ajax.php' );
+    $sport_notification_ajax         =   array( 'url' => $sport_notification_admin_url );
+    wp_localize_script( 'notification', 'load_notification', $sport_notification_ajax );
+
     if ( class_exists('Woocommerce') ) :
 
         if ( is_shop() || is_product_category() ) :
@@ -716,3 +723,68 @@ function sport_comment_form() {
     endif;
 }
 /* End comment */
+
+/* Start notification */
+function sport_notification() {
+
+    $args = array(
+        'post_type'             =>  'notify',
+        'posts_per_page'        =>  1,
+        'orderby'               =>  'rand',
+    );
+
+    $query = new WP_Query( $args );
+
+    if ( $query->have_posts() ) :
+        while ( $query->have_posts() ) :
+            $query->the_post();
+
+            $notify_content     =   rwmb_meta( 'sport_option_notify_content' );
+            $notify_time_ago    =   rwmb_meta( 'sport_option_notify_time_ago' );
+
+    ?>
+
+        <div class="item d-flex">
+            <div class="item-thumbnail">
+                <?php the_post_thumbnail( array( '90', '90' ) ); ?>
+            </div>
+
+            <div class="item-content">
+                <h5 class="item-title">
+                    <?php the_title(); ?>
+                </h5>
+
+                <div class="info">
+                    <p class="des">
+                        <?php echo esc_html( wp_trim_words( $notify_content, 15, '...' ) ); ?>
+                    </p>
+
+                    <p class="titme-ago">
+                        <?php echo esc_html( $notify_time_ago ); ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <?php
+
+        endwhile;
+        wp_reset_postdata();
+
+    endif;
+
+}
+
+
+// ajax notification
+add_action( 'wp_ajax_sport_notification_ajax', 'sport_notification_ajax' );
+add_action( 'wp_ajax_nopriv_sport_notification_ajax', 'sport_notification_ajax' );
+
+function sport_notification_ajax() {
+
+    sport_notification();
+
+    exit();
+
+}
+/* End notification */

@@ -88,17 +88,18 @@ function sport_register_meta_boxes() {
         'fields'        =>  array(
 
             array(
-                'id'        =>  'sport_option_notify_content',
-                'name'      =>  esc_html__( 'Content', 'sport' ),
-                'type'      =>  'textarea',
-                'placeholder'      =>  esc_html__( 'Đã đặt hàng, shop gửi sớm nhé', 'sport' ),
+                'id'            =>  'sport_option_notify_content',
+                'name'          =>  esc_html__( 'Content', 'sport' ),
+                'type'          =>  'textarea',
+                'placeholder'   =>  esc_html__( 'Đã đặt hàng, shop gửi sớm nhé', 'sport' ),
             ),
 
             array(
-                'id'        =>  'sport_option_notify_time_ago',
-                'name'      =>  esc_html__( 'Time Ago', 'sport' ),
-                'type'      =>  'text',
-                'placeholder'      =>  esc_html__( '20 phút trước', 'sport' ),
+                'id'            =>  'sport_option_notify_time_ago',
+                'name'          =>  esc_html__( 'Time Ago', 'sport' ),
+                'type'          =>  'text',
+                'clone'         =>  false,
+                'placeholder'   =>  esc_html__( '20 phút trước', 'sport' ),
             ),
 
         )

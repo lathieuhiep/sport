@@ -17,10 +17,11 @@
 <div id="page">
     <!--Include Loading Template-->
     <?php
-
     get_template_part('template-parts/inc','loading');
+
     get_template_part('template-parts/header/inc','header');
 
+    get_template_part('template-parts/inc','notification');
     ?>
     <!--End Loading Template-->
 

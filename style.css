@@ -32,6 +32,7 @@ Text Domain: sport
   ## Product Ids
 # Woocommerce
 # Contact Form 7
+# Notification
 # Footer
 # Responsive
 * -----------------------------------------------------------------------------
@@ -3715,6 +3716,98 @@ form.wpcf7-form .wpcf7-submit {
 
 form.wpcf7-form .wpcf7-submit:hover {
   background: #00b0f0;
+}
+
+/**
+# Notification
+-----------------------------------------------------------------------------*/
+.site-notification {
+  position: fixed;
+  top: 50px;
+  right: 30px;
+  width: 300px;
+  z-index: 10;
+}
+
+.site-notification .item {
+  overflow: hidden;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+  -webkit-box-shadow: 0 8px 50px rgba(64, 64, 64, 0.05);
+  -moz-box-shadow: 0 8px 50px rgba(64, 64, 64, 0.05);
+  box-shadow: 0 8px 50px rgba(64, 64, 64, 0.05);
+}
+
+.site-notification .item .item-thumbnail {
+  width: 50px;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.site-notification .item .item-thumbnail img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.site-notification .item .item-content {
+  padding-left: 15px;
+}
+
+.site-notification .item .item-content .item-title {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 5px;
+  line-height: 1.2em;
+}
+
+.site-notification .item .item-content p {
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.5em;
+  margin-bottom: 5px;
+}
+
+.site-notification .item .item-content p:last-child {
+  margin-bottom: 0;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
 }
 
 /**

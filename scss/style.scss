@@ -33,6 +33,7 @@ Text Domain: sport
   ## Product Ids
 # Woocommerce
 # Contact Form 7
+# Notification
 # Footer
 # Responsive
 * -----------------------------------------------------------------------------
@@ -83,6 +84,11 @@ Text Domain: sport
 # Contact Form 7
 -----------------------------------------------------------------------------*/
 @import "cf7";
+
+/**
+# Notification
+-----------------------------------------------------------------------------*/
+@import "notification";
 
 /**
 # 404
