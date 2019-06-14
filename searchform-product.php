@@ -33,8 +33,6 @@ else:
 
 endif;
 
-
-
 ?>
 <form role="search" method="get" class="search-form-product d-flex" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 

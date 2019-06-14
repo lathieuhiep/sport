@@ -125,6 +125,7 @@ foreach(glob( get_parent_theme_file_path( '/extension/widgets/*.php' ) ) as $spo
 
 /* Start Require Post type */
 require get_parent_theme_file_path( '/extension/post-type/gallery.php' );
+require get_parent_theme_file_path( '/extension/post-type/notification.php' );
 /* End Require Post type */
 
 
