@@ -12,7 +12,7 @@
 
     $( document ).ready( function () {
 
-        setInterval( notification_show, 10000 );
+        setInterval( notification_show, 5000 );
 
         // setTimeout( notification_show, 5000 );
 
