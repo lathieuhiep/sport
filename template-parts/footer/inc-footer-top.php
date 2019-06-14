@@ -3,7 +3,6 @@
 global $sport_options;
 
 $sport_copyright = $sport_options ['sport_footer_copyright_editor'];
-var_dump();
 
 ?>
 <div class="container">

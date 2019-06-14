@@ -23,7 +23,17 @@ $sport_product_cat     =   get_terms(
     )
 );
 
-$sport_cat_id_product   = $_GET['product_cat_id'];
+if ( isset( $_GET['product_cat_id'] ) ) :
+
+    $sport_cat_id_product   = $_GET['product_cat_id'];
+
+else:
+
+    $sport_cat_id_product = '';
+
+endif;
+
+
 
 ?>
 <form role="search" method="get" class="search-form-product d-flex" action="<?php echo esc_url( home_url( '/' ) ); ?>">

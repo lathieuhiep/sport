@@ -43,7 +43,10 @@ if( !function_exists('sport_setup') ):
         // This theme uses wp_nav_menu() in two locations.
         register_nav_menu('primary','Primary Menu');
         register_nav_menu('canvas','Canvas Menu');
-        register_nav_menu('footer-menu','Footer Menu');
+        register_nav_menu('footer-menu-1','Cột 1 tìm kiếm nhiều');
+        register_nav_menu('footer-menu-2','Cột 2 tìm kiếm nhiều');
+        register_nav_menu('footer-menu-3','Cột 3 tìm kiếm nhiều');
+        register_nav_menu('footer-menu-4','Cột 4 tìm kiếm nhiều');
 
         // add theme support title-tag
         add_theme_support( 'title-tag' );
