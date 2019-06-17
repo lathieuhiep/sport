@@ -39,6 +39,7 @@
 
             beforeSend: function () {
 
+                site_notification.slideUp();
 
             },
 
@@ -46,15 +47,17 @@
 
                 if ( data ) {
 
-                    site_notification.empty().append( data );
+                    site_notification.empty().append( data ).delay(2500);
+
+                    // site_notification.empty().append( data );
 
                 }
 
             },
 
-            // complete:function(data){
-            //     setTimeout( notification_show, 5000 );
-            // }
+            complete:function(data){
+                site_notification.slideDown();
+            }
 
         });
 
