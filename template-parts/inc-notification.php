@@ -1,3 +1,1 @@
-<div class="site-notification">
-<!--    --><?php //sport_notification(); ?>
-</div>
+<div class="site-notification"></div>

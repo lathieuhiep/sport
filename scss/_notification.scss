@@ -1,10 +1,16 @@
 .site-notification {
   position: fixed;
-  top: 50px;
-  right: 30px;
+  top: 50%;
+  left: -50%;
   width: 300px;
   z-index: 10;
+  @include transform(translateY(-50%));
+  @include transition(all 0.8s ease-in-out);
 
+
+  &.active {
+    left: 30px;
+  }
   .item {
     overflow: hidden;
     padding: 10px;

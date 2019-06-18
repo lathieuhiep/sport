@@ -154,17 +154,26 @@
 
     $( window ).scroll( function() {
 
+        let scrollTop       =   $(this).scrollTop(),
+            class_header    =   $( '.header' ),
+            height_header   =   class_header.height(),
+            id_back_top     =   $('#back-top');
+
         if ( timer_clear ) clearTimeout(timer_clear);
 
         timer_clear = setTimeout( function() {
 
-            /* Start scroll back top */
-            let $scrollTop = $(this).scrollTop();
+            if ( scrollTop > height_header ) {
+                class_header.addClass( 'header_fix' );
+            } else {
+                class_header.removeClass( 'header_fix' );
+            }
 
-            if ( $scrollTop > 200 ) {
-                $('#back-top').addClass('active_top');
+            /* Start scroll back top */
+            if ( scrollTop > 200 ) {
+                id_back_top.addClass('active_top');
             }else {
-                $('#back-top').removeClass('active_top');
+                id_back_top.removeClass('active_top');
             }
             /* End scroll back top */
 

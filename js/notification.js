@@ -8,20 +8,29 @@
 
     "use strict";
 
-    let site_notification   =   $( '.site-notification' );
+    let timesRun            =   0,
+        site_notification   =   $( '.site-notification' );
 
     $( document ).ready( function () {
 
-        setInterval( notification_show, 5000 );
+        // setInterval( notification_show, 10000 );
 
-        // setTimeout( notification_show, 5000 );
+        let interval = setInterval( function() {
+            timesRun += 1;
 
-        // setInterval( function() {
-        //
-        //     notification_show().slideToggle('slow');
-        //
-        //     }, 5000 );
+            notification_show();
 
+            setTimeout( function () {
+
+                site_notification.removeClass('active');
+
+            }, 5000 );
+
+            if( timesRun === 3 ) {
+                clearInterval(interval);
+            }
+
+            }, 10000 );
 
     });
 
@@ -39,7 +48,7 @@
 
             beforeSend: function () {
 
-                site_notification.slideUp();
+                // site_notification.removeClass('active');
 
             },
 
@@ -56,7 +65,7 @@
             },
 
             complete:function(data){
-                site_notification.slideDown();
+                site_notification.addClass('active');
             }
 
         });
