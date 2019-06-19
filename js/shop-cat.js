@@ -9,8 +9,9 @@
     "use strict";
 
     let site_shop               =   $( '.site-shop' ),
-        product_cat_id          =   site_shop.data( 'product-cat' ),
-        order_by                =   site_shop.data( 'orderby' ),
+        settings_shop_page      =   site_shop.data( 'settings' ),
+        product_cat_id          =   settings_shop_page['product_cat_id'],
+        order_by                =   settings_shop_page['order_by_product'],
         site_shop_product       =   $( '.site-shop__product' ),
         btn_product_pagination  =   $( '.btn-product-pagination' );
 

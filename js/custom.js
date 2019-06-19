@@ -144,6 +144,18 @@
             $qty.trigger( 'change' );
         });
 
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        });
+        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
     });
 
     $( window ).on( "load", function() {
@@ -155,19 +167,12 @@
     $( window ).scroll( function() {
 
         let scrollTop       =   $(this).scrollTop(),
-            class_header    =   $( '.header' ),
-            height_header   =   class_header.height(),
+            class_header    =   $( '.sticky-header' ),
             id_back_top     =   $('#back-top');
 
         if ( timer_clear ) clearTimeout(timer_clear);
 
         timer_clear = setTimeout( function() {
-
-            if ( scrollTop > height_header ) {
-                class_header.addClass( 'header_fix' );
-            } else {
-                class_header.removeClass( 'header_fix' );
-            }
 
             /* Start scroll back top */
             if ( scrollTop > 200 ) {
@@ -178,6 +183,18 @@
             /* End scroll back top */
 
         }, 100 );
+
+        if ( class_header.length ) {
+
+            let height_header   =   class_header.height();
+
+            if ( scrollTop > height_header ) {
+                class_header.addClass( 'header_fix' );
+            } else {
+                class_header.removeClass( 'header_fix' );
+            }
+
+        }
 
     });
 

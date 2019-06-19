@@ -268,6 +268,8 @@ add_action( 'wp_ajax_sport_pagination_product', 'sport_pagination_product' );
 
 function sport_pagination_product() {
 
+    global $product;
+
     $pagination     =   $_POST['pagination'];
     $order_by       =   $_POST['order_by'];
     $limit          =   $_POST['limit'];
@@ -314,7 +316,7 @@ function sport_pagination_product() {
 
             ?>
 
-            <li <?php wc_product_class( 'animated fadeIn' ); ?>>
+            <li <?php wc_product_class( 'animated fadeIn', $product ); ?>>
                 <?php
                 /**
                  * Hook: woocommerce_before_shop_loop_item.

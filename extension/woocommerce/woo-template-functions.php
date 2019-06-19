@@ -150,7 +150,7 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
 
         endif;
 
-        if ( empty( $_GET ) ) :
+        if ( empty( $_GET['orderby'] ) ) :
 
             $sport_order_by_product =  '';
 
@@ -160,9 +160,14 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
 
         endif;
 
+        $data_setting_shop_page =   [
+           'order_by_product'   =>  $sport_order_by_product,
+           'product_cat_id'     =>  $sport_get_product_cat_id
+        ];
+
     ?>
 
-        <div class="site-shop" data-orderby="<?php echo esc_attr( $sport_order_by_product ); ?>" data-product-cat="<?php echo esc_attr( $sport_get_product_cat_id ); ?>">
+        <div class="site-shop" data-settings='<?php echo esc_attr( wp_json_encode( $data_setting_shop_page ) ); ?>'>
             <div class="container">
                 <div class="row">
 

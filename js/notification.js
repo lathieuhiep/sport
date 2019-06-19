@@ -13,9 +13,13 @@
 
     $( document ).ready( function () {
 
-        // setInterval( notification_show, 10000 );
+        let settings_notify =   site_notification.data( 'settings' ),
+            time_second     =   settings_notify['time_second'],
+            loop_end        =   settings_notify['loop_end'];
 
-        let interval = setInterval( function() {
+
+        let interval    =   setInterval( function() {
+
             timesRun += 1;
 
             notification_show();
@@ -26,11 +30,11 @@
 
             }, 5000 );
 
-            if( timesRun === 3 ) {
+            if( timesRun === loop_end ) {
                 clearInterval(interval);
             }
 
-            }, 10000 );
+            }, time_second );
 
     });
 

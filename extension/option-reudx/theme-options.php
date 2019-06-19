@@ -298,6 +298,18 @@ Redux::setSection( $sport_opt_name, array(
             ),
             'output'         => array('.site-logo img'),
         ),
+
+        array(
+            'id'        =>  'sport_sticky_header',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Sticky Header', 'sport' ),
+            'default'   =>  1,
+            'options'   =>  array(
+                1   =>  esc_html__( 'Yes', 'sport' ),
+                0   =>  esc_html__( 'No', 'sport' ),
+            )
+        ),
+
     )
 ));
 
@@ -305,7 +317,6 @@ Redux::setSection( $sport_opt_name, array(
 Redux::setSection( $sport_opt_name, array(
     'title'         =>  esc_html__( 'Contact Us', 'sport' ),
     'id'            =>  'sport_contact_us',
-    'desc'          =>  esc_html__( '', 'sport' ),
     'subsection'    =>  true,
     'fields'        =>  array(
 
@@ -402,6 +413,41 @@ Redux::setSection( $sport_opt_name, array(
     )
 ));
 /* End Blog Option */
+
+Redux::setSection( $sport_opt_name, array(
+    'title'     =>  esc_html__( 'Notification', 'sport' ),
+    'id'        =>  'sport_notify',
+    'desc'      =>  esc_html__( 'Notification', 'sport' ),
+    'fields'    =>  array(
+
+//        array(
+//            'id'        =>  'sport_notify_time_fist',
+//            'title'     =>  esc_html__( 'Time Fist (ms)', 'sport' ),
+//            'type'      =>  'text',
+//            'validate'  =>  'numeric',
+//            'default'   =>  2000,
+//            'desc'      =>  '1000ms = 1s'
+//        ),
+
+        array(
+            'id'        =>  'sport_notify_time_second',
+            'title'     =>  esc_html__( 'Time (ms)', 'sport' ),
+            'type'      =>  'text',
+            'validate'  =>  'numeric',
+            'default'   =>  10000,
+            'desc'      =>  '1000ms = 1s'
+        ),
+
+        array(
+            'id'        =>  'sport_notify_loop_end',
+            'title'     =>  esc_html__( 'Loop End', 'sport' ),
+            'type'      =>  'text',
+            'validate'  =>  'numeric',
+            'default'   =>  5,
+        ),
+
+    )
+));
 
 /* Start Social Network */
 Redux::setSection( $sport_opt_name, array(
