@@ -91,6 +91,18 @@ class sport_widget_text_editor_scroll extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'text_editor_padding',
+            [
+                'label' => esc_html__( 'Padding', 'sport' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .element-text-editor-scroll .editor-content-scroll' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
     }
@@ -104,8 +116,10 @@ class sport_widget_text_editor_scroll extends Widget_Base {
     ?>
 
         <div class="element-text-editor-scroll">
-            <div class="boxscroll">
-                <?php echo wp_kses_post( $settings['text_editor'] ); ?>
+            <div class="scrollbar-inner">
+                <div class="editor-content-scroll">
+                    <?php echo wp_kses_post( $settings['text_editor'] ); ?>
+                </div>
             </div>
         </div>
 
@@ -121,8 +135,10 @@ class sport_widget_text_editor_scroll extends Widget_Base {
         <# if ( settings.text_editor !== '' ) {#>
 
         <div class="element-text-editor-scroll">
-            <div class="boxscroll">
-                {{{ settings.text_editor }}}
+            <div class="scrollbar-inner">
+                <div class="editor-content-scroll">
+                    {{{ settings.text_editor }}}
+                </div>
             </div>
         </div>
 

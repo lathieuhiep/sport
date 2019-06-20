@@ -1,7 +1,13 @@
 <div class="header-nav">
     <div class="container">
-        <div class="header-nav_warp d-flex">
+        <div class="header-nav_warp d-flex align-items-center">
             <?php get_template_part('template-parts/header/inc','canvas'); ?>
+
+            <div class="icon-home-link">
+                <a href="<?php echo esc_url( get_home_url('/') ); ?>">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
 
             <div class="site-menu collapse navbar-collapse">
 

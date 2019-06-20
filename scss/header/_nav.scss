@@ -12,6 +12,22 @@
       border: 0;
     }
   }
+  .header-nav_warp {
+    padding: 0 15px;
+    background-color: $background-primary;
+
+    a {
+      color: #ffffff;
+      @include transition(all 0.4s ease-out);
+
+      &:hover {
+        color: #000000;
+      }
+    }
+    .icon-home-link {
+      padding-left: 15px;
+    }
+  }
 }
 .site-logo {
   @include flex(0 0 auto);
@@ -24,6 +40,7 @@
 .site-menu-canvas {
   .icon-canvas {
     cursor: pointer;
+    @include transition(all 0.4s ease-out);
   }
 }
 #menu-canvas:not(.mm-menu_opened) {
@@ -38,24 +55,25 @@
 
     li {
       display: inline-block;
-      padding: 22px 0;
+      padding: 15px 0;
       position: relative;
 
       a {
+        color: #ffffff;
         padding: 0 15px;
+        line-height: 1.1em;
         text-shadow: none;
         display: block;
-        text-transform: capitalize;
+        text-transform: uppercase;
 
         &:hover {
           background-color: transparent;
-          color: $color-hover;
+          color: #000000;
         }
       }
       .sub-menu {
         min-width: 160px;
-        border-top: 1px solid $color-hover;
-        background-color: $border-color;
+        background-color: $background-primary;
         position: absolute;
         top: 120%;
         left: 0;
@@ -102,6 +120,19 @@
           a {
             padding-right: 0;
           }
+        }
+      }
+    }
+  }
+  > ul {
+    > li {
+      > a {
+        border-right: 1px solid #ffffff;
+      }
+      &:last-child {
+        > a {
+          padding-right: 0;
+          border-right: 0;
         }
       }
     }

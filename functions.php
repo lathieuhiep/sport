@@ -41,6 +41,7 @@ if( !function_exists('sport_setup') ):
         add_theme_support( 'automatic-feed-links' );
 
         // This theme uses wp_nav_menu() in two locations.
+        register_nav_menu('top-menu','Top Menu');
         register_nav_menu('primary','Primary Menu');
         register_nav_menu('canvas','Canvas Menu');
         register_nav_menu('footer-menu-1','Cột 1 tìm kiếm nhiều');

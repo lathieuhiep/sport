@@ -104,6 +104,23 @@ if ( ! function_exists( 'sport_add_to_cart_fragment' ) ) :
 endif;
 /* End get cart */
 
+/* Start breadcrumbs */
+if ( !function_exists( 'sport_woo_breadcrumbs' ) ) :
+
+    /**
+     * Hook: woocommerce_before_main_content.
+     *
+     * @hooked sport_woo_breadcrumbs - 20
+     */
+    function sport_woo_breadcrumbs() {
+
+        get_template_part('template-parts/inc','breadcrumbs');
+
+    }
+
+endif;
+/* End breadcrumbs */
+
 /* Start Sidebar Shop */
 if ( ! function_exists( 'sport_woo_get_sidebar' ) ) :
 

@@ -23,11 +23,13 @@
     /* Start element text editor scroll */
     let ElementTextEditorScroll =   function( $scope, $ ) {
 
-        let element_text_editor_scroll = $scope.find( '.element-text-editor-scroll .boxscroll' );
+        let element_text_editor_scroll = $scope.find( '.element-text-editor-scroll .scrollbar-inner' );
 
         element_text_editor_scroll.each( function () {
 
-            $(this).niceScroll();
+            $(this).scrollbar({
+                scrollStep: 0
+            });
 
         } )
 
