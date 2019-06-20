@@ -15,65 +15,99 @@ global $post,$wp_query;
 // Do not display on the homepage
 if ( !is_front_page() ) {
 
-    // Build the breadcrums
-    echo '<ul id="' . $breadcrums_id . '" class="' . $breadcrums_class . '">';
+?>
 
-    // Home page
-    echo '<li class="item-home"><a class="bread-link bread-home" href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
-    echo '<li class="separator separator-home"> ' . $separator . ' </li>';
+   <ul id="<?php echo esc_attr( $breadcrums_id ); ?>" class="<?php echo esc_attr( $breadcrums_class ); ?>">
+        <li class="item-home">
+            <a class="bread-link bread-home" href="<?php echo esc_url( get_home_url('/') ); ?>" title="<?php echo esc_attr( $home_title ); ?>">
+                <?php echo esc_html( $home_title ); ?>
+            </a>
+        </li>
 
-    if ( is_archive() && !is_tax() && !is_category() && !is_tag() ) {
+        <li class="separator separator-home">
+            <?php echo esc_html( $separator ); ?>
+        </li>
 
-        echo '<li class="item-current item-archive"><strong class="bread-current bread-archive">' . post_type_archive_title($prefix, false) . '</strong></li>';
+    <?php if ( is_archive() && !is_tax() && !is_category() && !is_tag() ) { ?>
+
+        <li class="item-current item-archive">
+            <strong class="bread-current bread-archive">
+                <?php echo esc_html( post_type_archive_title($prefix, false) ); ?>
+            </strong>
+        </li>
+
+    <?php
 
     } else if ( is_archive() && is_tax() && !is_category() && !is_tag() ) {
 
-        // If post is a custom post type
         $post_type = get_post_type();
 
-        // If it is a custom post type display name and link
         if($post_type != 'post') {
 
-            $post_type_object = get_post_type_object($post_type);
-            $post_type_archive = get_post_type_archive_link($post_type);
+            $post_type_object = get_post_type_object( $post_type );
+            $post_type_archive = get_post_type_archive_link( $post_type );
 
-            echo '<li class="item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . $post_type_object->labels->name . '</a></li>';
-            echo '<li class="separator"> ' . $separator . ' </li>';
+        ?>
+
+            <li class="item-cat item-custom-post-type-<?php echo esc_attr( $post_type ); ?>">
+                <a class="bread-cat bread-custom-post-type-<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $post_type_archive ); ?>" title="<?php echo esc_attr( $post_type_object->labels->name ); ?>">
+                    <?php echo esc_html( $post_type_object->labels->name ); ?>
+                </a>
+            </li>
+
+            <li class="separator">
+                <?php echo esc_html( $separator ); ?>
+            </li>
+
+        <?php
 
         }
 
         $custom_tax_name = get_queried_object()->name;
-        echo '<li class="item-current item-archive"><strong class="bread-current bread-archive">' . $custom_tax_name . '</strong></li>';
+
+    ?>
+
+        <li class="item-current item-archive">
+            <strong class="bread-current bread-archive">
+                <?php echo esc_html( $custom_tax_name ); ?>
+            </strong>
+        </li>
+
+    <?php
 
     } else if ( is_single() ) {
 
-        // If post is a custom post type
         $post_type = get_post_type();
 
-        // If it is a custom post type display name and link
         if($post_type != 'post') {
 
             $post_type_object = get_post_type_object($post_type);
             $post_type_archive = get_post_type_archive_link($post_type);
 
-            echo '<li class="item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . $post_type_object->labels->name . '</a></li>';
-            echo '<li class="separator"> ' . $separator . ' </li>';
+        ?>
+
+            <li class="item-cat item-custom-post-type-<?php echo esc_attr( $post_type ); ?>">
+                <a class="bread-cat bread-custom-post-type-<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $post_type_archive ); ?>" title="<?php echo esc_attr( $post_type_object->labels->name ); ?>">
+                   <?php echo esc_html( $post_type_object->labels->name ); ?>
+                </a>
+            </li>
+
+            <li class="separator">
+                <?php echo esc_html( $separator ); ?>
+            </li>
+
+        <?php
 
         }
 
-        // Get post category info
         $category = get_the_category();
 
-        if(!empty($category)) {
+        if(!empty( $category )) {
 
-            // Get last category post is in
-            $last_category = end(array_values($category));
+            $last_category      =   end(array_values($category));
+            $get_cat_parents    =   rtrim(get_category_parents($last_category->term_id, true, ','),',');
+            $cat_parents        =   explode(',',$get_cat_parents);
 
-            // Get parent any categories and create array
-            $get_cat_parents = rtrim(get_category_parents($last_category->term_id, true, ','),',');
-            $cat_parents = explode(',',$get_cat_parents);
-
-            // Loop through parent categories and store in variable $cat_display
             $cat_display = '';
             foreach($cat_parents as $parents) {
                 $cat_display .= '<li class="item-cat">'.$parents.'</li>';
@@ -222,6 +256,10 @@ if ( !is_front_page() ) {
         echo '<li>' . 'Error 404' . '</li>';
     }
 
-    echo '</ul>';
+    ?>
+
+   </ul>
+
+   <?php
 
 }
