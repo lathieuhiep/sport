@@ -776,7 +776,6 @@ function sport_notification() {
 
 }
 
-
 // ajax notification
 add_action( 'wp_ajax_sport_notification_ajax', 'sport_notification_ajax' );
 add_action( 'wp_ajax_nopriv_sport_notification_ajax', 'sport_notification_ajax' );

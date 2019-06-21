@@ -121,6 +121,9 @@ if ( !function_exists( 'sport_woo_breadcrumbs' ) ) :
 endif;
 /* End breadcrumbs */
 
+/* Start archive description open */
+/* End archive description open */
+
 /* Start Sidebar Shop */
 if ( ! function_exists( 'sport_woo_get_sidebar' ) ) :
 
@@ -186,6 +189,9 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
 
         <div class="site-shop" data-settings='<?php echo esc_attr( wp_json_encode( $data_setting_shop_page ) ); ?>'>
             <div class="container">
+
+                <?php sport_woo_breadcrumbs(); ?>
+
                 <div class="row">
 
                 <?php

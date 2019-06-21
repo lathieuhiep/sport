@@ -256,6 +256,37 @@ Redux::setSection( $sport_opt_name, array(
     ),
 ));
 
+// Chat Options
+Redux::setSection( $sport_opt_name, array(
+    'title'             =>  esc_html__( 'Chat', 'sport' ),
+    'id'                =>  'sport_chat',
+    'subsection'        => true,
+    'fields'            => array(
+
+        array(
+            'id'        =>  'sport_chat_tel',
+            'type'      =>  'text',
+            'title'     =>  esc_html__( 'Tel', 'sport' ),
+            'default'   =>  '0984187697',
+        ),
+
+        array(
+            'id'        =>  'sport_chat_face',
+            'type'      =>  'text',
+            'title'     =>  esc_html__( 'Facebook', 'sport' ),
+            'default'   =>  'm.me/ShopSport360',
+        ),
+
+        array(
+            'id'        =>  'sport_chat_zalo',
+            'type'      =>  'text',
+            'title'     =>  esc_html__( 'Zalo', 'sport' ),
+            'default'   =>  'https://zalo.me/0984187697',
+        ),
+
+    ),
+));
+
 /* End General Options */
 
 /* Start Header Options */

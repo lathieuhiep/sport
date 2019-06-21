@@ -395,6 +395,8 @@ function sport_check_box_product_cat() {
 }
 
 // advanced search functionality
+add_action('pre_get_posts', 'advanced_search_query');
+
 function advanced_search_query($query) {
 
     if($query->is_search()) {
@@ -412,4 +414,39 @@ function advanced_search_query($query) {
     }
     return $query;
 }
-add_action('pre_get_posts', 'advanced_search_query');
+
+//add_action( 'wp_footer', 'event_conference_font_google_script' );
+// allow html in category and taxonomy descriptions
+remove_filter( 'pre_term_description', 'wp_filter_kses' );
+remove_filter( 'pre_link_description', 'wp_filter_kses' );
+remove_filter( 'pre_link_notes', 'wp_filter_kses' );
+remove_filter( 'term_description', 'wp_kses_data' );
+
+add_filter( 'product_cat_edit_form_fields', 'event_conference_edit_cat_description', 10 , 2 );
+function event_conference_edit_cat_description( $category ) {
+    ?>
+
+    <table class="form-table">
+        <tr class="form-field">
+            <th scope="row" valign="top">
+                <label for="description">
+                    <?php esc_html_e('Description', 'event_conference'); ?>
+                </label>
+            </th>
+
+            <td>
+                <?php
+                $settings = array('wpautop' => true, 'media_buttons' => false, 'quicktags' => true, 'textarea_rows' => '15', 'textarea_name' => 'description' );
+                wp_editor(html_entity_decode($category->description , ENT_QUOTES, 'UTF-8'), 'description1', $settings);
+                ?>
+                <br />
+                <span class="description">
+                    <?php esc_html_e( 'The description is not prominent by default, however some themes may show it.', 'event_conference' ); ?>
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <?php
+
+}

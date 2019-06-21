@@ -314,3 +314,7 @@
 .rwmb-field.rwmb-heading-wrapper p.description {
     margin: 10px 0 0;
 }
+
+.woocommerce-page table.form-table .form-field.term-description-wrap {
+    display: none;
+}

@@ -22,6 +22,8 @@
     get_template_part('template-parts/header/inc','header');
 
     get_template_part('template-parts/inc','notification');
+
+    get_template_part('template-parts/inc','chat');
     ?>
     <!--End Loading Template-->
 
