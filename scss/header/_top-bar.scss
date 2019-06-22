@@ -6,6 +6,10 @@
     a {
       color: #ffffff;
       font-size: 12px;
+
+      &:hover {
+        color: #000000;
+      }
     }
     .top-menu {
       padding-right: 25px;

@@ -241,7 +241,7 @@ class sport_widget_products_filter extends Widget_Base {
                 'step'      =>  1,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-product-cat .product-gallery-cat .item-gallery .item-gallery__img' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .product-gallery-cate .item-gallery .item-gallery__img' => 'height: {{VALUE}}px;',
                 ],
             ]
         );

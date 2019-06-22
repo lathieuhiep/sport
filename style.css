@@ -781,6 +781,10 @@ form.post-password-form p input[type='submit'] {
   font-size: 12px;
 }
 
+.header .top-bar a:hover {
+  color: #000000;
+}
+
 .header .top-bar .top-menu {
   padding-right: 25px;
 }
@@ -1188,7 +1192,6 @@ form.post-password-form p input[type='submit'] {
 .site-menu ul li {
   display: inline-block;
   padding: 15px 0;
-  position: relative;
 }
 
 .site-menu ul li a {
@@ -1203,46 +1206,6 @@ form.post-password-form p input[type='submit'] {
 .site-menu ul li a:hover {
   background-color: transparent;
   color: #000000;
-}
-
-.site-menu ul li .sub-menu {
-  min-width: 160px;
-  background-color: #00b0f0;
-  position: absolute;
-  top: 120%;
-  left: 0;
-  z-index: -1;
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
-}
-
-.site-menu ul li .sub-menu li {
-  padding: 8px 0;
-  display: block;
-}
-
-.site-menu ul li .sub-menu li a {
-  white-space: nowrap;
-}
-
-.site-menu ul li .sub-menu li .sub-menu {
-  left: 90%;
-  top: -1px;
-}
-
-.site-menu ul li .sub-menu li:hover > .sub-menu {
-  left: 100%;
-}
-
-.site-menu ul li:hover > .sub-menu {
-  top: 100%;
-  z-index: 999;
-  opacity: 1;
-  visibility: visible;
 }
 
 .site-menu ul > li > a:first-child a {
@@ -1260,6 +1223,50 @@ form.post-password-form p input[type='submit'] {
 .site-menu > ul > li:last-child > a {
   padding-right: 0;
   border-right: 0;
+}
+
+.site-menu-nav ul li {
+  position: relative;
+}
+
+.site-menu-nav ul li .sub-menu {
+  min-width: 160px;
+  background-color: #00b0f0;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.site-menu-nav ul li .sub-menu li {
+  padding: 8px 0;
+  display: block;
+}
+
+.site-menu-nav ul li .sub-menu li a {
+  white-space: nowrap;
+}
+
+.site-menu-nav ul li .sub-menu li .sub-menu {
+  left: 90%;
+  top: -1px;
+}
+
+.site-menu-nav ul li .sub-menu li:hover > .sub-menu {
+  left: 100%;
+}
+
+.site-menu-nav ul li:hover > .sub-menu {
+  top: 100%;
+  z-index: 999;
+  opacity: 1;
+  visibility: visible;
 }
 
 .icon_menu_item_mobile {
@@ -2635,6 +2642,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   text-decoration: none;
 }
 
+.element-products .owl-carousel .owl-nav {
+  margin: 0;
+}
+
 .element-products .owl-carousel .owl-nav button {
   position: absolute;
   top: 50%;
@@ -2724,14 +2735,17 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 .product-gallery-cate .item-gallery .item-gallery__title {
   font-size: 14px;
   color: #00b0f0;
-  padding: 8px 5px;
+  padding: 8px 10px;
   margin: 0 0 5px;
   border: 1px solid #f2f2f2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .product-gallery-cate .item-gallery .item-gallery__img {
   position: relative;
-  height: 472px;
+  height: 467px;
   overflow: hidden;
 }
 

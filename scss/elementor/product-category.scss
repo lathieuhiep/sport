@@ -115,6 +115,8 @@
   }
   .owl-carousel {
     .owl-nav {
+      margin: 0;
+
       button {
         position: absolute;
         top: 50%;
@@ -188,13 +190,16 @@
     .item-gallery__title {
       font-size: 14px;
       color: $color-hover;
-      padding: 8px 5px;
+      padding: 8px 10px;
       margin: 0 0 5px;
       border: 1px solid #f2f2f2;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .item-gallery__img {
       position: relative;
-      height: 472px;
+      height: 467px;
       overflow: hidden;
 
       a {

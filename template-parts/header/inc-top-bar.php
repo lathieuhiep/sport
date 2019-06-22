@@ -3,7 +3,7 @@
         <div class="top-bar__warp d-flex align-items-center justify-content-end">
             <?php if ( has_nav_menu('top-menu') ) : ?>
 
-            <div class="top-menu">
+            <div class="top-menu site-menu-nav">
                 <?php
 
                 wp_nav_menu( array(

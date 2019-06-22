@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <div class="site-menu collapse navbar-collapse">
+            <div class="site-menu site-menu-nav collapse navbar-collapse">
 
                 <?php
 
