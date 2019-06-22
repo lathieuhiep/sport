@@ -689,7 +689,7 @@ class sport_widget_products_filter extends Widget_Base {
                                         <div class="item-gallery__img">
                                             <?php if ( !empty( $link ) ) : ?>
 
-                                            <a class="item-gallery__link" href="<?php echo esc_url( $attachment->post_content ); ?>" title="<?php echo esc_attr( $title_gallery ); ?>"></a>
+                                            <a class="item-gallery__link" href="<?php echo esc_url( $attachment->post_content ); ?>" title="<?php echo esc_attr( $title_gallery ); ?>" target="_blank"></a>
 
                                             <?php
                                             endif;
