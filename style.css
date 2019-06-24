@@ -3404,6 +3404,8 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   padding: 35px 30px;
   margin: 0;
   line-height: 1.9em;
+  height: 450px;
+  overflow-y: scroll;
 }
 
 .woocommerce div.product .woocommerce-tabs .panel ul {
