@@ -1,18 +1,20 @@
 .element-text-editor-scroll {
   .scrollbar-inner {
     height: 170px;
-    overflow: hidden;
+  }
+}
+.scrollbar-inner {
+  overflow: hidden;
 
-    > .scroll-element {
-      &.scroll-y {
-        width: 12px;
-        right: 0;
-      }
-      .scroll-element_outer,
-      .scroll-element_track,
-      .scroll-bar {
-        @include border-radius(0);
-      }
+  > .scroll-element {
+    &.scroll-y {
+      width: 12px;
+      right: 0;
+    }
+    .scroll-element_outer,
+    .scroll-element_track,
+    .scroll-bar {
+      @include border-radius(0);
     }
   }
 }

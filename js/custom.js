@@ -156,6 +156,45 @@
         $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
             " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 
+        /* Start scrollbar description */
+        let site_term_description_scroll    =   $( '.site-term-description-scroll .scrollbar-inner' );
+
+        if ( site_term_description_scroll.length ) {
+
+            site_term_description_scroll.each( function () {
+
+                $(this).scrollbar({
+                    scrollStep: 0
+                });
+
+            } )
+
+        }
+        /* End scrollbar description */
+
+        /* Start countdown product sale */
+        let countdown_sale_product  =   $( '.site-single-product__countdown-sale' );
+
+        if ( countdown_sale_product.length ) {
+
+            countdown_sale_product.each( function () {
+                let finalDate = $(this).data( 'countdown' );
+
+                $(this).countdown( finalDate, function(event) {
+                    let $this = $(this).html( event.strftime(''
+                        + '<div class="box-count"><span class="text">Ngày</span><span class="number">%D</span></div>'
+                        + '<div class="box-count"><span class="text">Giờ</span><span class="number">%H</span></div>'
+                        + '<div class="box-count"><span class="text">Phút</span><span class="number">%M</span></div>'
+                        + '<div class="box-count"><span class="text">Giây</span><span class="number">%S</span></div>'
+                        )
+                    );
+                });
+
+            } )
+
+        }
+        /* End countdown product sale */
+
     });
 
     $( window ).on( "load", function() {

@@ -608,6 +608,52 @@ Redux::setSection( $sport_opt_name, array(
     )
 ));
 
+// Single Prodcut
+Redux::setSection( $sport_opt_name, array(
+    'title'         =>  esc_html__( 'Sing Product', 'sport' ),
+    'id'            =>  'sport_single_product',
+    'desc'          =>  esc_html__( '', 'sport' ),
+    'subsection'    =>  true,
+    'fields'        =>  array(
+
+        array(
+            'id'            =>  'sport_single_product_related_limit',
+            'type'          =>  'slider',
+            'title'         =>  esc_html__( 'Related Product Limit', 'sport' ),
+            'min'           =>  1,
+            'step'          =>  1,
+            'max'           =>  250,
+            'default'       =>  24,
+            'display_value' => 'text'
+        ),
+
+        array(
+            'id'        =>  'sport_single_product_related_order_by',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Related Product Order By', 'sport' ),
+            'default'   =>  'id',
+            'options'   =>  array(
+                'id'    =>  esc_html__( 'Post ID', 'sport' ),
+                'date'  =>  esc_html__( 'Date', 'sport' ),
+                'title' =>  esc_html__( 'Title', 'sport' ),
+                'rand'  =>  esc_html__( 'Random', 'sport' ),
+            )
+        ),
+
+        array(
+            'id'        =>  'sport_single_product_related_order',
+            'type'      =>  'select',
+            'title'     =>  esc_html__( 'Related Product Order', 'sport' ),
+            'default'   =>  'DESC',
+            'options'   =>  array(
+                'DESC'  =>  esc_html__( 'Descending', 'sport' ),
+                'ASC'   =>  esc_html__( 'Ascending', 'sport' ),
+            )
+        ),
+
+    )
+));
+
 // Blog Shop
 Redux::setSection( $sport_opt_name, array(
     'title'         =>  esc_html__( 'Blog Shop', 'sport' ),

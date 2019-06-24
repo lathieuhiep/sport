@@ -171,6 +171,14 @@ pre {
   transition: all 0.4s ease-in-out;
 }
 
+.row-custom {
+  margin: 0 -5px;
+}
+
+.item-col-custom {
+  padding: 0 5px;
+}
+
 #site-loadding {
   position: fixed;
   top: 0;
@@ -342,7 +350,7 @@ pre {
 .breadcrumbs {
   color: #000000;
   padding: 5px 10px;
-  margin: 0 0 30px;
+  margin: 0 0 15px;
   border: 2px solid #ebebeb;
   background-color: #f2f2f2;
 }
@@ -2427,17 +2435,20 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 /* Text Editor Scroll */
 .element-text-editor-scroll .scrollbar-inner {
   height: 170px;
+}
+
+.scrollbar-inner {
   overflow: hidden;
 }
 
-.element-text-editor-scroll .scrollbar-inner > .scroll-element.scroll-y {
+.scrollbar-inner > .scroll-element.scroll-y {
   width: 12px;
   right: 0;
 }
 
-.element-text-editor-scroll .scrollbar-inner > .scroll-element .scroll-element_outer,
-.element-text-editor-scroll .scrollbar-inner > .scroll-element .scroll-element_track,
-.element-text-editor-scroll .scrollbar-inner > .scroll-element .scroll-bar {
+.scrollbar-inner > .scroll-element .scroll-element_outer,
+.scrollbar-inner > .scroll-element .scroll-element_track,
+.scrollbar-inner > .scroll-element .scroll-bar {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -2808,7 +2819,31 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 .site-shop__result-count-ordering {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.site-term-description-scroll {
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
+}
+
+.site-term-description-scroll .scrollbar-inner {
+  height: 226px;
+}
+
+.site-term-description-scroll .term-description {
+  padding: 10px 15px;
+}
+
+.woocommerce .title-cat-product {
+  margin-bottom: 15px;
+}
+
+.woocommerce .title-cat-product .title {
+  font-size: 16px;
+  color: #707070;
+  text-transform: capitalize;
+  margin: 0;
 }
 
 .woocommerce .site-post-item {
@@ -2908,7 +2943,7 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 .woocommerce ul.products li.product .price {
-  color: #00b0f0;
+  color: #e12f2f;
   font-size: 14px;
   font-weight: 700;
 }
@@ -2916,6 +2951,9 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 .woocommerce ul.products li.product .price del {
   display: inline-block;
   font-size: 12px;
+  color: #707070;
+  font-weight: 400;
+  opacity: 1;
 }
 
 .woocommerce ul.products li.product .price ins {
@@ -3004,6 +3042,21 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 .woocommerce .site-shop-single .site-shop-single__warp span.onsale {
   top: 0;
   left: 15px;
+}
+
+.woocommerce .site-shop-single .site-shop-single__warp .site-post-share {
+  margin: 15px 0 0;
+}
+
+.woocommerce .site-shop-single .site-shop-single__warp .site-post-share span {
+  font-weight: 700;
+}
+
+.woocommerce .site-shop-single .site-shop-single__warp .site-post-share a {
+  color: #ffffff;
+  padding: 2px 8px;
+  border: none;
+  background-color: #707070;
 }
 
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box {
@@ -3458,8 +3511,7 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.2);
 }
 
-.site-single-product-related .title,
-.blog-post-product .title {
+.title-global-sing-product {
   font-size: 18px;
   font-weight: 500;
   color: #ffffff;
@@ -3823,6 +3875,49 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 .blog-post-product:hover .owl-carousel .owl-nav button {
   opacity: 1;
   visibility: visible;
+}
+
+.site-single-product__meta {
+  margin-bottom: 20px;
+}
+
+.site-single-product__meta .right-box {
+  margin-left: 10px;
+  padding: 5px 0;
+  background-color: #707070;
+}
+
+.site-single-product__meta .right-box .text-time {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 5px;
+  margin: 0 0 5px;
+}
+
+.site-single-product__meta .right-box .box-count {
+  text-align: center;
+  padding: 0 5px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.site-single-product__meta .right-box .box-count span {
+  display: block;
+}
+
+.site-single-product__meta .right-box .box-count span.text {
+  color: #ffffff;
+}
+
+.site-single-product__meta .right-box .box-count span.number {
+  font-size: 20px;
+  color: #e12f2f;
+  font-weight: 700;
+  padding: 5px;
+  background-color: #000000;
 }
 
 /**

@@ -116,13 +116,48 @@ if ( !function_exists( 'sport_woo_breadcrumbs' ) ) :
 
         get_template_part('template-parts/inc','breadcrumbs');
 
+        if ( is_product_category() ) {
+    ?>
+
+            <div class="title-cat-product">
+                <h3 class="title">
+                    <?php single_term_title(); ?>
+                </h3>
+            </div>
+
+    <?php
+        }
+
     }
 
 endif;
 /* End breadcrumbs */
 
-/* Start archive description open */
-/* End archive description open */
+/* Start archive description */
+if ( ! function_exists( 'sport_woo_archive_description_open' ) ) :
+
+    function sport_woo_archive_description_open() {
+
+        if ( is_product_category() ) :
+    ?>
+
+        <div class="site-term-description-scroll">
+            <div class="scrollbar-inner">
+                <?php
+                woocommerce_taxonomy_archive_description();
+                woocommerce_product_archive_description();
+                ?>
+            </div>
+        </div>
+
+    <?php
+
+    endif;
+
+    }
+
+endif;
+/* End archive description */
 
 /* Start Sidebar Shop */
 if ( ! function_exists( 'sport_woo_get_sidebar' ) ) :
@@ -190,7 +225,11 @@ if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
         <div class="site-shop" data-settings='<?php echo esc_attr( wp_json_encode( $data_setting_shop_page ) ); ?>'>
             <div class="container">
 
-                <?php sport_woo_breadcrumbs(); ?>
+                <?php
+                sport_woo_breadcrumbs();
+
+                sport_woo_archive_description_open()
+                ?>
 
                 <div class="row">
 
@@ -738,6 +777,95 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
 
 endif;
 
+/* Start query sport related upsells */
+function sport_related_upsells_item( $args, $number_row, $number_column ) {
+
+    $data_settings  =   [
+        'loop'          =>  false,
+        'autoplay'      =>  false,
+        'nav'           =>  true,
+    ];
+
+    $rows_number    =   $number_row;
+    $column_number  =   $number_column;
+    $number_item    =   $rows_number * $column_number;
+
+    $query = new WP_Query( $args );
+
+    if ( $query->have_posts() ) :
+
+?>
+
+    <div class="related-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+        <?php
+        $i = 1;
+        $total_posts    =   $query->post_count;
+
+        while ( $query->have_posts() ):
+            $query->the_post();
+
+            if ( $i % $number_item == 1 ) :
+        ?>
+
+                <div class="row row-custom">
+
+            <?php endif; ?>
+
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 item-col item-col-custom">
+                <?php sport_content_item_product(); ?>
+            </div>
+
+            <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
+
+            </div>
+
+        <?php
+        endif;
+
+            $i++;
+        endwhile;
+        wp_reset_postdata();
+        ?>
+    </div>
+
+<?php
+
+    endif;
+
+}
+
+if ( ! function_exists( 'sport_upsells_products' ) ) :
+
+    function sport_upsells_products() {
+
+       $upsell_ids  =   get_post_meta( get_the_ID(), '_upsell_ids', true );
+
+       if ( !empty( $upsell_ids ) ) :
+
+        $args = array(
+            'post_type'         =>  'product',
+            'orderby'           =>  'rand',
+            'order'             =>  'DESC',
+            'post__in'          =>  $upsell_ids
+        );
+
+    ?>
+
+        <div class="site-single-product-upsell element-products">
+            <h3 class="title title-global-sing-product text-center">
+                <?php esc_html_e( 'Có thể bạn thích', 'sport' ); ?>
+            </h3>
+
+            <?php sport_related_upsells_item( $args, 1, 6 ); ?>
+        </div>
+
+    <?php
+
+        endif;
+    }
+
+endif;
+
 if ( ! function_exists( 'sport_related_products' ) ) :
 
     /**
@@ -748,19 +876,14 @@ if ( ! function_exists( 'sport_related_products' ) ) :
 
     function sport_related_products() {
 
-        $product_cat = get_the_terms( get_the_ID(), 'product_cat' );
+        global $sport_options;
+
+        $limit          =   $sport_options['sport_single_product_related_limit'];
+        $order_by       =   $sport_options['sport_single_product_related_order_by'];
+        $order          =   $sport_options['sport_single_product_related_order'];
+        $product_cat    =   get_the_terms( get_the_ID(), 'product_cat' );
 
         if ( !empty( $product_cat ) ) :
-
-            $data_settings  =   [
-                'loop'          =>  false,
-                'autoplay'      =>  false,
-                'nav'           =>  true,
-            ];
-
-            $rows_number    =   2;
-            $column_number  =   5;
-            $number_item    =   $rows_number * $column_number;
 
             $product_cat_ids = array();
 
@@ -768,9 +891,9 @@ if ( ! function_exists( 'sport_related_products' ) ) :
 
             $args = array(
                 'post_type'         =>  'product',
-                'posts_per_page'    =>  12,
-                'orderby'           =>  'id',
-                'order'             =>  'DESC',
+                'posts_per_page'    =>  $limit,
+                'orderby'           =>  $order_by,
+                'order'             =>  $order,
                 'tax_query'         =>  array(
                     array(
                         'taxonomy'  =>  'product_cat',
@@ -779,53 +902,17 @@ if ( ! function_exists( 'sport_related_products' ) ) :
                     )
                 ),
             );
-
-            $query = new WP_Query( $args );
-
-            if ( $query->have_posts() ) :
-
     ?>
 
             <div class="site-single-product-related element-products">
-                <h3 class="title text-center">
+                <h3 class="title title-global-sing-product text-center">
                     <?php esc_html_e( 'Sản phẩm cùng danh mục', 'sport' ); ?>
                 </h3>
 
-                <div class="related-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-                    <?php
-                    $i = 1;
-                    $total_posts    =   $query->post_count;
-
-                    while ( $query->have_posts() ):
-                        $query->the_post();
-                        if ( $i % $number_item == 1 ) :
-                    ?>
-
-                        <div class="row">
-
-                    <?php endif; ?>
-
-                            <div class="col-12 col-sm-6 col-md-3 column-5 item-col">
-                                <?php sport_content_item_product(); ?>
-                            </div>
-
-                    <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
-
-                        </div>
-
-                    <?php
-                        endif;
-
-                        $i++;
-                    endwhile;
-                    wp_reset_postdata();
-                    ?>
-                </div>
+                <?php sport_related_upsells_item( $args, 2, 6 ); ?>
             </div>
 
     <?php
-
-            endif;
 
         endif;
 
@@ -1003,7 +1090,7 @@ if ( !function_exists( 'sport_product_blog' ) ) :
 ?>
 
         <div class="blog-post-product">
-            <h3 class="title text-center">
+            <h3 class="title title-global-sing-product text-center">
                 <?php echo esc_html( $sport_products_title_blog ); ?>
             </h3>
 
@@ -1070,3 +1157,37 @@ if ( !function_exists( 'sport_product_blog' ) ) :
     }
 
 endif;
+
+function sport_loop_single_meta_product() {
+
+    $countdown_time =  get_post_meta( get_the_ID(), '_sale_price_dates_to', true );
+
+?>
+
+    <div class="site-single-product__meta<?php echo ( !empty( $countdown_time ) ? ' d-flex justify-content-between' : '' ); ?>">
+        <div class="left-box">
+            <?php
+            woocommerce_template_single_rating();
+            woocommerce_template_single_price();
+            ?>
+        </div>
+
+        <?php
+        if ( !empty( $countdown_time ) ) :
+
+            $countdown_time_format  =   date("Y/m/d", $countdown_time );
+        ?>
+
+            <div class="right-box">
+                <h4 class="text-time">
+                    <?php esc_html_e( 'Thời gian còn lại của ưu dãi', 'sport' ); ?>
+                </h4>
+
+                <div class="site-single-product__countdown-sale d-flex" data-countdown="<?php echo esc_attr(  $countdown_time_format ); ?>"></div>
+            </div>
+
+        <?php endif; ?>
+    </div>
+
+<?php
+}

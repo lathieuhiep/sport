@@ -29,9 +29,30 @@
   padding: 50px 0;
 }
 .site-shop__result-count-ordering {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+.site-term-description-scroll {
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
+
+  .scrollbar-inner {
+    height: 226px;
+  }
+  .term-description {
+    padding: 10px 15px;
+  }
 }
 .woocommerce {
+  .title-cat-product {
+    margin-bottom: 15px;
+
+    .title {
+      font-size: 16px;
+      color: #707070;
+      text-transform: capitalize;
+      margin: 0;
+    }
+  }
   .site-post-item {
     border-bottom: none;
   }
@@ -118,13 +139,16 @@
             }
           }
           .price {
-            color: $color-hover;
+            color: $color-hover-second;
             font-size: 14px;
             font-weight: $font-weight-bold;
 
             del {
               display: inline-block;
               font-size: 12px;
+              color: $color-primary;
+              font-weight: 400;
+              opacity: 1;
             }
             ins {
               display: inline-block;
@@ -214,6 +238,19 @@
         &.onsale {
           top: 0;
           left: 15px;
+        }
+      }
+      .site-post-share {
+       margin: 15px 0 0;
+
+        span {
+          font-weight: 700;
+        }
+        a {
+          color: #ffffff;
+          padding: 2px 8px;
+          border: none;
+          background-color: $color-primary;
         }
       }
     }
@@ -618,9 +655,7 @@
     }
   }
 }
-.site-single-product-related,
-.blog-post-product {
-  .title {
+.title-global-sing-product {
     font-size: 18px;
     font-weight: 500;
     color: #ffffff;
@@ -628,8 +663,6 @@
     margin: 30px 0;
     text-transform: uppercase;
     background-color: $background-primary;
-
-  }
 }
 .site-shop__product--item {
   position: relative;
@@ -931,6 +964,44 @@
         button {
           opacity: 1;
           visibility: visible;
+        }
+      }
+    }
+  }
+}
+.site-single-product__meta {
+  margin-bottom: 20px;
+
+  .right-box {
+    margin-left: 10px;
+    padding: 5px 0;
+    background-color: $color-primary;
+
+    .text-time {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
+      padding: 0 5px;
+      margin: 0 0 5px;
+    }
+    .box-count {
+      text-align: center;
+      padding: 0 5px;
+      @include flex(1);
+
+      span {
+        display: block;
+
+        &.text {
+          color: #ffffff;
+        }
+        &.number {
+          font-size: 20px;
+          color: $color-hover-second;
+          font-weight: 700;
+          padding: 5px;
+          background-color: #000000;
         }
       }
     }

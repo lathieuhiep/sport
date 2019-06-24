@@ -103,6 +103,12 @@ pre {
 .global-transition {
   @include transition(all 0.4s ease-in-out);
 }
+.row-custom {
+  margin: 0 -5px;
+}
+.item-col-custom {
+  padding: 0 5px;
+}
 #site-loadding {
   position: fixed;
   top: 0;
@@ -239,7 +245,7 @@ pre {
 .breadcrumbs {
   color: #000000;
   padding: 5px 10px;
-  margin: 0 0 30px;
+  margin: 0 0 15px;
   border: 2px solid #ebebeb;
   background-color: #f2f2f2;
 
