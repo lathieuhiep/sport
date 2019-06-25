@@ -15,7 +15,7 @@ class sport_widget_products_filter extends Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__( 'Products Category', 'sport' );
+        return esc_html__( 'Products Category Parent', 'sport' );
     }
 
     public function get_icon() {
@@ -41,7 +41,7 @@ class sport_widget_products_filter extends Widget_Base {
             [
                 'label'         =>  esc_html__( 'Select Category', 'sport' ),
                 'type'          =>  Controls_Manager::SELECT,
-                'options'       =>  sport_check_get_cat( 'product_cat' ),
+                'options'       =>  sport_check_get_cat_parent( 'product_cat' ),
                 'label_block'   =>  true,
             ]
         );
@@ -135,21 +135,6 @@ class sport_widget_products_filter extends Widget_Base {
                     3   =>  esc_html__( '3 Column', 'sport' ),
                     2   =>  esc_html__( '2 Column', 'sport' ),
                     1   =>  esc_html__( '1 Column', 'sport' ),
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_height_product',
-            [
-                'label'     =>  esc_html__( 'Height Image Product', 'sport' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'min'       =>  1,
-                'max'       =>  '',
-                'step'      =>  1,
-                'default'   =>  150,
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
                 ],
             ]
         );

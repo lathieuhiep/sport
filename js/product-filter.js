@@ -108,8 +108,10 @@
                     parent_data_settings    =   parent_class.data( 'settings' ),
                     product_ids_slider      =   parent_class.find( '.element-product-ids__slider' ),
                     item_product            =   parent_class.find( '.item-product' ),
-                    order                   =   parent_data_settings['order'],
-                    product_ids             =   $(this).data( 'ids' );
+                    product_cat_id          =   parseInt( $(this).data( 'cat-id' ) ),
+                    limit                   =   parseInt( parent_data_settings['limit'] ),
+                    order_by                =   parent_data_settings['order_by'],
+                    order                   =   parent_data_settings['order'];
 
                 parent_class.find( '.btn-product-grid-all-ids' ).attr( 'href', href );
 
@@ -120,7 +122,9 @@
                     data: ({
 
                         action: 'sport_product_filter_id',
-                        product_ids: product_ids,
+                        product_cat_id: product_cat_id,
+                        limit: limit,
+                        order_by: order_by,
                         order: order,
 
                     }),

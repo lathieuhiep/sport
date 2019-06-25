@@ -37,6 +37,33 @@ class sport_widget_products_ids extends Widget_Base {
         );
 
         $this->add_control(
+            'limit',
+            [
+                'label'     =>  esc_html__( 'Number of Products', 'sport' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  16,
+                'min'       =>  1,
+                'max'       =>  '',
+                'step'      =>  1,
+            ]
+        );
+
+        $this->add_control(
+            'order_by',
+            [
+                'label'     =>  esc_html__( 'Order By', 'sport' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'id',
+                'options'   =>  [
+                    'id'    =>  esc_html__( 'Post ID', 'sport' ),
+                    'date'  =>  esc_html__( 'Date', 'sport' ),
+                    'title' =>  esc_html__( 'Title', 'sport' ),
+                    'rand'  =>  esc_html__( 'Random', 'sport' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'order',
             [
                 'label'     =>  esc_html__( 'Order', 'sport' ),
@@ -68,6 +95,16 @@ class sport_widget_products_ids extends Widget_Base {
                 'label'         =>  esc_html__( 'Title', 'sport' ),
                 'type'          =>  Controls_Manager::TEXT,
                 'default'       =>  esc_html__( 'Sản phẩm mới' , 'sport' ),
+                'label_block'   =>  true,
+            ]
+        );
+
+        $repeater->add_control(
+            'list_product_cat',
+            [
+                'label'         =>  esc_html__( 'Select Category', 'sport' ),
+                'type'          =>  Controls_Manager::SELECT,
+                'options'       =>  sport_check_get_cat( 'product_cat' ),
                 'label_block'   =>  true,
             ]
         );
@@ -118,21 +155,6 @@ class sport_widget_products_ids extends Widget_Base {
             'section_layout',
             [
                 'label' =>  esc_html__( 'Layout Settings', 'sport' )
-            ]
-        );
-
-        $this->add_control(
-            'image_height_product',
-            [
-                'label'     =>  esc_html__( 'Height Image Product', 'sport' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'min'       =>  1,
-                'max'       =>  '',
-                'step'      =>  1,
-                'default'   =>  150,
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-products .item-product .item-thumbnail a' => 'height: {{VALUE}}px;',
-                ],
             ]
         );
 
@@ -417,9 +439,11 @@ class sport_widget_products_ids extends Widget_Base {
     protected function render() {
 
         $settings       =   $this->get_settings_for_display();
+        $limit          =   $settings['limit'];
+        $order_by       =   $settings['order_by'];
         $order          =   $settings['order'];
         $tab_list       =   $settings['tab_list'];
-        $list_id        =   $tab_list[0]['list_product_id'];
+        $cat_id_fist    =   $tab_list[0]['list_product_cat'];
         $link_fist      =   $tab_list[0]['link']['url'];
 
         $data_settings_tab  = [
@@ -428,7 +452,9 @@ class sport_widget_products_ids extends Widget_Base {
         ];
 
         $product_settings =   [
-            'order'     =>  $order,
+            'limit'     =>  $limit,
+            'order_by'  =>  $order_by,
+            'order'     =>  $order
         ];
 
         $data_settings  =   [
@@ -442,24 +468,29 @@ class sport_widget_products_ids extends Widget_Base {
             'nav'                   =>  ( 'yes' === $settings['nav'] ),
         ];
 
-        if ( !empty( $list_id ) ) :
+        if ( !empty( $cat_id_fist ) ) :
 
-           $product_ids = explode( ",", $list_id  );
-
-           $args = array(
-               'post_type'  =>  'product',
-               'post__in'   =>  $product_ids,
-               'order'      =>  $order,
-           );
+            $tax_query = array(
+                array(
+                    'taxonomy'  =>  'product_cat',
+                    'field'     =>  'term_id',
+                    'terms'     =>  array( $cat_id_fist ),
+                )
+            );
 
        else:
 
-           $args = array(
-               'post_type'  =>  'product',
-               'order'      =>  $order,
-           );
+           $tax_query = '';
 
        endif;
+
+        $args = array(
+            'post_type'         =>  'product',
+            'posts_per_page'    =>  $limit,
+            'orderby'           =>  $order_by,
+            'order'             =>  $order,
+            'tax_query'         =>  $tax_query,
+        );
 
        $query = new \ WP_Query( $args );
 
@@ -468,26 +499,24 @@ class sport_widget_products_ids extends Widget_Base {
     ?>
 
         <div class="element-product-ids element-products"  data-settings='<?php echo esc_attr( wp_json_encode( $product_settings ) ); ?>'>
+            <?php if ( !empty( $cat_id_fist ) ) : ?>
+
             <div class="product-tabs btn-filter-product-ids">
                 <div class="row align-items-end">
                     <div class="col-12 col-md-10">
                         <div class="product-tabs-list btn-list-product-ids owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings_tab ) ); ?>'>
                             <?php
-                            $i = 1;
                             foreach ( $tab_list as $item ) :
 
-                                if ( !empty( $item['list_product_id'] ) ) :
-                                    $ids = $item['list_product_id'];
-                                else:
-                                    $ids = 0;
-                                endif;
+                                $item_cat_id = (int)$item['list_product_cat'];
+
                             ?>
 
-                            <a class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $i == 1 ? ' active' : '' ); ?>" href="<?php echo esc_url( $item['link']['url'] ) ?>" data-ids="<?php echo esc_attr( $ids ); ?>">
+                            <a class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $cat_id_fist == $item_cat_id ? ' active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $item_cat_id, 'product_cat' ) ); ?>" data-cat-id="<?php echo esc_attr( $item_cat_id ); ?>">
                                 <?php echo esc_html_e( $item['title_tab'] ); ?>
                             </a>
 
-                            <?php $i++; endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 
@@ -499,6 +528,8 @@ class sport_widget_products_ids extends Widget_Base {
                     </div>
                 </div>
             </div>
+
+            <?php endif; ?>
 
             <div class="element-product-ids__slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
                 <?php

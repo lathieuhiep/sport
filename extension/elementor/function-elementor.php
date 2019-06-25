@@ -145,18 +145,24 @@ add_action( 'wp_ajax_nopriv_sport_product_filter_id', 'sport_product_filter_id' 
 
 function sport_product_filter_id() {
 
-    $product_ids    =   $_POST['product_ids'];
+    $product_cat_id =   $_POST['product_cat_id'];
+    $limit          =   $_POST['limit'];
+    $order_by       =   $_POST['order_by'];
     $order          =   $_POST['order'];
 
-    if ( !empty( $product_ids ) ) :
-
-        $ids = explode( ",", $product_ids  );
-
-        $args = array(
-            'post_type'  =>  'product',
-            'post__in'   =>  $ids,
-            'order'      =>  $order,
-        );
+    $args = array(
+        'post_type'         =>  'product',
+        'posts_per_page'    =>  $limit,
+        'orderby'           =>  $order_by,
+        'order'             =>  $order,
+        'tax_query'         =>  array(
+            array(
+                'taxonomy'  =>  'product_cat',
+                'field'     =>  'term_id',
+                'terms'     =>  array( $product_cat_id ),
+            )
+        ),
+    );
 
         $query = new \ WP_Query( $args );
 
@@ -167,8 +173,6 @@ function sport_product_filter_id() {
 
         endwhile;
         wp_reset_postdata();
-
-    endif;
 
     exit();
 

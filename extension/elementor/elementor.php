@@ -75,7 +75,7 @@ function sport_check_get_cat( $type_taxonomy ) {
     $category     =   get_terms(
         array(
             'taxonomy'      =>  $type_taxonomy,
-            'hide_empty'    =>  true,
+            'hide_empty'    =>  1,
         )
     );
 
@@ -84,6 +84,34 @@ function sport_check_get_cat( $type_taxonomy ) {
         foreach( $category as $item ) :
 
             $cat_check[$item->term_id]  =   $item->name;
+
+        endforeach;
+
+    endif;
+
+    return $cat_check;
+
+}
+
+function sport_check_get_cat_parent( $type_taxonomy ) {
+
+    $cat_check    =   array();
+    $category     =   get_terms(
+        array(
+            'taxonomy'      =>  $type_taxonomy,
+            'hide_empty'    =>  1,
+            'parent'        =>  0,
+        )
+    );
+
+    if ( isset( $category ) && !empty( $category ) ):
+
+        foreach( $category as $item ) :
+
+            if ( count( get_term_children( $item->term_id, $type_taxonomy ) ) > 0 ) {
+
+                $cat_check[$item->term_id]  =   $item->name;
+            }
 
         endforeach;
 

@@ -2603,10 +2603,6 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   overflow: hidden;
 }
 
-.element-products .item-product .item-thumbnail a img {
-  height: 100%;
-}
-
 .element-products .item-product .item-thumbnail .on-sale-percent {
   position: absolute;
   bottom: -5px;

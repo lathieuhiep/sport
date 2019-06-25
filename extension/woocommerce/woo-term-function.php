@@ -1,6 +1,16 @@
 <?php
 
+function sport_is_featured_product() {
 
+    $featured = get_post_meta( get_the_ID(), '_featured', true );
+
+    if ( $featured == 'yes' ) :
+        return true;
+    else :
+        return false;
+    endif;
+
+}
 
 function sport_select_post_gallery() {
 
