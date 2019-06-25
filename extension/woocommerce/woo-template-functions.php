@@ -954,7 +954,7 @@ if ( !function_exists( 'sport_product_hot' ) ) :
      * @hooked sport_product_hot - 10
      */
 
-    function sport_product_new() {
+    function sport_product_hot() {
 
         $product_new = get_post_meta( get_the_ID(), 'sport_option_product_new', true );
 
