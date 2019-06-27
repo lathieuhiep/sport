@@ -14,7 +14,17 @@
 </head>
 <body <?php body_class(); ?>>
 
-<div id="page">
+<div class="site-canvas">
+    <nav class="site-menu-canvas">
+        <?php
+        wp_nav_menu( array(
+            'theme_location'    =>  'canvas',
+            'menu_class'        =>  'navbar-nav',
+            'container'         =>  false,
+        ) ) ;
+        ?>
+    </nav>
+
     <!--Include Loading Template-->
     <?php
     get_template_part('template-parts/inc','loading');

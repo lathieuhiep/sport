@@ -361,19 +361,37 @@
     };
     /* End function multi owlCarouse */
 
+    var toggleNav = function () {
+        if ($('.site-canvas').hasClass('site-canvas--active')) {
+            // Nav Close
+            $('.site-canvas').removeClass('site-canvas--active');
+            $('.close-canvas').removeClass('close-canvas--active');
+        } else {
+            // Nav Open
+            $('.site-canvas').addClass('site-canvas--active');
+            $('.close-canvas').addClass('close-canvas--active');
+        }
+    };
+
+    // Toggle Nav on Click
+    $('.toggle-nav, .close-canvas').click(function(event) {
+        event.preventDefault();
+        toggleNav();
+    });
+
 } )( jQuery );
 
-new Mmenu( document.querySelector( '#menu-canvas' ),
-    {
-        navbar: {
-            title: ''
-        },
-    }
-);
-
-document.addEventListener( 'click', ( evnt ) => {
-    let anchor = evnt.target.closest( 'a[href^="#/"]' );
-    if ( anchor ) {
-        evnt.preventDefault();
-    }
-});
+// new Mmenu( document.querySelector( '#menu-canvas' ),
+//     {
+//         navbar: {
+//             title: ''
+//         },
+//     }
+// );
+//
+// document.addEventListener( 'click', ( evnt ) => {
+//     let anchor = evnt.target.closest( 'a[href^="#/"]' );
+//     if ( anchor ) {
+//         evnt.preventDefault();
+//     }
+// });

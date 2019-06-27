@@ -14,6 +14,7 @@
 
     </footer>
 
+    <div class="close-canvas"></div>
 </div>
 
 <?php wp_footer(); ?>

@@ -50,6 +50,7 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   line-height: 1.5em;
   overflow-x: hidden;
@@ -1298,6 +1299,69 @@ form.post-password-form p input[type='submit'] {
 
 .icon_menu_item_mobile.icon_menu_item_mobile_active:after {
   content: "\f077";
+}
+
+/* Nav Canvas */
+.site-canvas {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: 300ms ease all;
+  -moz-transition: 300ms ease all;
+  -ms-transition: 300ms ease all;
+  -o-transition: 300ms ease all;
+  transition: 300ms ease all;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.site-canvas--active {
+  -webkit-transform: translate3d(300px, 0, 0);
+  -moz-transform: translate3d(300px, 0, 0);
+  -ms-transform: translate3d(300px, 0, 0);
+  -o-transform: translate3d(300px, 0, 0);
+  transform: translate3d(300px, 0, 0);
+}
+
+.site-menu-canvas {
+  background: Crimson;
+  color: White;
+  height: 100%;
+  left: -300px;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.close-canvas {
+  background-color: transparent;
+  bottom: 0;
+  cursor: pointer;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.close-canvas--active {
+  display: block;
 }
 
 /**
