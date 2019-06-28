@@ -141,7 +141,7 @@ if ( ! function_exists( 'sport_woo_archive_description_open' ) ) :
         if ( is_product_category() ) :
     ?>
 
-        <div class="site-term-description-scroll">
+        <div class="site-term-description-scroll scrollbar-box">
             <div class="scrollbar-inner">
                 <?php
                 woocommerce_taxonomy_archive_description();
@@ -1216,4 +1216,15 @@ function sport_loop_single_meta_product() {
     </div>
 
 <?php
+}
+
+add_filter( 'woocommerce_email_order_items_args', 'iconic_email_order_items_args', 10, 1 );
+
+function iconic_email_order_items_args( $args ) {
+
+    $args['show_image'] =   true;
+    $args['image_size'] =   array(100,100);
+
+    return $args;
+
 }

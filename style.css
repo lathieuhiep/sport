@@ -833,19 +833,10 @@ form.post-password-form p input[type='submit'] {
 
 /* Center Bar */
 .header {
-  background-color: #ffffff;
-}
-
-.header.header_fix {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 999;
-  -webkit-animation: fadeInDown 900ms ease-in-out;
-  -moz-animation: fadeInDown 900ms ease-in-out;
-  -ms-animation: fadeInDown 900ms ease-in-out;
-  animation: fadeInDown 900ms ease-in-out;
+  background-color: #ffffff;
 }
 
 .header .center-bar {
@@ -1127,6 +1118,11 @@ form.post-password-form p input[type='submit'] {
   visibility: visible;
 }
 
+body.admin-bar header,
+body.admin-bar .site-menu-canvas {
+  top: 32px;
+}
+
 /* Nav */
 .header .navbar {
   margin: 0;
@@ -1303,56 +1299,70 @@ form.post-password-form p input[type='submit'] {
 
 /* Nav Canvas */
 .site-canvas {
-  height: 100%;
   position: relative;
+  height: 100%;
   width: 100%;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-transition: 300ms ease all;
-  -moz-transition: 300ms ease all;
-  -o-transition: 300ms ease all;
-  transition: 300ms ease all;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.site-canvas--active {
-  -webkit-transform: translate3d(365px, 0, 0);
-  -moz-transform: translate3d(365px, 0, 0);
-  -o-transform: translate3d(365px, 0, 0);
-  -ms-transform: translate3d(365px, 0, 0);
-  transform: translate3d(365px, 0, 0);
+  left: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .site-menu-canvas {
-  background: #eeeeee;
-  height: 100%;
-  left: -365px;
-  padding: 15px;
-  position: absolute;
+  position: fixed;
   top: 0;
+  bottom: 0;
+  left: -365px;
   width: 365px;
+  background: #f2f2f2;
+  z-index: 999;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
-.site-menu-canvas > ul > li {
-  margin-bottom: 10px;
+.site-menu-canvas .scrollbar-inner {
+  height: 100%;
+}
+
+.site-menu-canvas .scrollbar-inner > .scroll-element.scroll-y {
+  width: 5px;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.site-menu-canvas:hover .scrollbar-inner > .scroll-element.scroll-y {
+  opacity: 1;
 }
 
 .site-menu-canvas ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+
+.site-menu-canvas ul.nav-canvas {
+  padding: 15px;
+}
+
+.site-menu-canvas ul li {
+  margin-bottom: 10px;
 }
 
 .site-menu-canvas ul li a {
   display: block;
+  color: #00b0f0;
+}
+
+.site-menu-canvas ul li a strong {
+  font-size: 16px;
   color: #000000;
+  display: inline-block;
 }
 
 .site-menu-canvas ul li a span {
@@ -1364,9 +1374,44 @@ form.post-password-form p input[type='submit'] {
   font-weight: 700;
 }
 
+.site-menu-canvas ul li a:hover {
+  color: #333333;
+}
+
+.site-menu-canvas ul li a i.fa-home {
+  display: inline-block;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 15px;
+  background-color: #00b0f0;
+}
+
 .site-menu-canvas ul li .sub-menu {
   padding-left: 10px;
   margin-top: 15px;
+}
+
+.site-menu-canvas ul li .sub-menu li {
+  margin-bottom: 8px;
+}
+
+.site-menu-canvas ul li .sub-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.site-canvas--active {
+  left: 365px;
+}
+
+.site-canvas--active .site-menu-canvas {
+  left: 0;
+}
+
+.site-canvas--active .site-notification.active {
+  left: 370px;
 }
 
 .close-canvas {

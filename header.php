@@ -15,16 +15,6 @@
 <body <?php body_class(); ?>>
 
 <div class="site-canvas">
-    <nav class="site-menu-canvas">
-        <?php
-        wp_nav_menu( array(
-            'theme_location'    =>  'canvas',
-            'menu_class'        =>  'navbar-nav',
-            'container'         =>  false,
-        ) ) ;
-        ?>
-    </nav>
-
     <!--Include Loading Template-->
     <?php
     get_template_part('template-parts/inc','loading');
@@ -37,11 +27,19 @@
     ?>
     <!--End Loading Template-->
 
-    <div id="back-top">
-        <a href="#">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
+
+
+    <nav class="site-menu-canvas scrollbar-box">
+        <div class="scrollbar-inner">
+            <?php
+            wp_nav_menu( array(
+                'theme_location'    =>  'canvas',
+                'menu_class'        =>  'nav-canvas',
+                'container'         =>  false,
+            ) ) ;
+            ?>
+        </div>
+    </nav>
 
     <!--Start Sticky Footer-->
     <div class="sticky-footer">

@@ -15,6 +15,12 @@
     </footer>
 
     <div class="close-canvas"></div>
+
+    <div id="back-top">
+        <a href="#">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
 </div>
 
 <?php wp_footer(); ?>

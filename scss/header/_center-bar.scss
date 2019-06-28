@@ -1,17 +1,9 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
   background-color: #ffffff;
 
-  &.header_fix {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    -webkit-animation: fadeInDown 900ms ease-in-out;
-    -moz-animation: fadeInDown 900ms ease-in-out;
-    -ms-animation: fadeInDown 900ms ease-in-out;
-    animation: fadeInDown 900ms ease-in-out;
-  }
   .center-bar {
     border-bottom: 1px solid #dedede;
 
@@ -249,5 +241,11 @@
         }
       }
     }
+  }
+}
+body.admin-bar {
+  header,
+  .site-menu-canvas {
+    top: 32px;
   }
 }
