@@ -513,14 +513,17 @@ class sport_widget_products_filter extends Widget_Base {
             'autoplay'      =>  ( 'yes' === $settings['gallery_autoplay'] ),
         ];
 
-        $product_cat_children = get_term_children( $product_cat, 'product_cat' );
+        $product_cat_children  = get_terms( array(
+            'taxonomy'  =>  'product_cat',
+            'parent'    =>  $product_cat
+        ) );
 
         if ( !empty( $product_cat ) ) :
 
             $product_term = get_term( $product_cat, 'product_cat' );
 
             if ( !empty( $product_cat_children ) ) :
-                $product_cat_id = $product_cat_children[0];
+                $product_cat_id = $product_cat_children[0]->term_id;
             else:
                 $product_cat_id = $product_cat;
             endif;
@@ -567,14 +570,10 @@ class sport_widget_products_filter extends Widget_Base {
                     <div class="row align-items-end">
                         <div class="col-12 col-md-10">
                             <div class="product-tabs-list btn-list-cat owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings_tab ) ); ?>'>
-                                <?php
-                                foreach ( $product_cat_children as $item ) :
+                                <?php foreach ( $product_cat_children as $item ) : ?>
 
-                                    $term_children = get_term_by( 'id', $item, 'product_cat' );
-                                ?>
-
-                                <a href="<?php echo esc_url( get_term_link( $term_children->term_id, 'product_cat' ) ); ?>" class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0] == $term_children->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $term_children->term_id ); ?>">
-                                    <?php echo esc_html( $term_children->name ); ?>
+                                <a href="<?php echo esc_url( get_term_link( $item->term_id, 'product_cat' ) ); ?>" class="btn-tab-product-item btn-item-filter<?php echo ( $product_cat_children[0]->term_id == $item->term_id ? ' active' : '' ); ?>" data-id="<?php echo esc_attr( $item->term_id ); ?>">
+                                    <?php echo esc_html( $item->name ); ?>
                                 </a>
 
                                 <?php endforeach; ?>
@@ -582,7 +581,7 @@ class sport_widget_products_filter extends Widget_Base {
                         </div>
 
                         <div class="col-12 col-md-2 text-right">
-                            <a class="btn-product-grid btn-product-grid-all-cat" href="<?php echo esc_url( get_term_link( $product_cat_children[0], 'product_cat' ) ); ?>" title="<?php echo esc_attr( $product_term->name ); ?>">
+                            <a class="btn-product-grid btn-product-grid-all-cat" href="<?php echo esc_url( get_term_link( $product_cat_children[0]->term_id, 'product_cat' ) ); ?>">
                                 <?php esc_html_e( 'Xem tất cả', 'sport' ); ?>
                                 <i class="fas fa-angle-double-right"></i>
                             </a>

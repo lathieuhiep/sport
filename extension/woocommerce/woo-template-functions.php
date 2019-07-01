@@ -1223,8 +1223,20 @@ add_filter( 'woocommerce_email_order_items_args', 'iconic_email_order_items_args
 function iconic_email_order_items_args( $args ) {
 
     $args['show_image'] =   true;
-    $args['image_size'] =   array(100,100);
+    $args['image_size'] =   array( 300, 300 );
 
     return $args;
+
+}
+
+add_filter( 'woocommerce_order_item_name', 'sport_custom_woo_order_item_name', 10, 2 );
+
+function sport_custom_woo_order_item_name( $name, $item ) {
+    
+?>
+    <a href="<?php echo esc_url( get_permalink( $item->get_product_id() ) ); ?>">
+        <?php echo esc_html( $item->get_name() ); ?>
+    </a>
+<?php
 
 }
