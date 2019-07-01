@@ -1232,7 +1232,7 @@ function iconic_email_order_items_args( $args ) {
 add_filter( 'woocommerce_order_item_name', 'sport_custom_woo_order_item_name', 10, 2 );
 
 function sport_custom_woo_order_item_name( $name, $item ) {
-    
+
 ?>
     <a href="<?php echo esc_url( get_permalink( $item->get_product_id() ) ); ?>">
         <?php echo esc_html( $item->get_name() ); ?>
