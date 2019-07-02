@@ -202,19 +202,20 @@
 
             e.preventDefault();
 
-            if ($(this).attr('id') === 'show_login')
-                $('form#login').fadeIn(500);
+            if ( $(this).attr('id') === 'show_login' )
+                $('#form-login').fadeIn(500);
             else
-                $('form#register').fadeIn(500);
+                $('#form-register').fadeIn(500);
 
         });
 
         // Close popup
-        $(document).on('click', '.login_overlay, .close', function () {
-            $('form#login, form#register').fadeOut(500, function () {
-                $('.login_overlay').remove();
-            });
+        $( '.login_overlay, .close' ).on('click', function () {
+
+            $('#form-login, #form-register').fadeOut(500);
+
             return false;
+
         });
 
     });

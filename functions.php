@@ -278,6 +278,22 @@ function sport_register_front_end() {
     $sport_notification_ajax         =   array( 'url' => $sport_notification_admin_url );
     wp_localize_script( 'notification', 'load_notification', $sport_notification_ajax );
 
+    /* Login */
+    if ( !is_user_logged_in() ) :
+
+        wp_enqueue_script( 'jquery-validate', get_theme_file_uri( '/js/library/jquery.validate.js' ), array('jquery'), '1.19.1', true );
+
+        wp_enqueue_script( 'ajax-auth-script', get_theme_file_uri( '/js/ajax-auth-script.js' ), array(), '1.0.0', true );
+
+        wp_localize_script( 'ajax-auth-script', 'ajax_auth_object', array(
+            'ajaxurl'           =>  admin_url( 'admin-ajax.php' ),
+            'redirecturl'       =>  home_url(),
+            'loadingmessage'    =>  esc_html__( 'Đang gửi thông tin, vui lòng chờ...', 'sport' )
+        ));
+
+    endif;
+
+    /* Woocommerce */
     if ( class_exists('Woocommerce') ) :
 
         if ( is_shop() || is_product_category() ) :
@@ -820,3 +836,41 @@ function sport_notification_ajax() {
 
 }
 /* End notification */
+
+// Enable the user with no privileges to run ajax_login() in AJAX
+add_action( 'wp_ajax_nopriv_ajaxlogin', 'ajax_login' );
+function ajax_login(){
+
+    // First check the nonce, if it fails the function will break
+    check_ajax_referer( 'ajax-login-nonce', 'security' );
+
+    // Nonce is checked, get the POST data and sign user on
+    // Call auth_user_login
+    auth_user_login( $_POST['username'], $_POST['password'], $_POST['username'] );
+
+    die();
+}
+
+function auth_user_login( $user_login, $password, $login )
+{
+    $info = array();
+    $info['user_login'] = $user_login;
+    $info['user_password'] = $password;
+    $info['remember'] = true;
+
+    $user_signon = wp_signon( $info, '' );
+
+    if ( is_wp_error( $user_signon ) ) :
+
+        echo json_encode( array( 'loggedin' => false, 'message' => esc_html__( 'Sai tên đăng nhập hoặc mật khẩu', 'sport' ) ) );
+
+    else :
+
+        wp_set_current_user( $user_signon->ID );
+
+        echo json_encode( array( 'loggedin' => true, 'message' => $login . esc_html__( ' đăng nhập thành công, xin chờ...', 'sport' ) ) );
+
+    endif;
+
+    die();
+}

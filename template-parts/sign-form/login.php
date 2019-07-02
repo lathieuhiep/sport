@@ -1,30 +1,35 @@
 <form id="login" class="ajax-auth" action="<?php echo esc_url( get_permalink() ); ?>" method="post">
-    <h3>
-        New to site?
-        <a id="pop_signup" href="#">
-            Create an Account
-        </a>
-    </h3>
+    <div class="header-form d-flex justify-content-between">
+        <p class="text-sign">
+            <?php esc_html_e( 'Đăng nhập' ); ?>
+        </p>
 
-    <h1>Login</h1>
+        <a id="pop_signup" href="#">
+            <?php esc_html_e( 'Đăng kí', 'sport' ); ?>
+        </a>
+    </div>
 
     <p class="status"></p>
 
     <?php wp_nonce_field('ajax-login-nonce', 'security'); ?>
 
-    <label for="username">Username</label>
-    <input id="username" type="text" class="required" name="username">
+    <div class="field-item">
+        <input id="username" type="text" class="required" name="username" placeholder="<?php esc_attr_e( 'Tên đăng nhập', 'sport' ); ?>">
+    </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" class="required" name="password">
+    <div class="field-item">
+        <input id="password" type="password" class="required" name="password" placeholder="<?php esc_attr_e( 'Mật khẩu', 'sport' ); ?>">
+    </div>
 
-    <a class="text-link" href="<?php echo wp_lostpassword_url(); ?>">
-        Lost password?
-    </a>
+    <div class="d-flex align-items-center justify-content-between">
+        <a class="text-link" href="<?php echo wp_lostpassword_url(); ?>">
+            <?php esc_html_e( 'Quên mật khẩu', 'sport' ); ?>
+        </a>
 
-    <input class="submit_button" type="submit" value="LOGIN">
+        <input class="submit_button" type="submit" value="LOGIN">
+    </div>
 
     <a class="close" href="#">
-        (close)
+        <i class="fas fa-times"></i>
     </a>
 </form>

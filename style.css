@@ -830,10 +830,6 @@ form.post-password-form p input[type='submit'] {
   margin-right: 5px;
 }
 
-.header .top-bar .sign-up-bar a:hover {
-  text-decoration: underline;
-}
-
 /* Center Bar */
 .header {
   position: sticky;
@@ -4235,121 +4231,116 @@ form.wpcf7-form .wpcf7-submit:hover {
 # Sign Form
 -----------------------------------------------------------------------------*/
 /* Login */
-form.ajax-auth {
+.sign-form-popup {
   display: none;
-  z-index: 999;
   position: fixed;
-  top: 150px;
-  left: 50%;
-  width: 350px;
-  margin-left: -200px;
-  padding: 40px 25px 25px 25px;
-  background-color: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-  color: #878787;
-  font-size: 11px;
-}
-
-.ajax-auth h1, .ajax-auth h3 {
-  font-weight: 100;
-  color: #333333;
-  line-height: 1;
-}
-
-.ajax-auth h1 {
-  font-size: 27px;
-  text-align: center;
-  margin: 0 0 20px 0;
-}
-
-.ajax-auth h3 {
-  font-size: 18px;
-  text-align: left;
-  margin: 0;
-}
-
-.ajax-auth h3 a {
-  color: #e25c4c;
-}
-
-.ajax-auth hr {
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 0 none;
-  height: 1px;
-  margin: 20px 0;
-}
-
-.ajax-auth input#username, .ajax-auth input#password, .ajax-auth input#signonname, .ajax-auth input#email, .ajax-auth input#signonpassword, .ajax-auth input#password2 {
-  border: 1px solid #EDEDED;
-  border-radius: 3px 3px 3px 3px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) inset;
-  color: #333333;
-  font-size: 15px;
-  padding: 10px 10px 10px 13px;
-  width: 325px;
-  margin: 7px 0 20px 0;
-  background-color: #F9F9F9;
-}
-
-.ajax-auth input#username:focus, .ajax-auth input#password:focus, .ajax-auth input#signonname:focus, .ajax-auth input#email:focus, .ajax-auth input#signonpassword:focus, .ajax-auth input#password2:focus {
-  background-color: #FFF;
-}
-
-.ajax-auth label.error {
-  display: none !important;
-}
-
-.ajax-auth input.error {
-  border: 1px solid #FF0000 !important;
-}
-
-.ajax-auth input.submit_button {
-  font-size: 13px;
-  color: #FFF;
-  border: 1px solid #b34336;
-  background-color: #e25c4c;
-  border-radius: 3px;
-  text-shadow: 0 1px 0 #ba3f31;
-  padding: 9px 31px 9px 31px;
-  background: -moz-linear-gradient(top, #ea6656, #df5949);
-  border-top: 1px solid #bb483a;
-  border-bottom: 1px solid #a63b2e;
-  float: right;
-  box-shadow: 0 1px 0 #E87A6E inset;
-}
-
-.ajax-auth a {
-  text-decoration: none;
-}
-
-.ajax-auth a.close {
-  color: #DCDCDC;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-}
-
-.ajax-auth a.text-link {
-  color: #B4B2B2;
-  float: left;
-  margin: 10px 0 0 0;
-}
-
-.ajax-auth p.status {
-  text-align: center;
-  margin: -15px 0 20px 0;
-  font-weight: 600;
-  display: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 998;
 }
 
 .login_overlay {
-  height: 100%;
+  position: absolute;
   width: 100%;
-  background-color: #F6F6F6;
-  opacity: 0.9;
-  position: fixed;
-  z-index: 998;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(246, 246, 246, 0.9);
+}
+
+.form-login__box {
+  height: 100vh;
+}
+
+.form-login__box .header-form {
+  margin-bottom: 15px;
+}
+
+.form-login__box .header-form .text-sign {
+  color: #000000;
+  margin: 0;
+}
+
+.form-login__box .header-form a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #e12f2f;
+}
+
+form.ajax-auth {
+  width: 30%;
+  position: relative;
+  padding: 40px 25px 25px 25px;
+  background-color: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+form.ajax-auth p.status {
+  text-align: center;
+  display: none;
+}
+
+form.ajax-auth .field-item {
+  margin: 0 0 20px;
+}
+
+form.ajax-auth input#username, form.ajax-auth input#password, form.ajax-auth input#signonname, form.ajax-auth input#email, form.ajax-auth input#signonpassword, form.ajax-auth input#password2 {
+  display: block;
+  border: 1px solid #EDEDED;
+  border-radius: 3px 3px 3px 3px;
+  color: #333333;
+  font-size: 15px;
+  padding: 10px;
+  width: 100%;
+  background-color: #F9F9F9;
+}
+
+form.ajax-auth input#username:focus, form.ajax-auth input#password:focus, form.ajax-auth input#signonname:focus, form.ajax-auth input#email:focus, form.ajax-auth input#signonpassword:focus, form.ajax-auth input#password2:focus {
+  background-color: #FFF;
+}
+
+form.ajax-auth input.error {
+  border: 1px solid #FF0000 !important;
+}
+
+form.ajax-auth input.submit_button {
+  cursor: pointer;
+  color: #ffffff;
+  padding: 9px 31px 9px 31px;
+  border: none;
+  background-color: #00b0f0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+form.ajax-auth label.error {
+  display: none !important;
+}
+
+form.ajax-auth .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  opacity: 1;
+}
+
+.header .top-bar a.text-link {
+  color: #e12f2f;
+  margin: 0;
+}
+
+.header .top-bar .sign-up-bar .ajax-auth .close i {
+  font-size: 18px;
+  color: #e12f2f;
+  margin: 0;
 }
 
 /* Register */

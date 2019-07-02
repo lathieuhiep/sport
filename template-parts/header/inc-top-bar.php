@@ -25,11 +25,7 @@
                         <?php esc_html_e( 'Đăng xuất', 'sport' ); ?>
                     </a>
 
-                <?php
-                else:
-
-                get_template_part( 'template-parts/sign-form/login' );
-                ?>
+                <?php else: ?>
 
                     <a class="login login_button" id="show_login" href="#">
                         <i class="fas fa-lock"></i>
@@ -40,6 +36,14 @@
                         <i class="fas fa-user"></i>
                         <?php esc_html_e( 'Đăng kí', 'sport' ); ?>
                     </a>
+
+                    <div id="form-login" class="sign-form-popup">
+                        <div class="login_overlay"></div>
+
+                        <div class="form-login__box d-flex align-items-center justify-content-center">
+                            <?php get_template_part( 'template-parts/sign-form/login' ); ?>
+                        </div>
+                    </div>
 
                 <?php endif; ?>
 
