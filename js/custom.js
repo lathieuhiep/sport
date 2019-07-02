@@ -144,18 +144,6 @@
             $qty.trigger( 'change' );
         });
 
-        $( "#slider-range" ).slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [ 75, 300 ],
-            slide: function( event, ui ) {
-                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-            }
-        });
-        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
         /* Start scrollbar description */
         let site_term_description_scroll    =   $( '.scrollbar-box .scrollbar-inner' );
 
@@ -194,6 +182,40 @@
 
         }
         /* End countdown product sale */
+
+        // $('#pop_login, #pop_signup').live('click', function (e) {
+        //     let formToFadeOut = $('form#register'),
+        //         formtoFadeIn = $('form#login');
+        //
+        //     if ($(this).attr('id') === 'pop_signup') {
+        //         formToFadeOut = $('form#login');
+        //         formtoFadeIn = $('form#register');
+        //     }
+        //     formToFadeOut.fadeOut(500, function () {
+        //         formtoFadeIn.fadeIn();
+        //     });
+        //     return false;
+        // });
+
+        // Show the login/signup popup on click
+        $('#show_login, #show_signup').on('click', function (e) {
+
+            e.preventDefault();
+
+            if ($(this).attr('id') === 'show_login')
+                $('form#login').fadeIn(500);
+            else
+                $('form#register').fadeIn(500);
+
+        });
+
+        // Close popup
+        $(document).on('click', '.login_overlay, .close', function () {
+            $('form#login, form#register').fadeOut(500, function () {
+                $('.login_overlay').remove();
+            });
+            return false;
+        });
 
     });
 

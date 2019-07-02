@@ -35,6 +35,9 @@ Text Domain: sport
 # Contact Form 7
 # Notification
 # Chat
+# Sign Form
+  ## Login
+  ## Register
 # Footer
 # Responsive
 * -----------------------------------------------------------------------------
@@ -95,6 +98,16 @@ Text Domain: sport
 # Chat
 -----------------------------------------------------------------------------*/
 @import "chat";
+
+/**
+# Sign Form
+-----------------------------------------------------------------------------*/
+
+/* Login */
+@import "sign-form/login";
+
+/* Register */
+@import "sign-form/register";
 
 /**
 # 404
