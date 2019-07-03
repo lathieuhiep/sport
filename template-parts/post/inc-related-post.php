@@ -22,7 +22,7 @@ if ( !empty( $sport_term_cat_post ) ):
 
     <div class="site-single-post-related">
         <h3 class="title">
-            <?php esc_html_e( 'Related Post', 'sport' ); ?>
+            <?php esc_html_e( 'Bài viết liên quan', 'sport' ); ?>
         </h3>
 
         <div class="row">
@@ -36,24 +36,26 @@ if ( !empty( $sport_term_cat_post ) ):
                         <figure class="post-image">
                             <?php the_post_thumbnail( 'medium' ); ?>
                         </figure>
+                        <div class="post-content">
+                            <h4 class="title-post">
+                                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                    <?php the_title(); ?>
+                                </a>
+                            </h4>
 
-                        <h4 class="title-post">
-                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                <?php the_title(); ?>
-                            </a>
-                        </h4>
-
-                        <div class="excerpt-post">
-                            <p>
-                                <?php
-                                if( has_excerpt() ) :
-                                    echo wp_trim_words( get_the_excerpt(), 15, '...' );
-                                else:
-                                    echo wp_trim_words( get_the_content(), 15, '...' );
-                                endif;
-                                ?>
-                            </p>
+                            <div class="excerpt-post">
+                                <p>
+                                    <?php
+                                    if( has_excerpt() ) :
+                                        echo wp_trim_words( get_the_excerpt(), 15, '...' );
+                                    else:
+                                        echo wp_trim_words( get_the_content(), 15, '...' );
+                                    endif;
+                                    ?>
+                                </p>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 

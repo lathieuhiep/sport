@@ -11,6 +11,15 @@ $sport_class_col_content = sport_col_use_sidebar( $sport_blog_sidebar_single, 's
 
 <div class="site-container site-single">
     <div class="container">
+        <div class="top-archive">
+            <div class="breadcrumb">
+                <?php if (function_exists('bcn_display')) {
+                    bcn_display();
+                } ?>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="<?php echo esc_attr( $sport_class_col_content ); ?>">
 
@@ -25,7 +34,11 @@ $sport_class_col_content = sport_col_use_sidebar( $sport_blog_sidebar_single, 's
 
             </div>
 
-            <?php get_sidebar(); ?>
+            <?php
+            if($sport_blog_sidebar_single != 'hide'):
+            get_sidebar();
+            endif;
+            ?>
         </div>
     </div>
 </div>
