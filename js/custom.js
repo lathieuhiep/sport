@@ -183,19 +183,26 @@
         }
         /* End countdown product sale */
 
-        // $('#pop_login, #pop_signup').live('click', function (e) {
-        //     let formToFadeOut = $('form#register'),
-        //         formtoFadeIn = $('form#login');
-        //
-        //     if ($(this).attr('id') === 'pop_signup') {
-        //         formToFadeOut = $('form#login');
-        //         formtoFadeIn = $('form#register');
-        //     }
-        //     formToFadeOut.fadeOut(500, function () {
-        //         formtoFadeIn.fadeIn();
-        //     });
-        //     return false;
-        // });
+        /* Start form login register */
+        let form_login      =   $('#form-login'),
+            form_register   =   $('#form-register');
+
+        $('#pop_login, #pop_signup').on('click', function (e) {
+
+            let formToFadeOut   =   form_register,
+                formtoFadeIn    =   form_login;
+
+            if ( $(this).attr('id') === 'pop_signup' ) {
+                formToFadeOut   =   form_login;
+                formtoFadeIn    =   form_register;
+            }
+
+            formToFadeOut.fadeOut(500, function () {
+                formtoFadeIn.fadeIn();
+            });
+
+            return false;
+        });
 
         // Show the login/signup popup on click
         $('#show_login, #show_signup').on('click', function (e) {
@@ -203,9 +210,9 @@
             e.preventDefault();
 
             if ( $(this).attr('id') === 'show_login' )
-                $('#form-login').fadeIn(500);
+                form_login.fadeIn(500);
             else
-                $('#form-register').fadeIn(500);
+                form_register.fadeIn(500);
 
         });
 
@@ -217,6 +224,7 @@
             return false;
 
         });
+        /* Start form login register */
 
     });
 

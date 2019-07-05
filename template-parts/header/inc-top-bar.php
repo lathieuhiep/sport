@@ -17,13 +17,29 @@
 
             <?php endif; ?>
 
-            <div class="sign-up-bar">
+            <div class="sign-up-bar d-flex">
 
-                <?php if (is_user_logged_in()) : ?>
+                <?php
+                if ( is_user_logged_in() ) :
 
-                    <a href="<?php echo wp_logout_url( home_url() ); ?>">
-                        <?php esc_html_e( 'Đăng xuất', 'sport' ); ?>
+                    $sport_current_user = wp_get_current_user();
+
+                ?>
+
+                    <a class="site-text-login" href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ); ?>" title="<?php esc_attr_e( 'Tài khoản của tôi','sport' ); ?>">
+                        <i class="fas fa-user-circle"></i>
+                        <?php echo esc_html( $sport_current_user -> user_login ); ?>
                     </a>
+
+                    <div class="dropdown-account-box">
+                        <span class="dropdown-toggle-account" id="drop-down-my-account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-caret-down"></i>
+                        </span>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop-down-my-acount">
+                            <?php do_action( 'woocommerce_account_navigation' ); ?>
+                        </div>
+                    </div>
 
                 <?php else: ?>
 
@@ -37,13 +53,11 @@
                         <?php esc_html_e( 'Đăng kí', 'sport' ); ?>
                     </a>
 
-                    <div id="form-login" class="sign-form-popup">
-                        <div class="login_overlay"></div>
+                    <?php
+                    get_template_part( 'template-parts/sign-form/login' );
 
-                        <div class="form-login__box d-flex align-items-center justify-content-center">
-                            <?php get_template_part( 'template-parts/sign-form/login' ); ?>
-                        </div>
-                    </div>
+                    get_template_part( 'template-parts/sign-form/register' );
+                    ?>
 
                 <?php endif; ?>
 

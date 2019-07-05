@@ -113,6 +113,36 @@ form {
           }
         }
       }
+      .site-text-login {
+        margin-right: 15px;
+      }
+      .dropdown-account-box {
+        .dropdown-toggle-account {
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 16px;
+        }
+        .dropdown-menu {
+          border: none;
+          border-radius: 0;
+          background-color: $background-primary;
+          @include box-shadow(0 3px 3px -3px rgba(0, 0, 0, 0.3));
+
+          nav {
+            float: none;
+            width: 100%;
+          }
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+              padding: 0 10px;
+            }
+          }
+        }
+      }
     }
   }
 }

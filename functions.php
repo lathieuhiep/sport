@@ -851,8 +851,38 @@ function ajax_login(){
     die();
 }
 
-function auth_user_login( $user_login, $password, $login )
-{
+// Enable the user with no privileges to run ajax_register() in AJAX
+add_action( 'wp_ajax_nopriv_ajaxregister', 'ajax_register' );
+function ajax_register() {
+
+    // First check the nonce, if it fails the function will break
+    check_ajax_referer( 'ajax-register-nonce', 'security' );
+
+    // Nonce is checked, get the POST data and sign user on
+    $info = array();
+    $info['user_nicename'] = $info['nickname'] = $info['display_name'] = $info['first_name'] = $info['user_login'] = sanitize_user($_POST['username']) ;
+    $info['user_pass'] = sanitize_text_field($_POST['password']);
+    $info['user_email'] = sanitize_email( $_POST['email']);
+
+    // Register the user
+    $user_register = wp_insert_user( $info );
+    if ( is_wp_error($user_register) ){
+        $error  = $user_register->get_error_codes() ;
+
+        if(in_array('empty_user_login', $error))
+            echo json_encode(array('loggedin'=>false, 'message' => __($user_register->get_error_message('empty_user_login'))));
+        elseif(in_array('existing_user_login',$error))
+            echo json_encode( array('loggedin'=>false, 'message' => esc_html__( 'Tên người dùng này đã được đăng ký', 'sport' ) ) );
+        elseif(in_array('existing_user_email',$error))
+            echo json_encode(array('loggedin'=>false, 'message' =>  esc_html__('Email này đã được dùng.')));
+    } else {
+        auth_user_login( $info['nickname'], $info['user_pass'], 'Đăng kí tài khoản' );
+    }
+
+    die();
+}
+
+function auth_user_login( $user_login, $password, $login ) {
     $info = array();
     $info['user_login'] = $user_login;
     $info['user_password'] = $password;

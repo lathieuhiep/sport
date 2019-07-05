@@ -4343,6 +4343,40 @@ form.ajax-auth .close {
   margin: 0;
 }
 
+.header .top-bar .sign-up-bar .site-text-login {
+  margin-right: 15px;
+}
+
+.header .top-bar .sign-up-bar .dropdown-account-box .dropdown-toggle-account {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.header .top-bar .sign-up-bar .dropdown-account-box .dropdown-menu {
+  border: none;
+  border-radius: 0;
+  background-color: #00b0f0;
+  -webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+}
+
+.header .top-bar .sign-up-bar .dropdown-account-box .dropdown-menu nav {
+  float: none;
+  width: 100%;
+}
+
+.header .top-bar .sign-up-bar .dropdown-account-box .dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .top-bar .sign-up-bar .dropdown-account-box .dropdown-menu ul li {
+  padding: 0 10px;
+}
+
 /* Register */
 /**
 # 404

@@ -8,6 +8,9 @@
 
     "use strict";
 
+    let register_form   =   $( '#register' ),
+        login_form      =   $( '#login' );
+
     // Perform AJAX login/register on form submit
     $('form#login, form#register').on('submit', function (e) {
 
@@ -19,7 +22,7 @@
         email = '',
         security = $('form#login #security').val();
 
-        if ($(this).attr('id') == 'register') {
+        if ($(this).attr('id') === 'register') {
             action = 'ajaxregister';
             username = $('#signonname').val();
             password = $('#signonpassword').val();
@@ -53,15 +56,18 @@
     });
 
     // Client side form validation
-    if (jQuery("#register").length)
-        jQuery("#register").validate(
+    if ( register_form.length )
+
+        register_form.validate(
             {
                 rules:{
                     password2:{ equalTo:'#signonpassword'
                     }
                 }}
         );
-    else if (jQuery("#login").length)
-        jQuery("#login").validate();
+
+    else if ( login_form.length )
+
+        login_form.validate();
 
 } )( jQuery );
