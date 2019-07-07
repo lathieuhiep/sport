@@ -651,6 +651,13 @@ Redux::setSection( $sport_opt_name, array(
             )
         ),
 
+        array(
+            'id'        =>  'sport_single_product_phone',
+            'type'      =>  'text',
+            'title'     =>  esc_html__( 'Phone Shop', 'sport' ),
+            'default'   =>  '0984.187.697',
+        ),
+
     )
 ));
 

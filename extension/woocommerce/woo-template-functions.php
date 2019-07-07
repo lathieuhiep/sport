@@ -1240,3 +1240,40 @@ function sport_custom_woo_order_item_name( $name, $item ) {
 <?php
 
 }
+
+if( !function_exists( 'sport_single_product_phone' ) ) :
+
+    /**
+     * woocommerce_after_add_to_cart_button hook.
+     *
+     * @hooked sport_single_product_phone - 10
+     */
+
+    function sport_single_product_phone() {
+
+        global $sport_options;
+
+        $phone      =   $sport_options['sport_single_product_phone'];
+
+        if ( !empty( $phone ) ) :
+
+    ?>
+
+        <div class="single-phone d-flex align-items-center">
+            <div class="number-phone">
+                <span>
+                    <i class="fas fa-phone-volume"></i>
+                </span>
+            </div>
+
+            <a href="tel:<?php echo esc_attr( $phone ); ?>" title="<?php esc_attr_e( 'Liên hệ', 'sport' ); ?>">
+                <?php echo esc_html( $phone ); ?>
+            </a>
+        </div>
+
+    <?php
+
+        endif;
+    }
+
+endif;

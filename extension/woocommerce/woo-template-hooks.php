@@ -93,6 +93,7 @@ add_action( 'woocommerce_after_main_content', 'sport_woo_after_main_content', 10
  * @see sport_woo_after_single_product()
  * @see sport_related_products()
  * @see sport_product_blog()
+ * @see sport_single_product_phone();
  *
  */
 
@@ -123,10 +124,13 @@ add_action( 'woocommerce_after_single_product_summary', 'sport_woo_after_single_
 add_action( 'woocommerce_after_single_product', 'sport_woo_after_single_product', 30 );
 
 add_action( 'woocommerce_single_product_summary', 'sport_loop_single_meta_product', 10 );
+
 add_action( 'woocommerce_after_single_product_summary', 'sport_upsells_products', 15 );
 add_action( 'woocommerce_after_single_product_summary', 'sport_related_products', 20 );
 
 add_action( 'woocommerce_single_product_summary', 'sport_share', 50 );
 
 add_action( 'woocommerce_after_single_product_summary', 'sport_product_blog', 25 );
+
+add_action( 'woocommerce_after_add_to_cart_button', 'sport_single_product_phone', 10 );
 
