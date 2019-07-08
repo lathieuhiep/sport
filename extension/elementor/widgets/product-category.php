@@ -216,20 +216,20 @@ class sport_widget_products_filter extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'gallery_height',
-            [
-                'label'     =>  esc_html__( 'Height', 'sport' ),
-                'type'      =>  Controls_Manager::NUMBER,
-                'min'       =>  1,
-                'max'       =>  '',
-                'step'      =>  1,
-                'default'   =>  '',
-                'selectors' =>  [
-                    '{{WRAPPER}} .product-gallery-cate .item-gallery .item-gallery__img' => 'height: {{VALUE}}px;',
-                ],
-            ]
-        );
+//        $this->add_control(
+//            'gallery_height',
+//            [
+//                'label'     =>  esc_html__( 'Height', 'sport' ),
+//                'type'      =>  Controls_Manager::NUMBER,
+//                'min'       =>  1,
+//                'max'       =>  '',
+//                'step'      =>  1,
+//                'default'   =>  '',
+//                'selectors' =>  [
+//                    '{{WRAPPER}} .product-gallery-cate .item-gallery .item-gallery__img' => 'height: {{VALUE}}px;',
+//                ],
+//            ]
+//        );
 
         $this->add_control(
             'gallery_loop',

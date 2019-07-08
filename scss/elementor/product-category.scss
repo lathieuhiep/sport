@@ -195,7 +195,7 @@
     }
     .item-gallery__img {
       position: relative;
-      height: 467px;
+      //height: 467px;
       overflow: hidden;
 
       a {
@@ -205,10 +205,10 @@
         top: 0;
         left: 0;
       }
-      img{
-        height: 100%;
-        object-fit: cover;
-      }
+      //img{
+      //  height: 100%;
+      //  object-fit: cover;
+      //}
     }
   }
 }
