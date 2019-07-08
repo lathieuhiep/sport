@@ -86,6 +86,12 @@ pre {
   white-space: pre-wrap;
   margin-bottom: 30px;
 }
+body.admin-bar {
+  .nav-menu,
+  .site-menu-canvas {
+    top: 32px;
+  }
+}
 .nav {
   > li {
     > a {

@@ -53,7 +53,7 @@ endif;
     ?>
 
         <div class="product-cat-selector-search dropdown d-flex align-items-center">
-            <span class="text-product" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="text-product" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                 <?php echo esc_html( $sport_text_name_product ) ?>
             </span>
 

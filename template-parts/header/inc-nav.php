@@ -1,9 +1,9 @@
 <div class="header-nav">
     <div class="container">
-        <div class="header-nav_warp d-flex align-items-center">
+        <div class="header-nav_warp d-flex">
             <?php get_template_part('template-parts/header/inc','canvas'); ?>
 
-            <div class="icon-home-link">
+            <div class="icon-home-link d-flex align-items-center">
                 <a href="<?php echo esc_url( get_home_url('/') ); ?>">
                     <i class="fas fa-home"></i>
                 </a>
@@ -35,6 +35,16 @@
 
                 <?php endif; ?>
 
+            </div>
+
+            <div class="search-nav">
+                <span class="item-icon">
+                    <i class="fas fa-search"></i>
+                </span>
+
+                <div class="search-nav__box">
+                    <?php get_template_part( 'searchform', 'product' ); ?>
+                </div>
             </div>
         </div>
     </div>

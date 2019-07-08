@@ -85,6 +85,20 @@
         }
         /* End product select search */
 
+        /* Start icon nav search */
+        let search_nav_icon =   $( '.search-nav .item-icon' );
+
+        if ( search_nav_icon.length ) {
+
+            search_nav_icon.on( 'click', function () {
+
+                $(this).parent().find( '.search-nav__box' ).toggleClass('is-active');
+
+            } )
+
+        }
+        /* End icon nav search*/
+
         /* Start Gallery Single */
         $( document ).general_owlCarousel_item( '.site-post-slides' );
         /* End Gallery Single */
@@ -253,6 +267,15 @@
 
         }, 100 );
 
+        let height_header   =   $('.header').height(),
+            nav_menu        =   $( '.nav-menu' );
+
+        if ( scrollTop >= height_header ) {
+            nav_menu.addClass( 'nav-menu-sticky' );
+        } else {
+            nav_menu.removeClass( 'nav-menu-sticky' );
+        }
+
     });
 
     /* Start function owlCarouse item */
@@ -379,15 +402,19 @@
     };
     /* End function multi owlCarouse */
 
-    var toggleNav = function () {
-        if ($('.site-canvas').hasClass('site-canvas--active')) {
+    let toggleNav = function () {
+
+        let site_canvas     =   $( '.site-canvas' ),
+            close_canvas    =   $( '.close-canvas' );
+
+        if ( site_canvas.hasClass( 'site-canvas--active' ) ) {
             // Nav Close
-            $('.site-canvas').removeClass('site-canvas--active');
-            $('.close-canvas').removeClass('close-canvas--active');
+            site_canvas.removeClass( 'site-canvas--active' );
+            close_canvas.removeClass( 'close-canvas--active' );
         } else {
             // Nav Open
-            $('.site-canvas').addClass('site-canvas--active');
-            $('.close-canvas').addClass('close-canvas--active');
+            site_canvas.addClass( 'site-canvas--active' );
+            close_canvas.addClass( 'close-canvas--active' );
         }
     };
 
@@ -398,18 +425,3 @@
     });
 
 } )( jQuery );
-
-// new Mmenu( document.querySelector( '#menu-canvas' ),
-//     {
-//         navbar: {
-//             title: ''
-//         },
-//     }
-// );
-//
-// document.addEventListener( 'click', ( evnt ) => {
-//     let anchor = evnt.target.closest( 'a[href^="#/"]' );
-//     if ( anchor ) {
-//         evnt.preventDefault();
-//     }
-// });

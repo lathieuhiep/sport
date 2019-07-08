@@ -221,6 +221,18 @@
 
 }
 
+@media ( min-width: 576px ) {
+
+  .header-nav {
+    .search-nav {
+      .search-nav__box {
+        width: 430px;
+      }
+    }
+  }
+
+}
+
 @media ( max-width: 575px ) {
 
   .comment-form {
