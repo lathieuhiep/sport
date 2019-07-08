@@ -585,6 +585,9 @@
           height: 450px;
           overflow-y: scroll;
 
+          &.woocommerce-Tabs-panel--description {
+            height: 800px;
+          }
           ul {
             list-style: none;
             padding: 0;

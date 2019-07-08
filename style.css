@@ -3635,6 +3635,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   overflow-y: scroll;
 }
 
+.woocommerce div.product .woocommerce-tabs .panel.woocommerce-Tabs-panel--description {
+  height: 800px;
+}
+
 .woocommerce div.product .woocommerce-tabs .panel ul {
   list-style: none;
   padding: 0;
