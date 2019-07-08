@@ -2996,7 +2996,7 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 .site-shop {
-  padding: 25px 0 50px;
+  padding: 50px 0;
 }
 
 .site-shop__result-count-ordering {
@@ -3238,6 +3238,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   padding: 2px 8px;
   border: none;
   background-color: #707070;
+}
+
+.woocommerce .site-shop-single .site-shop-single__warp .product-gallery-cate .item-gallery .item-gallery__img {
+  height: 320px;
 }
 
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box {
@@ -3490,6 +3494,48 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .woocommerce .site-shop-single div.product form.cart.grouped_form .single_add_to_cart_button {
   margin-top: 15px;
+}
+
+.woocommerce .site-shop-single div.product form.cart .single-phone {
+  padding: 0 10px 0 3px;
+  margin-left: 5px;
+  line-height: 35px;
+  background-color: #e12f2f;
+}
+
+.woocommerce .site-shop-single div.product form.cart .single-phone .number-phone {
+  display: inline-block;
+  font-size: 23px;
+  color: #00b0f0;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+  margin-right: 5px;
+  background-color: #ffffff;
+}
+
+.woocommerce .site-shop-single div.product form.cart .single-phone .number-phone span {
+  display: block;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.woocommerce .site-shop-single div.product form.cart .single-phone .number-phone i {
+  line-height: inherit;
+  -webkit-animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+  animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+.woocommerce .site-shop-single div.product form.cart .single-phone a {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .woocommerce .site-shop-single .product_meta > span {
@@ -4101,6 +4147,30 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   font-weight: 700;
   padding: 5px;
   background-color: #000000;
+}
+
+@-webkit-keyframes phonering-alo-circle-img-anim {
+  0% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+  }
+  10% {
+    -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+  }
+  20% {
+    -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+  }
+  30% {
+    -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+  }
+  40% {
+    -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+  }
+  50% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+  }
+  100% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+  }
 }
 
 /**

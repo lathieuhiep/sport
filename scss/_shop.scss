@@ -26,7 +26,7 @@
   z-index: 2;
 }
 .site-shop {
-  padding: 25px 0 50px;
+  padding: 50px 0;
 }
 .site-shop__result-count-ordering {
   margin-bottom: 20px;
@@ -253,6 +253,13 @@
           background-color: $color-primary;
         }
       }
+      .product-gallery-cate {
+        .item-gallery {
+          .item-gallery__img {
+            height: 320px;
+          }
+        }
+      }
     }
     div {
       &.product {
@@ -439,6 +446,41 @@
               }
               .single_add_to_cart_button {
                 margin-top: 15px;
+              }
+            }
+            .single-phone {
+              padding: 0 10px 0 3px;
+              margin-left: 5px;
+              line-height: 35px;
+              background-color: $background-hover;
+
+              .number-phone {
+                display: inline-block;
+                font-size: 23px;
+                color: $color-hover;
+                line-height: 30px;
+                text-align: center;
+                width: 30px;
+                margin-right: 5px;
+                background-color: #ffffff;
+
+                span {
+                  display: block;
+                  @include transform(rotate(-45deg));
+                }
+                i {
+                  line-height: inherit;
+                  -webkit-animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+                  animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+                  -webkit-transform-origin:50% 50%;
+                  -ms-transform-origin:50% 50%;
+                  transform-origin:50% 50%
+                }
+              }
+              a {
+                color: #ffffff;
+                font-weight: 700;
+                font-size: 18px;
               }
             }
           }
@@ -1007,5 +1049,34 @@
         }
       }
     }
+  }
+}
+@-webkit-keyframes phonering-alo-circle-img-anim {
+  0% {
+    -webkit-transform:rotate(0) scale(1) skew(1deg)
+  }
+
+  10% {
+    -webkit-transform:rotate(-25deg) scale(1) skew(1deg)
+  }
+
+  20% {
+    -webkit-transform:rotate(25deg) scale(1) skew(1deg)
+  }
+
+  30% {
+    -webkit-transform:rotate(-25deg) scale(1) skew(1deg)
+  }
+
+  40% {
+    -webkit-transform:rotate(25deg) scale(1) skew(1deg)
+  }
+
+  50% {
+    -webkit-transform:rotate(0) scale(1) skew(1deg)
+  }
+
+  100% {
+    -webkit-transform:rotate(0) scale(1) skew(1deg)
   }
 }

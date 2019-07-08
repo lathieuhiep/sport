@@ -9,6 +9,10 @@
                 </a>
             </div>
 
+            <button class="navbar-toggler" data-toggle="collapse" data-target=".site-menu">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <div class="site-menu site-menu-nav collapse navbar-collapse">
 
                 <?php

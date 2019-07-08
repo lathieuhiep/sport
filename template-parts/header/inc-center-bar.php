@@ -19,10 +19,6 @@ $sport_logo_image_id    =   $sport_options['sport_logo_image']['id'];
                         endif;
                         ?>
                     </a>
-
-                    <button class="navbar-toggler" data-toggle="collapse" data-target=".site-menu">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
                 </div>
             </div>
 
