@@ -270,6 +270,52 @@
               bottom: 5px;
             }
           }
+          .wpgs-nav {
+            margin-top: 10px;
+
+            .slick-list {
+              margin: 0 -5px;
+            }
+            .slick-slide {
+              margin: 0;
+              padding: 0 5px;
+            }
+            .slick-arrow {
+              width: 20px;
+              height: 25px;
+              line-height: 25px;
+              text-align: center;
+              background-color: rgba(204, 204, 204, 0.5);
+              @include transition(all 0.4s ease-in-out);
+
+              &:hover {
+                background-color: $background-primary;
+              }
+              &:before {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                opacity: 1;
+                color: #ffffff;
+                font-size: 15px;
+                line-height: inherit;
+              }
+              &.slick-prev {
+                margin-left: 0;
+                left: 0;
+
+                &:before {
+                  content: "\f104";
+                }
+              }
+              &.slick-next {
+                right: 0;
+
+                &:before {
+                  content: "\f105"
+                }
+              }
+            }
+          }
         }
         div {
           &.images {
@@ -1074,5 +1120,68 @@
 
   100% {
     -webkit-transform:rotate(0) scale(1) skew(1deg)
+  }
+}
+.woocommerce-account {
+  .woocommerce {
+    margin: 0 -15px;
+  }
+  .woocommerce-MyAccount-navigation {
+    width: 25%;
+    padding: 0 15px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-bottom: 8px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .woocommerce-MyAccount-content {
+    width: 75%;
+    padding: 0 15px;
+  }
+}
+section {
+  &.widget {
+    ul {
+      &.woof_list {
+        margin: 0 -5px !important;
+        @include flexbox();
+        @include flex-wrap(wrap);
+
+        li {
+          margin: 0 0 10px !important;
+          padding: 0 5px !important;
+          border-bottom: 0;
+          width: 50%;
+          @include flex( 0 0 50%);
+
+          input {
+            &[type=checkbox] {
+              opacity: 0;
+            }
+          }
+        }
+        label {
+          padding: 0;
+          margin: 0 0 0 5px;
+        }
+      }
+      &.woof_list_checkbox {
+        li {
+          div {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 }
