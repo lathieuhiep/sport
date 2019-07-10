@@ -240,6 +240,14 @@
         });
         /* Start form login register */
 
+        let wpgs_nav    =   $( '.site-shop-single__gallery-box .wpgs-nav' );
+
+        if ( wpgs_nav.length ) {
+
+            wpgs_nav.parents( '.site-shop-single__gallery-box' ).find( '.on-sale-percent' ).addClass( 'on-sale-wpgs-nav' )
+
+        }
+
     });
 
     $( window ).on( "load", function() {

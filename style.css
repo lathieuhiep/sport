@@ -3239,11 +3239,6 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   overflow: hidden;
 }
 
-.woocommerce .site-shop-single div.product .site-shop-single__gallery-box .on-sale-percent {
-  top: 0;
-  bottom: auto;
-}
-
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box .product-new ~ .on-sale-percent {
   top: auto;
   bottom: 5px;
@@ -3251,6 +3246,8 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box .wpgs-nav {
   margin-top: 10px;
+  height: 60px;
+  overflow: hidden;
 }
 
 .woocommerce .site-shop-single div.product .site-shop-single__gallery-box .wpgs-nav .slick-list {
@@ -3736,6 +3733,10 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
   left: 5px;
   bottom: 5px;
   z-index: 2;
+}
+
+.woocommerce .on-sale-percent.on-sale-wpgs-nav {
+  bottom: 75px;
 }
 
 .woocommerce .quantity .title-qty {

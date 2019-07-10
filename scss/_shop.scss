@@ -260,10 +260,6 @@
           position: relative;
           overflow: hidden;
 
-          .on-sale-percent {
-            top: 0;
-            bottom: auto;
-          }
           .product-new {
             ~ .on-sale-percent {
               top: auto;
@@ -272,6 +268,8 @@
           }
           .wpgs-nav {
             margin-top: 10px;
+            height: 60px;
+            overflow: hidden;
 
             .slick-list {
               margin: 0 -5px;
@@ -685,6 +683,10 @@
     left: 5px;
     bottom: 5px;
     z-index: 2;
+
+    &.on-sale-wpgs-nav {
+      bottom: 75px;
+    }
   }
   .quantity {
     .title-qty {
