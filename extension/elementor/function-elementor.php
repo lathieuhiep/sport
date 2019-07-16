@@ -41,6 +41,8 @@ function sport_content_item_product( $class_animate = null ) {
         <div class="item-thumbnail">
             <?php
             sport_product_new();
+            sport_product_hot();
+            sport_product_only();
 
             woocommerce_show_product_loop_sale_flash();
             ?>

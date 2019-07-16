@@ -4,25 +4,27 @@
  * General functions used to integrate this theme with WooCommerce.
  */
 
-add_action( 'after_setup_theme', 'sport_shop_setup' );
+add_action('after_setup_theme', 'sport_shop_setup');
 
-function sport_shop_setup() {
+function sport_shop_setup()
+{
 
-    add_theme_support( 'woocommerce' );
-    add_theme_support( 'wc-product-gallery-zoom' );
-    add_theme_support( 'wc-product-gallery-lightbox' );
-    add_theme_support( 'wc-product-gallery-slider' );
+    add_theme_support('woocommerce');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
 
 }
 
 /* Remove description heading */
-add_filter( 'woocommerce_product_description_heading', '__return_null' );
-add_filter( 'woocommerce_product_additional_information_heading', '__return_null' );
+add_filter('woocommerce_product_description_heading', '__return_null');
+add_filter('woocommerce_product_additional_information_heading', '__return_null');
 
 /* Start limit product */
 add_filter('loop_shop_per_page', 'sport_show_products_per_page');
 
-function sport_show_products_per_page() {
+function sport_show_products_per_page()
+{
     global $sport_options;
 
     $sport_product_limit = $sport_options['sport_product_limit'];
@@ -30,70 +32,77 @@ function sport_show_products_per_page() {
     return $sport_product_limit;
 
 }
+
 /* End limit product */
 
 /* Start Change number or products per row */
 add_filter('loop_shop_columns', 'sport_loop_columns_product');
 
-function sport_loop_columns_product() {
+function sport_loop_columns_product()
+{
     global $sport_options;
 
     $sport_products_per_row = $sport_options['sport_products_per_row'];
 
-    if ( !empty( $sport_products_per_row ) ) :
+    if (!empty($sport_products_per_row)) :
         return $sport_products_per_row;
     else:
         return 4;
     endif;
 
 }
+
 /* End Change number or products per row */
 
-add_filter( 'woocommerce_show_page_title', 'sport_woo_show_page_title' );
-function sport_woo_show_page_title() {
+add_filter('woocommerce_show_page_title', 'sport_woo_show_page_title');
+function sport_woo_show_page_title()
+{
     return false;
 }
 
 /* Start get cart */
-if ( ! function_exists( 'sport_get_cart' ) ):
+if (!function_exists('sport_get_cart')):
 
-    function sport_get_cart(){
+    function sport_get_cart()
+    {
 
-?>
+        ?>
 
         <div class="cart-box d-flex align-items-center">
-            <a class="cart-link" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html_e('Xem giỏ hàng', 'sport'); ?>"></a>
+            <a class="cart-link" href="<?php echo wc_get_cart_url(); ?>"
+               title="<?php esc_html_e('Xem giỏ hàng', 'sport'); ?>"></a>
 
             <div class="cart-customlocation">
-                <img src="<?php echo esc_url( get_theme_file_uri( '/images/cart.png' ) ); ?>" alt="cart">
+                <img src="<?php echo esc_url(get_theme_file_uri('/images/cart.png')); ?>" alt="cart">
 
                 <span class="number-cart-product">
-                    <?php echo sprintf ( _n( '%d', '%d', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?>
+                    <?php echo sprintf(_n('%d', '%d', WC()->cart->get_cart_contents_count()), WC()->cart->get_cart_contents_count()); ?>
                 </span>
             </div>
 
             <span class="text-cart-product">
-                <?php esc_html_e( 'Giỏ hàng', 'sport' ); ?>
-                <br />
-                <?php esc_html_e( 'sản phẩm', 'sport' ); ?>
+                <?php esc_html_e('Giỏ hàng', 'sport'); ?>
+                <br/>
+                <?php esc_html_e('sản phẩm', 'sport'); ?>
             </span>
         </div>
 
-<?php
+        <?php
     }
 
 endif;
 
 /* To ajaxify your cart viewer */
-add_filter( 'woocommerce_add_to_cart_fragments', 'sport_add_to_cart_fragment' );
+add_filter('woocommerce_add_to_cart_fragments', 'sport_add_to_cart_fragment');
 
-if ( ! function_exists( 'sport_add_to_cart_fragment' ) ) :
+if (!function_exists('sport_add_to_cart_fragment')) :
 
-    function sport_add_to_cart_fragment( $sport_fragments ) {
+    function sport_add_to_cart_fragment($sport_fragments)
+    {
 
         ob_start();
 
-        do_action( 'sport_get_cart_item' );
+        do_action('sport_get_cart_item');
 
         $sport_fragments['.cart-box'] = ob_get_clean();
 
@@ -105,19 +114,20 @@ endif;
 /* End get cart */
 
 /* Start breadcrumbs */
-if ( !function_exists( 'sport_woo_breadcrumbs' ) ) :
+if (!function_exists('sport_woo_breadcrumbs')) :
 
     /**
      * Hook: woocommerce_before_main_content.
      *
      * @hooked sport_woo_breadcrumbs - 20
      */
-    function sport_woo_breadcrumbs() {
+    function sport_woo_breadcrumbs()
+    {
 
-        get_template_part('template-parts/inc','breadcrumbs');
+        get_template_part('template-parts/inc', 'breadcrumbs');
 
-        if ( is_product_category() ) {
-    ?>
+        if (is_product_category()) {
+            ?>
 
             <div class="title-cat-product">
                 <h3 class="title">
@@ -125,7 +135,7 @@ if ( !function_exists( 'sport_woo_breadcrumbs' ) ) :
                 </h3>
             </div>
 
-    <?php
+            <?php
         }
 
     }
@@ -134,25 +144,26 @@ endif;
 /* End breadcrumbs */
 
 /* Start archive description */
-if ( ! function_exists( 'sport_woo_archive_description_open' ) ) :
+if (!function_exists('sport_woo_archive_description_open')) :
 
-    function sport_woo_archive_description_open() {
+    function sport_woo_archive_description_open()
+    {
 
-        if ( is_product_category() ) :
-    ?>
+        if (is_product_category()) :
+            ?>
 
-        <div class="site-term-description-scroll scrollbar-box">
-            <div class="scrollbar-inner">
-                <?php
-                woocommerce_taxonomy_archive_description();
-                woocommerce_product_archive_description();
-                ?>
+            <div class="site-term-description-scroll scrollbar-box">
+                <div class="scrollbar-inner">
+                    <?php
+                    woocommerce_taxonomy_archive_description();
+                    woocommerce_product_archive_description();
+                    ?>
+                </div>
             </div>
-        </div>
 
-    <?php
+        <?php
 
-    endif;
+        endif;
 
     }
 
@@ -160,18 +171,19 @@ endif;
 /* End archive description */
 
 /* Start Sidebar Shop */
-if ( ! function_exists( 'sport_woo_get_sidebar' ) ) :
+if (!function_exists('sport_woo_get_sidebar')) :
 
-    function sport_woo_get_sidebar() {
+    function sport_woo_get_sidebar()
+    {
 
-        if( is_active_sidebar( 'sport-sidebar-wc' ) ):
-    ?>
+        if (is_active_sidebar('sport-sidebar-wc')):
+            ?>
 
             <aside class="col-md-3">
-                <?php dynamic_sidebar( 'sport-sidebar-wc' ); ?>
+                <?php dynamic_sidebar('sport-sidebar-wc'); ?>
             </aside>
 
-    <?php
+        <?php
         endif;
     }
 
@@ -182,278 +194,291 @@ endif;
 * Lay Out Shop
 */
 
-if ( ! function_exists( 'sport_woo_before_main_content' ) ) :
+if (!function_exists('sport_woo_before_main_content')) :
     /**
      * Before Content
      * Wraps all WooCommerce content in wrappers which match the theme markup
      */
-    function sport_woo_before_main_content() {
+    function sport_woo_before_main_content()
+    {
         global $sport_options;
-        $sport_sidebar_woo_position =   $sport_options['sport_sidebar_woo'];
+        $sport_sidebar_woo_position = $sport_options['sport_sidebar_woo'];
 
-        if ( is_search() ) :
+        if (is_search()) :
 
-            if ( !empty( $_GET['product_cat_id'] ) ) :
-                $sport_get_product_cat_id   =   $_GET['product_cat_id'];
+            if (!empty($_GET['product_cat_id'])) :
+                $sport_get_product_cat_id = $_GET['product_cat_id'];
             else:
-                $sport_get_product_cat_id   =   0;
+                $sport_get_product_cat_id = 0;
             endif;
 
         else:
 
-            $sport_get_product_cat_id   =   get_queried_object_id();
+            $sport_get_product_cat_id = get_queried_object_id();
 
         endif;
 
-        if ( empty( $_GET['orderby'] ) ) :
+        if (empty($_GET['orderby'])) :
 
-            $sport_order_by_product =  '';
+            $sport_order_by_product = '';
 
         else:
 
-            $sport_order_by_product     =   $_GET['orderby'];
+            $sport_order_by_product = $_GET['orderby'];
 
         endif;
 
-        $data_setting_shop_page =   [
-           'order_by_product'   =>  $sport_order_by_product,
-           'product_cat_id'     =>  $sport_get_product_cat_id
+        $data_setting_shop_page = [
+            'order_by_product' => $sport_order_by_product,
+            'product_cat_id' => $sport_get_product_cat_id
         ];
 
-    ?>
+        ?>
 
-        <div class="site-shop" data-settings='<?php echo esc_attr( wp_json_encode( $data_setting_shop_page ) ); ?>'>
-            <div class="container">
+        <div class="site-shop" data-settings='<?php echo esc_attr(wp_json_encode($data_setting_shop_page)); ?>'>
+        <div class="container">
 
-                <?php
-                sport_woo_breadcrumbs();
+        <?php
+        sport_woo_breadcrumbs();
 
-                sport_woo_archive_description_open()
-                ?>
+    sport_woo_archive_description_open()
+        ?>
 
-                <div class="row">
+        <div class="row">
 
-                <?php
-                /**
-                 * woocommerce_sidebar hook.
-                 *
-                 * @hooked sport_woo_sidebar - 10
-                 */
+        <?php
+        /**
+         * woocommerce_sidebar hook.
+         *
+         * @hooked sport_woo_sidebar - 10
+         */
 
-                if ( $sport_sidebar_woo_position == 'left' && !is_product() ) :
-                    do_action( 'sport_woo_sidebar' );
-                endif;
-                ?>
+        if ($sport_sidebar_woo_position == 'left' && !is_product()) :
+            do_action('sport_woo_sidebar');
+        endif;
+        ?>
 
-                    <div class="<?php echo is_active_sidebar( 'sport-sidebar-wc' ) && $sport_sidebar_woo_position != 'hide' && !is_product() ? 'col-md-9' : 'col-md-12'; ?>">
+        <div class="<?php echo is_active_sidebar('sport-sidebar-wc') && $sport_sidebar_woo_position != 'hide' && !is_product() ? 'col-md-9' : 'col-md-12'; ?>">
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_after_main_content' ) ) :
+if (!function_exists('sport_woo_after_main_content')) :
     /**
      * After Content
      * Closes the wrapping divs
      */
-    function sport_woo_after_main_content() {
+    function sport_woo_after_main_content()
+    {
         global $sport_options;
         $sport_sidebar_woo_position = $sport_options['sport_sidebar_woo'];
-    ?>
+        ?>
 
-                    </div><!-- .col-md-9 -->
+        </div><!-- .col-md-9 -->
 
-                    <?php
-                    /**
-                     * woocommerce_sidebar hook.
-                     *
-                     * @hooked sport_woo_sidebar - 10
-                     */
+        <?php
+        /**
+         * woocommerce_sidebar hook.
+         *
+         * @hooked sport_woo_sidebar - 10
+         */
 
-                    if ( $sport_sidebar_woo_position == 'right' && !is_product() ) :
-                        do_action( 'sport_woo_sidebar' );
-                    endif;
-                    ?>
+        if ($sport_sidebar_woo_position == 'right' && !is_product()) :
+            do_action('sport_woo_sidebar');
+        endif;
+        ?>
 
-                </div><!-- .row -->
-            </div><!-- .container -->
+        </div><!-- .row -->
+        </div><!-- .container -->
         </div><!-- .site-shop -->
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_product_thumbnail_open' ) ) :
+if (!function_exists('sport_woo_product_thumbnail_open')) :
     /**
      * Hook: woocommerce_before_shop_loop_item_title.
      *
      * @hooked sport_woo_product_thumbnail_open - 5
      */
 
-    function sport_woo_product_thumbnail_open() {
-    ?>
+    function sport_woo_product_thumbnail_open()
+    {
+        ?>
         <div class="site-shop__product--item-image">
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_product_thumbnail_close' ) ) :
+if (!function_exists('sport_woo_product_thumbnail_close')) :
     /**
      * Hook: woocommerce_before_shop_loop_item_title.
      *
      * @hooked sport_woo_product_thumbnail_close - 15
      */
 
-    function sport_woo_product_thumbnail_close() {
-    ?>
+    function sport_woo_product_thumbnail_close()
+    {
+        ?>
         </div><!-- .site-shop__product--item-image -->
 
         <div class="site-shop__product--item-content">
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_get_product_title' ) ) :
+if (!function_exists('sport_woo_get_product_title')) :
     /**
      * Hook: woocommerce_shop_loop_item_title.
      *
      * @hooked sport_woo_get_product_title - 10
      */
 
-    function sport_woo_get_product_title() {
-    ?>
+    function sport_woo_get_product_title()
+    {
+        ?>
         <h2 class="woocommerce-loop-product__title">
             <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
                 <?php the_title(); ?>
             </a>
         </h2>
-    <?php
+        <?php
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_after_shop_loop_item_title' ) ) :
+if (!function_exists('sport_woo_after_shop_loop_item_title')) :
     /**
      * Hook: woocommerce_after_shop_loop_item_title.
      *
      * @hooked sport_woo_after_shop_loop_item_title - 15
      */
-    function sport_woo_after_shop_loop_item_title() {
-    ?>
+    function sport_woo_after_shop_loop_item_title()
+    {
+        ?>
         </div><!-- .site-shop__product--item-content -->
-    <?php
+        <?php
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_loop_add_to_cart_open' ) ) :
+if (!function_exists('sport_woo_loop_add_to_cart_open')) :
     /**
      * Hook: woocommerce_after_shop_loop_item.
      *
      * @hooked sport_woo_loop_add_to_cart_open - 4
      */
 
-    function sport_woo_loop_add_to_cart_open() {
-    ?>
+    function sport_woo_loop_add_to_cart_open()
+    {
+        ?>
         <div class="site-shop__product-add-to-cart">
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_loop_add_to_cart_close' ) ) :
+if (!function_exists('sport_woo_loop_add_to_cart_close')) :
     /**
      * Hook: woocommerce_after_shop_loop_item.
      *
      * @hooked sport_woo_loop_add_to_cart_close - 12
      */
 
-    function sport_woo_loop_add_to_cart_close() {
-    ?>
+    function sport_woo_loop_add_to_cart_close()
+    {
+        ?>
         </div><!-- .site-shop__product-add-to-cart -->
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_shop_loop_item' ) ) :
+if (!function_exists('sport_woo_before_shop_loop_item')) :
     /**
      * Hook: woocommerce_before_shop_loop_item.
      *
      * @hooked sport_woo_before_shop_loop_item - 5
      */
-    function sport_woo_before_shop_loop_item() {
-    ?>
+    function sport_woo_before_shop_loop_item()
+    {
+        ?>
 
         <div class="site-shop__product--item">
 
-    <?php
+        <?php
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_after_shop_loop_item' ) ) :
+if (!function_exists('sport_woo_after_shop_loop_item')) :
     /**
      * Hook: woocommerce_after_shop_loop_item.
      *
      * @hooked sport_woo_after_shop_loop_item - 15
      */
-    function sport_woo_after_shop_loop_item() {
-    ?>
+    function sport_woo_after_shop_loop_item()
+    {
+        ?>
 
         </div><!-- .site-shop__product--item -->
 
-    <?php
+        <?php
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_before_shop_loop_open' ) ) :
+if (!function_exists('sport_woo_before_shop_loop_open')) :
     /**
      * Before Shop Loop
      * woocommerce_before_shop_loop hook.
      *
      * @hooked sport_woo_before_shop_loop_open - 5
      */
-    function sport_woo_before_shop_loop_open() {
+    function sport_woo_before_shop_loop_open()
+    {
 
-    ?>
+        ?>
 
         <div class="site-shop__result-count-ordering d-flex align-items-center justify-content-between">
 
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_shop_loop_close' ) ) :
+if (!function_exists('sport_woo_before_shop_loop_close')) :
     /**
      * Before Shop Loop
      * woocommerce_before_shop_loop hook.
      *
      * @hooked sport_woo_before_shop_loop_close - 35
      */
-    function sport_woo_before_shop_loop_close() {
+    function sport_woo_before_shop_loop_close()
+    {
 
-    ?>
+        ?>
 
         </div><!-- .site-shop__result-count-ordering -->
 
-    <?php
+        <?php
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_shop_loop_product' ) ) :
+if (!function_exists('sport_woo_before_shop_loop_product')) :
     /**
      * Hook: woocommerce_before_shop_loop.
      *
      * @hooked sport_woo_before_shop_loop_product - 35
      */
 
-    function sport_woo_before_shop_loop_product() {
+    function sport_woo_before_shop_loop_product()
+    {
         ?>
 
         <div class="site-shop__product">
@@ -462,14 +487,15 @@ if ( ! function_exists( 'sport_woo_before_shop_loop_product' ) ) :
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_after_shop_loop_product' ) ) :
+if (!function_exists('sport_woo_after_shop_loop_product')) :
     /**
      * Hook: woocommerce_after_shop_loop.
      *
      * @hooked sport_woo_after_shop_loop_product - 15
      */
 
-    function sport_woo_after_shop_loop_product() {
+    function sport_woo_after_shop_loop_product()
+    {
         ?>
 
         </div><!-- .site-shop__product -->
@@ -478,7 +504,7 @@ if ( ! function_exists( 'sport_woo_after_shop_loop_product' ) ) :
     }
 endif;
 
-if ( ! function_exists( 'sport_woo_pagination_ajax' ) ) :
+if (!function_exists('sport_woo_pagination_ajax')) :
 
     /**
      * Hook: woocommerce_after_shop_loop.
@@ -486,33 +512,35 @@ if ( ! function_exists( 'sport_woo_pagination_ajax' ) ) :
      * @hooked sport_woo_pagination_ajax - 10
      */
 
-    function sport_woo_pagination_ajax() {
+    function sport_woo_pagination_ajax()
+    {
 
-        $limit          =   sport_show_products_per_page();
-        $total_pages    =   wc_get_loop_prop( 'total_pages' );
-        $total_product  =   wc_get_loop_prop( 'total' );
+        $limit = sport_show_products_per_page();
+        $total_pages = wc_get_loop_prop('total_pages');
+        $total_product = wc_get_loop_prop('total');
 
-        if ( $total_pages > 1 ) :
+        if ($total_pages > 1) :
 
-            $total_product_remaining  =   $total_product - $limit;
-    ?>
+            $total_product_remaining = $total_product - $limit;
+            ?>
 
-        <div class="btn-product-pagination text-center">
-            <div class="filter-loader">
-                <span class="loader-icon"></span>
+            <div class="btn-product-pagination text-center">
+                <div class="filter-loader">
+                    <span class="loader-icon"></span>
+                </div>
+
+                <button class="btn-global btn-load-product" data-pagination="2"
+                        data-limit="<?php echo esc_attr($limit); ?>">
+                    <?php esc_html_e('Xem thêm', 'sport'); ?>
+                    &#40;
+                    <span class="total-product-remaining">
+                    <?php echo esc_html($total_product_remaining); ?>
+                </span>
+                    &#41;
+                </button>
             </div>
 
-            <button class="btn-global btn-load-product" data-pagination="2" data-limit="<?php echo esc_attr( $limit ); ?>">
-                <?php esc_html_e( 'Xem thêm', 'sport' ); ?>
-                &#40;
-                <span class="total-product-remaining">
-                    <?php echo esc_html( $total_product_remaining ); ?>
-                </span>
-                &#41;
-            </button>
-        </div>
-
-    <?php
+        <?php
 
         endif;
     }
@@ -523,7 +551,7 @@ endif;
 * Single Shop
 */
 
-if ( ! function_exists( 'sport_woo_before_single_product' ) ) :
+if (!function_exists('sport_woo_before_single_product')) :
 
     /**
      * Before Content Single  product
@@ -533,19 +561,20 @@ if ( ! function_exists( 'sport_woo_before_single_product' ) ) :
      * @hooked sport_woo_before_single_product - 5
      */
 
-    function sport_woo_before_single_product() {
+    function sport_woo_before_single_product()
+    {
 
-    ?>
+        ?>
 
         <div class="site-shop-single">
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_after_single_product' ) ) :
+if (!function_exists('sport_woo_after_single_product')) :
 
     /**
      * After Content Single  product
@@ -555,19 +584,20 @@ if ( ! function_exists( 'sport_woo_after_single_product' ) ) :
      * @hooked sport_woo_after_single_product - 30
      */
 
-    function sport_woo_after_single_product() {
+    function sport_woo_after_single_product()
+    {
 
-    ?>
+        ?>
 
         </div><!-- .site-shop-single -->
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( !function_exists( 'sport_woo_before_single_product_summary_open_warp' ) ) :
+if (!function_exists('sport_woo_before_single_product_summary_open_warp')) :
 
     /**
      * Before single product summary
@@ -576,20 +606,21 @@ if ( !function_exists( 'sport_woo_before_single_product_summary_open_warp' ) ) :
      * @hooked sport_woo_before_single_product_summary_open_warp - 1
      */
 
-    function sport_woo_before_single_product_summary_open_warp() {
+    function sport_woo_before_single_product_summary_open_warp()
+    {
 
-    ?>
+        ?>
 
         <div class="site-shop-single__warp">
-            <div class="row">
+        <div class="row">
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( !function_exists( 'sport_woo_after_single_product_summary_close_warp' ) ) :
+if (!function_exists('sport_woo_after_single_product_summary_close_warp')) :
 
     /**
      * After single product summary
@@ -598,19 +629,20 @@ if ( !function_exists( 'sport_woo_after_single_product_summary_close_warp' ) ) :
      * @hooked sport_woo_after_single_product_summary_close_warp - 5
      */
 
-    function sport_woo_after_single_product_summary_close_warp() {
+    function sport_woo_after_single_product_summary_close_warp()
+    {
 
-    ?>
-            </div><!-- .row -->
+        ?>
+        </div><!-- .row -->
         </div><!-- .site-shop-single__warp -->
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_single_product_summary_open' ) ) :
+if (!function_exists('sport_woo_before_single_product_summary_open')) :
 
     /**
      * woocommerce_before_single_product_summary hook.
@@ -618,19 +650,20 @@ if ( ! function_exists( 'sport_woo_before_single_product_summary_open' ) ) :
      * @hooked sport_woo_before_single_product_summary_open - 5
      */
 
-    function sport_woo_before_single_product_summary_open() {
+    function sport_woo_before_single_product_summary_open()
+    {
 
-    ?>
+        ?>
         <div class="col-12 col-md-3">
-            <div class="site-shop-single__gallery-box">
+        <div class="site-shop-single__gallery-box">
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_single_product_summary_close' ) ) :
+if (!function_exists('sport_woo_before_single_product_summary_close')) :
 
     /**
      * woocommerce_before_single_product_summary hook.
@@ -638,20 +671,21 @@ if ( ! function_exists( 'sport_woo_before_single_product_summary_close' ) ) :
      * @hooked sport_woo_before_single_product_summary_close - 30
      */
 
-    function sport_woo_before_single_product_summary_close() {
+    function sport_woo_before_single_product_summary_close()
+    {
 
-    ?>
+        ?>
 
-            </div><!-- .site-shop-single__gallery-box -->
+        </div><!-- .site-shop-single__gallery-box -->
         </div><!-- .col -->
 
-    <?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_open' ) ) :
+if (!function_exists('sport_woo_before_single_product_entry_summary_open')) :
 
     /**
      * woocommerce_before_single_product_summary hook.
@@ -659,18 +693,19 @@ if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_open' ) )
      * @hooked sport_woo_before_single_product_entry_summary_open - 35
      */
 
-    function sport_woo_before_single_product_entry_summary_open() {
+    function sport_woo_before_single_product_entry_summary_open()
+    {
 
-?>
+        ?>
         <div class="col-12 col-md-6">
 
-<?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_close' ) ) :
+if (!function_exists('sport_woo_before_single_product_entry_summary_close')) :
 
     /**
      * woocommerce_after_single_product_summary hook.
@@ -678,19 +713,20 @@ if ( ! function_exists( 'sport_woo_before_single_product_entry_summary_close' ) 
      * @hooked sport_woo_before_single_product_entry_summary_close - 2
      */
 
-    function sport_woo_before_single_product_entry_summary_close() {
+    function sport_woo_before_single_product_entry_summary_close()
+    {
 
-?>
+        ?>
 
         </div><!-- .col -->
 
-<?php
+        <?php
 
     }
 
 endif;
 
-if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
+if (!function_exists('sport_post_type_gallery_product_cate')) :
 
     /**
      * woocommerce_before_single_product_summary hook.
@@ -698,64 +734,65 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
      * @hooked sport_post_type_gallery_product_cate - 3
      */
 
-    function sport_post_type_gallery_product_cate() {
+    function sport_post_type_gallery_product_cate()
+    {
 
-        $product_cate = get_the_terms( get_the_ID(), 'product_cat' );
+        $product_cate = get_the_terms(get_the_ID(), 'product_cat');
 
-        $term_values   =   array();
+        $term_values = array();
 
-        foreach ( $product_cate as $item ) {
+        foreach ($product_cate as $item) {
 
-            $term_values[] = get_term_meta( $item->term_id, 'type-gallery', true );
+            $term_values[] = get_term_meta($item->term_id, 'type-gallery', true);
 
         }
 
-        if ( !empty( $term_values ) ) :
+        if (!empty($term_values)) :
 
-            $gallery_settings  =   [
-                'loop'          =>  true,
-                'autoplay'      =>  true,
+            $gallery_settings = [
+                'loop' => true,
+                'autoplay' => true,
             ];
 
             $gallery_args = array(
-                'post_type'  =>  'gallery',
-                'post__in'   =>  $term_values,
+                'post_type' => 'gallery',
+                'post__in' => $term_values,
             );
 
-            $gallery_query = new \ WP_Query( $gallery_args );
+            $gallery_query = new \ WP_Query($gallery_args);
 
-?>
+            ?>
             <div class="col-12 col-md-3">
-                <div class="product-gallery-cat-single product-gallery-cate owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $gallery_settings ) ); ?>'>
+                <div class="product-gallery-cat-single product-gallery-cate owl-carousel owl-theme"
+                     data-settings='<?php echo esc_attr(wp_json_encode($gallery_settings)); ?>'>
 
                     <?php
-                    while ( $gallery_query->have_posts() ):
+                    while ($gallery_query->have_posts()):
                         $gallery_query->the_post();
 
-                        $sport_gallery_image = get_post_meta( get_the_ID(),'sport_images_gallery', false );
+                        $sport_gallery_image = get_post_meta(get_the_ID(), 'sport_images_gallery', false);
 
-                        foreach ( $sport_gallery_image as $item) :
+                        foreach ($sport_gallery_image as $item) :
 
-                            $attachment     =   get_post( $item );
-                            $title_gallery  =   $attachment->post_excerpt;
-                            $link           =   $attachment->post_content
+                            $attachment = get_post($item);
+                            $title_gallery = $attachment->post_excerpt;
+                            $link = $attachment->post_content
 
                             ?>
 
                             <div class="item-gallery">
-                                <h4 class="item-gallery__title text-center">
-                                    <?php echo esc_html( $title_gallery ); ?>
-                                </h4>
 
                                 <div class="item-gallery__img">
-                                    <?php if ( !empty( $link ) ) : ?>
+                                    <?php if (!empty($link)) : ?>
 
-                                        <a class="item-gallery__link" href="<?php echo esc_url( $attachment->post_content ); ?>" title="<?php echo esc_attr( $title_gallery ); ?>"></a>
+                                        <a class="item-gallery__link"
+                                           href="<?php echo esc_url($attachment->post_content); ?>"
+                                           title="<?php echo esc_attr($title_gallery); ?>"></a>
 
                                     <?php
                                     endif;
 
-                                    echo wp_kses_post( wp_get_attachment_image( $item, 'full' ) );
+                                    echo wp_kses_post(wp_get_attachment_image($item, 'full'));
                                     ?>
 
                                 </div>
@@ -770,7 +807,7 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
                 </div>
             </div>
 
-<?php
+        <?php
         endif;
 
     }
@@ -778,95 +815,98 @@ if ( ! function_exists( 'sport_post_type_gallery_product_cate' ) ) :
 endif;
 
 /* Start query sport related upsells */
-function sport_related_upsells_item( $args, $number_row, $number_column ) {
+function sport_related_upsells_item($args, $number_row, $number_column)
+{
 
-    $data_settings  =   [
-        'loop'          =>  false,
-        'autoplay'      =>  false,
-        'nav'           =>  true,
+    $data_settings = [
+        'loop' => false,
+        'autoplay' => false,
+        'nav' => true,
     ];
 
-    $rows_number    =   $number_row;
-    $column_number  =   $number_column;
-    $number_item    =   $rows_number * $column_number;
+    $rows_number = $number_row;
+    $column_number = $number_column;
+    $number_item = $rows_number * $column_number;
 
-    $query = new WP_Query( $args );
+    $query = new WP_Query($args);
 
-    if ( $query->have_posts() ) :
+    if ($query->have_posts()) :
 
-?>
-
-    <div class="related-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
-        <?php
-        $i = 1;
-        $total_posts    =   $query->post_count;
-
-        while ( $query->have_posts() ):
-            $query->the_post();
-
-            if ( $i % $number_item == 1 ) :
         ?>
 
-                <div class="row row-custom">
+        <div class="related-product-slider owl-carousel owl-theme"
+             data-settings='<?php echo esc_attr(wp_json_encode($data_settings)); ?>'>
+            <?php
+            $i = 1;
+            $total_posts = $query->post_count;
 
-            <?php endif; ?>
+            while ($query->have_posts()):
+                $query->the_post();
 
-            <div class="col-12 col-sm-6 col-md-3 col-lg-2 item-col item-col-custom">
-                <?php sport_content_item_product(); ?>
-            </div>
+                if ($i % $number_item == 1) :
+                    ?>
 
-            <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
+                    <div class="row row-custom">
 
-            </div>
+                <?php endif; ?>
 
-        <?php
-        endif;
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 item-col item-col-custom">
+                    <?php sport_content_item_product(); ?>
+                </div>
 
-            $i++;
-        endwhile;
-        wp_reset_postdata();
-        ?>
-    </div>
+                <?php if ($i % $number_item == 0 || $i == $total_posts) : ?>
 
-<?php
+                </div>
+
+            <?php
+            endif;
+
+                $i++;
+            endwhile;
+            wp_reset_postdata();
+            ?>
+        </div>
+
+    <?php
 
     endif;
 
 }
 
-if ( ! function_exists( 'sport_upsells_products' ) ) :
+if (!function_exists('sport_upsells_products')) :
 
-    function sport_upsells_products() {
+    function sport_upsells_products()
+    {
 
-       $upsell_ids  =   get_post_meta( get_the_ID(), '_upsell_ids', true );
+        $upsell_ids = get_post_meta(get_the_ID(), '_upsell_ids', true);
 
-       if ( !empty( $upsell_ids ) ) :
+        if (!empty($upsell_ids)) :
 
-        $args = array(
-            'post_type'         =>  'product',
-            'orderby'           =>  'rand',
-            'order'             =>  'DESC',
-            'post__in'          =>  $upsell_ids
-        );
+            $args = array(
+                'post_type' => 'product',
+                'orderby' => 'rand',
+                'order' => 'DESC',
+                'post__in' => $upsell_ids
+            );
 
-    ?>
+            ?>
 
-        <div class="site-single-product-upsell element-products">
-            <h3 class="title title-global-sing-product text-center">
-                <?php esc_html_e( 'Có thể bạn thích', 'sport' ); ?>
-            </h3>
+            <div class="site-single-product-upsell element-products">
+                <h3 class="title title-global-sing-product text-center">
+                    <?php esc_html_e('Có thể bạn thích', 'sport'); ?>
+                </h3>
 
-            <?php sport_related_upsells_item( $args, 1, 6 ); ?>
-        </div>
+                <?php sport_related_upsells_item($args, 1, 6); ?>
+            </div>
 
-    <?php
+        <?php
 
         endif;
     }
 
 endif;
 
-if ( ! function_exists( 'sport_related_products' ) ) :
+if (!function_exists('sport_related_products')) :
 
     /**
      * woocommerce_after_single_product_summary hook.
@@ -874,45 +914,46 @@ if ( ! function_exists( 'sport_related_products' ) ) :
      * @hooked sport_related_products - 20
      */
 
-    function sport_related_products() {
+    function sport_related_products()
+    {
 
         global $sport_options;
 
-        $limit          =   $sport_options['sport_single_product_related_limit'];
-        $order_by       =   $sport_options['sport_single_product_related_order_by'];
-        $order          =   $sport_options['sport_single_product_related_order'];
-        $product_cat    =   get_the_terms( get_the_ID(), 'product_cat' );
+        $limit = $sport_options['sport_single_product_related_limit'];
+        $order_by = $sport_options['sport_single_product_related_order_by'];
+        $order = $sport_options['sport_single_product_related_order'];
+        $product_cat = get_the_terms(get_the_ID(), 'product_cat');
 
-        if ( !empty( $product_cat ) ) :
+        if (!empty($product_cat)) :
 
             $product_cat_ids = array();
 
-            foreach( $product_cat as $item ) $product_cat_ids[] = $item->term_id;
+            foreach ($product_cat as $item) $product_cat_ids[] = $item->term_id;
 
             $args = array(
-                'post_type'         =>  'product',
-                'posts_per_page'    =>  $limit,
-                'orderby'           =>  $order_by,
-                'order'             =>  $order,
-                'tax_query'         =>  array(
+                'post_type' => 'product',
+                'posts_per_page' => $limit,
+                'orderby' => $order_by,
+                'order' => $order,
+                'tax_query' => array(
                     array(
-                        'taxonomy'  =>  'product_cat',
-                        'field'     =>  'term_id',
-                        'terms'     =>  $product_cat_ids,
+                        'taxonomy' => 'product_cat',
+                        'field' => 'term_id',
+                        'terms' => $product_cat_ids,
                     )
                 ),
             );
-    ?>
+            ?>
 
             <div class="site-single-product-related element-products">
                 <h3 class="title title-global-sing-product text-center">
-                    <?php esc_html_e( 'Sản phẩm cùng danh mục', 'sport' ); ?>
+                    <?php esc_html_e('Sản phẩm cùng danh mục', 'sport'); ?>
                 </h3>
 
-                <?php sport_related_upsells_item( $args, 2, 6 ); ?>
+                <?php sport_related_upsells_item($args, 2, 6); ?>
             </div>
 
-    <?php
+        <?php
 
         endif;
 
@@ -920,7 +961,7 @@ if ( ! function_exists( 'sport_related_products' ) ) :
 
 endif;
 
-if ( !function_exists( 'sport_product_new' ) ) :
+if (!function_exists('sport_product_new')) :
 
     /**
      * woocommerce_before_shop_loop_item_title hook.
@@ -928,25 +969,26 @@ if ( !function_exists( 'sport_product_new' ) ) :
      * @hooked sport_product_new - 9
      */
 
-    function sport_product_new() {
+    function sport_product_new()
+    {
 
-        $product_new = get_post_meta( get_the_ID(), 'sport_option_product_new', true );
+        $product_new = get_post_meta(get_the_ID(), 'sport_option_product_new', true);
 
-        if ( $product_new == 1 ) :
-    ?>
+        if ($product_new == 1) :
+            ?>
 
-        <span class="product-new">
-            <?php esc_html_e( 'New', 'sport' ); ?>
+            <span class="product-new">
+            <?php esc_html_e('New', 'sport'); ?>
         </span>
 
-    <?php
+        <?php
         endif;
 
     }
 
 endif;
 
-if ( !function_exists( 'sport_product_hot' ) ) :
+if (!function_exists('sport_product_hot')) :
 
     /**
      * woocommerce_before_shop_loop_item_title hook.
@@ -954,18 +996,44 @@ if ( !function_exists( 'sport_product_hot' ) ) :
      * @hooked sport_product_hot - 10
      */
 
-    function sport_product_hot() {
+    function sport_product_hot()
+    {
 
-        $product_new = get_post_meta( get_the_ID(), 'sport_option_product_new', true );
+        $product_hot = get_post_meta(get_the_ID(), 'sport_option_product_hot', true);
 
-        if ( $product_new == 1 ) :
-    ?>
-
-        <span class="product-new">
-            <?php esc_html_e( 'New', 'sport' ); ?>
+        if ($product_hot == 1) :
+            ?>
+            <span class="product-hot">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/icon_hot.gif" width="65px" alt="<?php echo esc_html__('Sản phẩm Hot','sport'); ?>"/>
         </span>
 
-    <?php
+        <?php
+        endif;
+
+    }
+
+endif;
+
+if (!function_exists('sport_product_only')) :
+
+    /**
+     * woocommerce_before_shop_loop_item_title hook.
+     *
+     * @hooked sport_product_only - 10
+     */
+
+    function sport_product_only()
+    {
+
+        $product_only = get_post_meta(get_the_ID(), 'sport_option_product_only', true);
+        if ($product_only != '') :
+            ?>
+
+            <span class="product-only">
+            <?php echo esc_html($product_only); ?>
+            </span>
+
+        <?php
         endif;
 
     }
@@ -973,32 +1041,33 @@ if ( !function_exists( 'sport_product_hot' ) ) :
 endif;
 
 /* Sale flash percent */
-add_filter( 'woocommerce_sale_flash', 'sport_change_displayed_sale_price' );
+add_filter('woocommerce_sale_flash', 'sport_change_displayed_sale_price');
 
-function sport_change_displayed_sale_price() {
+function sport_change_displayed_sale_price()
+{
 
     global $product;
-    $max_percentage =   '';
+    $max_percentage = '';
 
-    if ( ! $product->is_on_sale() ) return;
+    if (!$product->is_on_sale()) return;
 
-    if ( $product->is_type( 'simple' ) ) {
+    if ($product->is_type('simple')) {
 
-        $max_percentage = ( ( $product->get_regular_price() - $product->get_sale_price() ) / $product->get_regular_price() ) * 100;
+        $max_percentage = (($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100;
 
-    } elseif ( $product->is_type( 'variable' ) ) {
+    } elseif ($product->is_type('variable')) {
 
         $max_percentage = 0;
 
-        foreach ( $product->get_children() as $child_id ) {
-            $variation = wc_get_product( $child_id );
+        foreach ($product->get_children() as $child_id) {
+            $variation = wc_get_product($child_id);
 
             $price = $variation->get_regular_price();
             $sale = $variation->get_sale_price();
 
-            if ( $price != 0 && ! empty( $sale ) ) $percentage = ( $price - $sale ) / $price * 100;
+            if ($price != 0 && !empty($sale)) $percentage = ($price - $sale) / $price * 100;
 
-            if ( $percentage > $max_percentage ) {
+            if ($percentage > $max_percentage) {
 
                 $max_percentage = $percentage;
 
@@ -1006,26 +1075,27 @@ function sport_change_displayed_sale_price() {
         }
 
     }
-    if ( $max_percentage > 0 ) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
+    if ($max_percentage > 0) echo "<span class='on-sale-percent'>-" . round($max_percentage) . "%</span>";
 }
 
 /**
  * Add a custom product data tab
  */
-add_filter( 'woocommerce_product_tabs', 'sport_new_product_tab' );
-function sport_new_product_tab( $tabs ) {
+add_filter('woocommerce_product_tabs', 'sport_new_product_tab');
+function sport_new_product_tab($tabs)
+{
 
     // Adds the new tab
     global $sport_options;
 
     $sport_products_single_tab_guide = $sport_options['sport_products_single_tab_guide'];
 
-    if ( !empty( $sport_products_single_tab_guide ) ) :
+    if (!empty($sport_products_single_tab_guide)) :
 
         $tabs['shopping_guide'] = array(
-            'title' 	=>  esc_html__( 'Hướng dẫn mua hàng', 'sport' ),
-            'priority' 	=>  25,
-            'callback'  =>  'sport_new_product_tab_content'
+            'title' => esc_html__('Hướng dẫn mua hàng', 'sport'),
+            'priority' => 25,
+            'callback' => 'sport_new_product_tab_content'
         );
 
     endif;
@@ -1033,18 +1103,20 @@ function sport_new_product_tab( $tabs ) {
     return $tabs;
 
 }
-function sport_new_product_tab_content() {
+
+function sport_new_product_tab_content()
+{
 
     // The new tab content
     global $sport_options;
 
     $sport_products_single_tab_guide = $sport_options['sport_products_single_tab_guide'];
 
-    echo wp_kses_post( $sport_products_single_tab_guide );
+    echo wp_kses_post($sport_products_single_tab_guide);
 
 }
 
-if ( !function_exists( 'sport_product_blog' ) ) :
+if (!function_exists('sport_product_blog')) :
 
     /**
      * woocommerce_after_single_product_summary hook.
@@ -1052,32 +1124,33 @@ if ( !function_exists( 'sport_product_blog' ) ) :
      * @hooked sport_product_blog - 25
      */
 
-    function sport_product_blog() {
+    function sport_product_blog()
+    {
         global $sport_options;
 
-        $sport_products_title_blog      =   $sport_options['sport_products_title_blog'];
-        $sport_products_check_blog      =   $sport_options['sport_products_check_blog'];
-        $sport_product_blog_limit       =   $sport_options['sport_product_blog_limit'];
-        $sport_product_blog_order_by    =   $sport_options['sport_product_blog_order_by'];
-        $sport_product_blog_order       =   $sport_options['sport_product_blog_order'];
+        $sport_products_title_blog = $sport_options['sport_products_title_blog'];
+        $sport_products_check_blog = $sport_options['sport_products_check_blog'];
+        $sport_product_blog_limit = $sport_options['sport_product_blog_limit'];
+        $sport_product_blog_order_by = $sport_options['sport_product_blog_order_by'];
+        $sport_product_blog_order = $sport_options['sport_product_blog_order'];
 
-        $data_settings  =   [
-            'loop'          =>  false,
-            'autoplay'      =>  false,
-            'nav'           =>  true,
+        $data_settings = [
+            'loop' => false,
+            'autoplay' => false,
+            'nav' => true,
         ];
 
-        $rows_number    =   2;
-        $column_number  =   2;
-        $number_item    =   $rows_number * $column_number;
+        $rows_number = 2;
+        $column_number = 2;
+        $number_item = $rows_number * $column_number;
 
-        $cat_post_ids    =   array();
+        $cat_post_ids = array();
 
-        if ( !empty( $sport_products_check_blog ) ) :
+        if (!empty($sport_products_check_blog)) :
 
-            foreach ( $sport_products_check_blog as $key => $item ):
+            foreach ($sport_products_check_blog as $key => $item):
 
-                if ( $item == 1 ) :
+                if ($item == 1) :
 
                     $cat_post_ids[] .= $key;
 
@@ -1087,96 +1160,97 @@ if ( !function_exists( 'sport_product_blog' ) ) :
 
         endif;
 
-        if ( !empty( $cat_post_ids ) ) :
+        if (!empty($cat_post_ids)) :
 
 
             $args = array(
-                'post_type'         =>  'post',
-                'cat'               =>  $cat_post_ids,
-                'posts_per_page'    =>  $sport_product_blog_limit,
-                'orderby'           =>  $sport_product_blog_order_by,
-                'order'             =>  $sport_product_blog_order,
+                'post_type' => 'post',
+                'cat' => $cat_post_ids,
+                'posts_per_page' => $sport_product_blog_limit,
+                'orderby' => $sport_product_blog_order_by,
+                'order' => $sport_product_blog_order,
             );
 
         else:
 
             $args = array(
-                'post_type'         =>  'post',
-                'posts_per_page'    =>  $sport_product_blog_limit,
-                'orderby'           =>  $sport_product_blog_order_by,
-                'order'             =>  $sport_product_blog_order,
+                'post_type' => 'post',
+                'posts_per_page' => $sport_product_blog_limit,
+                'orderby' => $sport_product_blog_order_by,
+                'order' => $sport_product_blog_order,
             );
 
         endif;
 
-        $query = new WP_Query( $args );
+        $query = new WP_Query($args);
 
-        if ( $query->have_posts() ) :
+        if ($query->have_posts()) :
 
-?>
+            ?>
 
-        <div class="blog-post-product">
-            <h3 class="title title-global-sing-product text-center">
-                <?php echo esc_html( $sport_products_title_blog ); ?>
-            </h3>
+            <div class="blog-post-product">
+                <h3 class="title title-global-sing-product text-center">
+                    <?php echo esc_html($sport_products_title_blog); ?>
+                </h3>
 
-            <div class="blog-product-slider owl-carousel owl-theme" data-settings='<?php echo esc_attr( wp_json_encode( $data_settings ) ); ?>'>
+                <div class="blog-product-slider owl-carousel owl-theme"
+                     data-settings='<?php echo esc_attr(wp_json_encode($data_settings)); ?>'>
 
                     <?php
                     $i = 1;
-                    $total_posts    =   $query->post_count;
+                    $total_posts = $query->post_count;
 
-                    while ( $query->have_posts() ):
+                    while ($query->have_posts()):
                         $query->the_post();
 
-                        if ( $i % $number_item == 1 ) :
-                    ?>
+                        if ($i % $number_item == 1) :
+                            ?>
 
-                        <div class="row">
+                            <div class="row">
 
-                    <?php endif; ?>
+                        <?php endif; ?>
 
-                            <div class="col-md-6 item-col">
-                                <div class="item d-sm-flex">
-                                    <div class="item-thumbnail">
-                                        <?php the_post_thumbnail( 'large' ); ?>
-                                    </div>
+                        <div class="col-md-6 item-col">
+                            <div class="item d-sm-flex">
+                                <div class="item-thumbnail">
+                                    <?php the_post_thumbnail('large'); ?>
+                                </div>
 
-                                    <div class="item-content">
-                                        <h3 class="item-title">
-                                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                                <?php the_title(); ?>
-                                            </a>
-                                        </h3>
+                                <div class="item-content">
+                                    <h3 class="item-title">
+                                        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                            <?php the_title(); ?>
+                                        </a>
+                                    </h3>
 
-                                        <p class="item-excerpt">
-                                            <?php
-                                            if( has_excerpt() ) :
-                                                echo wp_trim_words( get_the_excerpt(), 30, '...' );
-                                            else:
-                                                echo wp_trim_words( get_the_content(), 30, '...' );
-                                            endif;
-                                            ?>
-                                        </p>
-                                    </div>
+                                    <p class="item-excerpt">
+                                        <?php
+                                        if (has_excerpt()) :
+                                            echo wp_trim_words(get_the_excerpt(), 30, '...');
+                                        else:
+                                            echo wp_trim_words(get_the_content(), 30, '...');
+                                        endif;
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
+                        </div>
 
-                    <?php if ( $i % $number_item == 0 || $i == $total_posts ) : ?>
+                        <?php if ($i % $number_item == 0 || $i == $total_posts) : ?>
 
                         </div>
 
                     <?php
-                        endif;
+                    endif;
 
                         $i++;
                     endwhile;
                     wp_reset_postdata(); ?>
 
+                </div>
             </div>
-        </div>
 
-<?php
+        <?php
 
         endif;
 
@@ -1184,13 +1258,14 @@ if ( !function_exists( 'sport_product_blog' ) ) :
 
 endif;
 
-function sport_loop_single_meta_product() {
+function sport_loop_single_meta_product()
+{
 
-    $countdown_time =  get_post_meta( get_the_ID(), '_sale_price_dates_to', true );
+    $countdown_time = get_post_meta(get_the_ID(), '_sale_price_dates_to', true);
 
-?>
+    ?>
 
-    <div class="site-single-product__meta<?php echo ( !empty( $countdown_time ) ? ' d-flex justify-content-between' : '' ); ?>">
+    <div class="site-single-product__meta<?php echo(!empty($countdown_time) ? ' d-flex justify-content-between' : ''); ?>">
         <div class="left-box">
             <?php
             woocommerce_template_single_rating();
@@ -1199,49 +1274,52 @@ function sport_loop_single_meta_product() {
         </div>
 
         <?php
-        if ( !empty( $countdown_time ) ) :
+        if (!empty($countdown_time)) :
 
-            $countdown_time_format  =   date("Y/m/d", $countdown_time );
-        ?>
+            $countdown_time_format = date("Y/m/d", $countdown_time);
+            ?>
 
             <div class="right-box">
                 <h4 class="text-time">
-                    <?php esc_html_e( 'Thời gian còn lại của ưu dãi', 'sport' ); ?>
+                    <?php esc_html_e('Thời gian còn lại của ưu dãi', 'sport'); ?>
                 </h4>
 
-                <div class="site-single-product__countdown-sale d-flex" data-countdown="<?php echo esc_attr(  $countdown_time_format ); ?>"></div>
+                <div class="site-single-product__countdown-sale d-flex"
+                     data-countdown="<?php echo esc_attr($countdown_time_format); ?>"></div>
             </div>
 
         <?php endif; ?>
     </div>
 
-<?php
+    <?php
 }
 
-add_filter( 'woocommerce_email_order_items_args', 'iconic_email_order_items_args', 10, 1 );
+add_filter('woocommerce_email_order_items_args', 'iconic_email_order_items_args', 10, 1);
 
-function iconic_email_order_items_args( $args ) {
+function iconic_email_order_items_args($args)
+{
 
-    $args['show_image'] =   true;
-    $args['image_size'] =   array( 300, 300 );
+    $args['show_image'] = true;
+    $args['image_size'] = array(300, 300);
 
     return $args;
 
 }
 
-add_filter( 'woocommerce_order_item_name', 'sport_custom_woo_order_item_name', 10, 2 );
+add_filter('woocommerce_order_item_name', 'sport_custom_woo_order_item_name', 10, 2);
 
-function sport_custom_woo_order_item_name( $name, $item ) {
+function sport_custom_woo_order_item_name($name, $item)
+{
 
-?>
-    <a href="<?php echo esc_url( get_permalink( $item->get_product_id() ) ); ?>">
-        <?php echo esc_html( $item->get_name() ); ?>
+    ?>
+    <a href="<?php echo esc_url(get_permalink($item->get_product_id())); ?>">
+        <?php echo esc_html($item->get_name()); ?>
     </a>
-<?php
+    <?php
 
 }
 
-if( !function_exists( 'sport_single_product_phone' ) ) :
+if (!function_exists('sport_single_product_phone')) :
 
     /**
      * woocommerce_after_add_to_cart_button hook.
@@ -1249,29 +1327,30 @@ if( !function_exists( 'sport_single_product_phone' ) ) :
      * @hooked sport_single_product_phone - 10
      */
 
-    function sport_single_product_phone() {
+    function sport_single_product_phone()
+    {
 
         global $sport_options;
 
-        $phone      =   $sport_options['sport_single_product_phone'];
+        $phone = $sport_options['sport_single_product_phone'];
 
-        if ( !empty( $phone ) ) :
+        if (!empty($phone)) :
 
-    ?>
+            ?>
 
-        <div class="single-phone d-flex align-items-center">
-            <div class="number-phone">
+            <div class="single-phone d-flex align-items-center">
+                <div class="number-phone">
                 <span>
                     <i class="fas fa-phone-volume"></i>
                 </span>
+                </div>
+
+                <a href="tel:<?php echo esc_attr($phone); ?>" title="<?php esc_attr_e('Liên hệ', 'sport'); ?>">
+                    <?php echo esc_html($phone); ?>
+                </a>
             </div>
 
-            <a href="tel:<?php echo esc_attr( $phone ); ?>" title="<?php esc_attr_e( 'Liên hệ', 'sport' ); ?>">
-                <?php echo esc_html( $phone ); ?>
-            </a>
-        </div>
-
-    <?php
+        <?php
 
         endif;
     }

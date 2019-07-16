@@ -181,6 +181,14 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.product-gallery-cat-single.product-gallery-cate{
+  .item-gallery{
+    .item-gallery__img{
+      height: 325px;
+    }
+  }
+}
 .product-gallery-cate {
   .item-gallery {
     .item-gallery__title {
@@ -195,7 +203,7 @@
     }
     .item-gallery__img {
       position: relative;
-      //height: 467px;
+      height: 545px;
       overflow: hidden;
 
       a {
@@ -204,11 +212,16 @@
         height: 100%;
         top: 0;
         left: 0;
+        :before{
+          clear: both;
+        }
       }
-      //img{
-      //  height: 100%;
-      //  object-fit: cover;
-      //}
+      img{
+        height: 100%;
+        width: auto;
+        float: right;
+        max-width: 100%;
+      }
     }
   }
 }

@@ -11,19 +11,38 @@
   position: absolute;
   top: 12px;
   left: -70px;
-  height: 30px;
+  height: 20px;
   width: 195px;
-  line-height: 30px;
   color: #ffffff;
   text-transform: uppercase;
-  background-color: $background-hover;
+  background-color: $background-hover-opacity;
   -moz-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
   text-align: center;
+  display: inline-block;
+  align-items: center;
   z-index: 2;
+}
+.product-hot{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  display: inline-block;
+  img{
+    width: 65px;
+  }
+}
+.product-only{
+  position: absolute;
+  top: 50%;
+  background: rgb(0,176,240);
+  color: #fff;
+  padding: 0 5px;
+  font-size: 10px;
 }
 .site-shop {
   padding: 20px 0 50px;

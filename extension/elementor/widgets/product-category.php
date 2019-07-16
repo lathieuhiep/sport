@@ -666,9 +666,9 @@ class sport_widget_products_filter extends Widget_Base {
                                 ?>
 
                                     <div class="item-gallery">
-                                        <h4 class="item-gallery__title text-center">
-                                            <?php echo esc_html( $title_gallery ); ?>
-                                        </h4>
+<!--                                        <h4 class="item-gallery__title text-center">-->
+<!--                                            --><?php //echo esc_html( $title_gallery ); ?>
+<!--                                        </h4>-->
 
                                         <div class="item-gallery__img">
                                             <?php if ( !empty( $link ) ) : ?>

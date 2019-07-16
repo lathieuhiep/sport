@@ -73,6 +73,21 @@ function sport_register_meta_boxes() {
                     1   =>  esc_html__( 'Yes', 'sport' ),
                 ),
             ),
+            array(
+                'id'        =>  'sport_option_product_hot',
+                'name'      =>  esc_html__( 'Product Hot', 'sport' ),
+                'type'      =>  'select',
+                'options'   => array(
+                    0   =>  esc_html__( 'No', 'sport' ),
+                    1   =>  esc_html__( 'Yes', 'sport' ),
+                ),
+            ),
+            array(
+                'id'        =>  'sport_option_product_only',
+                'name'      =>  esc_html__( 'Product only today', 'sport' ),
+                'type'      =>  'text',
+                'placeholder' => esc_html__( 'Chèn nội dung', 'sport' ),
+            ),
 
         )
     );
