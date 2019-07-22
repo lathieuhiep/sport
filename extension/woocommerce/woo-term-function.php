@@ -56,6 +56,27 @@ function shoptheme_product_cat_add_new_meta_field() {
         </select>
     </div>
 
+    <div class="form-field">
+        <label for="select-category-link">
+            <?php esc_html_e( 'Chọn danh mục liên kết', 'shoptheme' ); ?>
+        </label>
+
+        <select id="select-category-link" name="select-category-link">
+            <option value="0">
+                <?php esc_html_e( 'None', 'sport' ); ?>
+            </option>
+
+            <?php $categories = get_categories();
+            foreach($categories as  $category) : ?>
+
+                <option value="<?php echo esc_attr( $category->term_id ); ?>">
+                    <?php echo esc_html( $category->name ); ?>
+                </option>
+
+            <?php endforeach; ?>
+        </select>
+    </div>
+
 <?php
 
 }
@@ -65,6 +86,10 @@ function sport_save_select_gallery( $term_id ){
     if( isset( $_POST['type-gallery'] ) && $_POST['type-gallery'] !== '' ){
         $select_gallery = sanitize_title( $_POST['type-gallery'] );
         add_term_meta( $term_id, 'type-gallery', $select_gallery, true );
+    }
+    if( isset( $_POST['select-category-link'] ) && $_POST['select-category-link'] !== '' ){
+        $select_category = sanitize_title( $_POST['select-category-link'] );
+        add_term_meta( $term_id, 'select-category-link', $select_category, true );
     }
 }
 add_action( 'create_product_cat', 'sport_save_select_gallery', 10, 2 );
@@ -87,6 +112,7 @@ function shoptheme_product_cat_edit_meta_field( $term ) {
 
     // get current group
     $feature_group = get_term_meta( $term->term_id, 'type-gallery', true );
+    $feature_group_cat = get_term_meta( $term->term_id, 'select-category-link', true );
 
 ?>
 
@@ -118,6 +144,35 @@ function shoptheme_product_cat_edit_meta_field( $term ) {
         </td>
     </tr>
 
+    <tr>
+        <th>
+            <label for="select-category-link">
+                <?php esc_html_e( 'Chọn danh mục liên kết', 'shoptheme' ); ?>
+            </label>
+        </th>
+
+        <td>
+            <div class="form-field form-field__edit-cat">
+                <div class="form-field__item">
+                    <select id="select-category-link" name="select-category-link">
+                        <option value="0">
+                            <?php esc_html_e( 'None', 'sport' ); ?>
+                        </option>
+
+                        <?php $categories = get_categories();
+                        foreach($categories as  $category) : ?>
+
+                            <option value="<?php echo esc_attr( $category->term_id ); ?>" <?php selected( $feature_group_cat, $category->term_id ); ?>>
+                                <?php echo esc_html( $category->name ); ?>
+                            </option>
+
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </td>
+    </tr>
+
 <?php
 
 }
@@ -129,6 +184,10 @@ function sport_update_select_gallery( $term_id ) {
     if( isset( $_POST['type-gallery'] ) &&  $_POST['type-gallery'] !=='' ){
         $select_gallery = sanitize_title( $_POST['type-gallery'] );
         update_term_meta( $term_id, 'type-gallery', $select_gallery );
+    }
+    if( isset( $_POST['select-category-link'] ) && $_POST['select-category-link'] !== '' ){
+        $select_category = sanitize_title( $_POST['select-category-link'] );
+        update_term_meta( $term_id, 'select-category-link', $select_category );
     }
 
 }

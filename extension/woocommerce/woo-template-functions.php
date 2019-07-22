@@ -654,7 +654,7 @@ if (!function_exists('sport_woo_before_single_product_summary_open')) :
     {
 
         ?>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-4">
         <div class="site-shop-single__gallery-box">
 
         <?php
@@ -697,8 +697,7 @@ if (!function_exists('sport_woo_before_single_product_entry_summary_open')) :
     {
 
         ?>
-        <div class="col-12 col-md-6">
-
+        <div class="col-12 col-md-5">
         <?php
 
     }
@@ -1004,7 +1003,8 @@ if (!function_exists('sport_product_hot')) :
         if ($product_hot == 1) :
             ?>
             <span class="product-hot">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/icon_hot.gif" width="65px" alt="<?php echo esc_html__('Sản phẩm Hot','sport'); ?>"/>
+                <img src="<?php echo get_template_directory_uri(); ?>/images/icon_hot.gif" width="65px"
+                     alt="<?php echo esc_html__('Sản phẩm Hot', 'sport'); ?>"/>
         </span>
 
         <?php
@@ -1030,8 +1030,88 @@ if (!function_exists('sport_product_only')) :
             ?>
 
             <span class="product-only">
-            <?php echo esc_html($product_only); ?>
+
+                <p><?php echo esc_html($product_only); ?></p>
+
             </span>
+
+        <?php
+        endif;
+
+    }
+
+endif;
+
+if (!function_exists('sport_product_sale_info')) :
+
+    /**
+     * woocommerce_single_product_summary hook.
+     *
+     * @hooked sport_product_sale_info - 10
+     */
+
+    function sport_product_sale_info()
+    {
+
+        $product_info = get_post_meta(get_the_ID(), 'sport_option_product_sale_info', true);
+        if ($product_info != '') :
+            ?>
+
+            <span class="product-sale-info">
+            <strong><?php echo esc_html__('Khuyến mãi: ', 'sport'); ?></strong>
+                <?php echo esc_html($product_info); ?>
+            </span>
+
+        <?php
+        endif;
+
+    }
+
+endif;
+
+if (!function_exists('sport_product_rating')) :
+
+    /**
+     * woocommerce_single_product_summary hook.
+     *
+     * @hooked sport_product_rating - 10
+     */
+
+    function sport_product_rating()
+    {
+
+        $product_star = get_post_meta(get_the_ID(), 'sport_option_product_fake_star', true);
+        $product_evaluate = get_post_meta(get_the_ID(), 'sport_option_product_fake_evaluate', true);
+        $evaluate = '';
+        if ($product_evaluate != ''):
+            $evaluate .= $product_evaluate;
+        endif;
+
+        if ($product_star == 4) {
+            $product_star_width = 80;
+        } elseif ($product_star == 45) {
+            $product_star_width = 87.5;
+        } elseif ($product_star == 5) {
+            $product_star_width = 100;
+        } else {
+            $product_star_width = '';
+        }
+
+        if ($product_star != '') :
+            ?>
+
+            <div class="woocommerce-product-rating">
+                <div class="star-rating" role="img"
+                     aria-label="Được xếp hạng <?php echo esc_attr($product_star); ?>.00 <?php echo esc_attr($product_star); ?> sao"><span
+                            style="width:<?php echo esc_attr($product_star_width); ?>%"><strong
+                                class="rating"><?php echo esc_attr($product_star); ?>
+                            .00</strong> trên <?php echo esc_attr($product_star); ?>
+                        dựa trên <span
+                                class="rating"><?php echo esc_html($evaluate); ?></span> đánh giá</span></div>
+                <p class="woocommerce-review-link">(<span class="count"><?php echo esc_html($evaluate); ?></span> đánh
+                    giá)
+                </p>
+            </div>
 
         <?php
         endif;
@@ -1143,22 +1223,22 @@ if (!function_exists('sport_product_blog')) :
         $rows_number = 2;
         $column_number = 2;
         $number_item = $rows_number * $column_number;
+        $cate = get_queried_object();
+        $product_id = $cate->ID;
+        $term_obj_list = get_the_terms( $product_id, 'product_cat' );
+        foreach ($term_obj_list as $listID) {
+            $listID->term_id;
+        }
+        $productCatMeta = get_term_meta($listID->term_id, 'select-category-link', true);
+        $cat_post_ids = '';
+        if($productCatMeta != ''){
+            $cat_post_ids .= $productCatMeta;
+        }else{
+            $cat_post_ids = NULL;
+        }
 
-        $cat_post_ids = array();
 
-        if (!empty($sport_products_check_blog)) :
 
-            foreach ($sport_products_check_blog as $key => $item):
-
-                if ($item == 1) :
-
-                    $cat_post_ids[] .= $key;
-
-                endif;
-
-            endforeach;
-
-        endif;
 
         if (!empty($cat_post_ids)) :
 
@@ -1268,7 +1348,7 @@ function sport_loop_single_meta_product()
     <div class="site-single-product__meta<?php echo(!empty($countdown_time) ? ' d-flex justify-content-between' : ''); ?>">
         <div class="left-box">
             <?php
-            woocommerce_template_single_rating();
+            sport_product_rating();
             woocommerce_template_single_price();
             ?>
         </div>
@@ -1356,3 +1436,4 @@ if (!function_exists('sport_single_product_phone')) :
     }
 
 endif;
+

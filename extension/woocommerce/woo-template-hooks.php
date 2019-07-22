@@ -59,6 +59,8 @@ add_action( 'woocommerce_after_shop_loop', 'sport_woo_after_shop_loop_product', 
 
 add_action( 'woocommerce_before_shop_loop_item_title', 'sport_woo_product_thumbnail_open', 5 );
 add_action( 'woocommerce_before_shop_loop_item_title', 'sport_product_new', 9 );
+add_action( 'woocommerce_before_shop_loop_item_title', 'sport_product_hot', 9 );
+add_action( 'woocommerce_before_shop_loop_item_title', 'sport_product_only', 9 );
 add_action( 'woocommerce_before_shop_loop_item_title', 'sport_woo_product_thumbnail_close', 15 );
 
 add_action( 'woocommerce_shop_loop_item_title', 'sport_woo_get_product_title', 10 );
@@ -128,9 +130,12 @@ add_action( 'woocommerce_single_product_summary', 'sport_loop_single_meta_produc
 add_action( 'woocommerce_after_single_product_summary', 'sport_upsells_products', 15 );
 add_action( 'woocommerce_after_single_product_summary', 'sport_related_products', 20 );
 
+add_action( 'woocommerce_single_product_summary', 'sport_product_sale_info', 45 );
 add_action( 'woocommerce_single_product_summary', 'sport_share', 50 );
 
 add_action( 'woocommerce_after_single_product_summary', 'sport_product_blog', 25 );
+
+//add_action( 'woocommerce_after_single_product_summary', 'sport_comment_form();', 25 );
 
 add_action( 'woocommerce_after_add_to_cart_button', 'sport_single_product_phone', 10 );
 

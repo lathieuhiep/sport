@@ -185,7 +185,7 @@
 .product-gallery-cat-single.product-gallery-cate{
   .item-gallery{
     .item-gallery__img{
-      height: 325px;
+      height: 470px;
     }
   }
 }
@@ -203,8 +203,14 @@
     }
     .item-gallery__img {
       position: relative;
-      height: 545px;
+      height: 543px;
       overflow: hidden;
+
+      &:after{
+        clear: both;
+        content: "";
+        display: contents;
+      }
 
       a {
         position: absolute;
@@ -212,9 +218,6 @@
         height: 100%;
         top: 0;
         left: 0;
-        :before{
-          clear: both;
-        }
       }
       img{
         height: 100%;

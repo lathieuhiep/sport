@@ -680,7 +680,7 @@ function sport_col_use_sidebar( $option_sidebar, $active_sidebar ) {
 }
 
 function sport_col_sidebar() {
-    $class_col_sidebar = 'col-12 col-md-4 col-lg-3';
+    $class_col_sidebar = 'col-12 col-md-3 col-lg-3';
 
     return $class_col_sidebar;
 }

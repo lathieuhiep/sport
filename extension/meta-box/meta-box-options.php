@@ -89,6 +89,38 @@ function sport_register_meta_boxes() {
                 'placeholder' => esc_html__( 'Chèn nội dung', 'sport' ),
             ),
 
+            array(
+                'id'        =>  'sport_option_product_sale_info',
+                'name'      =>  esc_html__( 'Sale Infomation', 'sport' ),
+                'type'      =>  'text',
+                'placeholder' => esc_html__( 'Nội dung thông tin khuyến mãi', 'sport' ),
+            ),
+
+            array(
+                'id'        =>  '_sale_price_dates_to',
+                'name'      =>  esc_html__( 'Count down', 'sport' ),
+                'type'      =>  'date',
+                'placeholder' => esc_html__( '', 'sport' ),
+            ),
+
+            array(
+                'id'        =>  'sport_option_product_fake_star',
+                'name'      =>  esc_html__( 'Star number (fake)', 'sport' ),
+                'desc'      =>  esc_html__( 'Số lượng sao', 'sport' ),
+                'type'      =>  'select',
+                'options'   => array(
+                    4   =>  esc_html__( '4', 'sport' ),
+                    45   =>  esc_html__( '4.5', 'sport' ),
+                    5   =>  esc_html__( '5', 'sport' ),
+                ),
+            ),
+            array(
+                'id'        =>  'sport_option_product_fake_evaluate',
+                'name'      =>  esc_html__( 'Evaluate number (fake)', 'sport' ),
+                'desc'      =>  esc_html__( 'Số lượng đánh giá', 'sport' ),
+                'type'      =>  'text',
+            ),
+
         )
     );
     /* End meta box gallery */
@@ -116,6 +148,8 @@ function sport_register_meta_boxes() {
                 'clone'         =>  false,
                 'placeholder'   =>  esc_html__( '20 phút trước', 'sport' ),
             ),
+
+
 
         )
     );
