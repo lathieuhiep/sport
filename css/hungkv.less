@@ -345,6 +345,7 @@
     }
     .site-post-item {
       .site-post-content {
+
         display: flex;
         flex-direction: row;
         .post-thumbnail {
@@ -370,14 +371,16 @@
     .site-post-content {
       border: 2px solid #eee;
       padding: 15px;
-      height: 1500px;
-      overflow-y: scroll;
+      .site-post-excerpt{
+        height: 1500px;
+        overflow-y: scroll;
+      }
       p {
         color: #000;
       }
       h1 {
-        background: #e9ecef;
-        color: @color_3;
+        background: #ff5c00;
+        color: #fff;
         text-align: center;
       }
     }
@@ -471,16 +474,8 @@
 .product-only {
   left: 0;
   right: 0;
-  p {
-    /* Starting position */
-    -moz-transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-    /* Apply animation to this element */
-    -moz-animation: example1 15s linear infinite;
-    -webkit-animation: example1 15s linear infinite;
-    animation: example1 15s linear infinite;
-    width: max-content;
+  marquee {
+    width: 100%;
     height: 100%;
     font-size: 16px;
     line-height: 30px;
@@ -530,6 +525,106 @@
       left: 6px;
       font-weight: 900;
       font-size: 10px;
+    }
+  }
+}
+.fcomment{
+  margin-top: 30px;
+  webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  background: #fff;
+  padding: 15px 20px;
+  .item{
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    &:last-child{
+      border: 0;
+    }
+  }
+  h3{
+    color: #00b0f0;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  .title{
+    h6{
+      font-size: 14px;
+      line-height: 1.4em;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+    p{
+      span{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #2ba832;
+        text-align: center;
+        margin-right: 3px;
+        i{
+          font-size: 14px;
+          color: #fff;
+          line-height: 1.4em;
+        }
+      }
+      color: #00b0f0;
+    }
+  }
+  .comment{
+    .star{
+      margin-bottom: 5px;
+      display: inline-block;
+      position: relative;
+      &:before{
+        position: absolute;
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        left: 0;
+        top: 0;
+        color: #ff5c00;
+        right: 0;
+        width: 100%;
+        overflow: hidden;
+        letter-spacing: 3.3px;
+      }
+    }
+    .star.star-5{
+      &:before{
+        width: 100%;
+      }
+    }
+    .star.star-45{
+      &:before{
+        width: 91%;
+      }
+    }
+    .star.star-4{
+      &:before{
+        width: 80%;
+      }
+    }
+  }
+  .like{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p{
+      margin: 0;
+    }
+    .dot{
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #707070;
+      margin: 0 5px;
     }
   }
 }

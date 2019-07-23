@@ -658,6 +658,17 @@ Redux::setSection( $sport_opt_name, array(
             'default'   =>  '0984.187.697',
         ),
 
+        array(
+            'id'        =>  'sport_single_product_amount',
+            'type'      =>  'slider',
+            'title'     =>  esc_html__( 'Fake comments amount', 'sport' ),
+            'desc'      =>  esc_html__( 'Số lượng đánh giá fake trên trang sản phẩm', 'sport' ),
+            'default'   =>  '10',
+            'min'           =>  1,
+            'step'          =>  1,
+            'max'           =>  50,
+        ),
+
     )
 ));
 

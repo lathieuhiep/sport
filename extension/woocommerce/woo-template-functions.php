@@ -1031,7 +1031,8 @@ if (!function_exists('sport_product_only')) :
 
             <span class="product-only">
 
-                <p><?php echo esc_html($product_only); ?></p>
+                <marquee scrollamount="5" direction="" onmouseover="this.stop();"
+                         onmouseout="this.start();"><?php echo esc_html($product_only); ?></marquee>
 
             </span>
 
@@ -1118,6 +1119,71 @@ if (!function_exists('sport_product_rating')) :
 
     }
 
+endif;
+
+if (!function_exists('sport_product_fakecomment')) :
+
+    /**
+     * woocommerce_after_single_product_summary hook.
+     *
+     * @hooked sport_product_fakecomment - 25
+     */
+    function sport_product_fakecomment()
+    {
+        global $sport_options;
+        $sport_fc_amount = $sport_options['sport_single_product_amount'];
+        $args = array(
+            'post_type' => 'fakecomment',
+            'posts_per_page' => $sport_fc_amount,
+            'orderby' => 'rand',
+        );
+
+        $query = new WP_Query($args);
+        echo '<div class="fcomment">';
+        echo '<h3>'.esc_html__('Đánh giá của khách hàng','sport').'</h3>';
+        if ($query->have_posts()) :
+            while ($query->have_posts()) :
+                $query->the_post();
+
+                $fakecomment_star = rwmb_meta('sport_option_fakecomment_star');
+                $fakecomment_date = rwmb_meta('sport_option_fakecomment_date');
+                $fakecomment_like = rwmb_meta('sport_option_fakecomment_like');
+                ?>
+
+                <div class="item">
+                    <div class="title d-flex">
+                        <h6><?php the_title(); ?></h6>
+                        <p>
+                            <span><i class="fas fa-check"></i></span>
+                            <?php echo esc_html__('Đã mua tại Sport360.vn', 'sport'); ?>
+                        </p>
+                    </div>
+                    <div class="comment">
+                        <div class="star <?php echo esc_attr('star-').esc_attr($fakecomment_star); ?>">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <?php the_content(); ?>
+                    </div>
+                    <div class="like">
+                        <p><?php echo $fakecomment_like . esc_html__(' Lượt thích', 'sport'); ?></p>
+                        <span class="dot"></span>
+                        <span class="date"><?php echo date('d/m/Y', strtotime($fakecomment_date)); ?></span>
+                    </div>
+                </div>
+
+            <?php
+
+            endwhile;
+            wp_reset_postdata();
+
+        endif;
+        echo '</div>';
+
+    }
 endif;
 
 /* Sale flash percent */
@@ -1225,19 +1291,17 @@ if (!function_exists('sport_product_blog')) :
         $number_item = $rows_number * $column_number;
         $cate = get_queried_object();
         $product_id = $cate->ID;
-        $term_obj_list = get_the_terms( $product_id, 'product_cat' );
+        $term_obj_list = get_the_terms($product_id, 'product_cat');
         foreach ($term_obj_list as $listID) {
             $listID->term_id;
         }
         $productCatMeta = get_term_meta($listID->term_id, 'select-category-link', true);
         $cat_post_ids = '';
-        if($productCatMeta != ''){
+        if ($productCatMeta != '') {
             $cat_post_ids .= $productCatMeta;
-        }else{
+        } else {
             $cat_post_ids = NULL;
         }
-
-
 
 
         if (!empty($cat_post_ids)) :
