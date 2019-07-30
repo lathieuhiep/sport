@@ -530,14 +530,18 @@
 }
 .fcomment{
   margin-top: 30px;
-  webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-  border-top: 1px solid #eee;
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
-  background: #fff;
-  padding: 15px 20px;
+  .wrap-scroll{
+    webkit-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    background: #fff;
+    padding: 15px 20px;
+    height: 640px;
+    overflow-y: scroll;
+  }
   .item{
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -552,28 +556,19 @@
     font-size: 16px;
   }
   .title{
+    align-items: center;
     h6{
       font-size: 14px;
       line-height: 1.4em;
       margin-bottom: 0;
-      margin-right: 10px;
+      margin-right: 5px;
     }
     p{
-      span{
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: inline-block;
-        background: #2ba832;
-        text-align: center;
+      color: #22b345;
+      font-size: 12px;
+      img{
         margin-right: 3px;
-        i{
-          font-size: 14px;
-          color: #fff;
-          line-height: 1.4em;
-        }
       }
-      color: #00b0f0;
     }
   }
   .comment{
@@ -581,35 +576,39 @@
       margin-bottom: 5px;
       display: inline-block;
       position: relative;
-      &:before{
-        position: absolute;
-        content: "\f005 \f005 \f005 \f005 \f005";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        left: 0;
-        top: 0;
-        color: #ff5c00;
-        right: 0;
-        width: 100%;
-        overflow: hidden;
-        letter-spacing: 3.3px;
+      i{
+        font-size: 10px;
+        color: #ffa500;
       }
+      //&:before{
+      //  position: absolute;
+      //  content: "\f005 \f005 \f005 \f005 \f005";
+      //  font-family: 'Font Awesome 5 Free';
+      //  font-weight: 900;
+      //  left: 0;
+      //  top: 0;
+      //  color: #ffa500;
+      //  right: 0;
+      //  width: 100%;
+      //  overflow: hidden;
+      //  letter-spacing: 3.3px;
+      //}
     }
-    .star.star-5{
-      &:before{
-        width: 100%;
-      }
-    }
-    .star.star-45{
-      &:before{
-        width: 91%;
-      }
-    }
-    .star.star-4{
-      &:before{
-        width: 80%;
-      }
-    }
+    //.star.star-5{
+    //  &:before{
+    //    width: 100%;
+    //  }
+    //}
+    //.star.star-45{
+    //  &:before{
+    //    width: 91%;
+    //  }
+    //}
+    //.star.star-4{
+    //  &:before{
+    //    width: 80%;
+    //  }
+    //}
   }
   .like{
     display: flex;
@@ -626,5 +625,81 @@
       background: #707070;
       margin: 0 5px;
     }
+  }
+}
+.woof_container_inner_khohng{
+  .woof_list_checkbox{
+    height: 315px;
+    overflow-y: scroll;
+  }
+}
+.clock-cowndown{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p{
+    margin: 0;
+    color: #242424;
+    font-size: 14px;
+    line-height: 1.8em;
+    margin-right: 5px;
+  }
+  img{
+    max-width: 60px;
+    height: auto;
+    margin-right: 5px;
+  }
+  #clock{
+    font-size: 18px;
+    font-weight: 700;
+    color: red;
+    p{
+      margin: 0 5px;
+    }
+  }
+}
+.sold-progress-bar{
+  margin: 10px 0;
+  .sold{
+    align-items: center;
+    p{
+      width: 15%;
+      margin: 0;
+      color: #ff0000;
+    }
+    .progress-product{
+      height: 10px;
+      background: #eee;
+      width: 85%;
+      border-radius: 3px;
+      position: relative;
+      z-index: 1;
+      &:after{
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #ff0000;
+        border-radius: 3px;
+        z-index: 9;
+        content: "";
+        height: 10px;
+      }
+    }
+  }
+  .total{
+    p{
+      font-size: 16px;
+      line-height: 1.8em;
+      color: #00b0f0;
+      font-weight: 500;
+      b{
+        color: #ff0000;
+      }
+    }
+  }
+}
+.xxbh{
+  .product-origin{
+    margin-right: 100px;
   }
 }

@@ -17,7 +17,6 @@
             time_second     =   settings_notify['time_second'],
             loop_end        =   settings_notify['loop_end'];
 
-
         let interval    =   setInterval( function() {
 
             timesRun += 1;

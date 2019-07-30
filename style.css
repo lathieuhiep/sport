@@ -3699,7 +3699,7 @@ section.widget.woocommerce .woocommerce-widget-layered-nav-list .woocommerce-wid
 }
 
 .site-single-product__meta {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 .site-single-product__meta .right-box {
   margin-left: 10px;

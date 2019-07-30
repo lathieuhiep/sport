@@ -250,6 +250,10 @@ function sport_register_front_end()
     wp_enqueue_style('sport-library', get_theme_file_uri('/css/library.min.css'), array(), '');
     /* End main Css */
 
+    if (is_product()):
+//        wp_enqueue_style('flipclock', get_theme_file_uri('/css/library/flipclock.css'), array(), '');
+    endif;
+
     /*  Start Style Css   */
     wp_enqueue_style('sport-style', get_stylesheet_uri());
     /*  Start Style Css   */
@@ -313,6 +317,10 @@ function sport_register_front_end()
             $sport_woo_cat_ajax = array('url' => $sport_woo_cat_admin_url);
             wp_localize_script('shop-cat', 'load_product_cat', $sport_woo_cat_ajax);
 
+        endif;
+
+        if (is_product()):
+            wp_enqueue_script('flipclock', get_theme_file_uri('/js/library/flipclock.js'), array(), '1.1a', true);
         endif;
 
     endif;
@@ -860,7 +868,6 @@ function sport_notification()
     endif;
 
 }
-
 
 
 // ajax notification

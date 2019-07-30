@@ -98,11 +98,19 @@ function sport_register_meta_boxes()
             ),
 
             array(
-                'id' => '_sale_price_dates_to',
-                'name' => esc_html__('Count down', 'sport'),
-                'type' => 'date',
-                'placeholder' => esc_html__('', 'sport'),
+                'id' => 'sport_option_product_origin',
+                'name' => esc_html__('Product origin', 'sport'),
+                'type' => 'text',
+                'desc' => esc_html__('Xuất sứ', 'sport'),
             ),
+
+            array(
+                'id' => 'sport_option_product_guarantee',
+                'name' => esc_html__('Product guarantee', 'sport'),
+                'type' => 'text',
+                'desc' => esc_html__('Chế độ bảo hành', 'sport'),
+            ),
+
 
             array(
                 'id' => 'sport_option_product_fake_star',
@@ -121,6 +129,26 @@ function sport_register_meta_boxes()
                 'desc' => esc_html__('Số lượng đánh giá', 'sport'),
                 'type' => 'text',
             ),
+            array(
+                'id' => 'sport_option_product_cd_date',
+                'type' => 'datetime',
+                'name' => esc_html__('Countdown End date', 'sport'),
+                'desc' => esc_html__('Chọn ngày kết thúc khuyến mãi', 'sport'),
+                'save_format' => 'M-j-y H:i:s'
+            ),
+            array(
+                'id' => 'sport_option_product_sold',
+                'type' => 'text',
+                'name' => esc_html__('Sold product', 'metabox-online-generator'),
+                'desc' => esc_html__('Số sản phẩm đã bán', 'metabox-online-generator'),
+            ),
+            array(
+                'id' => 'sport_option_product_total',
+                'type' => 'text',
+                'name' => esc_html__('Total product', 'metabox-online-generator'),
+                'desc' => esc_html__('Tổng số sản phẩm có trong kho', 'metabox-online-generator'),
+            ),
+
 
         )
     );
@@ -172,21 +200,21 @@ function sport_register_meta_boxes()
                 'placeholder' => esc_html__('Chọn số sao tương ứng', 'sport'),
                 'options' => array(
                     4 => '4',
-                    '4.5' => '4.5',
-                    '5',
+                    45 => '4.5',
+                    5 => '5',
                 ),
                 'std' => '5',
             ),
             array(
                 'id' => 'sport_option_fakecomment_date',
                 'type' => 'date',
-                'name' => esc_html__( 'Chọn ngày hiển thị comment', 'sport' ),
+                'name' => esc_html__('Chọn ngày hiển thị comment', 'sport'),
             ),
             array(
                 'id' => 'sport_option_fakecomment_like',
                 'type' => 'number',
-                'name' => esc_html__( 'Like number', 'sport' ),
-                'desc' => esc_html__( 'Số lượng lượt thích comment', 'sport' ),
+                'name' => esc_html__('Like number', 'sport'),
+                'desc' => esc_html__('Số lượng lượt thích comment', 'sport'),
                 'std' => '5',
             ),
         )

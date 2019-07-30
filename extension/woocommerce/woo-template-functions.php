@@ -411,7 +411,7 @@ if (!function_exists('sport_woo_before_shop_loop_item')) :
         ?>
 
         <div class="site-shop__product--item">
-
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
         <?php
     }
 endif;
@@ -425,7 +425,7 @@ if (!function_exists('sport_woo_after_shop_loop_item')) :
     function sport_woo_after_shop_loop_item()
     {
         ?>
-
+        </a>
         </div><!-- .site-shop__product--item -->
 
         <?php
@@ -1070,6 +1070,44 @@ if (!function_exists('sport_product_sale_info')) :
 
 endif;
 
+if (!function_exists('sport_product_origin')) :
+
+    /**
+     * woocommerce_single_product_summary hook.
+     *
+     * @hooked sport_product_origin - 40
+     */
+
+    function sport_product_origin()
+    {
+
+        $product_origin = get_post_meta(get_the_ID(), 'sport_option_product_origin', true);
+        $product_guarantee = get_post_meta(get_the_ID(), 'sport_option_product_guarantee', true);
+        if ($product_origin != '' || $product_guarantee != '') :
+            ?>
+            <div class="xxbh d-flex">
+                <?php if ($product_origin != '') : ?>
+                <span class="product-origin">
+                <strong><?php echo esc_html__('Xuất xứ: ', 'sport'); ?></strong>
+                    <?php echo esc_html($product_origin); ?>
+                </span>
+            <?php
+            endif;
+            if ($product_guarantee != '') : ?>
+                <span class="product-guarantee">
+                <strong><?php echo esc_html__('Bảo hành: ', 'sport'); ?></strong>
+                    <?php echo esc_html($product_guarantee); ?>
+                </span>
+            <?php endif; ?>
+            </div>
+
+        <?php
+        endif;
+
+    }
+
+endif;
+
 if (!function_exists('sport_product_rating')) :
 
     /**
@@ -1140,7 +1178,10 @@ if (!function_exists('sport_product_fakecomment')) :
 
         $query = new WP_Query($args);
         echo '<div class="fcomment">';
-        echo '<h3>'.esc_html__('Đánh giá của khách hàng','sport').'</h3>';
+
+        echo '<h3>' . esc_html__('Đánh giá của khách hàng', 'sport') . '</h3>';
+
+        echo '<div class="wrap-scroll">';
         if ($query->have_posts()) :
             while ($query->have_posts()) :
                 $query->the_post();
@@ -1154,17 +1195,29 @@ if (!function_exists('sport_product_fakecomment')) :
                     <div class="title d-flex">
                         <h6><?php the_title(); ?></h6>
                         <p>
-                            <span><i class="fas fa-check"></i></span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/security-checked.png"
+                                 width="12px" height="12px" alt="security checked"/>
                             <?php echo esc_html__('Đã mua tại Sport360.vn', 'sport'); ?>
                         </p>
                     </div>
                     <div class="comment">
-                        <div class="star <?php echo esc_attr('star-').esc_attr($fakecomment_star); ?>">
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
+
+                        <div class="star <?php echo esc_attr('star-') . esc_attr($fakecomment_star); ?>">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <?php if ($fakecomment_star == 45 || $fakecomment_star == 4 || $fakecomment_star == 5 || $fakecomment_star == 46): ?>
+                                <i class="fa fa-star"></i>
+                            <?php endif; ?>
+                            <?php if ($fakecomment_star == 4): ?>
+                                <i class="far fa-star"></i>
+                            <?php endif; ?>
+                            <?php if ($fakecomment_star == 45): ?>
+                                <i class="fas fa-star-half-alt"></i>
+                            <?php endif; ?>
+                            <?php if ($fakecomment_star == 5 || $fakecomment_star == 46): ?>
+                                <i class="fa fa-star"></i>
+                            <?php endif; ?>
                         </div>
                         <?php the_content(); ?>
                     </div>
@@ -1182,7 +1235,55 @@ if (!function_exists('sport_product_fakecomment')) :
 
         endif;
         echo '</div>';
+        echo '</div>';
 
+    }
+endif;
+
+if (!function_exists('sport_product_countdown')) :
+
+    /**
+     * woocommerce_after_single_product_summary hook.
+     *
+     * @hooked sport_product_countdown - 99
+     */
+    function sport_product_countdown()
+    {
+        $sport_cd_day = rwmb_meta('sport_option_product_cd_date');
+        $sport_product_sold = rwmb_meta('sport_option_product_sold');
+        $sport_product_total = rwmb_meta('sport_option_product_total');
+        $sport_product_percent = ($sport_product_sold / $sport_product_total) * 100;
+        ?>
+        <?php if ($sport_cd_day != ''): ?>
+        <div class="count-down">
+            <div class="clock-cowndown">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/Smu8.gif" alt="alarm clock"/>
+                <p><?php echo esc_html__('Khuyến mãi kết thúc sau', 'sport'); ?></p>
+                <div id="clock" class="twoDayDigits d-flex"
+                     data-countdown-day="<?php echo esc_attr($sport_cd_day); ?>"
+                ></div>
+            </div>
+            <?php if ($sport_product_sold != '' && $sport_product_total != ''): ?>
+                <div class="sold-progress-bar">
+                    <div class="sold d-flex">
+                        <p><?php echo esc_html__('Đã bán ', '') ?><?php echo esc_html($sport_product_sold); ?></p>
+                        <div class="progress-product"></div>
+                        <style>
+                            .progress-product:after {
+                                width: <?php echo esc_attr($sport_product_percent); ?>%;
+                            }
+                        </style>
+                    </div>
+                    <div class="total">
+                        <p><?php echo esc_html('Trên tổng số ', 'sport') . "<b>$sport_product_total</b>" . esc_html__(' sản phẩm được ưu đãi trong đợt sale này', 'sport'); ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+
+
+    <?php
+    endif;
     }
 endif;
 
@@ -1417,22 +1518,6 @@ function sport_loop_single_meta_product()
             ?>
         </div>
 
-        <?php
-        if (!empty($countdown_time)) :
-
-            $countdown_time_format = date("Y/m/d", $countdown_time);
-            ?>
-
-            <div class="right-box">
-                <h4 class="text-time">
-                    <?php esc_html_e('Thời gian còn lại của ưu dãi', 'sport'); ?>
-                </h4>
-
-                <div class="site-single-product__countdown-sale d-flex"
-                     data-countdown="<?php echo esc_attr($countdown_time_format); ?>"></div>
-            </div>
-
-        <?php endif; ?>
     </div>
 
     <?php
