@@ -45,7 +45,7 @@
             type: 'POST',
             data: ({
 
-                action: 'sport_notification_ajax'
+                action: 'sport_get_notification_ajax'
 
             }),
 

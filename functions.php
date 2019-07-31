@@ -869,24 +869,23 @@ function sport_notification()
 
 }
 
-
 // ajax notification
-add_action('wp_ajax_sport_notification_ajax', 'sport_notification_ajax');
-add_action('wp_ajax_nopriv_sport_notification_ajax', 'sport_notification_ajax');
+add_action('wp_ajax_sport_get_notification_ajax', 'sport_get_notification_ajax');
+add_action('wp_ajax_nopriv_sport_get_notification_ajax', 'sport_get_notification_ajax');
 
-function sport_notification_ajax()
+function sport_get_notification_ajax()
 {
 
     sport_notification();
 
-    exit();
+   wp_die();
 
 }
 
 /* End notification */
 
 // Enable the user with no privileges to run ajax_login() in AJAX
-add_action('wp_ajax_nopriv_ajaxlogin', 'ajax_login');
+add_action('wp_ajax_nopriv_ajax_login', 'ajax_login');
 function ajax_login()
 {
 
@@ -901,7 +900,7 @@ function ajax_login()
 }
 
 // Enable the user with no privileges to run ajax_register() in AJAX
-add_action('wp_ajax_nopriv_ajaxregister', 'ajax_register');
+add_action('wp_ajax_nopriv_ajax_register', 'ajax_register');
 function ajax_register()
 {
 

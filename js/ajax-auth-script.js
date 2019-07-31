@@ -16,14 +16,14 @@
 
         if (!$(this).valid()) return false;
         $('p.status', this).show().text(ajax_auth_object.loadingmessage);
-        let action = 'ajaxlogin',
+        let action = 'ajax_login',
         username = $('form#login #username').val(),
         password = $('form#login #password').val(),
         email = '',
         security = $('form#login #security').val();
 
         if ($(this).attr('id') === 'register') {
-            action = 'ajaxregister';
+            action = 'ajax_register';
             username = $('#signonname').val();
             password = $('#signonpassword').val();
             email = $('#email').val();

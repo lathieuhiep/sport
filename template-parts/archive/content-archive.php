@@ -9,71 +9,90 @@ $sport_class_col_content = sport_col_use_sidebar($sport_blog_sidebar_archive, 's
 
 <div class="site-container site-blog">
     <div class="container">
-        <div class="top-archive">
-            <div class="breadcrumb">
-                <?php if (function_exists('bcn_display')) {
-                    bcn_display();
-                } ?>
-            </div>
-        </div>
-        <div class="category-desc">
-                <?php
-                the_archive_description( '<div class="taxonomy-description">', '</div>' );
-                ?>
-        </div>
+        <?php if (function_exists('bcn_display')) : ?>
 
-        <div class="tag_cloud_on_single">
-            <h2><?php echo esc_html__('Thẻ tag','sport'); ?></h2>
-            <?php
+            <div class="top-archive">
+                <div class="breadcrumb">
+                    <?php bcn_display(); ?>
+                </div>
+            </div>
+
+        <?php
+        endif;
+
+        if ( is_archive() ) :
 
             $category = get_the_category();
             $root_cat_of_curr =  $category[0]->category_parent;
+        ?>
 
-            function get_cat_slug($cat_id) {
-                $cat_id = (int) $cat_id;
-                $category = &get_category($cat_id);
-                return $category->slug;
-            }
+            <div class="category-desc">
+                <?php
+                the_archive_description( '<div class="taxonomy-description">', '</div>' );
+                ?>
+            </div>
 
-            $my_cat = get_cat_slug($root_cat_of_curr);
+            <?php if ( !empty( $root_cat_of_curr ) ) : ?>
 
-            $custom_query = new WP_Query('posts_per_page=-1&category_name='.$my_cat.'');
-            if ($custom_query->have_posts()) :
-                while ($custom_query->have_posts()) : $custom_query->the_post();
-                    $posttags = get_the_tags();
-                    if ($posttags) {
-                        foreach($posttags as $tag) {
-                            $all_tags[] = $tag->term_id;
-                        }
+                <div class="tag_cloud_on_single">
+                    <h2>
+                        <?php echo esc_html__('Thẻ tag','sport'); ?>
+                    </h2>
+
+                    <?php
+
+                    function get_cat_slug($cat_id) {
+                        $cat_id = (int) $cat_id;
+                        $category = &get_category($cat_id);
+                        return $category->slug;
                     }
-                endwhile;
+
+                    $my_cat = get_cat_slug($root_cat_of_curr);
+
+                    $custom_query = new WP_Query('posts_per_page=-1&category_name='.$my_cat.'');
+                    if ($custom_query->have_posts()) :
+                        while ($custom_query->have_posts()) : $custom_query->the_post();
+                            $posttags = get_the_tags();
+                            if ($posttags) {
+                                foreach($posttags as $tag) {
+                                    $all_tags[] = $tag->term_id;
+                                }
+                            }
+                        endwhile;
+                    endif;
+
+                    $tags_arr = array_unique($all_tags);
+                    $tags_str = implode(",", $tags_arr);
+
+                    $args = array(
+                        'smallest'                  => 12,
+                        'largest'                   => 24,
+                        'unit'                      => 'pt',
+                        'number'                    => 0,
+                        'format'                    => 'flat',
+                        'separator'                 => "&nbsp;&nbsp;&nbsp;",
+                        'orderby'                   => 'name',
+                        'order'                     => 'RAND',
+                        'exclude'                   => null,
+                        'topic_count_text_callback' => '',
+                        'link'                      => 'view',
+                        'echo'                      => true,
+                        'include'                   => $tags_str
+                    );
+
+                    wp_tag_cloud($args);
+
+                    ?>
+
+                </div>
+
+        <?php
             endif;
 
-            $tags_arr = array_unique($all_tags);
-            $tags_str = implode(",", $tags_arr);
-
-            $args = array(
-                'smallest'                  => 12,
-                'largest'                   => 24,
-                'unit'                      => 'pt',
-                'number'                    => 0,
-                'format'                    => 'flat',
-                'separator'                 => "&nbsp;&nbsp;&nbsp;",
-                'orderby'                   => 'name',
-                'order'                     => 'RAND',
-                'exclude'                   => null,
-                'topic_count_text_callback' => '',
-                'link'                      => 'view',
-                'echo'                      => true,
-                'include'                   => $tags_str
-            );
-
-            wp_tag_cloud($args);
-
-            ?>
-
-        </div>
+        endif;
+        ?>
     </div>
+
     <div class="container">
         <div class="row">
 
