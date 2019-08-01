@@ -13,6 +13,8 @@ class sport_plugin_elementor_widgets {
 
         // Register controls
         add_action( 'elementor/controls/controls_registered', [ $this, 'register_controls' ] );
+
+        add_action('elementor/widgets/widgets_registered', [ $this, 'widgets_registered' ] );
     }
 
     public function register_controls() {
@@ -21,6 +23,13 @@ class sport_plugin_elementor_widgets {
 
         $controls_manager = Plugin::$instance->controls_manager;
         $controls_manager->register_control( 'BoxIcon', new Control_Box_Icon() );
+
+    }
+
+    public function widgets_registered($widgets_manager) {
+
+
+        $widgets_manager->unregister_widget_type('wp-widget-woof_widget');
 
     }
 
