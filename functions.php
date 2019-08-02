@@ -277,11 +277,18 @@ function sport_register_front_end()
     wp_enqueue_script('sport-custom', get_theme_file_uri('/js/custom.js'), array(), '1.0.0', true);
 
     /* Notification */
-    wp_enqueue_script('notification', get_theme_file_uri('/js/notification.js'), array(), '1.0.0', true);
+    global $sport_options;
+    $on_off_notification    =   $sport_options['sport_on_off_notification'];
 
-    $sport_notification_admin_url = admin_url('admin-ajax.php');
-    $sport_notification_ajax = array('url' => $sport_notification_admin_url);
-    wp_localize_script('notification', 'load_notification', $sport_notification_ajax);
+    if ( $on_off_notification == 1 ) :
+
+        wp_enqueue_script('notification', get_theme_file_uri('/js/notification.js'), array(), '1.0.0', true);
+
+        $sport_notification_admin_url = admin_url('admin-ajax.php');
+        $sport_notification_ajax = array('url' => $sport_notification_admin_url);
+        wp_localize_script('notification', 'load_notification', $sport_notification_ajax);
+
+    endif;
 
     /* Login */
     if (!is_user_logged_in()) :

@@ -451,14 +451,12 @@ Redux::setSection( $sport_opt_name, array(
     'desc'      =>  esc_html__( 'Notification', 'sport' ),
     'fields'    =>  array(
 
-//        array(
-//            'id'        =>  'sport_notify_time_fist',
-//            'title'     =>  esc_html__( 'Time Fist (ms)', 'sport' ),
-//            'type'      =>  'text',
-//            'validate'  =>  'numeric',
-//            'default'   =>  2000,
-//            'desc'      =>  '1000ms = 1s'
-//        ),
+        array(
+            'id'        =>  'sport_on_off_notification',
+            'type'      =>  'switch',
+            'title'     =>  esc_html__( 'On/Off Notification', 'sport' ),
+            'default'   =>  true,
+        ),
 
         array(
             'id'        =>  'sport_notify_time_second',
