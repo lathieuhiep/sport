@@ -1,10 +1,28 @@
 .site-single {
+  padding: 25px 0 50px;
+
   .site-post-image,
   .page-links {
     margin-bottom: 30px;
   }
   .site-post-title {
     margin-bottom: 15px;
+  }
+  .site-post-content {
+    border: 2px solid #eee;
+    padding: 15px;
+    .site-post-excerpt {
+      height: 1500px;
+      overflow-y: scroll;
+    }
+    p {
+      color: #000;
+    }
+    h1 {
+      background: #ff5c00;
+      color: #ffffff;
+      text-align: center;
+    }
   }
 }
 .site-post-single-item {
@@ -111,6 +129,12 @@
   }
 }
 .site-single-post-related {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  @include box-shadow(0 3px 3px -3px rgba(0, 0, 0, 0.3));
+
   .title {
     position: relative;
     font-size: 18px;
@@ -129,5 +153,67 @@
   }
   .item {
     margin-bottom: 15px;
+  }
+  .owl-nav {
+    display: block !important;
+  }
+  h3 {
+    background: #00b0f0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.4em;
+    padding: 10px 0;
+    margin: 0;
+  }
+  .item-thumbnail {
+    margin-right: 20px;
+  }
+  .related-post-item {
+    display: flex;
+    flex-direction: row;
+
+    figure {
+      margin-right: 20px;
+    }
+  }
+}
+.older-post {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  .nav-next {
+    width: 49%;
+  }
+  .nav-previous {
+    width: 49%;
+  }
+  
+  h6 {
+    margin-bottom: 0;
+    color: #FF0000;
+  }
+  > div {
+    border: 2px solid #eee;
+    text-align: center;
+    background: #e9ecef;
+    padding: 5px 0;
+    
+    a {
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      &:hover {
+        color: #00b0f0;
+      }
+    }
+  }
+}
+.all-tags {
+  a {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 }

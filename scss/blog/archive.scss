@@ -98,3 +98,65 @@
     }
   }
 }
+.category-desc {
+  margin-bottom: 30px;
+
+  .taxonomy-description {
+    height: 150px;
+    padding: 15px;
+    overflow-y: scroll;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    @include box-shadow(0 3px 3px -3px rgba(0, 0, 0, 0.3));
+  }
+}
+.tag_cloud_on_single {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  @include box-shadow(0 3px 3px -3px rgba(0, 0, 0, 0.3));
+
+  h2 {
+    background: #00b0f0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.4em;
+    padding: 10px 0;
+  }
+  a {
+    padding: 10px 15px;
+    display: inline-block;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: #ff5c00;
+      border-color: #ff5c00;
+      color: #ffffff;
+      transition: all 0.5s ease;
+    }
+  }
+}
+.archive {
+  .site-blog {
+    padding: 25px 0 50px;
+
+    .site-post-item {
+      .site-post-content {
+        display: flex;
+        flex-direction: row;
+        .post-thumbnail {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+.tag-scroll {
+  height: 100px;
+  overflow-y: scroll;
+}

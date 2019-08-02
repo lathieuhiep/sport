@@ -250,17 +250,9 @@ function sport_register_front_end()
     wp_enqueue_style('sport-library', get_theme_file_uri('/css/library.min.css'), array(), '');
     /* End main Css */
 
-    if (is_product()):
-//        wp_enqueue_style('flipclock', get_theme_file_uri('/css/library/flipclock.css'), array(), '');
-    endif;
-
     /*  Start Style Css   */
     wp_enqueue_style('sport-style', get_stylesheet_uri());
     /*  Start Style Css   */
-    wp_enqueue_style('hungkv-style', get_theme_file_uri('/css/hungkv.css'), array(), '');
-    /* Start hungkv.css */
-
-    /* End hungkv.css */
 
     /*
     * End Get Css Front End

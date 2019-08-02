@@ -4,17 +4,13 @@ global $sport_options;
 
 $sport_on_off_share_single = $sport_options['sport_on_off_share_single'];
 
+$tags = get_tags(array(
+    'hide_empty' => false
+));
+
 ?>
 
     <div id="post-<?php the_ID() ?>" <?php post_class('site-post-single-item'); ?>>
-        <?php if (get_the_tags() != false): ?>
-            <div class="tag_cloud_on_single">
-                <?php
-                the_tags('', ' ');
-                ?>
-
-            </div>
-        <?php endif; ?>
         <div class="site-post-content">
             <h1 class="site-post-title">
                 <?php the_title(); ?>
@@ -33,28 +29,39 @@ $sport_on_off_share_single = $sport_options['sport_on_off_share_single'];
 
         <div class="older-post">
 
-            <div class="nav-previous"><?php next_post_link('%link', '<< Bài trước', TRUE); ?></div>
+            <div class="nav-previous">
+                <?php next_post_link('%link', '<< Bài trước', TRUE); ?>
+            </div>
 
-            <div class="nav-next"><?php previous_post_link('%link', 'Bài sau >>', TRUE); ?></div>
+            <div class="nav-next">
+                <?php previous_post_link('%link', 'Bài sau >>', TRUE); ?>
+            </div>
 
         </div>
+
+        <?php if ( !empty( $tags ) ) : ?>
 
         <div class="tag_cloud_on_single all-tags">
-            <h2><?php echo esc_html__('Thẻ tag', 'sport'); ?></h2>
-            <?php
+            <h2>
+                <?php esc_html_e('Thẻ tag', 'sport'); ?>
+            </h2>
 
-            $tags = get_tags(array(
-                'hide_empty' => false
-            ));
-            foreach ($tags as $tag) {
-                echo '<a title="' . $tag->name . '" href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a>';
-            }
-            ?>
+            <div class="tag-scroll">
+                <?php foreach ( $tags as $tag ) : ?>
+
+                    <a title="<?php echo esc_attr( $tag->name ); ?>" href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>">
+                        <?php echo esc_html( $tag->name ); ?>
+                    </a>
+
+                <?php endforeach; ?>
+            </div>
         </div>
 
-        <?php get_template_part('template-parts/post/inc', 'related-post'); ?>
-
         <?php
+        endif;
+
+        get_template_part('template-parts/post/inc', 'related-post');
+
         if ($sport_on_off_share_single == 1 || $sport_on_off_share_single == null) :
 
             sport_share();

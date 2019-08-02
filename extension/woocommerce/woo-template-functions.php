@@ -1304,7 +1304,7 @@ function sport_change_displayed_sale_price()
 
     } elseif ($product->is_type('variable')) {
 
-        $max_percentage = 0;
+        $percentage = $max_percentage = 0;
 
         foreach ($product->get_children() as $child_id) {
             $variation = wc_get_product($child_id);
