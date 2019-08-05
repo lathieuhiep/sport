@@ -1393,10 +1393,12 @@ if (!function_exists('sport_product_blog')) :
         $cate = get_queried_object();
         $product_id = $cate->ID;
         $term_obj_list = get_the_terms($product_id, 'product_cat');
-        foreach ($term_obj_list as $listID) {
-            $listID->term_id;
+        foreach ($term_obj_list as $index => $listID) {
+            if($index == 0){
+                $ids = $listID->term_id;
+            }
         }
-        $productCatMeta = get_term_meta($listID->term_id, 'select-category-link', true);
+        $productCatMeta = get_term_meta($ids, 'select-category-link', true);
         $cat_post_ids = '';
         if ($productCatMeta != '') {
             $cat_post_ids .= $productCatMeta;
@@ -1585,4 +1587,35 @@ if (!function_exists('sport_single_product_phone')) :
     }
 
 endif;
+
+add_action( 'woocommerce_product_data_panels', 'gowp_global_variation_price' );
+function gowp_global_variation_price() {
+    global $woocommerce;
+    ?>
+    <script type="text/javascript">
+        function addVariationLinks() {
+            a = jQuery( '<a href="#">Thiết lập cho toàn bộ thuộc tính</a>' );
+            b = jQuery( 'input[name^="variable_regular_price"]' );
+            a.click( function( c ) {
+                d = jQuery( this ).parent( 'label' ).next( 'input[name^="variable_regular_price"]' ).val();
+                e = confirm( "Bạn có chắc chắn thay đổi toàn bộ thuộc tính thành " + d + "?" );
+                if ( e ) b.val( d ).trigger( 'change' );
+                c.preventDefault();
+            } );
+            b.prev( 'label' ).append( " " ).append( a );
+        }
+        <?php if ( version_compare( $woocommerce->version, '2.4', '>=' ) ) : ?>
+        jQuery( document ).ready( function() {
+            jQuery( document ).ajaxComplete( function( event, request, settings ) {
+                if ( settings.data.lastIndexOf( "action=woocommerce_load_variations", 0 ) === 0 ) {
+                    addVariationLinks();
+                }
+            } );
+        } );
+        <?php else: ?>
+        addVariationLinks();
+        <?php endif; ?>
+    </script>
+    <?php
+}
 
