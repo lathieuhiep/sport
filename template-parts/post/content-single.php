@@ -30,11 +30,13 @@ $tags = get_tags(array(
         <div class="older-post">
 
             <div class="nav-previous">
-                <?php next_post_link('%link', '<< Bài trước', TRUE); ?>
+                <h6 class="title"><?php echo esc_html__('<< Bài trước','sport'); ?></h6>
+                <?php next_post_link('%link', '%title', TRUE); ?>
             </div>
 
             <div class="nav-next">
-                <?php previous_post_link('%link', 'Bài sau >>', TRUE); ?>
+                <h6 class="title"><?php echo esc_html__('Bài sau >>','sport'); ?></h6>
+                <?php previous_post_link('%link', '%title', TRUE); ?>
             </div>
 
         </div>

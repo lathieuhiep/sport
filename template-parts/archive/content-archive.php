@@ -17,7 +17,7 @@ $sport_class_col_content = sport_col_use_sidebar($sport_blog_sidebar_archive, 's
             $category = get_queried_object();
             $root_cat_of_curr =  $category->term_id;
         ?>
-
+            <h3 class="title" style="color: #e12f2f; font-size: 16px; text-transform: capitalize"><?php  single_cat_title(); ?></h3>
             <div class="category-desc">
                 <?php
                 the_archive_description( '<div class="taxonomy-description">', '</div>' );

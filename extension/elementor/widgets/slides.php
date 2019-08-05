@@ -1001,7 +1001,7 @@ class sport_widget_slides extends Widget_Base {
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ( !empty( $item['button_text'] ) ) : ?>
+                            <?php if ( !empty( $sport_slides_link['url'] ) ) : ?>
                                 <div class="element-slides__item--link">
                                     <?php if ( !empty( $sport_slides_link['url'] ) ) : ?>
                                         <a href="<?php echo esc_url( $sport_slides_link['url'] ); ?>" <?php echo ( $sport_slides_link['is_external'] ? 'target="_blank"' : '' ); ?>>
