@@ -1,5 +1,6 @@
 .header {
   .top-bar {
+    position: relative;
     padding: 5px 0;
     background-color: $background-primary;
 
@@ -40,6 +41,19 @@
         i {
           font-size: 12px;
           margin-right: 5px;
+        }
+      }
+    }
+    .top-bar__warp {
+      .navbar-toggler {
+        padding: 0;
+        display: inline-block;
+        font-size: 14px;
+        color: #ffffff;
+        cursor: pointer;
+
+        .nav-text {
+          margin-left: 5px;
         }
       }
     }

@@ -67,19 +67,43 @@
 
 @media ( max-width: 991px ) {
 
-  .header-nav_warp {
-    display: block;
+  .header {
+    .top-bar {
+      .top-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 0;
+        background-color: $background-primary;
+        z-index: 1;
+
+        ul {
+          li {
+            display: block;
+
+            .sub-menu {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
   .information {
     .container {
       max-width: none;
     }
   }
+  .nav-menu {
+    background-color: $background-primary;
+  }
   .header-nav {
     position: relative;
 
-    .container {
-      max-width: none;
+    .header-nav_warp {
+      display: block;
+      background-color: transparent;
     }
   }
   .site-logo {

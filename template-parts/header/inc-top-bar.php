@@ -1,19 +1,29 @@
 <div class="top-bar">
     <div class="container">
-        <div class="top-bar__warp d-flex align-items-center justify-content-end">
+        <div class="top-bar__warp d-flex align-items-center justify-content-between justify-content-lg-end">
             <?php if ( has_nav_menu('top-menu') ) : ?>
 
-            <div class="top-menu site-menu-nav">
-                <?php
+                <nav class="navbar-expand-lg navbar-tob-bar">
+                    <button class="navbar-toggler" data-toggle="collapse" data-target=".top-menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
 
-                wp_nav_menu( array(
-                    'theme_location' => 'top-menu',
-                    'menu_class'     => '',
-                    'container'      => false,
-                ) ) ;
+                        <span class="nav-text">
+                            <?php esc_html_e( 'Giới Thiệu', 'sport' ); ?>
+                        </span>
+                    </button>
 
-                ?>
-            </div>
+                    <div id="nav-top-bar" class="top-menu site-menu-nav collapse navbar-collapse">
+                        <?php
+
+                        wp_nav_menu( array(
+                            'theme_location' => 'top-menu',
+                            'menu_class'     => '',
+                            'container'      => false,
+                        ) ) ;
+
+                        ?>
+                    </div>
+                </nav>
 
             <?php endif; ?>
 

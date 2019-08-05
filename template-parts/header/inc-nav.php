@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <button class="navbar-toggler" data-toggle="collapse" data-target=".site-menu">
+            <button class="navbar-toggler" data-toggle="collapse" data-target=".site-menu" aria-expanded="false">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
