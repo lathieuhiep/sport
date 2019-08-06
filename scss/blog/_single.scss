@@ -8,6 +8,22 @@
   .site-post-title {
     margin-bottom: 15px;
   }
+    .site-post-share{
+      margin: 25px 0 21px;
+      span{
+        font-weight: bold;
+      }
+      a{
+        color: #ffffff;
+        padding: 2px 8px;
+        border: none;
+        background-color: #707070;
+        &:hover{
+          border: none;
+          background-color: #707070;
+        }
+      }
+    }
   .site-post-content {
     border: 2px solid #eee;
     padding: 15px;

@@ -49,11 +49,11 @@ if ( !empty( $sport_term_cat_post ) ):
                         </div>
 
                         <div class="item-content">
-                            <h4 class="item-title">
+                            <h3 class="item-title">
                                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                                     <?php the_title(); ?>
                                 </a>
-                            </h4>
+                            </h3>
 
                             <p class="item-excerpt">
                                 <?php

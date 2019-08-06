@@ -195,8 +195,8 @@ function sport_widgets_init()
             'description' => esc_attr($sport_widgets_value['description']),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget' => '</section>',
-            'before_title' => '<h2 class="widget-title">',
-            'after_title' => '</h2>'
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>'
         ));
 
     endforeach;
@@ -602,7 +602,7 @@ function sport_get_social_url()
             ?>
 
             <div class="social-network-item item-<?php echo esc_attr($sport_social['id']); ?>">
-                <a href="<?php echo esc_url($sport_social_url); ?>">
+                <a href="<?php echo esc_url($sport_social_url); ?>" rel="nofollow">
                     <i class="fa fa-<?php echo esc_attr($sport_social['id']); ?>" aria-hidden="true"></i>
                 </a>
             </div>
@@ -730,23 +730,23 @@ function sport_share()
         </span>
 
         <!-- Facebook Button -->
-        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>">
+        <a rel="nofollow" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>">
             <i class="fa fa-facebook"></i>
         </a>
 
-        <a target="_blank"
+        <a rel="nofollow" target="_blank"
            href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php print sport_social_title(get_the_title()); ?>%20-%20<?php the_permalink(); ?>">
             <i class="fa fa-twitter"></i>
         </a>
 
         <?php $sport_pin_image = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>
 
-        <a data-pin-do="skipLink" target="_blank"
+        <a rel="nofollow" data-pin-do="skipLink" target="_blank"
            href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_url($sport_pin_image); ?>&description=<?php the_title(); ?>">
             <i class="fa fa-pinterest"></i>
         </a>
 
-        <a target="_blank" href="https://plus.google.com/share?url=<?php the_permalink(); ?>">
+        <a rel="nofollow" target="_blank" href="https://plus.google.com/share?url=<?php the_permalink(); ?>">
             <i class="fa fa-google-plus"></i>
         </a>
     </div>
@@ -952,4 +952,10 @@ function auth_user_login($user_login, $password, $login)
     endif;
 
     die();
+}
+// Nofollow link all tags
+add_filter( 'wp_tag_cloud', 'no_follow_tag_cloud_links' );
+function no_follow_tag_cloud_links( $return ) {
+    $return = str_replace('<a', '<a rel="nofollow" ', $return );
+    return $return;
 }

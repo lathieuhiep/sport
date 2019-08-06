@@ -27,9 +27,9 @@ $sport_class_col_content = sport_col_use_sidebar($sport_blog_sidebar_archive, 's
             <?php if ( !empty( $root_cat_of_curr ) ) : ?>
 
                 <div class="tag_cloud_on_single">
-                    <h2>
+                    <h3>
                         <?php echo esc_html__('Thẻ tag','sport'); ?>
-                    </h2>
+                    </h3>
 
                     <div class="tag-scroll">
                         <?php

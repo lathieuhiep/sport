@@ -511,10 +511,12 @@ class sport_widget_products_ids extends Widget_Base {
                                 $item_cat_id = (int)$item['list_product_cat'];
 
                             ?>
+                            <h2>
+                                <a class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $cat_id_fist == $item_cat_id ? ' active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $item_cat_id, 'product_cat' ) ); ?>" data-cat-id="<?php echo esc_attr( $item_cat_id ); ?>">
+                                    <?php echo esc_html_e( $item['title_tab'] ); ?>
+                                </a>
+                            </h2>
 
-                            <a class="btn-tab-product-item btn-item-filter-product-id<?php echo ( $cat_id_fist == $item_cat_id ? ' active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $item_cat_id, 'product_cat' ) ); ?>" data-cat-id="<?php echo esc_attr( $item_cat_id ); ?>">
-                                <?php echo esc_html_e( $item['title_tab'] ); ?>
-                            </a>
 
                             <?php endforeach; ?>
                         </div>

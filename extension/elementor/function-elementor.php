@@ -61,11 +61,11 @@ function sport_content_item_product( $class_animate = null ) {
         </div>
 
         <div class="item-detail text-center">
-            <h2 class="item-title">
+            <h3 class="item-title">
                 <a class="item-link-product" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                     <?php the_title(); ?>
                 </a>
-            </h2>
+            </h3>
 
             <div class="price-box">
                 <?php woocommerce_template_loop_price(); ?>

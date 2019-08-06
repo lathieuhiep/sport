@@ -7,7 +7,7 @@ $sport_copyright = $sport_options ['sport_footer_copyright_editor'] == '' ? 'Cop
 ?>
 <div class="much-search">
     <div class="container">
-        <h6><?php echo esc_html__('Tìm kiếm nhiều:','sport'); ?></h6>
+        <h5><?php echo esc_html__('Tìm kiếm nhiều:','sport'); ?></h5>
         <div class="row">
             <div class="col-md-3">
                 <?php

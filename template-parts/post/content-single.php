@@ -27,6 +27,14 @@ $tags = get_tags(array(
 
         </div>
 
+        <?php
+        if ($sport_on_off_share_single == 1 || $sport_on_off_share_single == null) :
+
+            sport_share();
+
+        endif;
+        ?>
+
         <div class="older-post">
 
             <div class="nav-previous">
@@ -44,9 +52,9 @@ $tags = get_tags(array(
         <?php if ( !empty( $tags ) ) : ?>
 
         <div class="tag_cloud_on_single all-tags">
-            <h2>
+            <h3>
                 <?php esc_html_e('Thẻ tag', 'sport'); ?>
-            </h2>
+            </h3>
 
             <div class="tag-scroll">
                 <?php foreach ( $tags as $tag ) : ?>
@@ -64,11 +72,6 @@ $tags = get_tags(array(
 
         get_template_part('template-parts/post/inc', 'related-post');
 
-        if ($sport_on_off_share_single == 1 || $sport_on_off_share_single == null) :
-
-            sport_share();
-
-        endif;
         ?>
     </div>
 

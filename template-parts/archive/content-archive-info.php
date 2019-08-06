@@ -6,7 +6,7 @@
         ?>
     </div>
     <div class="post-content">
-        <h2 class="site-post-title">
+        <h3 class="site-post-title">
             <a href="<?php the_permalink();?>" title="<?php the_title(); ?>">
                 <?php if ( is_sticky() && is_home() ) : ?>
                     <i class="fa fa-thumb-tack" aria-hidden="true"></i>
@@ -16,7 +16,7 @@
                 the_title();
                 ?>
             </a>
-        </h2>
+        </h3>
         <div class="site-post-excerpt">
             <p>
                 <?php

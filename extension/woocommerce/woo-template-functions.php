@@ -130,9 +130,9 @@ if (!function_exists('sport_woo_breadcrumbs')) :
             ?>
 
             <div class="title-cat-product">
-                <h3 class="title">
+                <h1 class="title">
                     <?php single_term_title(); ?>
-                </h3>
+                </h1>
             </div>
 
             <?php
@@ -345,11 +345,11 @@ if (!function_exists('sport_woo_get_product_title')) :
     function sport_woo_get_product_title()
     {
         ?>
-        <h2 class="woocommerce-loop-product__title">
+        <h3 class="woocommerce-loop-product__title">
             <a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
                 <?php the_title(); ?>
             </a>
-        </h2>
+        </h3>
         <?php
     }
 endif;
@@ -826,6 +826,30 @@ function sport_related_upsells_item($args, $number_row, $number_column)
     $rows_number = $number_row;
     $column_number = $number_column;
     $number_item = $rows_number * $column_number;
+
+
+    $category = get_queried_object();
+    $terms = get_the_terms( $category->ID, 'product_cat' );
+    foreach ($terms as $index => $term){
+        if($index == 0){
+            $termID = $term->term_id;
+        }
+    }
+    $args = array(
+        'post_type'             => 'product',
+        'post_status'           => 'publish',
+        'ignore_sticky_posts'   => 1,
+        'posts_per_page'        => '28',
+        'post__not_in' => array($category->ID),
+        'tax_query'             => array(
+            array(
+                'taxonomy'      => 'product_cat',
+                'field' => 'term_id', //This is optional, as it defaults to 'term_id'
+                'terms'         => $termID,
+                'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+            ),
+        )
+    );
 
     $query = new WP_Query($args);
 
