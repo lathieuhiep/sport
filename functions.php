@@ -602,7 +602,7 @@ function sport_get_social_url()
             ?>
 
             <div class="social-network-item item-<?php echo esc_attr($sport_social['id']); ?>">
-                <a href="<?php echo esc_url($sport_social_url); ?>" rel="nofollow">
+                <a target="_blank" href="<?php echo esc_url($sport_social_url); ?>" rel="nofollow">
                     <i class="fa fa-<?php echo esc_attr($sport_social['id']); ?>" aria-hidden="true"></i>
                 </a>
             </div>
