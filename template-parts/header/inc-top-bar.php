@@ -17,7 +17,7 @@
 
                         wp_nav_menu( array(
                             'theme_location' => 'top-menu',
-                            'menu_class'     => '',
+                            'menu_class'     => 'menu-top',
                             'container'      => false,
                         ) ) ;
 

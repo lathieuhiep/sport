@@ -32,6 +32,12 @@
     .icon-home-link {
       padding-left: 15px;
     }
+    .menu-canvas {
+      .text-canvas {
+        display: inline-block;
+        margin-left: 5px;
+      }
+    }
   }
   .search-nav {
     position: relative;
@@ -190,10 +196,11 @@
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 900;
+    @include transition(all 0.4s ease-in-out);
   }
   &.icon_menu_item_mobile_active {
     &:after {
-      content: "\f077";
+      @include transform(rotate(180deg));
     }
   }
 }
