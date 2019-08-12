@@ -38,6 +38,7 @@
 
       .cart-box {
         position: relative;
+        cursor: pointer;
 
         a {
           position: absolute;
@@ -159,9 +160,6 @@
             }
           }
         }
-      }
-      .cart-box {
-
       }
       &:hover {
         .widget_shopping_cart {

@@ -1016,6 +1016,7 @@ form.post-password-form p input[type='submit'] {
 
 .header .center-bar .shop-cart-view .cart-box {
   position: relative;
+  cursor: pointer;
 }
 
 .header .center-bar .shop-cart-view .cart-box a {
