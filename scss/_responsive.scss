@@ -12,6 +12,21 @@
 
 }
 
+@media ( max-width: 1200px ) {
+
+  .nav-menu {
+    background-color: $background-primary;
+  }
+  .header-nav {
+    .header-nav_warp {
+      padding: 0;
+      display: block;
+      background-color: transparent;
+    }
+  }
+
+}
+
 @media ( max-width: 1199px ) {
 
   .container {
@@ -65,7 +80,8 @@
     ul {
       li {
         a {
-          padding: 0 7px;
+          padding: 0 5px;
+          font-size: 12px;
         }
       }
     }
@@ -75,6 +91,16 @@
 
 @media ( max-width: 991px ) {
 
+  .header {
+    .center-bar {
+      .col-search {
+        display: none;
+      }
+      .contact-us-bar {
+        @include flex(1);
+      }
+    }
+  }
   .top-menu {
     position: absolute;
     top: 100%;
@@ -108,20 +134,15 @@
       max-width: none;
     }
   }
-  .nav-menu {
-    background-color: $background-primary;
-  }
   .header-nav {
     position: relative;
-    padding: 10px 0;
 
     .header-nav_warp {
-      padding: 0;
-      display: block;
-      background-color: transparent;
-
+      > div {
+        padding: 10px 0;
+      }
       .icon-home-link {
-        margin-left: 5px;
+        margin-right: 10px;
       }
       .site-menu {
         ul {
@@ -134,7 +155,19 @@
       }
     }
     .search-nav {
-      display: block;
+      @include flexbox();
+      @include flex(1);
+      @include justify-content(flex-end);
+    }
+    button {
+      &.navbar-toggler {
+        color: #ffffff;
+        font-size: 14px;
+
+        .text-nav {
+          margin-left: 5px;
+        }
+      }
     }
   }
   .site-logo {
@@ -278,6 +311,16 @@
 
 @media ( max-width: 575px ) {
 
+  .header {
+    .center-bar {
+      .contact-us-bar {
+        display: none;
+      }
+      .col-contact-cart {
+        @include justify-content(flex-end)
+      }
+    }
+  }
   .comment-form {
     .comment-fields-row {
       margin-bottom: 0;

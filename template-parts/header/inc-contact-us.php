@@ -7,7 +7,7 @@ $sport_contact_us_zalo  =   $sport_options['sport_contact_us_zalo'];
 
 ?>
 
-<div class="contact-us-bar d-flex align-items-center justify-content-center">
+<div class="contact-us-bar d-sm-flex align-items-sm-center justify-content-lg-center">
     <div class="contact-us__icon">
         <img src="<?php echo esc_url( get_theme_file_uri( '/images/phone.png' ) ); ?>" alt="contact">
     </div>

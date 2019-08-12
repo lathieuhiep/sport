@@ -69,8 +69,7 @@ if (!function_exists('sport_get_cart')):
         ?>
 
         <div class="cart-box d-flex align-items-center">
-            <a class="cart-link" href="<?php echo wc_get_cart_url(); ?>"
-               title="<?php esc_html_e('Xem giỏ hàng', 'sport'); ?>"></a>
+            <span class="cart-link" title="<?php esc_html_e('Xem giỏ hàng', 'sport'); ?>"></span>
 
             <div class="cart-customlocation">
                 <img src="<?php echo esc_url(get_theme_file_uri('/images/cart.png')); ?>" alt="cart">

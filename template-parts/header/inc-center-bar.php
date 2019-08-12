@@ -8,7 +8,7 @@ $sport_logo_image_id    =   $sport_options['sport_logo_image']['id'];
 <div class="center-bar">
     <div class="container">
         <div class="center-bar__box row">
-            <div class="col-md-3">
+            <div class="col-6 col-sm-3 col-lg-2">
                 <div class="site-logo d-flex align-items-center">
                     <a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
                         <?php
@@ -22,13 +22,13 @@ $sport_logo_image_id    =   $sport_options['sport_logo_image']['id'];
                 </div>
             </div>
 
-            <div class="col-md-5 d-flex align-items-center">
+            <div class="col-lg-5 d-lg-flex align-items-lg-center col-search">
                 <div class="center-bar__search">
                     <?php get_template_part( 'searchform', 'product' ); ?>
                 </div>
             </div>
 
-           <div class="col-md-4 d-flex">
+           <div class="col-6 col-sm-9 col-lg-5 d-flex col-contact-cart">
                <?php
                get_template_part( 'template-parts/header/inc', 'contact-us' );
 

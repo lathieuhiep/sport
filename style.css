@@ -5442,6 +5442,17 @@ form.ajax-auth .close {
   }
 }
 
+@media (max-width: 1200px) {
+  .nav-menu {
+    background-color: #00b0f0;
+  }
+  .header-nav .header-nav_warp {
+    padding: 0;
+    display: block;
+    background-color: transparent;
+  }
+}
+
 @media (max-width: 1199px) {
   .container {
     max-width: none;
@@ -5474,11 +5485,20 @@ form.ajax-auth .close {
 
 @media (min-width: 992px) and (max-width: 1200px) {
   .site-menu ul li a {
-    padding: 0 7px;
+    padding: 0 5px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 991px) {
+  .header .center-bar .col-search {
+    display: none;
+  }
+  .header .center-bar .contact-us-bar {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
   .top-menu {
     position: absolute;
     top: 100%;
@@ -5506,26 +5526,36 @@ form.ajax-auth .close {
   .information .container {
     max-width: none;
   }
-  .nav-menu {
-    background-color: #00b0f0;
-  }
   .header-nav {
     position: relative;
+  }
+  .header-nav .header-nav_warp > div {
     padding: 10px 0;
   }
-  .header-nav .header-nav_warp {
-    padding: 0;
-    display: block;
-    background-color: transparent;
-  }
   .header-nav .header-nav_warp .icon-home-link {
-    margin-left: 5px;
+    margin-right: 10px;
   }
   .header-nav .header-nav_warp .site-menu ul li a {
     color: #000000;
   }
   .header-nav .search-nav {
-    display: block;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+  }
+  .header-nav button.navbar-toggler {
+    color: #ffffff;
+    font-size: 14px;
+  }
+  .header-nav button.navbar-toggler .text-nav {
+    margin-left: 5px;
   }
   .site-logo {
     display: -webkit-box;
@@ -5649,6 +5679,13 @@ form.ajax-auth .close {
 }
 
 @media (max-width: 575px) {
+  .header .center-bar .contact-us-bar {
+    display: none;
+  }
+  .header .center-bar .col-contact-cart {
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+  }
   .comment-form .comment-fields-row {
     margin-bottom: 0;
   }

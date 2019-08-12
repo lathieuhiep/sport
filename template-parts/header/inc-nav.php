@@ -11,6 +11,10 @@
 
             <button class="navbar-toggler" data-toggle="collapse" data-target=".site-menu" aria-expanded="false">
                 <i class="fa fa-bars" aria-hidden="true"></i>
+
+                <span class="text-nav d-lg-none">
+                    <?php esc_html_e( 'Menu', 'sport' ); ?>
+                </span>
             </button>
 
             <div class="site-menu site-menu-nav collapse navbar-collapse">
