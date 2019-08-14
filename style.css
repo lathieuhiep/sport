@@ -981,6 +981,12 @@ form.post-password-form p input[type='submit'] {
   width: 100%;
 }
 
+.header .center-bar .contact-cart {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 .header .center-bar .contact-us-bar .contact-us__icon {
   margin-right: 5px;
 }
@@ -5495,11 +5501,6 @@ form.ajax-auth .close {
   .header .center-bar .col-search {
     display: none;
   }
-  .header .center-bar .contact-us-bar {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-  }
   .top-menu {
     position: absolute;
     top: 100%;
@@ -5680,12 +5681,17 @@ form.ajax-auth .close {
 }
 
 @media (max-width: 575px) {
-  .header .center-bar .contact-us-bar {
+  .header .center-bar .contact-us-bar .contact-us__icon {
     display: none;
   }
-  .header .center-bar .col-contact-cart {
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
+  .header .center-bar .contact-us-bar a.hot-line {
+    font-size: 14px;
+  }
+  .site-menu-canvas {
+    width: 270px;
+  }
+  .site-canvas--active {
+    left: 270px;
   }
   .comment-form .comment-fields-row {
     margin-bottom: 0;

@@ -7,6 +7,9 @@
     .center-bar__search {
       width: 100%;
     }
+    .contact-cart {
+      @include flex(1);
+    }
     .contact-us-bar {
       .contact-us__icon {
         margin-right: 5px;

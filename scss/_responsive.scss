@@ -96,9 +96,6 @@
       .col-search {
         display: none;
       }
-      .contact-us-bar {
-        @include flex(1);
-      }
     }
   }
   .top-menu {
@@ -314,12 +311,22 @@
   .header {
     .center-bar {
       .contact-us-bar {
-        display: none;
-      }
-      .col-contact-cart {
-        @include justify-content(flex-end)
+        .contact-us__icon {
+          display: none;
+        }
+        a {
+          &.hot-line {
+            font-size: 14px;
+          }
+        }
       }
     }
+  }
+  .site-menu-canvas {
+    width: 270px;
+  }
+  .site-canvas--active {
+    left: 270px;
   }
   .comment-form {
     .comment-fields-row {

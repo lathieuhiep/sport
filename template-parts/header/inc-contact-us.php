@@ -7,7 +7,7 @@ $sport_contact_us_zalo  =   $sport_options['sport_contact_us_zalo'];
 
 ?>
 
-<div class="contact-us-bar d-sm-flex align-items-sm-center justify-content-lg-center">
+<div class="contact-us-bar d-flex align-items-center justify-content-lg-center">
     <div class="contact-us__icon">
         <img src="<?php echo esc_url( get_theme_file_uri( '/images/phone.png' ) ); ?>" alt="contact">
     </div>
@@ -28,13 +28,5 @@ $sport_contact_us_zalo  =   $sport_options['sport_contact_us_zalo'];
 
         endif;
         ?>
-
-        <a class="email" href="mailto:<?php echo esc_attr( $sport_information_mail ); ?>">
-            <?php esc_html_e( 'Email: ', 'sport' ); echo esc_html( $sport_information_mail ); ?>
-        </a>
-
-        <a class="zalo" href="//zalo.me/<?php echo esc_attr( $sport_contact_us_zalo ); ?>">
-            <?php esc_html_e( 'Zalo Chat: ', 'sport' ); echo esc_html( $sport_contact_us_zalo ); ?>
-        </a>
     </div>
 </div>
